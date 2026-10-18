@@ -1,6 +1,6 @@
 # On · Vehicle Voice Lab
 
-Compare how well speech models and small language models turn **Korean vehicle requests into validated actions and spoken confirmations**. Watch the cabin settings change, try a correction or undo, and compare model accuracy, first-audio latency, and memory use in a **Korean / English UI**.
+Compare how well speech models and small language models turn **vehicle requests into validated actions and spoken confirmations**. Try English speech with Nova 2.5 Sonic, explore the Korean self-hosted model comparison, and watch the cabin settings change. Compare model accuracy, first-audio latency, and memory use in a **Korean / English UI**.
 
 [한국어 안내](README.ko.md) · [Deployment](docs/DEPLOYMENT.md) · [Architecture & tools](docs/ARCHITECTURE.md) · [Model catalog](model-catalog.json) · [License notices](NOTICE)
 
@@ -20,37 +20,39 @@ Speak, type, or upload an audio file to change the simulated driver/passenger te
 
 ## Try these test scenarios
 
-Choose the default **Self-hosted · STT → sLLM → TTS** mode with **Qwen3.5-4B NF4**, **Whisper**, and **Polly**. Click **Korean audio sample** for a microphone-free end-to-end check: it asks for the passenger temperature to be set to 25°C. You should see the temperature change and hear a short Korean confirmation.
+For the **English voice demo**, open the [English UI](https://dys3pnz3y08gk.cloudfront.net/?lang=en), select **Nova 2.5 Sonic · Realtime S2S**, then set **Sonic speech language** to **English · Officially supported**. Click **English audio sample** for a microphone-free end-to-end check. The [included English recording](public/sample-english.wav) says **“Set the driver temperature to twenty-four degrees.”** You should see the driver temperature change to 24°C and hear an English confirmation.
 
-For your own tests, click **Start microphone** and say the Korean requests below, or type them into the command box. English UI labels do not change the current Korean speech/planner configuration. Wait for each response before the next request; first use after switching a model can take longer.
+For your own tests, click **Start microphone** and say the English requests below, or type them into the command box. Wait for each response before the next request; first use after switching a model can take longer.
+
+The default **Self-hosted · STT → sLLM → TTS** configuration currently uses Korean ASR and Korean confirmations. Changing the UI language alone does not change that speech pipeline. Use the [Korean guide](README.ko.md#바로-따라-하는-테스트-시나리오) for its Korean examples. The benchmark scores below were measured with Korean audio; they are not scores for these English scenarios.
 
 ### A three-turn conversation
 
 Click **Reset cabin** once, then run these requests in order. This checks whether the assistant remembers the seat, corrects the previous command, and can undo it.
 
-| Step | Say or type in Korean | Expected result |
+| Step | Say or type in English | Expected result |
 | --- | --- | --- |
-| 1. Set a seat | `조수석 온도를 25도로 맞춰줘.` | Passenger 25°C; driver stays 22°C. |
-| 2. Correct it | `아니, 24도로 맞춰줘.` | Passenger changes to 24°C; driver stays 22°C. |
-| 3. Undo | `방금 설정 되돌려줘.` | Passenger returns to 25°C, the state before step 2. |
+| 1. Set a seat | `Set the passenger temperature to 25 degrees Celsius.` | Passenger 25°C; driver stays 22°C. |
+| 2. Correct it | `No, make that 24 degrees Celsius.` | Passenger changes to 24°C; driver stays 22°C. |
+| 3. Undo | `Undo the last setting change.` | Passenger returns to 25°C, the state before step 2. |
 
 ### More capabilities to try
 
 **Reset cabin before each row** so the expected values below have the same starting state. These are test expectations, not a promise that every model passes; failures are part of the comparison.
 
-| Capability | Say or type in Korean | What to check |
+| Capability | Say or type in English | What to check |
 | --- | --- | --- |
-| Relative temperature | `운전석 온도를 1도 올려줘.` | Driver changes from 22°C to 23°C; passenger stays 22°C. |
-| Fan speed | `바람 세기를 5단으로 해줘.` | Fan becomes level 5. |
-| Defrost | `앞유리 김서림 제거 켜줘.` | Front defrost turns on. |
-| Seat heating | `시트 열선을 2단으로 켜줘.` | Seat heating becomes level 2. |
-| Compound controls | `운전석은 24도로 하고 바람 세기는 3단으로 해줘.` | Driver 24°C and fan level 3 in one command. |
-| Media and volume | `음악 재생하고 음량은 20으로 해줘.` | Simulated playback on, volume 20; no real music is played. |
-| Destination | `서울역으로 길 안내해줘.` | Seoul Station becomes the simulated destination; no real route is fetched. |
-| State question | `지금 조수석 온도가 몇 도야?` | Answers 22°C without changing the cabin. |
-| Missing destination | `목적지는 아직 안 정했는데 길 안내해줘.` | Asks for a destination without applying a control. |
-| Out-of-range request | `조수석 온도를 40도로 설정해줘.` | Rejects the unsupported temperature; state remains unchanged. |
-| Unconnected sensor | `타이어 공기압 센서 값을 40으로 바꿔줘.` | Explains that sensor writes are unsupported; no state change. |
+| Relative temperature | `Raise the driver temperature by one degree Celsius.` | Driver changes from 22°C to 23°C; passenger stays 22°C. |
+| Fan speed | `Set the fan speed to level 5.` | Fan becomes level 5. |
+| Defrost | `Turn on the front windshield defroster.` | Front defrost turns on. |
+| Seat heating | `Set the seat heating to level 2.` | Seat heating becomes level 2. |
+| Compound controls | `Set the driver temperature to 24 degrees Celsius and the fan speed to level 3.` | Driver 24°C and fan level 3 in one command. |
+| Media and volume | `Play music and set the volume to 20.` | Simulated playback on, volume 20; no real music is played. |
+| Destination | `Navigate to Seoul Station.` | Seoul Station becomes the simulated destination; no real route is fetched. |
+| State question | `What is the passenger temperature right now?` | Answers 22°C without changing the cabin. |
+| Missing destination | `Start navigation, but I haven't chosen a destination yet.` | Asks for a destination without applying a control. |
+| Out-of-range request | `Set the passenger temperature to 40 degrees Celsius.` | Rejects the unsupported temperature; state remains unchanged. |
+| Unconnected sensor | `Change the tire pressure sensor reading to 40.` | Explains that sensor writes are unsupported; no state change. |
 
 After a response, inspect the **vehicle state**, **recognized request**, **execution note**, **spoken reply**, and **live timing** together. Use **Download session** to inspect the recorded model, actions, state, and timings. Select another model and repeat the same scenario to compare results. Native voice-only modes explicitly bypass vehicle controls; Sonic uses its own speech and tool-calling path.
 
@@ -86,7 +88,7 @@ The application owns the simulated state and validates commands from every contr
 
 ```mermaid
 flowchart LR
-    User["Speak / type a Korean request"] --> App["App backend + session"]
+    User["Speak / type a request"] --> App["App backend + session"]
     App --> Model["ASR + sLLM<br/>or direct audio planner"]
     Model --> Execute["Validate + execute<br/>vehicle command"]
     Execute --> State["Update simulated cabin"]
@@ -112,7 +114,7 @@ cp .env.example .env
 npm start
 ```
 
-Open [localhost:8787](http://localhost:8787) or [English UI](http://localhost:8787/?lang=en). Use **Korean audio sample** to test without microphone permissions. Microphone input requires localhost or HTTPS and browser/OS permission.
+Open [localhost:8787](http://localhost:8787) or [English UI](http://localhost:8787/?lang=en). For English speech, select **Nova 2.5 Sonic · Realtime S2S**, choose **English · Officially supported**, and click **English audio sample** to test without microphone permissions. This route requires working Bedrock access. Microphone input requires localhost or HTTPS and browser/OS permission.
 
 Workers are not bundled with the Node application. Follow [the GPU and CloudFront deployment guide](docs/DEPLOYMENT.md) to provision your own infrastructure. The repository contains no AWS keys, SSH keys, private infrastructure state, model weights, or user microphone recordings. AWS and model downloads require your own access and applicable licenses.
 
