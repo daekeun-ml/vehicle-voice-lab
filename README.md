@@ -1,10 +1,12 @@
 # On · Vehicle Voice Lab
 
-A voice-controlled vehicle simulator for comparing self-hosted speech models, small language models, and Amazon Nova 2.5 Sonic. Includes a **Korean / English UI**, shared Korean audio evaluations, and an EC2 + CloudFront reference deployment.
+Compare how well speech models and small language models turn **Korean vehicle requests into validated actions and spoken confirmations**. Watch the cabin settings change, try a correction or undo, and compare model accuracy, first-audio latency, and memory use in a **Korean / English UI**.
 
 [한국어 안내](README.ko.md) · [Deployment](docs/DEPLOYMENT.md) · [Architecture & tools](docs/ARCHITECTURE.md) · [Model catalog](model-catalog.json) · [License notices](NOTICE)
 
-## What it does
+[Open the shared demo](https://dys3pnz3y08gk.cloudfront.net/?lang=en) · [Test scenarios](#try-these-test-scenarios) · [Benchmark at a glance](#benchmark-at-a-glance)
+
+## What you can do
 
 Speak, type, or upload an audio file to change the simulated driver/passenger temperature, climate controls, seat heating, media state, or navigation destination. Follow-up corrections and undo use the conversation and current vehicle state. The server validates commands before applying them.
 
@@ -15,6 +17,85 @@ Speak, type, or upload an audio file to change the simulated driver/passenger te
 - Sonic path: Bedrock bidirectional speech → `vehicle_control` tool → shared executor → Sonic native audio.
 - Per-visitor vehicle state and conversation, response interruption, feedback, session export, model comparison tables, and synthetic reply samples.
 - **UI language selector** in the header. `/?lang=en` opens English; `/?lang=ko` opens Korean. Selection persists in the browser. UI language does not change speech language, model behavior, evaluation data, or conversation text.
+
+## Try these test scenarios
+
+Choose the default **Self-hosted · STT → sLLM → TTS** mode with **Qwen3.5-4B NF4**, **Whisper**, and **Polly**. Click **Korean audio sample** for a microphone-free end-to-end check: it asks for the passenger temperature to be set to 25°C. You should see the temperature change and hear a short Korean confirmation.
+
+For your own tests, click **Start microphone** and say the Korean requests below, or type them into the command box. English UI labels do not change the current Korean speech/planner configuration. Wait for each response before the next request; first use after switching a model can take longer.
+
+### A three-turn conversation
+
+Click **Reset cabin** once, then run these requests in order. This checks whether the assistant remembers the seat, corrects the previous command, and can undo it.
+
+| Step | Say or type in Korean | Expected result |
+| --- | --- | --- |
+| 1. Set a seat | `조수석 온도를 25도로 맞춰줘.` | Passenger 25°C; driver stays 22°C. |
+| 2. Correct it | `아니, 24도로 맞춰줘.` | Passenger changes to 24°C; driver stays 22°C. |
+| 3. Undo | `방금 설정 되돌려줘.` | Passenger returns to 25°C, the state before step 2. |
+
+### More capabilities to try
+
+**Reset cabin before each row** so the expected values below have the same starting state. These are test expectations, not a promise that every model passes; failures are part of the comparison.
+
+| Capability | Say or type in Korean | What to check |
+| --- | --- | --- |
+| Relative temperature | `운전석 온도를 1도 올려줘.` | Driver changes from 22°C to 23°C; passenger stays 22°C. |
+| Fan speed | `바람 세기를 5단으로 해줘.` | Fan becomes level 5. |
+| Defrost | `앞유리 김서림 제거 켜줘.` | Front defrost turns on. |
+| Seat heating | `시트 열선을 2단으로 켜줘.` | Seat heating becomes level 2. |
+| Compound controls | `운전석은 24도로 하고 바람 세기는 3단으로 해줘.` | Driver 24°C and fan level 3 in one command. |
+| Media and volume | `음악 재생하고 음량은 20으로 해줘.` | Simulated playback on, volume 20; no real music is played. |
+| Destination | `서울역으로 길 안내해줘.` | Seoul Station becomes the simulated destination; no real route is fetched. |
+| State question | `지금 조수석 온도가 몇 도야?` | Answers 22°C without changing the cabin. |
+| Missing destination | `목적지는 아직 안 정했는데 길 안내해줘.` | Asks for a destination without applying a control. |
+| Out-of-range request | `조수석 온도를 40도로 설정해줘.` | Rejects the unsupported temperature; state remains unchanged. |
+| Unconnected sensor | `타이어 공기압 센서 값을 40으로 바꿔줘.` | Explains that sensor writes are unsupported; no state change. |
+
+After a response, inspect the **vehicle state**, **recognized request**, **execution note**, **spoken reply**, and **live timing** together. Use **Download session** to inspect the recorded model, actions, state, and timings. Select another model and repeat the same scenario to compare results. Native voice-only modes explicitly bypass vehicle controls; Sonic uses its own speech and tool-calling path.
+
+## Benchmark at a glance
+
+We ran **14 control configurations × the same 31 Korean synthetic audio cases = 434 evaluated cases**. Finalists also received a separate 10-case holdout set. The configurations include the Qwen4B BF16/NF4 precision comparison; they are not 14 unrelated base models.
+
+- **Input:** 25 baseline cases, 3 alternate-voice cases, and 3 cases with 20 dB white noise. Inputs were synthesized with Polly Seoyeon and Qwen Sohee.
+- **Tasks:** seat selection, exact and relative numbers, climate/media/navigation controls, compound actions, state questions, correction, undo, clarification, and rejection of unsupported or out-of-range requests.
+- **Pass rule:** the requested actions, complete vehicle state, required answer, and audio output must all pass. Correction and undo cases also require their preceding command to pass.
+- **Timing:** median/p95 to the first received audio byte, with model switching/loading reported separately. Microphone endpointing and browser playback are excluded; Sonic timing starts after its input audio transmission ends.
+
+| Tested configuration | Application pass rate | First audio median / p95 | Voice used in this score |
+| --- | --- | --- | --- |
+| **Qwen3.5-4B · NF4 (default)** | 30/31 · 97/100 | 2.04 s / 3.22 s | Polly Seoyeon |
+| Qwen3.5-4B · BF16 | 30/31 · 97/100 | 1.45 s / 2.78 s | Polly Seoyeon |
+| Gemma 4 · E2B IT | 28/31 · 90/100 | 1.89 s / 2.45 s | Polly Seoyeon |
+| Phi-4 mini Instruct | 28/31 · 90/100 | 1.18 s / 2.25 s | Polly Seoyeon |
+| Qwen3-Omni · direct audio planning | 29/31 · 94/100 | 15.80 s / 22.87 s | Polly Seoyeon; not native TTS |
+| Nova 2.5 Sonic · native S2S + tool | 26/31 · 84/100 | 1.34 s / 1.43 s | Sonic native voice; Korean experimental |
+| MiniCPM-o 4.5 · direct audio planning | 22/31 · 71/100 | 2.66 s / 3.83 s | Polly Seoyeon; not native TTS |
+| Step-Audio 2 mini · direct audio planning | 22/31 · 71/100 | 4.47 s / 6.30 s | Polly Seoyeon; not native TTS |
+
+Qwen4B BF16 and NF4 each passed **10/10 holdout cases**. NF4 used **3.08 GiB planner CUDA allocation**, compared with **8.46 GiB for BF16**. Both had raw model actions correct in **29/31** cases; application guards rejected an out-of-range request, which is why model-only and application scores are reported separately.
+
+**These scores describe this application, configuration, and synthetic test set.** They are not an external published model benchmark, speech naturalness MOS, human microphone study, or road test. Korean voice understanding and native Korean pronunciation are separate questions; the audio-planning rows above use a shared external TTS voice. Results and timing definitions must stay attached to the selected path.
+
+The UI contains the full per-model table, failure examples, synthetic reply audio, license/hosting status, and edge deployment estimates. Read the [evaluation details](#evaluation-details-and-interpretation), [case definitions](scripts/vehicle-benchmark-cases.mjs), [recorded summary](research/vehicle-benchmark-summary.json), and [configuration audit](research/configuration-audit.json) for reproducibility and limitations.
+
+## Architecture overview
+
+The application owns the simulated state and validates commands from every control-capable model. Sonic calls a named tool; the self-hosted planners return structured JSON. MCP is not currently connected.
+
+```mermaid
+flowchart LR
+    User["Speak / type a Korean request"] --> App["App backend + session"]
+    App --> Model["ASR + sLLM<br/>or direct audio planner"]
+    Model --> Execute["Validate + execute<br/>vehicle command"]
+    Execute --> State["Update simulated cabin"]
+    State --> Voice["Spoken confirmation<br/>+ visible result"]
+    App <-->|"Native S2S + tool results"| Sonic["Nova 2.5 Sonic"]
+    Sonic -->|"vehicle_control"| Execute
+```
+
+See [Architecture & tools](docs/ARCHITECTURE.md) for the full inference flow, the two-GPU AWS deployment diagram, and a command sequence diagram.
 
 ![English interface](docs/screenshots/english-ui.png)
 
@@ -47,7 +128,7 @@ The reference deployment uses **two EC2 `g6e.2xlarge` instances in Seoul**, each
 | Default response voice | Amazon Polly Seoyeon, Seoul |
 | Nova 2.5 Sonic | Amazon Bedrock, Tokyo; Korean remains an unsupported-language experiment in this evaluation |
 
-Visitors have separate application state but share GPU capacity and model residency. Switching between different models can introduce queueing and cold loading. The reference deployment runs independently of a developer laptop. Account-specific addresses and deployment state are deliberately excluded from Git.
+Visitors have separate application state but share GPU capacity and model residency. Switching between different models can introduce queueing and cold loading. The reference deployment runs independently of a developer laptop. Worker addresses, AWS account IDs, and private deployment state are excluded from Git. The shared demo URL is public.
 
 ## What would improve with SageMaker?
 
@@ -72,7 +153,7 @@ The web UI, sessions, vehicle command executor, and future MCP clients remain in
 
 AWS references: [custom inference containers](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html), [autoscaling](https://aws.amazon.com/blogs/machine-learning/configuring-autoscaling-inference-endpoints-in-amazon-sagemaker/), [deployment guardrails](https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails.html), [inference components](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceComponent.html), [bidirectional streaming](https://aws.amazon.com/blogs/machine-learning/introducing-bidirectional-streaming-for-real-time-inference-on-amazon-sagemaker-ai/).
 
-## Evaluation results
+## Evaluation details and interpretation
 
 The default path is **Whisper large-v3-turbo → Qwen3.5-4B NF4 → vehicle executor → Polly Seoyeon**. The shared evaluation contains 31 synthetic Korean audio cases per control configuration and 10 additional holdout cases for finalists.
 

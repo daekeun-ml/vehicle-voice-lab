@@ -1,0 +1,20 @@
+flowchart TB
+    User["Browser<br/>Microphone · text · audio file"] --> App["Node backend<br/>Visitor session + current state"]
+    App --> ASR["Whisper / Nemotron<br/>Speech to text"]
+    ASR --> Planner["Qwen / Gemma / other sLLM<br/>Structured JSON plan"]
+    App --> Audio["MiniCPM / Qwen3-Omni / other audio model<br/>Direct audio plan"]
+    Planner --> Guard["Validate intent, actions and bounds<br/>executePlan"]
+    Audio --> Guard
+    App <-->|"Bidirectional audio"| Sonic["Nova 2.5 Sonic<br/>Bedrock · native tool calling"]
+    Sonic -->|"vehicle_control"| Guard
+    Guard --> State["Simulated vehicle state<br/>Commit only valid commands"]
+    State -->|"UI state event"| App
+    State -->|"Cascade / audio-control"| Confirm["Executor confirmation"]
+    Confirm --> TTS["Polly / Qwen TTS"]
+    TTS -->|"Response audio"| App
+    State -->|"Tool result"| Sonic
+    App -->|"State + spoken reply"| User
+    classDef app fill:#e5f5ee,stroke:#397c65,color:#173d30
+    classDef model fill:#edf3ff,stroke:#5278b3,color:#203e69
+    class App,Guard,State,Confirm app
+    class ASR,Planner,Audio,Sonic,TTS model

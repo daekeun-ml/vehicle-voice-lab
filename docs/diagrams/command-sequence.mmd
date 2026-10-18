@@ -1,0 +1,31 @@
+sequenceDiagram
+    actor User
+    participant UI as Browser
+    participant API as Node backend
+    participant ASR as Whisper
+    participant LLM as Qwen4B
+    participant Exec as Validator + executor
+    participant State as Session vehicle state
+    participant TTS as Polly / Qwen TTS
+    User->>UI: Korean request: set passenger temperature to 25
+    UI->>API: Audio + session ID
+    API->>ASR: Transcribe utterance
+    ASR-->>API: Recognized Korean text
+    API->>LLM: Instructions + current state + recent conversation + request
+    LLM-->>API: JSON: passenger temperature = 25
+    API->>Exec: Validate plan and requested range
+    alt All actions are valid
+        Exec->>State: Atomically commit passenger = 25
+        State-->>Exec: Updated state
+        Exec-->>API: State + short confirmation
+        API-->>UI: State event: passenger = 25
+        API->>TTS: Synthesize executor confirmation
+        TTS-->>API: Response audio
+        API-->>UI: Audio + timing metrics
+        UI-->>User: Show 25 degrees and play confirmation
+    else Invalid or unsupported action
+        Exec-->>API: Reject command and keep state unchanged
+        API->>TTS: Synthesize explanation or clarification
+        TTS-->>API: Response audio
+        API-->>UI: Unchanged state + explanation audio
+    end
