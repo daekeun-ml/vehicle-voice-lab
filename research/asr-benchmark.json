@@ -1,0 +1,549 @@
+{
+  "at": "2026-10-16T14:45:15.262Z",
+  "method": "Same 31 synthetic utterances; numbers normalized, spaces/punctuation excluded. CER is transcription fidelity, not command success.",
+  "models": [
+    {
+      "id": "nemotron",
+      "total": 31,
+      "characterErrorRate": 11.64,
+      "exact": 17,
+      "medianMs": 75
+    },
+    {
+      "id": "whisper",
+      "total": 31,
+      "characterErrorRate": 2.09,
+      "exact": 26,
+      "medianMs": 88
+    }
+  ],
+  "rows": [
+    {
+      "id": "driver-24",
+      "reference": "운전석 온도를 24도로 맞춰줘.",
+      "characters": 13,
+      "nemotron": {
+        "text": "운전석 온도를 이십사도로 맞춰줘.",
+        "errors": 0,
+        "elapsedMs": 89
+      },
+      "whisper": {
+        "text": "운전석 온도를 24도로 맞춰줘.",
+        "elapsedMs": 127,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "passenger-25",
+      "reference": "조수석 온도를 25도로 맞춰줘.",
+      "characters": 13,
+      "nemotron": {
+        "text": "조수석 온도를 이십오도로 맞춰줘.",
+        "errors": 0,
+        "elapsedMs": 84
+      },
+      "whisper": {
+        "text": "조수석 온도를 25도로 맞춰줘.",
+        "elapsedMs": 85,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "both-23",
+      "reference": "양쪽 온도를 23도로 맞춰줘.",
+      "characters": 12,
+      "nemotron": {
+        "text": "양쪽 온도를 이십삼도로 맞춰줘.",
+        "errors": 0,
+        "elapsedMs": 86
+      },
+      "whisper": {
+        "text": "양쪽 온도를 23도로 맞춰줘.",
+        "elapsedMs": 80,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "driver-up",
+      "reference": "운전석 온도를 1도 올려줘.",
+      "characters": 11,
+      "nemotron": {
+        "text": "운전석 온도를 일도 올려줘.",
+        "errors": 0,
+        "elapsedMs": 79
+      },
+      "whisper": {
+        "text": "운전석 온도를 1도 올려줘.",
+        "elapsedMs": 77,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "both-down",
+      "reference": "온도를 1도 내려줘.",
+      "characters": 8,
+      "nemotron": {
+        "text": "온도를 일도 내려줘.",
+        "errors": 0,
+        "elapsedMs": 70
+      },
+      "whisper": {
+        "text": "온도를 1도 내려줘.",
+        "elapsedMs": 64,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "fan-5",
+      "reference": "바람 세기를 5단으로 해줘.",
+      "characters": 11,
+      "nemotron": {
+        "text": "바람세기를 오단으로 해줘.",
+        "errors": 0,
+        "elapsedMs": 75
+      },
+      "whisper": {
+        "text": "바람 세기를 5단으로 해줘.",
+        "elapsedMs": 72,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "ac-off",
+      "reference": "에어컨 꺼줘.",
+      "characters": 5,
+      "nemotron": {
+        "text": "에어컨 거죠.",
+        "errors": 2,
+        "elapsedMs": 77
+      },
+      "whisper": {
+        "text": "에어컨 꺼줘.",
+        "elapsedMs": 64,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "ac-on",
+      "reference": "에어컨 켜줘.",
+      "characters": 5,
+      "nemotron": {
+        "text": "에어컨 켜줘",
+        "errors": 0,
+        "elapsedMs": 58
+      },
+      "whisper": {
+        "text": "에어컨 켜줘.",
+        "elapsedMs": 63,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "defrost-on",
+      "reference": "앞유리 김서림 제거 켜줘.",
+      "characters": 10,
+      "nemotron": {
+        "text": "압률이 김설임 제곱켜줘.",
+        "errors": 6,
+        "elapsedMs": 75
+      },
+      "whisper": {
+        "text": "앞유리 김서림 제거 켜줘.",
+        "elapsedMs": 79,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "defrost-off",
+      "reference": "앞유리 김서림 제거 꺼줘.",
+      "characters": 10,
+      "nemotron": {
+        "text": "압률이 김설임 제거 꺼줘.",
+        "errors": 5,
+        "elapsedMs": 75
+      },
+      "whisper": {
+        "text": "앞유리 김서림 제거 꺼줘.",
+        "elapsedMs": 84,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "seat-2",
+      "reference": "시트 열선을 2단으로 켜줘.",
+      "characters": 11,
+      "nemotron": {
+        "text": "시트 열선을 이단으로 켜줘.",
+        "errors": 0,
+        "elapsedMs": 77
+      },
+      "whisper": {
+        "text": "시트의 열선을 2단으로 켜줘.",
+        "elapsedMs": 119,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 1
+      }
+    },
+    {
+      "id": "seat-off",
+      "reference": "시트 열선 꺼줘.",
+      "characters": 6,
+      "nemotron": {
+        "text": "시트 열성 꺼",
+        "errors": 2,
+        "elapsedMs": 63
+      },
+      "whisper": {
+        "text": "시트의 열성 꺼줘.",
+        "elapsedMs": 94,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 2
+      }
+    },
+    {
+      "id": "volume-20",
+      "reference": "음량을 20으로 맞춰줘.",
+      "characters": 10,
+      "nemotron": {
+        "text": "음량을 이십으로 맞춰줘.",
+        "errors": 0,
+        "elapsedMs": 72
+      },
+      "whisper": {
+        "text": "음량을 20으로 맞춰줘.",
+        "elapsedMs": 94,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "media-play",
+      "reference": "음악 재생해줘.",
+      "characters": 6,
+      "nemotron": {
+        "text": "음악재생이죠.",
+        "errors": 2,
+        "elapsedMs": 61
+      },
+      "whisper": {
+        "text": "음악 재생해줘",
+        "elapsedMs": 72,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "media-pause",
+      "reference": "음악 멈춰줘.",
+      "characters": 5,
+      "nemotron": {
+        "text": "음악 멈춰줘.",
+        "errors": 0,
+        "elapsedMs": 61
+      },
+      "whisper": {
+        "text": "음악 멈춰줘.",
+        "elapsedMs": 71,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "media-next",
+      "reference": "다음 곡으로 넘겨줘.",
+      "characters": 8,
+      "nemotron": {
+        "text": "다음 국으로 넘겨줘.",
+        "errors": 1,
+        "elapsedMs": 69
+      },
+      "whisper": {
+        "text": "다음 곡으로 넘겨줘.",
+        "elapsedMs": 73,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "navigate",
+      "reference": "서울역으로 길 안내해줘.",
+      "characters": 10,
+      "nemotron": {
+        "text": "서울역으로 길 안내해줘.",
+        "errors": 0,
+        "elapsedMs": 73
+      },
+      "whisper": {
+        "text": "서울역으로 길 안내해줘.",
+        "elapsedMs": 93,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "nav-stop",
+      "reference": "길 안내 종료해줘.",
+      "characters": 7,
+      "nemotron": {
+        "text": "길 안내 종료해줘.",
+        "errors": 0,
+        "elapsedMs": 67
+      },
+      "whisper": {
+        "text": "기회 안내 종료해줘.",
+        "elapsedMs": 84,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 2
+      }
+    },
+    {
+      "id": "clarify",
+      "reference": "목적지는 아직 안 정했는데 길 안내해줘.",
+      "characters": 16,
+      "nemotron": {
+        "text": "목적지는 아직 안정했는데 귀에 안내해줘.",
+        "errors": 2,
+        "elapsedMs": 87
+      },
+      "whisper": {
+        "text": "목적지는 아직 안 정했는데 길 안내해줘.",
+        "elapsedMs": 105,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "unsupported-sensor",
+      "reference": "타이어 공기압 센서 값을 40으로 바꿔줘.",
+      "characters": 17,
+      "nemotron": {
+        "text": "타이어 공개압 센서 값을 사십으로 바꿔줘.",
+        "errors": 1,
+        "elapsedMs": 94
+      },
+      "whisper": {
+        "text": "타이어 공기압 센서 값을 40으로 바꿔줘",
+        "elapsedMs": 123,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "status",
+      "reference": "지금 조수석 온도가 몇 도야?",
+      "characters": 11,
+      "nemotron": {
+        "text": "지금 조수석 온도가 몇도야?",
+        "errors": 0,
+        "elapsedMs": 76
+      },
+      "whisper": {
+        "text": "지금 조수석 온도가 몇 도야?",
+        "elapsedMs": 95,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "out-of-range",
+      "reference": "조수석 온도를 40도로 설정해줘.",
+      "characters": 14,
+      "nemotron": {
+        "text": "조수석 온도를 사십도로 설정해줘.",
+        "errors": 0,
+        "elapsedMs": 87
+      },
+      "whisper": {
+        "text": "조수석 온도를 40도로 설정해줘.",
+        "elapsedMs": 110,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "compound",
+      "reference": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "characters": 21,
+      "nemotron": {
+        "text": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+        "errors": 2,
+        "elapsedMs": 105
+      },
+      "whisper": {
+        "text": "운전석은 24도로 하고 바람 쐬기는 3단으로 해줘.",
+        "elapsedMs": 139,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 1
+      }
+    },
+    {
+      "id": "correction",
+      "reference": "아니, 24도로 맞춰줘.",
+      "characters": 9,
+      "nemotron": {
+        "text": "아니 이십사도로 맞춰줘",
+        "errors": 0,
+        "elapsedMs": 69
+      },
+      "whisper": {
+        "text": "아니 24도로 맞춰줘.",
+        "elapsedMs": 80,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "undo",
+      "reference": "방금 설정 되돌려줘.",
+      "characters": 8,
+      "nemotron": {
+        "text": "방금 설정 되돌려줘.",
+        "errors": 0,
+        "elapsedMs": 70
+      },
+      "whisper": {
+        "text": "방금 설정 되돌려줘.",
+        "elapsedMs": 90,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "passenger-25-sohee",
+      "reference": "조수석 온도를 25도로 맞춰줘.",
+      "characters": 13,
+      "nemotron": {
+        "text": "주수석 온도를 이십오도로 맞춰줘.",
+        "errors": 1,
+        "elapsedMs": 108
+      },
+      "whisper": {
+        "text": "조수석 온도를 25도로 맞춰줘",
+        "elapsedMs": 101,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "defrost-off-sohee",
+      "reference": "앞유리 김서림 제거 꺼줘.",
+      "characters": 10,
+      "nemotron": {
+        "text": "압률이 김서림 제곱 꺼줘.",
+        "errors": 4,
+        "elapsedMs": 93
+      },
+      "whisper": {
+        "text": "앞유리 김서림 제거 꺼 줘",
+        "elapsedMs": 88,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "compound-sohee",
+      "reference": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "characters": 21,
+      "nemotron": {
+        "text": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+        "errors": 2,
+        "elapsedMs": 128
+      },
+      "whisper": {
+        "text": "운전석은 24도로 하고 바람새기는 3단으로 해줘",
+        "elapsedMs": 96,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 1
+      }
+    },
+    {
+      "id": "driver-24-noise",
+      "reference": "운전석 온도를 24도로 맞춰줘.",
+      "characters": 13,
+      "nemotron": {
+        "text": "운전석 온도를 이십사도로 맞춰줘.",
+        "errors": 0,
+        "elapsedMs": 83
+      },
+      "whisper": {
+        "text": "운전석 온도를 24도로 맞춰줘.",
+        "elapsedMs": 95,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "defrost-on-noise",
+      "reference": "앞유리 김서림 제거 켜줘.",
+      "characters": 10,
+      "nemotron": {
+        "text": "압류리 김설임 제곱혀줘.",
+        "errors": 6,
+        "elapsedMs": 73
+      },
+      "whisper": {
+        "text": "앞유리 김서림 제거 켜줘",
+        "elapsedMs": 101,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    },
+    {
+      "id": "fan-5-noise",
+      "reference": "바람 세기를 5단으로 해줘.",
+      "characters": 11,
+      "nemotron": {
+        "text": "바람색을 오단으로 해줘.",
+        "errors": 3,
+        "elapsedMs": 72
+      },
+      "whisper": {
+        "text": "바람 세기를 5단으로 해줘",
+        "elapsedMs": 86,
+        "model": "openai/whisper-large-v3-turbo",
+        "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+        "errors": 0
+      }
+    }
+  ]
+}

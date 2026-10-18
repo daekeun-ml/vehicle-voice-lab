@@ -1,0 +1,285 @@
+{
+  "at": "2026-10-16T15:12:30.193Z",
+  "method": "저장된 합성 테스트 응답을 독립 Whisper로 재인식한 텍스트 일치 진단. 이전 내장 음성 비교 샘플은 prior-ko로 표시. CER는 억양·자연스러움 MOS가 아니며 ASR 자체 오류가 섞임. 차량 명령 점수와 별도.",
+  "rows": [
+    {
+      "id": "qwen35-4b",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/qwen35-4b-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "qwen35-4b",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/qwen35-4b-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "qwen35-2b",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/qwen35-2b-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "qwen35-2b",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/qwen35-2b-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "qwen35-08b",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/qwen35-08b-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "qwen35-08b",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/qwen35-08b-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "gemma4-e2b",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/gemma4-e2b-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "gemma4-e2b",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/gemma4-e2b-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "phi4-mini",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/phi4-mini-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "phi4-mini",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/phi4-mini-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "hyperclova-05b",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/hyperclova-05b-passenger-25-reply.wav",
+      "expected": "Korean reply",
+      "transcript": "커리언 리플라이",
+      "characterErrorRate": 100
+    },
+    {
+      "id": "hyperclova-05b",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/hyperclova-05b-defrost-on-reply.wav",
+      "expected": "김서림 제거 켜",
+      "transcript": "김서림 제거 켜.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "exaone4-12b",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/exaone4-12b-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "exaone4-12b",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/exaone4-12b-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "smollm3",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/smollm3-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "smollm3",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/smollm3-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "qwen3-omni",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/qwen3-omni-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "qwen3-omni",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/qwen3-omni-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "minicpm-o45",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/minicpm-o45-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "minicpm-o45",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/minicpm-o45-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "step-audio2-mini",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/step-audio2-mini-passenger-25-reply.wav",
+      "expected": "조수석 온도를 25도로 맞췄어요.",
+      "transcript": "조수석 온도를 25도로 맞췄어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "step-audio2-mini",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/step-audio2-mini-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "mimo-audio",
+      "kind": "Polly hybrid",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/mimo-audio-passenger-25-reply.wav",
+      "expected": "운전석 온도를 20도로 맞췄어요. 조수석 온도를 20도로 맞췄어요.",
+      "transcript": "운전석 온도를 20도로 맞췄어요.",
+      "characterErrorRate": 50
+    },
+    {
+      "id": "mimo-audio",
+      "kind": "Polly hybrid",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/mimo-audio-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김사림 제거 기능을 켰어요.",
+      "characterErrorRate": 7.14
+    },
+    {
+      "id": "sonic",
+      "kind": "native",
+      "sample": "passenger-25",
+      "path": "output/vehicle-benchmark/sonic-passenger-25-reply.wav",
+      "expected": "조수석 온도를 이십오도로 맞췄습니다.",
+      "transcript": "조수석 온도를 25도로 맞췄습니다.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "sonic",
+      "kind": "native",
+      "sample": "defrost-on",
+      "path": "output/vehicle-benchmark/sonic-defrost-on-reply.wav",
+      "expected": "앞유리 김서림 제거 기능을 켰어요.",
+      "transcript": "앞유리 김서림 제거 기능을 켰어요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "step-audio2-mini",
+      "kind": "native comparison",
+      "sample": "prior-ko",
+      "path": "output/speech-alternatives/step-audio2-mini-ko.wav",
+      "expected": "조속도를 25도로 맞춰주세요.",
+      "transcript": "조속들을 이사부도로 맞춰주세요.",
+      "characterErrorRate": 38.46
+    },
+    {
+      "id": "moshi",
+      "kind": "native comparison",
+      "sample": "prior-ko",
+      "path": "output/speech-alternatives/moshi-ko.wav",
+      "expected": "there! How is it going? The result of 2 divided by",
+      "transcript": "2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.",
+      "characterErrorRate": 165.79
+    },
+    {
+      "id": "mimo-audio",
+      "kind": "native comparison",
+      "sample": "prior-ko",
+      "path": "output/speech-alternatives/mimo-audio-ko.wav",
+      "expected": "네, 주소서관도 25도로 맞춰 ��렸습니다. (Note: The assistant is a voice AI with no vehicle controls, so it cannot actually adjust the climate control settings. The response is polite and confirms the user's request in Korean as instructed.)",
+      "transcript": "이 시스템은 아이좋다. 이 시스템은 아이좋다. 이 시스템은 아이좋다. 이 시스템은 아이좋다. 이 시스템은 아이좋다. 이 시스템은 아이좋다. 이 시스템은 아이좋다. 이 시스템은 아이좋다.",
+      "characterErrorRate": 99.44
+    },
+    {
+      "id": "qwen3-omni",
+      "kind": "native comparison",
+      "sample": "prior-ko",
+      "path": "output/speech-alternatives/qwen3-omni-ko.wav",
+      "expected": "죄송합니다. 저는 차량의 온도 조절 기능을 제어할 수 없습니다. 조수석 온도를 25도로 맞추려면 차량의 온도 조절 버튼을 직접 조작해 주세요.",
+      "transcript": "죄송합니다. 저는 차량의 온도 조절 기능을 제어할 수 없습니다. 조수석 온도를 25도로 맞추려면 차량의 온도 조절 버튼을 직접 조작해 주세요.",
+      "characterErrorRate": 0
+    },
+    {
+      "id": "minicpm-o45",
+      "kind": "native comparison",
+      "sample": "prior-ko",
+      "path": "output/minicpm-pronunciation/native.wav",
+      "expected": "조수석 오른쪽에 25도는 설정할 수 없습니다.",
+      "transcript": "SDS E-C-I-N-N-D-N-Fort, now",
+      "characterErrorRate": 100
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "step-audio2-mini",
+    "language": "en",
+    "meanDb": "-23.3",
+    "nonSilent": true
+  },
+  {
+    "id": "step-audio2-mini",
+    "language": "ko",
+    "meanDb": "-22.9",
+    "nonSilent": true
+  },
+  {
+    "id": "moshi",
+    "language": "en",
+    "meanDb": "-27.5",
+    "nonSilent": true
+  },
+  {
+    "id": "moshi",
+    "language": "ko",
+    "meanDb": "-26.0",
+    "nonSilent": true
+  },
+  {
+    "id": "mimo-audio",
+    "language": "en",
+    "meanDb": "-17.4",
+    "nonSilent": true
+  },
+  {
+    "id": "mimo-audio",
+    "language": "ko",
+    "meanDb": "-18.8",
+    "nonSilent": true
+  },
+  {
+    "id": "qwen3-omni",
+    "language": "en",
+    "meanDb": "-20.7",
+    "nonSilent": true
+  },
+  {
+    "id": "qwen3-omni",
+    "language": "ko",
+    "meanDb": "-19.9",
+    "nonSilent": true
+  }
+]

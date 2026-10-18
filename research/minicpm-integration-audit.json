@@ -1,0 +1,108 @@
+{
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "syntheticAudioOnly": true,
+  "results": [
+    {
+      "profile": "legacy",
+      "case": "math-en",
+      "inputSamples": 63480,
+      "sha256": "d4865bb9749db7d10c43f6036a91302517231c9293a2ad609dc91653df61c18c",
+      "text": "Two plus three equals five.",
+      "chunks": 3,
+      "firstAudioMs": 2149,
+      "totalMs": 3107
+    },
+    {
+      "profile": "legacy",
+      "case": "math-ko",
+      "inputSamples": 63280,
+      "sha256": "01f42381f06e0622cd3e1484ef58b13b02cfa9f65fc0541c5a170cad18727f60",
+      "text": "1 더하기 3은 4입니다.",
+      "chunks": 4,
+      "firstAudioMs": 1278,
+      "totalMs": 2766
+    },
+    {
+      "profile": "legacy",
+      "case": "command-ko",
+      "inputSamples": 81920,
+      "sha256": "74dcea6af7e2bf947613375d5a73d14ab6862886536a920073e9811ba5a66876",
+      "text": "Set the driver temperature to twenty four degrees.",
+      "chunks": 3,
+      "firstAudioMs": 1359,
+      "totalMs": 2564
+    },
+    {
+      "profile": "official",
+      "case": "math-en",
+      "inputSamples": 63480,
+      "sha256": "d4865bb9749db7d10c43f6036a91302517231c9293a2ad609dc91653df61c18c",
+      "text": "Two plus three is five.",
+      "chunks": 2,
+      "firstAudioMs": 1142,
+      "totalMs": 1706
+    },
+    {
+      "profile": "official",
+      "case": "math-ko",
+      "inputSamples": 63280,
+      "sha256": "01f42381f06e0622cd3e1484ef58b13b02cfa9f65fc0541c5a170cad18727f60",
+      "text": "1 더하기 3은 4입니다.",
+      "chunks": 3,
+      "firstAudioMs": 1295,
+      "totalMs": 2364
+    },
+    {
+      "profile": "official",
+      "case": "command-ko",
+      "inputSamples": 81920,
+      "sha256": "74dcea6af7e2bf947613375d5a73d14ab6862886536a920073e9811ba5a66876",
+      "text": "Set the driver temperature to twenty four degrees.",
+      "chunks": 3,
+      "firstAudioMs": 1359,
+      "totalMs": 2368
+    },
+    {
+      "profile": "neutral-reference",
+      "case": "math-en",
+      "inputSamples": 63480,
+      "sha256": "d4865bb9749db7d10c43f6036a91302517231c9293a2ad609dc91653df61c18c",
+      "text": "Two plus three equals five.",
+      "chunks": 3,
+      "firstAudioMs": 1146,
+      "totalMs": 2147
+    },
+    {
+      "profile": "neutral-reference",
+      "case": "math-ko",
+      "inputSamples": 63280,
+      "sha256": "01f42381f06e0622cd3e1484ef58b13b02cfa9f65fc0541c5a170cad18727f60",
+      "text": "1 더하기 3은 4입니다.",
+      "chunks": 2,
+      "firstAudioMs": 1288,
+      "totalMs": 1871
+    },
+    {
+      "profile": "neutral-reference",
+      "case": "command-ko",
+      "inputSamples": 81920,
+      "sha256": "74dcea6af7e2bf947613375d5a73d14ab6862886536a920073e9811ba5a66876",
+      "text": "죄송합니다. 차량에 조수석온도조절기나 관련 기능이 없습니다.",
+      "chunks": 28,
+      "firstAudioMs": 1386,
+      "totalMs": 18427
+    }
+  ],
+  "at": "2026-10-16",
+  "seed": 42,
+  "expected": {
+    "math-en": "Two plus three is five.",
+    "math-ko": "2 더하기 3은 5",
+    "command-ko": "조수석 25도 요청; 실제 실행하지 않음"
+  },
+  "profiles": {
+    "legacy": "omni prompt; no tail padding; greedy; max_new_tokens 96; English vehicle command reference",
+    "official": "audio_assistant; 1s tail padding; sampling; max_new_tokens 512; length_penalty 1.1; same English vehicle command reference",
+    "neutral-reference": "official settings plus neutral synthetic reference"
+  }
+}

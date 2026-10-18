@@ -1,0 +1,2345 @@
+{
+  "modelId": "hyperclova-05b",
+  "name": "HyperCLOVA X SEED · 0.5B",
+  "repo": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+  "revision": "3da5046fb0195d14f2497de198136987d35fd644",
+  "size": "0.57B total",
+  "startedAt": "2026-10-16T14:44:11.810Z",
+  "status": "complete",
+  "syntheticAudio": true,
+  "pipeline": "Nemotron ASR → selected sLLM → vehicle executor → Polly",
+  "rows": [
+    {
+      "id": "driver-24",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 이십사도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "24도 올리겠습니다.",
+      "asrMs": 87,
+      "llmMs": 417,
+      "ttsMs": 980,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1835,
+      "elapsedMs": 1835,
+      "audioValid": true,
+      "audioBytes": 54444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "passenger-25",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "조수석 온도를 이십오도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석은 25도로 맞추겠습니다.",
+      "asrMs": 85,
+      "llmMs": 498,
+      "ttsMs": 174,
+      "modelLoadMs": 0,
+      "firstAudioMs": 929,
+      "elapsedMs": 930,
+      "audioValid": true,
+      "audioBytes": 83244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "both-23",
+      "text": "양쪽 온도를 23도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "양쪽 온도를 이십삼도로 맞춰줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 23
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 23도로 맞췄어요.",
+      "asrMs": 84,
+      "llmMs": 716,
+      "ttsMs": 189,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1129,
+      "elapsedMs": 1129,
+      "audioValid": true,
+      "audioBytes": 89244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "driver-up",
+      "text": "운전석 온도를 1도 올려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 일도 올려줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 25
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 25,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 25도로 맞췄어요.",
+      "asrMs": 80,
+      "llmMs": 624,
+      "ttsMs": 186,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1020,
+      "elapsedMs": 1020,
+      "audioValid": true,
+      "audioBytes": 88044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "both-down",
+      "text": "온도를 1도 내려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 21
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "온도를 일도 내려줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "일도 내려줘.",
+      "asrMs": 69,
+      "llmMs": 436,
+      "ttsMs": 117,
+      "modelLoadMs": 0,
+      "firstAudioMs": 660,
+      "elapsedMs": 660,
+      "audioValid": true,
+      "audioBytes": 40444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "fan-5",
+      "text": "바람 세기를 5단으로 해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "바람세기를 오단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "바람 세기를 5단으로 바꿨어요.",
+      "asrMs": 74,
+      "llmMs": 626,
+      "ttsMs": 161,
+      "modelLoadMs": 0,
+      "firstAudioMs": 945,
+      "elapsedMs": 945,
+      "audioValid": true,
+      "audioBytes": 76844,
+      "failureCategory": null,
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "ac-off",
+      "text": "에어컨 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": false,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "에어컨 거죠.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "에어컨 켜져 있어.",
+      "asrMs": 60,
+      "llmMs": 437,
+      "ttsMs": 131,
+      "modelLoadMs": 0,
+      "firstAudioMs": 683,
+      "elapsedMs": 683,
+      "audioValid": true,
+      "audioBytes": 48444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "ac-on",
+      "text": "에어컨 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "에어컨 켜줘",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "켜져 있어.",
+      "asrMs": 58,
+      "llmMs": 398,
+      "ttsMs": 109,
+      "modelLoadMs": 0,
+      "firstAudioMs": 606,
+      "elapsedMs": 606,
+      "audioValid": true,
+      "audioBytes": 33644,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "defrost-on",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김설임 제곱켜줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "깜빡이는 신호등으로 바뀌어주세요.",
+      "asrMs": 75,
+      "llmMs": 568,
+      "ttsMs": 165,
+      "modelLoadMs": 0,
+      "firstAudioMs": 871,
+      "elapsedMs": 872,
+      "audioValid": true,
+      "audioBytes": 79244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "defrost-off",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김설임 제거 꺼줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "깜빡이는 소리 멈춰줘.",
+      "asrMs": 75,
+      "llmMs": 531,
+      "ttsMs": 146,
+      "modelLoadMs": 0,
+      "firstAudioMs": 803,
+      "elapsedMs": 803,
+      "audioValid": true,
+      "audioBytes": 58444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "seat-2",
+      "text": "시트 열선을 2단으로 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 2
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 2,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "시트 열선을 이단으로 켜줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "시트를 이단으로 켜줘.",
+      "asrMs": 77,
+      "llmMs": 475,
+      "ttsMs": 146,
+      "modelLoadMs": 0,
+      "firstAudioMs": 750,
+      "elapsedMs": 750,
+      "audioValid": true,
+      "audioBytes": 56444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "seat-off",
+      "text": "시트 열선 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "시트 열성 꺼",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "시트를 끕니다.",
+      "asrMs": 62,
+      "llmMs": 457,
+      "ttsMs": 130,
+      "modelLoadMs": 0,
+      "firstAudioMs": 702,
+      "elapsedMs": 702,
+      "audioValid": true,
+      "audioBytes": 42044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "volume-20",
+      "text": "음량을 20으로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "volume",
+          "value": 20
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 20,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음량을 이십으로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음량을 20으로 맞추겠습니다.",
+      "asrMs": 71,
+      "llmMs": 474,
+      "ttsMs": 132,
+      "modelLoadMs": 0,
+      "firstAudioMs": 716,
+      "elapsedMs": 716,
+      "audioValid": true,
+      "audioBytes": 67244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "media-play",
+      "text": "음악 재생해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": true,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음악재생이죠.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음악 재생 중입니다.",
+      "asrMs": 61,
+      "llmMs": 416,
+      "ttsMs": 136,
+      "modelLoadMs": 0,
+      "firstAudioMs": 659,
+      "elapsedMs": 659,
+      "audioValid": true,
+      "audioBytes": 50444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "media-pause",
+      "text": "음악 멈춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음악 멈춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "멈춤",
+      "asrMs": 61,
+      "llmMs": 416,
+      "ttsMs": 125,
+      "modelLoadMs": 0,
+      "firstAudioMs": 653,
+      "elapsedMs": 653,
+      "audioValid": true,
+      "audioBytes": 25644,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "media-next",
+      "text": "다음 곡으로 넘겨줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "next"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "다음 드라이브 곡"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "다음 국으로 넘겨줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "한국어 응답 없음.",
+      "asrMs": 69,
+      "llmMs": 417,
+      "ttsMs": 132,
+      "modelLoadMs": 0,
+      "firstAudioMs": 678,
+      "elapsedMs": 678,
+      "audioValid": true,
+      "audioBytes": 51644,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "navigate",
+      "text": "서울역으로 길 안내해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "서울역",
+          "active": true
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "서울역으로 길 안내해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "길 안내 완료된 서울역입니다.",
+      "asrMs": 71,
+      "llmMs": 497,
+      "ttsMs": 163,
+      "modelLoadMs": 0,
+      "firstAudioMs": 795,
+      "elapsedMs": 796,
+      "audioValid": true,
+      "audioBytes": 72044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "nav-stop",
+      "text": "길 안내 종료해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "navigationStop"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "길 안내 종료해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "길 안내 종료된 것으로 표시됨.",
+      "asrMs": 67,
+      "llmMs": 492,
+      "ttsMs": 162,
+      "modelLoadMs": 0,
+      "firstAudioMs": 779,
+      "elapsedMs": 779,
+      "audioValid": true,
+      "audioBytes": 73244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "clarify",
+      "text": "목적지는 아직 안 정했는데 길 안내해줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": false,
+      "denialCorrect": true,
+      "heard": "목적지는 아직 안정했는데 귀에 안내해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "네, 다음 목적지로 이동하겠습니다.",
+      "asrMs": 87,
+      "llmMs": 476,
+      "ttsMs": 185,
+      "modelLoadMs": 0,
+      "firstAudioMs": 856,
+      "elapsedMs": 856,
+      "audioValid": true,
+      "audioBytes": 82444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "unsupported-sensor",
+      "text": "타이어 공기압 센서 값을 40으로 바꿔줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "heard": "타이어 공개압 센서 값을 사십으로 바꿔줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "사십으로 바꾸겠습니다.",
+      "asrMs": 91,
+      "llmMs": 449,
+      "ttsMs": 154,
+      "modelLoadMs": 0,
+      "firstAudioMs": 758,
+      "elapsedMs": 758,
+      "audioValid": true,
+      "audioBytes": 60844,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "status",
+      "text": "지금 조수석 온도가 몇 도야?",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": false,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "지금 조수석 온도가 몇도야?",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석은 현재 20도입니다.",
+      "asrMs": 77,
+      "llmMs": 514,
+      "ttsMs": 161,
+      "modelLoadMs": 0,
+      "firstAudioMs": 812,
+      "elapsedMs": 812,
+      "audioValid": true,
+      "audioBytes": 72044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "out-of-range",
+      "text": "조수석 온도를 40도로 설정해줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "heard": "조수석 온도를 사십도로 설정해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "사십도로 설정했습니다.",
+      "asrMs": 86,
+      "llmMs": 472,
+      "ttsMs": 158,
+      "modelLoadMs": 0,
+      "firstAudioMs": 795,
+      "elapsedMs": 795,
+      "audioValid": true,
+      "audioBytes": 58444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "compound",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 24도로 맞췄어요. 바람 세기를 3단으로 바꿨어요.",
+      "asrMs": 103,
+      "llmMs": 1045,
+      "ttsMs": 356,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1467,
+      "elapsedMs": 1628,
+      "audioValid": true,
+      "audioBytes": 166888,
+      "failureCategory": null,
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "correction",
+      "text": "아니, 24도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": false,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "아니 이십사도로 맞춰줘",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석을 20도로 맞춤.",
+      "asrMs": 68,
+      "llmMs": 512,
+      "ttsMs": 139,
+      "modelLoadMs": 0,
+      "firstAudioMs": 884,
+      "elapsedMs": 885,
+      "audioValid": true,
+      "audioBytes": 63644,
+      "failureCategory": "context-prelude",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "undo",
+      "text": "방금 설정 되돌려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": false,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "방금 설정 되돌려줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석을 25도로 되돌립니다.",
+      "asrMs": 70,
+      "llmMs": 510,
+      "ttsMs": 175,
+      "modelLoadMs": 0,
+      "firstAudioMs": 818,
+      "elapsedMs": 818,
+      "audioValid": true,
+      "audioBytes": 77644,
+      "failureCategory": "context-prelude",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "passenger-25-sohee",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "주수석 온도를 이십오도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "25도 올리겠습니다.",
+      "asrMs": 107,
+      "llmMs": 399,
+      "ttsMs": 145,
+      "modelLoadMs": 0,
+      "firstAudioMs": 742,
+      "elapsedMs": 742,
+      "audioValid": true,
+      "audioBytes": 54444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "defrost-off-sohee",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김서림 제곱 꺼줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "깜빡임 소리 끄세요.",
+      "asrMs": 92,
+      "llmMs": 501,
+      "ttsMs": 142,
+      "modelLoadMs": 0,
+      "firstAudioMs": 800,
+      "elapsedMs": 800,
+      "audioValid": true,
+      "audioBytes": 53244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "compound-sohee",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 24도로 맞췄어요. 바람 세기를 3단으로 바꿨어요.",
+      "asrMs": 127,
+      "llmMs": 1059,
+      "ttsMs": 357,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1522,
+      "elapsedMs": 1698,
+      "audioValid": true,
+      "audioBytes": 166888,
+      "failureCategory": null,
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "driver-24-noise",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 이십사도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "24도 올리겠습니다.",
+      "asrMs": 84,
+      "llmMs": 413,
+      "ttsMs": 122,
+      "modelLoadMs": 0,
+      "firstAudioMs": 688,
+      "elapsedMs": 688,
+      "audioValid": true,
+      "audioBytes": 54444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "defrost-on-noise",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압류리 김설임 제곱혀줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "깜빡이는 소리 줄여야 함.",
+      "asrMs": 74,
+      "llmMs": 529,
+      "ttsMs": 161,
+      "modelLoadMs": 0,
+      "firstAudioMs": 829,
+      "elapsedMs": 829,
+      "audioValid": true,
+      "audioBytes": 61244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    },
+    {
+      "id": "fan-5-noise",
+      "text": "바람 세기를 5단으로 해줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "바람색을 오단으로 해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "오단 바람색으로 바꾸겠습니다.",
+      "asrMs": 72,
+      "llmMs": 473,
+      "ttsMs": 164,
+      "modelLoadMs": 0,
+      "firstAudioMs": 837,
+      "elapsedMs": 837,
+      "audioValid": true,
+      "audioBytes": 71644,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "actualRevision": "3da5046fb0195d14f2497de198136987d35fd644"
+    }
+  ],
+  "warmup": {
+    "elapsedMs": 11099,
+    "modelLoadMs": 10240
+  },
+  "completedAt": "2026-10-16T14:44:52.085Z"
+}

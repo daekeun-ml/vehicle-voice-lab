@@ -1,0 +1,920 @@
+{
+  "modelId": "gemma4-e2b",
+  "name": "Gemma 4 · E2B IT",
+  "repo": "google/gemma-4-E2B-it",
+  "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "size": "2.3B effective / 5.12B total",
+  "startedAt": "2026-10-16T15:15:51.817Z",
+  "status": "complete",
+  "asrId": "whisper",
+  "promptVersion": "compact-v2",
+  "generationProfile": "deterministic",
+  "syntheticAudio": true,
+  "pipeline": "Whisper turbo ASR → selected sLLM → vehicle executor → Polly",
+  "rows": [
+    {
+      "id": "holdout-passenger-27",
+      "text": "조수석 온도를 스물일곱 도로 바꿔 주세요.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 27
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 27
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "조수석 온도를 27도로 바꿔주세요.",
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 27
+        }
+      ],
+      "modelReply": "",
+      "rawTranscript": "조수석 온도를 27도로 바꿔주세요.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 27
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 27
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석 온도를 27도로 맞췄어요.",
+      "asrMs": 80,
+      "llmMs": 1449,
+      "ttsMs": 141,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1721,
+      "elapsedMs": 1721,
+      "audioValid": true,
+      "audioBytes": 88044,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-driver-19",
+      "text": "운전석은 19도로 설정해 주세요.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 19
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 19,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석은 19도로 설정해주세요.",
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 19
+        }
+      ],
+      "modelReply": "",
+      "rawTranscript": "운전석은 19도로 설정해주세요.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 19
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 19,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 19도로 맞췄어요.",
+      "asrMs": 76,
+      "llmMs": 1443,
+      "ttsMs": 178,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1750,
+      "elapsedMs": 1750,
+      "audioValid": true,
+      "audioBytes": 85244,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-both-26",
+      "text": "실내 온도 양쪽 다 26도로 해 줘.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 26
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 26,
+          "passenger": 26
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "실내 온도 양쪽 다 26도로 해줘.",
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 26
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 26
+        }
+      ],
+      "modelReply": "",
+      "rawTranscript": "실내 온도 양쪽 다 26도로 해줘.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 26
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 26
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 26,
+          "passenger": 26
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 26도로 맞췄어요. 조수석 온도를 26도로 맞췄어요.",
+      "asrMs": 80,
+      "llmMs": 2076,
+      "ttsMs": 361,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2375,
+      "elapsedMs": 2563,
+      "audioValid": true,
+      "audioBytes": 181688,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-fan-4",
+      "text": "풍량을 4단으로 맞춰 주세요.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 4
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 4,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "풍량을 4단으로 맞춰주세요.",
+      "modelProposedActions": [
+        {
+          "type": "fan",
+          "value": 4
+        }
+      ],
+      "modelReply": "",
+      "rawTranscript": "풍량을 4단으로 맞춰주세요.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 4
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 4,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "바람 세기를 4단으로 바꿨어요.",
+      "asrMs": 76,
+      "llmMs": 1129,
+      "ttsMs": 167,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1511,
+      "elapsedMs": 1511,
+      "audioValid": true,
+      "audioBytes": 77644,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-seat-3",
+      "text": "엉덩이가 추워서 시트 열선 3단으로 켜 줘.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 3,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "엉덩이가 추워서 시트 열선 3단으로 켜줘.",
+      "modelProposedActions": [
+        {
+          "type": "seatHeat",
+          "value": 3
+        }
+      ],
+      "modelReply": "시트 열선을 3단으로 켜겠습니다.",
+      "rawTranscript": "엉덩이가 추워서 시트 열선 3단으로 켜줘.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 3,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "열선을 3단으로 켰어요.",
+      "asrMs": 102,
+      "llmMs": 1775,
+      "ttsMs": 129,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2058,
+      "elapsedMs": 2059,
+      "audioValid": true,
+      "audioBytes": 65644,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-volume-45",
+      "text": "음악 소리를 45로 설정해 줘.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "volume",
+          "value": 45
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 45,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음악소리를 45로 설정해줘",
+      "modelProposedActions": [
+        {
+          "type": "volume",
+          "value": 45
+        }
+      ],
+      "modelReply": "",
+      "rawTranscript": "음악소리를 45로 설정해줘",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "volume",
+          "value": 45
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 45,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음량을 45으로 맞췄어요.",
+      "asrMs": 66,
+      "llmMs": 1181,
+      "ttsMs": 155,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1460,
+      "elapsedMs": 1460,
+      "audioValid": true,
+      "audioBytes": 69244,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-defrost-off",
+      "text": "앞유리 성에 제거 기능을 꺼 주세요.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "앞유리성의 제거 기능을 꺼주세요.",
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "modelReply": "앞유리 김서림 제거를 끄겠습니다.",
+      "rawTranscript": "앞유리성의 제거 기능을 꺼주세요.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "asrMs": 86,
+      "llmMs": 1779,
+      "ttsMs": 160,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2097,
+      "elapsedMs": 2097,
+      "audioValid": true,
+      "audioBytes": 82844,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-pause",
+      "text": "노래 잠깐 멈춰 줘.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "노래 잠깐 멈춰줘.",
+      "modelProposedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "modelReply": "음악을 멈춥니다.",
+      "rawTranscript": "노래 잠깐 멈춰줘.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음악을 멈췄어요.",
+      "asrMs": 60,
+      "llmMs": 1561,
+      "ttsMs": 124,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1796,
+      "elapsedMs": 1796,
+      "audioValid": true,
+      "audioBytes": 50044,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-compound",
+      "text": "조수석은 21도로 하고 풍량은 6단으로 바꿔 줘.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 21
+        },
+        {
+          "type": "fan",
+          "value": 6
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 21
+        },
+        "fan": 6,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "조수석은 21도로 하고 풍량은 육간으로 바꿔줘.",
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 21
+        },
+        {
+          "type": "fan",
+          "value": 6
+        }
+      ],
+      "modelReply": "",
+      "rawTranscript": "조수석은 21도로 하고 풍량은 육간으로 바꿔줘.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 21
+        },
+        {
+          "type": "fan",
+          "value": 6
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 21
+        },
+        "fan": 6,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석 온도를 21도로 맞췄어요. 바람 세기를 6단으로 바꿨어요.",
+      "asrMs": 112,
+      "llmMs": 1838,
+      "ttsMs": 336,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2158,
+      "elapsedMs": 2352,
+      "audioValid": true,
+      "audioBytes": 166088,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    },
+    {
+      "id": "holdout-weather",
+      "text": "오늘 날씨 알려 줄래?",
+      "variant": "holdout",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "오늘 날씨 알려줄래?",
+      "modelProposedActions": [],
+      "modelReply": "날씨 정보는 제공할 수 없습니다.",
+      "rawTranscript": "오늘 날씨 알려줄래?",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "날씨 정보는 제공할 수 없습니다.",
+      "asrMs": 61,
+      "llmMs": 1293,
+      "ttsMs": 176,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1575,
+      "elapsedMs": 1575,
+      "audioValid": true,
+      "audioBytes": 74444,
+      "failureCategory": null,
+      "actualPlanner": "google/gemma-4-E2B-it",
+      "actualRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+    }
+  ],
+  "warmup": {
+    "elapsedMs": 9217,
+    "modelLoadMs": 7346
+  },
+  "completedAt": "2026-10-16T15:16:19.960Z"
+}

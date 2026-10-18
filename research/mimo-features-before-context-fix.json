@@ -1,0 +1,147 @@
+{
+  "at": "2026-10-16T12:15:04.273Z",
+  "method": "Synthetic Korean WAV, sequential vehicle state, no TTS",
+  "audioModelId": "mimo-audio",
+  "passed": 1,
+  "total": 4,
+  "rows": [
+    {
+      "name": "driver-24",
+      "understood": "운전석 온도를 24도로 맞춰줘",
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "llmMs": 3143,
+      "passed": false
+    },
+    {
+      "name": "defrost-on",
+      "understood": "앞유리 김서림 제거/성에 제거",
+      "actions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "state": {
+        "revision": 2,
+        "temperature": {
+          "driver": 24,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "llmMs": 2085,
+      "passed": true
+    },
+    {
+      "name": "defrost-off",
+      "understood": "앞유리 김서림 제거/성에 제거",
+      "actions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "state": {
+        "revision": 3,
+        "temperature": {
+          "driver": 24,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "llmMs": 2083,
+      "passed": false
+    },
+    {
+      "name": "temperature-up",
+      "understood": "앞유리 김서림 제거/성에 제거",
+      "actions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "state": {
+        "revision": 4,
+        "temperature": {
+          "driver": 24,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "llmMs": 2104,
+      "passed": false
+    }
+  ]
+}

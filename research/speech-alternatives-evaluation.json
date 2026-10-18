@@ -1,0 +1,452 @@
+{
+  "at": "2026-10-16T11:57:48.530Z",
+  "method": "Synthetic WAV input; native audio presence and schema/tool tests, not human speech quality",
+  "models": [
+    {
+      "id": "step-audio2-mini",
+      "tests": [
+        {
+          "language": "en",
+          "operation": "plan-audio",
+          "status": 200,
+          "model": "stepfun-ai/Step-Audio-2-mini",
+          "revision": "e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36",
+          "quantization": "BF16",
+          "elapsedMs": 8080,
+          "loadMs": 68406,
+          "jsonValid": true,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "heard": "온도 24도로 설정해줘",
+          "reply": "",
+          "expectedActions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "commandCorrect": true,
+          "state": {
+            "revision": 1,
+            "temperature": {
+              "driver": 24,
+              "passenger": 22
+            },
+            "fan": 2,
+            "ac": true,
+            "defrost": false,
+            "seatHeat": 0,
+            "media": {
+              "playing": false,
+              "volume": 35,
+              "track": "드라이브 플레이리스트"
+            },
+            "navigation": {
+              "destination": null,
+              "active": false
+            },
+            "speed": 0
+          }
+        },
+        {
+          "language": "en",
+          "operation": "s2s",
+          "status": 200,
+          "model": "stepfun-ai/Step-Audio-2-mini",
+          "revision": "e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36",
+          "quantization": "BF16",
+          "elapsedMs": 7875,
+          "loadMs": 0,
+          "audioBytes": 190158,
+          "nativeAudio": true,
+          "reply": "The driver's temperature has been set to 24 degrees.",
+          "meanDb": "-23.3",
+          "nonSilent": true
+        },
+        {
+          "language": "ko",
+          "operation": "plan-audio",
+          "status": 200,
+          "model": "stepfun-ai/Step-Audio-2-mini",
+          "revision": "e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36",
+          "quantization": "BF16",
+          "elapsedMs": 4618,
+          "loadMs": 0,
+          "jsonValid": true,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "heard": "조수석 온도를 25도로 맞춰주세요",
+          "reply": "",
+          "expectedActions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "commandCorrect": true,
+          "state": {
+            "revision": 1,
+            "temperature": {
+              "driver": 22,
+              "passenger": 25
+            },
+            "fan": 2,
+            "ac": true,
+            "defrost": false,
+            "seatHeat": 0,
+            "media": {
+              "playing": false,
+              "volume": 35,
+              "track": "드라이브 플레이리스트"
+            },
+            "navigation": {
+              "destination": null,
+              "active": false
+            },
+            "speed": 0
+          }
+        },
+        {
+          "language": "ko",
+          "operation": "s2s",
+          "status": 200,
+          "model": "stepfun-ai/Step-Audio-2-mini",
+          "revision": "e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36",
+          "quantization": "BF16",
+          "elapsedMs": 5914,
+          "loadMs": 0,
+          "audioBytes": 167118,
+          "nativeAudio": true,
+          "reply": "조속도를 25도로 맞춰주세요.",
+          "meanDb": "-22.9",
+          "nonSilent": true
+        }
+      ],
+      "nativeVerified": true,
+      "audioPlannerVerified": true,
+      "koreanCommandPassed": true
+    },
+    {
+      "id": "moshi",
+      "tests": [
+        {
+          "language": "en",
+          "operation": "s2s",
+          "status": 200,
+          "model": "kyutai/moshiko-pytorch-bf16",
+          "revision": "2bfc9ae6e89079a5cc7ed2a68436010d91a3d289",
+          "quantization": "BF16",
+          "elapsedMs": 18810,
+          "loadMs": 56306,
+          "audioBytes": 314924,
+          "nativeAudio": true,
+          "reply": "Hi, how is it going?",
+          "meanDb": "-27.5",
+          "nonSilent": true
+        },
+        {
+          "language": "ko",
+          "operation": "s2s",
+          "status": 200,
+          "model": "kyutai/moshiko-pytorch-bf16",
+          "revision": "2bfc9ae6e89079a5cc7ed2a68436010d91a3d289",
+          "quantization": "BF16",
+          "elapsedMs": 5599,
+          "loadMs": 0,
+          "audioBytes": 433964,
+          "nativeAudio": true,
+          "reply": "there! How is it going? The result of 2 divided by",
+          "meanDb": "-26.0",
+          "nonSilent": true
+        }
+      ],
+      "nativeVerified": true,
+      "audioPlannerVerified": false,
+      "koreanCommandPassed": false
+    },
+    {
+      "id": "mimo-audio",
+      "tests": [
+        {
+          "language": "en",
+          "operation": "plan-audio",
+          "status": 200,
+          "model": "XiaomiMiMo/MiMo-Audio-7B-Instruct",
+          "revision": "c359441c22c2a1c74be5f99a91e83392680e9cc8",
+          "quantization": "BF16",
+          "elapsedMs": 3019,
+          "loadMs": 14571,
+          "jsonValid": true,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "heard": "Set the driver temperature to 24 degrees.",
+          "reply": "",
+          "expectedActions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "commandCorrect": true,
+          "state": {
+            "revision": 1,
+            "temperature": {
+              "driver": 24,
+              "passenger": 22
+            },
+            "fan": 2,
+            "ac": true,
+            "defrost": false,
+            "seatHeat": 0,
+            "media": {
+              "playing": false,
+              "volume": 35,
+              "track": "드라이브 플레이리스트"
+            },
+            "navigation": {
+              "destination": null,
+              "active": false
+            },
+            "speed": 0
+          }
+        },
+        {
+          "language": "ko",
+          "operation": "plan-audio",
+          "status": 200,
+          "model": "XiaomiMiMo/MiMo-Audio-7B-Instruct",
+          "revision": "c359441c22c2a1c74be5f99a91e83392680e9cc8",
+          "quantization": "BF16",
+          "elapsedMs": 2510,
+          "loadMs": 0,
+          "jsonValid": true,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "heard": "조수석 온도를 25도로 맞춰주세요",
+          "reply": "",
+          "expectedActions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "commandCorrect": true,
+          "state": {
+            "revision": 1,
+            "temperature": {
+              "driver": 22,
+              "passenger": 25
+            },
+            "fan": 2,
+            "ac": true,
+            "defrost": false,
+            "seatHeat": 0,
+            "media": {
+              "playing": false,
+              "volume": 35,
+              "track": "드라이브 플레이리스트"
+            },
+            "navigation": {
+              "destination": null,
+              "active": false
+            },
+            "speed": 0
+          }
+        },
+        {
+          "language": "en",
+          "operation": "s2s",
+          "status": 200,
+          "model": "XiaomiMiMo/MiMo-Audio-7B-Instruct",
+          "revision": "c359441c22c2a1c74be5f99a91e83392680e9cc8",
+          "quantization": "BF16",
+          "elapsedMs": 13293,
+          "loadMs": 72709,
+          "audioBytes": 514604,
+          "nativeAudio": true,
+          "reply": "Got it! The driver temperature is set to 24 degrees. Enjoy the ride!",
+          "meanDb": "-17.4",
+          "nonSilent": true
+        },
+        {
+          "language": "ko",
+          "operation": "s2s",
+          "status": 200,
+          "model": "XiaomiMiMo/MiMo-Audio-7B-Instruct",
+          "revision": "c359441c22c2a1c74be5f99a91e83392680e9cc8",
+          "quantization": "BF16",
+          "elapsedMs": 18272,
+          "loadMs": 0,
+          "audioBytes": 737324,
+          "nativeAudio": true,
+          "reply": "네, 주소서관도 25도로 맞춰 ��렸습니다. (Note: The assistant is a voice AI with no vehicle controls, so it cannot actually adjust the climate control settings. The response is polite and confirms the user's request in Korean as instructed.)",
+          "meanDb": "-18.8",
+          "nonSilent": true
+        }
+      ],
+      "nativeVerified": true,
+      "audioPlannerVerified": true,
+      "koreanCommandPassed": true
+    },
+    {
+      "id": "qwen3-omni",
+      "tests": [
+        {
+          "language": "en",
+          "operation": "plan-audio",
+          "status": 200,
+          "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+          "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+          "quantization": "NF4 thinker linear layers",
+          "elapsedMs": 16082,
+          "loadMs": 0,
+          "jsonValid": true,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "heard": "Set the driver temperature to 24 degrees.",
+          "reply": "",
+          "expectedActions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "commandCorrect": true,
+          "state": {
+            "revision": 1,
+            "temperature": {
+              "driver": 24,
+              "passenger": 22
+            },
+            "fan": 2,
+            "ac": true,
+            "defrost": false,
+            "seatHeat": 0,
+            "media": {
+              "playing": false,
+              "volume": 35,
+              "track": "드라이브 플레이리스트"
+            },
+            "navigation": {
+              "destination": null,
+              "active": false
+            },
+            "speed": 0
+          }
+        },
+        {
+          "language": "ko",
+          "operation": "plan-audio",
+          "status": 200,
+          "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+          "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+          "quantization": "NF4 thinker linear layers",
+          "elapsedMs": 23737,
+          "loadMs": 0,
+          "jsonValid": true,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "heard": "조수석 온도를 이십오도로 맞춰주세요",
+          "reply": "알겠습니다. 조수석 온도를 25도로 설정합니다.",
+          "expectedActions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "commandCorrect": true,
+          "state": {
+            "revision": 1,
+            "temperature": {
+              "driver": 22,
+              "passenger": 25
+            },
+            "fan": 2,
+            "ac": true,
+            "defrost": false,
+            "seatHeat": 0,
+            "media": {
+              "playing": false,
+              "volume": 35,
+              "track": "드라이브 플레이리스트"
+            },
+            "navigation": {
+              "destination": null,
+              "active": false
+            },
+            "speed": 0
+          }
+        },
+        {
+          "language": "en",
+          "operation": "s2s",
+          "status": 200,
+          "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+          "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+          "quantization": "NF4 thinker linear layers",
+          "elapsedMs": 31467,
+          "loadMs": 129335,
+          "audioBytes": 429014,
+          "nativeAudio": true,
+          "reply": "I can't adjust the temperature settings. Please use the climate controls in your vehicle to set the driver's temperature to 24 degrees.",
+          "meanDb": "-20.7",
+          "nonSilent": true
+        },
+        {
+          "language": "ko",
+          "operation": "s2s",
+          "status": 200,
+          "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+          "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+          "quantization": "NF4 thinker linear layers",
+          "elapsedMs": 48897,
+          "loadMs": 0,
+          "audioBytes": 636374,
+          "nativeAudio": true,
+          "reply": "죄송합니다. 저는 차량의 온도 조절 기능을 제어할 수 없습니다. 조수석 온도를 25도로 맞추려면 차량의 온도 조절 버튼을 직접 조작해 주세요.",
+          "meanDb": "-19.9",
+          "nonSilent": true
+        }
+      ],
+      "nativeVerified": true,
+      "audioPlannerVerified": true,
+      "koreanCommandPassed": true
+    }
+  ]
+}

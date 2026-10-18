@@ -1,0 +1,44 @@
+{
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "syntheticAudioOnly": true,
+  "seed": 42,
+  "method": "teacher forcing fixes the exact text; only native TTS generates speech",
+  "results": [
+    {
+      "profile": "en-reference",
+      "case": "english",
+      "text": "The windshield defroster is on.",
+      "temperature": 0.8,
+      "seconds": 2.44,
+      "elapsedMs": 2904,
+      "file": "en-reference-english.wav",
+      "asr": ""
+    },
+    {
+      "profile": "en-reference",
+      "case": "hello-ko",
+      "text": "안녕하세요.",
+      "temperature": 0.8,
+      "seconds": 2.84,
+      "elapsedMs": 1884,
+      "file": "en-reference-hello-ko.wav",
+      "asr": ""
+    },
+    {
+      "profile": "en-reference",
+      "case": "yes-ko",
+      "text": "네.",
+      "temperature": 0.8,
+      "seconds": 7.2,
+      "elapsedMs": 4367,
+      "file": "en-reference-yes-ko.wav",
+      "asr": ""
+    }
+  ],
+  "englishControl": {
+    "asrModel": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "language": "en-US",
+    "transcript": "The windshield defroster is on."
+  },
+  "note": "English control must be decoded with en-US; earlier ko-KR empty English transcript is not evidence of English speech failure."
+}

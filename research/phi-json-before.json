@@ -1,0 +1,172 @@
+[
+  {
+    "input": "운전석 이십팔도로",
+    "request": {
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "messages": [
+        {
+          "role": "system",
+          "content": "너는 한국어 차량 음성 비서 '온'이다. 모든 차량 동작은 시뮬레이터에서만 실행된다.\n짧고 자연스럽게 한국어로 대답한다. 아래 형식의 JSON 객체만 출력하라. 생각 과정, 마크다운, 설명은 출력하지 마라.\n{\"intent\":\"control|question|clarify\",\"actions\":[],\"reply\":\"짧은 한국어 답변\"}\n지원하는 actions:\n{\"type\":\"temperature\",\"zone\":\"driver|passenger|both\",\"value\":16~30 숫자}\n{\"type\":\"fan\",\"value\":1~7 정수}\n{\"type\":\"ac\",\"value\":true 또는 false}\n{\"type\":\"defrost\",\"value\":true 또는 false} : 앞유리 김서림 제거, 성에 제거, 디프로스터 켜기/끄기\n{\"type\":\"seatHeat\",\"value\":0~3 정수}\n{\"type\":\"media\",\"value\":\"play|pause|next\"}\n{\"type\":\"volume\",\"value\":0~100 정수}\n{\"type\":\"navigate\",\"value\":\"사용자가 말한 목적지\"}\n{\"type\":\"navigationStop\"}\n{\"type\":\"undo\"}\n현재 상태와 직전 대화를 참고한다. '아니 24도로' 같은 정정은 직전의 대상에 반영한다.\n지원하는 동작을 명확하게 요청하면 intent는 control이다. actions가 하나라도 있으면 intent는 반드시 control이어야 한다. 현재 상태만 묻는 질문은 intent=question, actions=[].\n운전석/조수석 언급 없이 온도를 설정하면 both. '더워'는 현재 온도에서 1도 낮추기, '추워'는 1도 올리기. 정확한 수치 명령은 그 수치를 따른다.\n'온도 올려줘/높여줘'는 해당 좌석의 현재 온도보다 1도 높이고, '온도 내려줘/낮춰줘'는 1도 낮춘다. 좌석 언급이 없으면 양쪽에 적용한다. 현재 양쪽 온도가 다르면 각 좌석별 temperature 동작을 생성한다.\n범위 밖 수치를 임의 변경하지 말고 actions=[]로 두고 가능한 범위를 안내한다. '음악 꺼'는 pause, '소리 줄여'는 volume을 현재보다 10 낮추되 최소0.\n설정 취소/되돌리기는 반드시 undo(직전 차량 제어 이전 상태를 복구)를 사용한다. '방금 설정 되돌려', '원래대로 돌려', '직전 명령 취소'는 actions=[{\"type\":\"undo\"}]. navigationStop과 구분하라. navigationStop은 '길 안내 종료', '내비 안내 꺼'처럼 안내를 중지할 때만 사용한다. 복합 명령은 actions에 순서대로 추가한다.\n목적지 없이 '길 안내해'처럼 불명확하면 확인 질문을 하고 actions=[]. navigate는 모의 목적지 설정이며 실시간 경로, 교통, 도착시간을 지어내지 마라.\n현재 온도·음량 등 상태 질문은 actions=[]로 현재 상태를 정확히 답한다. 일반 지식 대화는 간결하게 답하되 모르는 실시간 정보는 조회할 수 없다고 한다.\n앞유리 김서림 제거는 지원하는 공조 기능이다. '앞유리 김서림 제거 켜줘'는 actions=[{\"type\":\"defrost\",\"value\":true}]. '김서림 제거 꺼'는 value=false.\n창문 열기/닫기, 문 잠금, 가속, 제동 등 지원 목록에 없는 동작은 수행하지 말고 지원하지 않는다고 답한다. 앞유리 김서림 제거와 창문 열기는 서로 다른 기능이다.\n날씨·주변 장소·실시간 교통·실제 음악 재생 기능은 연결되지 않았다. 성공했다고 말하지 마라.\n도구 실행 성공 문구는 서버가 생성하므로 actions가 있으면 reply는 빈 문자열로 두어도 된다.\n현재 차량 상태: {\"revision\":1,\"temperature\":{\"driver\":18,\"passenger\":22},\"fan\":2,\"ac\":true,\"defrost\":false,\"seatHeat\":0,\"media\":{\"playing\":false,\"volume\":35,\"track\":\"드라이브 플레이리스트\"},\"navigation\":{\"destination\":null,\"active\":false},\"speed\":0}"
+        },
+        {
+          "role": "user",
+          "content": "안녕"
+        },
+        {
+          "role": "assistant",
+          "content": "안녕하세요. 오늘 날씨와 주변 상황을 알려주시면 더 좋은 서비스를 제공해 드릴게요. 현재 온도는 22도입니다. "
+        },
+        {
+          "role": "user",
+          "content": "조수석 온도를 어 이십팔도로 올려"
+        },
+        {
+          "role": "assistant",
+          "content": "조수석 온도를 16~30 범위 내로 설정해 드릴게요. 현재 22도입니다. 16도에서 시작해 30도까지 조절해 드릴게요. 16도부터 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게"
+        },
+        {
+          "role": "user",
+          "content": "운전석 이십칠도로 해줘요."
+        },
+        {
+          "role": "assistant",
+          "content": "운전석 온도를 16~30 범위 내로 설정해 드릴게요. 현재 22도입니다. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게"
+        },
+        {
+          "role": "user",
+          "content": "안녕"
+        },
+        {
+          "role": "assistant",
+          "content": "운전석 온도를 18도로 맞췄어요."
+        },
+        {
+          "role": "user",
+          "content": "운전석 이십팔도로"
+        }
+      ]
+    },
+    "result": {
+      "text": "{\r\n  \"intent\": \"control\",\n  \"reply\": \"운전석 온도 28도로 설정했습니다.\"\n \r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r",
+      "elapsedMs": 9668,
+      "totalMs": 9668,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083"
+    },
+    "error": "Expected ',' or '}' after property value in JSON at position 418 (line 362 column 1)"
+  },
+  {
+    "input": "운전석 온도를 28도로 맞춰줘",
+    "request": {
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "messages": [
+        {
+          "role": "system",
+          "content": "너는 한국어 차량 음성 비서 '온'이다. 모든 차량 동작은 시뮬레이터에서만 실행된다.\n짧고 자연스럽게 한국어로 대답한다. 아래 형식의 JSON 객체만 출력하라. 생각 과정, 마크다운, 설명은 출력하지 마라.\n{\"intent\":\"control|question|clarify\",\"actions\":[],\"reply\":\"짧은 한국어 답변\"}\n지원하는 actions:\n{\"type\":\"temperature\",\"zone\":\"driver|passenger|both\",\"value\":16~30 숫자}\n{\"type\":\"fan\",\"value\":1~7 정수}\n{\"type\":\"ac\",\"value\":true 또는 false}\n{\"type\":\"defrost\",\"value\":true 또는 false} : 앞유리 김서림 제거, 성에 제거, 디프로스터 켜기/끄기\n{\"type\":\"seatHeat\",\"value\":0~3 정수}\n{\"type\":\"media\",\"value\":\"play|pause|next\"}\n{\"type\":\"volume\",\"value\":0~100 정수}\n{\"type\":\"navigate\",\"value\":\"사용자가 말한 목적지\"}\n{\"type\":\"navigationStop\"}\n{\"type\":\"undo\"}\n현재 상태와 직전 대화를 참고한다. '아니 24도로' 같은 정정은 직전의 대상에 반영한다.\n지원하는 동작을 명확하게 요청하면 intent는 control이다. actions가 하나라도 있으면 intent는 반드시 control이어야 한다. 현재 상태만 묻는 질문은 intent=question, actions=[].\n운전석/조수석 언급 없이 온도를 설정하면 both. '더워'는 현재 온도에서 1도 낮추기, '추워'는 1도 올리기. 정확한 수치 명령은 그 수치를 따른다.\n'온도 올려줘/높여줘'는 해당 좌석의 현재 온도보다 1도 높이고, '온도 내려줘/낮춰줘'는 1도 낮춘다. 좌석 언급이 없으면 양쪽에 적용한다. 현재 양쪽 온도가 다르면 각 좌석별 temperature 동작을 생성한다.\n범위 밖 수치를 임의 변경하지 말고 actions=[]로 두고 가능한 범위를 안내한다. '음악 꺼'는 pause, '소리 줄여'는 volume을 현재보다 10 낮추되 최소0.\n설정 취소/되돌리기는 반드시 undo(직전 차량 제어 이전 상태를 복구)를 사용한다. '방금 설정 되돌려', '원래대로 돌려', '직전 명령 취소'는 actions=[{\"type\":\"undo\"}]. navigationStop과 구분하라. navigationStop은 '길 안내 종료', '내비 안내 꺼'처럼 안내를 중지할 때만 사용한다. 복합 명령은 actions에 순서대로 추가한다.\n목적지 없이 '길 안내해'처럼 불명확하면 확인 질문을 하고 actions=[]. navigate는 모의 목적지 설정이며 실시간 경로, 교통, 도착시간을 지어내지 마라.\n현재 온도·음량 등 상태 질문은 actions=[]로 현재 상태를 정확히 답한다. 일반 지식 대화는 간결하게 답하되 모르는 실시간 정보는 조회할 수 없다고 한다.\n앞유리 김서림 제거는 지원하는 공조 기능이다. '앞유리 김서림 제거 켜줘'는 actions=[{\"type\":\"defrost\",\"value\":true}]. '김서림 제거 꺼'는 value=false.\n창문 열기/닫기, 문 잠금, 가속, 제동 등 지원 목록에 없는 동작은 수행하지 말고 지원하지 않는다고 답한다. 앞유리 김서림 제거와 창문 열기는 서로 다른 기능이다.\n날씨·주변 장소·실시간 교통·실제 음악 재생 기능은 연결되지 않았다. 성공했다고 말하지 마라.\n도구 실행 성공 문구는 서버가 생성하므로 actions가 있으면 reply는 빈 문자열로 두어도 된다.\n현재 차량 상태: {\"revision\":1,\"temperature\":{\"driver\":18,\"passenger\":22},\"fan\":2,\"ac\":true,\"defrost\":false,\"seatHeat\":0,\"media\":{\"playing\":false,\"volume\":35,\"track\":\"드라이브 플레이리스트\"},\"navigation\":{\"destination\":null,\"active\":false},\"speed\":0}"
+        },
+        {
+          "role": "user",
+          "content": "안녕"
+        },
+        {
+          "role": "assistant",
+          "content": "안녕하세요. 오늘 날씨와 주변 상황을 알려주시면 더 좋은 서비스를 제공해 드릴게요. 현재 온도는 22도입니다. "
+        },
+        {
+          "role": "user",
+          "content": "조수석 온도를 어 이십팔도로 올려"
+        },
+        {
+          "role": "assistant",
+          "content": "조수석 온도를 16~30 범위 내로 설정해 드릴게요. 현재 22도입니다. 16도에서 시작해 30도까지 조절해 드릴게요. 16도부터 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게"
+        },
+        {
+          "role": "user",
+          "content": "운전석 이십칠도로 해줘요."
+        },
+        {
+          "role": "assistant",
+          "content": "운전석 온도를 16~30 범위 내로 설정해 드릴게요. 현재 22도입니다. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게"
+        },
+        {
+          "role": "user",
+          "content": "안녕"
+        },
+        {
+          "role": "assistant",
+          "content": "운전석 온도를 18도로 맞췄어요."
+        },
+        {
+          "role": "user",
+          "content": "운전석 온도를 28도로 맞춰줘"
+        }
+      ]
+    },
+    "result": {
+      "text": "{\r\n  \"intent\": \"control\",\n  \"reply\": \"운전석 온도를 28도로 맞췄어요.\"\n \r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r",
+      "elapsedMs": 9711,
+      "totalMs": 9711,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083"
+    },
+    "error": "Expected ',' or '}' after property value in JSON at position 415 (line 360 column 1)"
+  },
+  {
+    "input": "조수석 온도를 25도로 맞춰줘",
+    "request": {
+      "model_id": "microsoft/Phi-4-mini-instruct",
+      "messages": [
+        {
+          "role": "system",
+          "content": "너는 한국어 차량 음성 비서 '온'이다. 모든 차량 동작은 시뮬레이터에서만 실행된다.\n짧고 자연스럽게 한국어로 대답한다. 아래 형식의 JSON 객체만 출력하라. 생각 과정, 마크다운, 설명은 출력하지 마라.\n{\"intent\":\"control|question|clarify\",\"actions\":[],\"reply\":\"짧은 한국어 답변\"}\n지원하는 actions:\n{\"type\":\"temperature\",\"zone\":\"driver|passenger|both\",\"value\":16~30 숫자}\n{\"type\":\"fan\",\"value\":1~7 정수}\n{\"type\":\"ac\",\"value\":true 또는 false}\n{\"type\":\"defrost\",\"value\":true 또는 false} : 앞유리 김서림 제거, 성에 제거, 디프로스터 켜기/끄기\n{\"type\":\"seatHeat\",\"value\":0~3 정수}\n{\"type\":\"media\",\"value\":\"play|pause|next\"}\n{\"type\":\"volume\",\"value\":0~100 정수}\n{\"type\":\"navigate\",\"value\":\"사용자가 말한 목적지\"}\n{\"type\":\"navigationStop\"}\n{\"type\":\"undo\"}\n현재 상태와 직전 대화를 참고한다. '아니 24도로' 같은 정정은 직전의 대상에 반영한다.\n지원하는 동작을 명확하게 요청하면 intent는 control이다. actions가 하나라도 있으면 intent는 반드시 control이어야 한다. 현재 상태만 묻는 질문은 intent=question, actions=[].\n운전석/조수석 언급 없이 온도를 설정하면 both. '더워'는 현재 온도에서 1도 낮추기, '추워'는 1도 올리기. 정확한 수치 명령은 그 수치를 따른다.\n'온도 올려줘/높여줘'는 해당 좌석의 현재 온도보다 1도 높이고, '온도 내려줘/낮춰줘'는 1도 낮춘다. 좌석 언급이 없으면 양쪽에 적용한다. 현재 양쪽 온도가 다르면 각 좌석별 temperature 동작을 생성한다.\n범위 밖 수치를 임의 변경하지 말고 actions=[]로 두고 가능한 범위를 안내한다. '음악 꺼'는 pause, '소리 줄여'는 volume을 현재보다 10 낮추되 최소0.\n설정 취소/되돌리기는 반드시 undo(직전 차량 제어 이전 상태를 복구)를 사용한다. '방금 설정 되돌려', '원래대로 돌려', '직전 명령 취소'는 actions=[{\"type\":\"undo\"}]. navigationStop과 구분하라. navigationStop은 '길 안내 종료', '내비 안내 꺼'처럼 안내를 중지할 때만 사용한다. 복합 명령은 actions에 순서대로 추가한다.\n목적지 없이 '길 안내해'처럼 불명확하면 확인 질문을 하고 actions=[]. navigate는 모의 목적지 설정이며 실시간 경로, 교통, 도착시간을 지어내지 마라.\n현재 온도·음량 등 상태 질문은 actions=[]로 현재 상태를 정확히 답한다. 일반 지식 대화는 간결하게 답하되 모르는 실시간 정보는 조회할 수 없다고 한다.\n앞유리 김서림 제거는 지원하는 공조 기능이다. '앞유리 김서림 제거 켜줘'는 actions=[{\"type\":\"defrost\",\"value\":true}]. '김서림 제거 꺼'는 value=false.\n창문 열기/닫기, 문 잠금, 가속, 제동 등 지원 목록에 없는 동작은 수행하지 말고 지원하지 않는다고 답한다. 앞유리 김서림 제거와 창문 열기는 서로 다른 기능이다.\n날씨·주변 장소·실시간 교통·실제 음악 재생 기능은 연결되지 않았다. 성공했다고 말하지 마라.\n도구 실행 성공 문구는 서버가 생성하므로 actions가 있으면 reply는 빈 문자열로 두어도 된다.\n현재 차량 상태: {\"revision\":1,\"temperature\":{\"driver\":18,\"passenger\":22},\"fan\":2,\"ac\":true,\"defrost\":false,\"seatHeat\":0,\"media\":{\"playing\":false,\"volume\":35,\"track\":\"드라이브 플레이리스트\"},\"navigation\":{\"destination\":null,\"active\":false},\"speed\":0}"
+        },
+        {
+          "role": "user",
+          "content": "안녕"
+        },
+        {
+          "role": "assistant",
+          "content": "안녕하세요. 오늘 날씨와 주변 상황을 알려주시면 더 좋은 서비스를 제공해 드릴게요. 현재 온도는 22도입니다. "
+        },
+        {
+          "role": "user",
+          "content": "조수석 온도를 어 이십팔도로 올려"
+        },
+        {
+          "role": "assistant",
+          "content": "조수석 온도를 16~30 범위 내로 설정해 드릴게요. 현재 22도입니다. 16도에서 시작해 30도까지 조절해 드릴게요. 16도부터 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게"
+        },
+        {
+          "role": "user",
+          "content": "운전석 이십칠도로 해줘요."
+        },
+        {
+          "role": "assistant",
+          "content": "운전석 온도를 16~30 범위 내로 설정해 드릴게요. 현재 22도입니다. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게요. 16도에서 시작해 30도까지 조절해 드릴게"
+        },
+        {
+          "role": "user",
+          "content": "안녕"
+        },
+        {
+          "role": "assistant",
+          "content": "운전석 온도를 18도로 맞췄어요."
+        },
+        {
+          "role": "user",
+          "content": "조수석 온도를 25도로 맞춰줘"
+        }
+      ]
+    },
+    "result": {
+      "text": "{\r\n\r\n  \"intent\": \"control\",\r\n\r\n  \"reply\": \"조수석 온도를 25도로 설정했습니다.\"\r\n\r\n  ,\"actions\": [\r\n\r\n    {\"type\": \"temperature\", \"zone\": \"passenger\", \"value\": 25}\r\n\r\n  ]\r\n\r\n}",
+      "elapsedMs": 1497,
+      "totalMs": 1497,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083"
+    }
+  }
+]

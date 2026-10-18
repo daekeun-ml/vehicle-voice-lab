@@ -1,0 +1,714 @@
+{
+  "at": "2026-10-16T14:58:39.532Z",
+  "method": "5 Korean and 5 English synthetic commands, same compact prompt; deterministic vs upstream sampling. Diagnostic; main scores use 31 Korean app-level scenarios.",
+  "rows": [
+    {
+      "modelId": "step-audio2-mini",
+      "profile": "deterministic",
+      "tests": [
+        {
+          "id": "driver-24",
+          "language": "ko",
+          "passed": true,
+          "heard": ": 운전석 온도를 24도로 맞춰줘요",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "llmMs": 4939,
+          "loadMs": 19343,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "passenger-25",
+          "language": "ko",
+          "passed": true,
+          "heard": ": 조수석 온도를 25도로 맞춰줘요",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "llmMs": 4272,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "defrost-off",
+          "language": "ko",
+          "passed": true,
+          "heard": ", 앞유리 김서림 제거 꺼",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": false
+            }
+          ],
+          "llmMs": 4340,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "fan-5",
+          "language": "ko",
+          "passed": true,
+          "heard": ", 바람 세기를 5단으로 설정했습니다.",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "llmMs": 4094,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "compound",
+          "language": "ko",
+          "passed": true,
+          "heard": ": 운전석 온도 24도로, 바람 세기 3단으로 설정합니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 5567,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "driver-24",
+          "language": "en",
+          "passed": true,
+          "heard": ":driver 24도로 설정합니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "llmMs": 3574,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "passenger-25",
+          "language": "en",
+          "passed": true,
+          "heard": ": 조수석 온도 25도로 설정합니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "llmMs": 3919,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "defrost-off",
+          "language": "en",
+          "passed": true,
+          "heard": ":(",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": false
+            }
+          ],
+          "llmMs": 2409,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "fan-5",
+          "language": "en",
+          "passed": true,
+          "heard": ": 바람 세기 5단으로 설정합니다.",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "llmMs": 3018,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "compound",
+          "language": "en",
+          "passed": true,
+          "heard": ", 운전석 온도 24도로 설정하고 바람 세기 3단으로 조절했습니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 7864,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        }
+      ],
+      "koreanPassed": 5,
+      "englishPassed": 5
+    },
+    {
+      "modelId": "step-audio2-mini",
+      "profile": "official",
+      "tests": [
+        {
+          "id": "driver-24",
+          "language": "ko",
+          "passed": true,
+          "heard": ": 운전석 온도를 24도로 맞춰줘",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "llmMs": 3727,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "passenger-25",
+          "language": "ko",
+          "passed": true,
+          "heard": ": 조수석 온도를 25도로 맞춰줘.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "llmMs": 3768,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "defrost-off",
+          "language": "ko",
+          "passed": true,
+          "heard": ":앞 유리 김서림을 없애겠습니다.",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": false
+            }
+          ],
+          "llmMs": 2919,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "fan-5",
+          "language": "ko",
+          "passed": true,
+          "heard": "바람세기를 5단으로 해줘",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "llmMs": 2667,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "compound",
+          "language": "ko",
+          "passed": true,
+          "heard": ": 운전석 온도 24도로, 바람 세기 3단으로 설정합니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 4968,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "driver-24",
+          "language": "en",
+          "passed": true,
+          "heard": ":24도로 운전석 온도를 설정했습니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "llmMs": 3554,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "passenger-25",
+          "language": "en",
+          "passed": true,
+          "heard": ": 조수석 온도 25도로 설정합니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "llmMs": 3650,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "defrost-off",
+          "language": "en",
+          "passed": true,
+          "heard": "김서림 제거 꺼",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": false
+            }
+          ],
+          "llmMs": 2613,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "fan-5",
+          "language": "en",
+          "passed": true,
+          "heard": "팬을 레벨 5로 설정합니다.",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "llmMs": 2835,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "compound",
+          "language": "en",
+          "passed": true,
+          "heard": ":온도를 24도로, 바람을 세 단으로 설정합니다.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 4538,
+          "loadMs": 0,
+          "actualProfile": "official"
+        }
+      ],
+      "koreanPassed": 5,
+      "englishPassed": 5
+    },
+    {
+      "modelId": "mimo-audio",
+      "profile": "deterministic",
+      "tests": [
+        {
+          "id": "driver-24",
+          "language": "ko",
+          "passed": false,
+          "heard": "운전석 공두를 24도로 바꿔줘",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 24
+            }
+          ],
+          "llmMs": 3773,
+          "loadMs": 10152,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "passenger-25",
+          "language": "ko",
+          "passed": false,
+          "heard": "운전석 온도를 20도로 맞춰줘요",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 20
+            },
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 20
+            }
+          ],
+          "llmMs": 3161,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "defrost-off",
+          "language": "ko",
+          "passed": false,
+          "heard": "앞유리 김서림 제거/성에 제거",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": true
+            }
+          ],
+          "llmMs": 2080,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "fan-5",
+          "language": "ko",
+          "passed": false,
+          "heard": "파람새기류를 오단으로 해줘",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 7
+            }
+          ],
+          "llmMs": 2014,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "compound",
+          "language": "ko",
+          "passed": true,
+          "heard": "운전석은 24도로 하고, 바람 세기는 3단으로 해줘.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 3061,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "driver-24",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the driver temperature to 24 degrees.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "llmMs": 2684,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "passenger-25",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the passenger temperature to 25 degrees.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "llmMs": 2434,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "defrost-off",
+          "language": "en",
+          "passed": true,
+          "heard": "Turn off the front windshield defroster.",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": false
+            }
+          ],
+          "llmMs": 1903,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "fan-5",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the fan speed to level 5.",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "llmMs": 1904,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        },
+        {
+          "id": "compound",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the driver temperature to 24 degrees and the fan speed to level 3.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 3946,
+          "loadMs": 0,
+          "actualProfile": "deterministic"
+        }
+      ],
+      "koreanPassed": 1,
+      "englishPassed": 5
+    },
+    {
+      "modelId": "mimo-audio",
+      "profile": "official",
+      "tests": [
+        {
+          "id": "driver-24",
+          "language": "ko",
+          "passed": false,
+          "heard": "운전석 온도를 24도로 바꿔줘",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 24
+            }
+          ],
+          "llmMs": 3136,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "passenger-25",
+          "language": "ko",
+          "passed": false,
+          "heard": "운전석 온도를 20도로 맞춰줘요",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 20
+            },
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 20
+            }
+          ],
+          "llmMs": 3164,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "defrost-off",
+          "language": "ko",
+          "passed": false,
+          "heard": "앞유리 김서림 제거/성에 제거",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": true
+            }
+          ],
+          "llmMs": 2084,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "fan-5",
+          "language": "ko",
+          "passed": false,
+          "heard": "파람새기류를 오단으로 해줘",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 7
+            }
+          ],
+          "llmMs": 2447,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "compound",
+          "language": "ko",
+          "passed": true,
+          "heard": "운전석은 24도로 하고, 바람 세기는 3단으로 해줘.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 3067,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "driver-24",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the driver temperature to 24 degrees.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "llmMs": 2713,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "passenger-25",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the passenger temperature to 25 degrees.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 25
+            }
+          ],
+          "llmMs": 2566,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "defrost-off",
+          "language": "en",
+          "passed": true,
+          "heard": "Turn off the front windshield defroster.",
+          "actions": [
+            {
+              "type": "defrost",
+              "value": false
+            }
+          ],
+          "llmMs": 1932,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "fan-5",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the fan speed to level 5.",
+          "actions": [
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "llmMs": 1918,
+          "loadMs": 0,
+          "actualProfile": "official"
+        },
+        {
+          "id": "compound",
+          "language": "en",
+          "passed": true,
+          "heard": "Set the driver temperature to 24 degrees and the fan speed to level 3.",
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            },
+            {
+              "type": "fan",
+              "value": 3
+            }
+          ],
+          "llmMs": 3961,
+          "loadMs": 0,
+          "actualProfile": "official"
+        }
+      ],
+      "koreanPassed": 1,
+      "englishPassed": 5
+    }
+  ]
+}

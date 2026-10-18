@@ -1,0 +1,155 @@
+{
+  "at": "2026-10-16T11:09:36.945Z",
+  "syntheticAudioOnly": true,
+  "scenario": "Relative temperature must ask for a target without mutation; absolute temperature uses a fresh session; defrost action values are checked",
+  "pipeline": "MiniCPM audio-to-plan -> validated simulator -> Polly Korean TTS",
+  "results": [
+    {
+      "file": "defrost-on",
+      "passed": true,
+      "heard": "앞유리 김서림 제거",
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "actions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "plannerPasses": 1,
+      "llmMs": 2261,
+      "elapsedMs": 2576
+    },
+    {
+      "file": "temperature-up",
+      "passed": true,
+      "heard": "온도를 1도 올려줘",
+      "guardReason": "MiniCPM relative-temperature target is not reliable",
+      "reply": "어느 좌석 온도를 몇 도로 맞출까요? 예를 들어 “양쪽 온도를 23도로 맞춰줘”라고 말씀해 주세요.",
+      "actions": [],
+      "state": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "plannerPasses": 1,
+      "llmMs": 2861,
+      "elapsedMs": 2889
+    },
+    {
+      "file": "driver-24",
+      "passed": false,
+      "heard": "운전석 온도를 24도로 맞춰줘",
+      "reply": "운전석 온도를 24도로 맞췄어요. 조수석 온도를 24도로 맞췄어요.",
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "plannerPasses": 1,
+      "llmMs": 3551,
+      "elapsedMs": 3615
+    },
+    {
+      "file": "defrost-off",
+      "passed": false,
+      "heard": "김서림 제거 켜줘",
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "actions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "state": {
+        "revision": 2,
+        "temperature": {
+          "driver": 24,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "plannerPasses": 1,
+      "llmMs": 2438,
+      "elapsedMs": 2485
+    }
+  ],
+  "note": "Experimental model evaluation: defrost-on and guarded relative request passed; absolute seat scope and defrost-off interpretation failed. Not a Korean command acceptance pass."
+}

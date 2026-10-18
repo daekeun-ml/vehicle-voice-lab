@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-16T12:03:56.212Z",
+  "method": "ko-KR Nemotron ASR of native generated Korean-mode audio; diagnostic only, not a human listening evaluation",
+  "rows": [
+    {
+      "id": "step-audio2-mini",
+      "asrText": "",
+      "asrMs": 74,
+      "status": 200
+    },
+    {
+      "id": "mimo-audio",
+      "asrText": "",
+      "asrMs": 184,
+      "status": 200
+    },
+    {
+      "id": "qwen3-omni",
+      "asrText": "죄송합니다.  저는 차량의 온도 조절 기능을 제어할 수 없습니다.  조수석 온도를 이십오도로 맞추려면 차량의 온도 조절 버튼을 직접 조작해주세요.",
+      "asrMs": 243,
+      "status": 200
+    }
+  ]
+}

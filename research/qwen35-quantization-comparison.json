@@ -1,0 +1,109 @@
+{
+  "at": "2026-10-16T16:20:48.741Z",
+  "hardware": "AWS g6e.2xlarge / NVIDIA L40S 48GB / Torch 2.14.1 cu130 / Transformers 5.20 / bitsandbytes 0.49.2",
+  "method": "Same pinned checkpoint, 31 identical recorded Korean waves + 10 additional expression waves; same Whisper, compact prompt, deterministic generation, XGrammar, vehicle executor including explicit-bound guard, and Polly. Each model is warmed before measurement; loading excluded. Models run sequentially on same shared worker. GPU memory is per-process CUDA allocated, not total car RAM.",
+  "format": "NF4 is 4-bit NormalFloat for selected Linear weights, double quantization, BF16 compute and remaining modules. This is not an exported Qualcomm QNN INT4 model or a vehicle latency result.",
+  "models": [
+    {
+      "id": "qwen35-4b",
+      "quantization": "bf16",
+      "passed": 30,
+      "total": 31,
+      "holdoutPassed": 10,
+      "holdoutTotal": 10,
+      "medianFirstAudioMs": 1452,
+      "p95FirstAudioMs": 2783,
+      "medianLlmMs": 1120,
+      "plannerCudaAllocatedMiB": 8659.22,
+      "modelFootprintMiB": 8657.96,
+      "maxRequestAdditionalMiB": 251.53,
+      "maxCoreProcessAllocatedMiB": 11361.74,
+      "linear4bitLayers": 0,
+      "rawActionCorrect": 29,
+      "guardBlocked": [
+        {
+          "id": "out-of-range",
+          "proposed": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 30
+            }
+          ],
+          "executed": [],
+          "reason": "온도는 16~30도 사이로 말씀해 주세요."
+        }
+      ],
+      "failures": [
+        {
+          "id": "nav-stop",
+          "heard": "기회 안내 종료해줘.",
+          "expected": [
+            {
+              "type": "navigationStop"
+            }
+          ],
+          "actual": [],
+          "reply": "지원하지 않는 기능입니다. '기회 안내'는 차량 내장 기능으로, 현재 지원되지 않습니다."
+        }
+      ]
+    },
+    {
+      "id": "qwen35-4b-nf4",
+      "quantization": "nf4",
+      "passed": 30,
+      "total": 31,
+      "holdoutPassed": 10,
+      "holdoutTotal": 10,
+      "medianFirstAudioMs": 2039,
+      "p95FirstAudioMs": 3220,
+      "medianLlmMs": 1571,
+      "plannerCudaAllocatedMiB": 3150.43,
+      "modelFootprintMiB": 3081.34,
+      "maxRequestAdditionalMiB": 243.98,
+      "maxCoreProcessAllocatedMiB": 5845.4,
+      "linear4bitLayers": 346,
+      "rawActionCorrect": 29,
+      "guardBlocked": [
+        {
+          "id": "out-of-range",
+          "proposed": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 40
+            }
+          ],
+          "executed": [],
+          "reason": "온도는 16~30도 사이로 말씀해 주세요."
+        }
+      ],
+      "failures": [
+        {
+          "id": "nav-stop",
+          "heard": "기회 안내 종료해줘.",
+          "expected": [
+            {
+              "type": "navigationStop"
+            }
+          ],
+          "actual": [],
+          "reply": "기회 안내는 현재 활성화되어 있지 않습니다."
+        }
+      ]
+    }
+  ],
+  "firstObservedNf4LoadMs": 67152,
+  "memoryReductionPercent": 63.6,
+  "sources": [
+    "https://huggingface.co/Qwen/Qwen3.5-4B",
+    "https://huggingface.co/docs/transformers/quantization/bitsandbytes"
+  ],
+  "checkpointRevision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "quantizationConfig": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "bnb_4bit_compute_dtype": "bfloat16"
+  }
+}

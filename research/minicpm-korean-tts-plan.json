@@ -1,0 +1,43 @@
+{
+  "status": "research proposal; training not started",
+  "model": "openbmb/MiniCPM-o-4_5",
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "date": "2026-10-16",
+  "evidence": {
+    "nativeFixedKoreanText": "8 reference/prompt/temperature cases not recognized by Korean ASR",
+    "nativeEnglishControl": "same teacher-forcing path recognized correctly by en-US ASR",
+    "koreanCodecRoundTrip": "verified original command reconstructed with both English and Korean references; both ASR transcripts preserved",
+    "limit": "Small synthetic samples and ASR indicators; not a human speech-quality benchmark"
+  },
+  "firstTrainingExperiment": {
+    "freezeInitially": [
+      "llm",
+      "apm",
+      "audio_projection_layer",
+      "tts.audio_tokenizer (Token2Wav)"
+    ],
+    "inspectForAdaptation": [
+      "tts.projector_semantic",
+      "tts.model",
+      "tts.emb_text",
+      "tts.emb_code",
+      "tts.head_code"
+    ],
+    "target": "Korean text/LLM hidden states -> correct acoustic speech tokens",
+    "dataNeeded": "Korean speech and aligned canonical text with confirmed training rights; separate held-out vehicle instructions, numbers and negation",
+    "implementationNeeded": "Custom differentiable TTS forward/loss and data pipeline; streaming_generate is inference code, not a training recipe",
+    "decision": "Try adapting TTS predictor/semantic bridge before unfreezing the full LLM or vocoder; widen scope only if measured errors require it"
+  },
+  "parallelCommandWork": {
+    "status": "experimental validated simulator connection added",
+    "remainingErrors": [
+      "seat scope expansion",
+      "on/off interpretation inversion"
+    ],
+    "relativeTemperaturePolicy": "ask for explicit seat and target, preserve proposed action in record"
+  },
+  "sources": [
+    "https://openbmb.github.io/MiniCPM-o-Demo/site/en/model.html",
+    "https://github.com/OpenBMB/MiniCPM-V/blob/main/finetune/readme.md"
+  ]
+}

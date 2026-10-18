@@ -1,0 +1,451 @@
+{
+  "at": "2026-10-16T15:16:50.344Z",
+  "note": "Post-benchmark explicit bound guard + default voice pipeline. Original 31-case scores are preserved; these additional checks do not silently replace model failures.",
+  "rows": [
+    {
+      "id": "out-of-range",
+      "metrics": {
+        "id": "808ff683-dafd-4f05-b806-2b2ca4b7f302",
+        "at": "2026-10-16T15:16:45.916Z",
+        "intent": "clarify",
+        "modelProposedActions": [
+          {
+            "type": "temperature",
+            "zone": "passenger",
+            "value": 30
+          }
+        ],
+        "modelReply": "조수석 온도를 40도로 설정할 수 없습니다. 허용 온도 범위는 16~30도입니다.",
+        "generationProfile": "deterministic",
+        "validationError": "온도는 16~30도 사이로 말씀해 주세요.",
+        "proposedActions": [
+          {
+            "type": "temperature",
+            "zone": "passenger",
+            "value": 30
+          }
+        ],
+        "promptVersion": "compact-v2",
+        "engine": "cascade",
+        "input": "조수석 온도를 40도로 설정해줘.",
+        "rawTranscript": "조수석 온도를 40도로 설정해줘.",
+        "asrModel": "openai/whisper-large-v3-turbo",
+        "asrId": "whisper",
+        "inputMeaning": "transcript",
+        "reply": "설정을 적용하지 않았어요. 온도는 16~30도 사이로 말씀해 주세요.",
+        "actions": [],
+        "results": [],
+        "state": {
+          "revision": 0,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 87,
+        "llmMs": 2394,
+        "planner": "Qwen/Qwen3.5-4B",
+        "plannerRevision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "modelLoadMs": 4809,
+        "vehicleTools": true,
+        "plannerPasses": 1,
+        "ttsProvider": "polly",
+        "ttsMeasurement": "aws-api-round-trip",
+        "inputMode": "file",
+        "feedback": null,
+        "ttsMs": 306,
+        "serverAudioReadyMs": 7649
+      },
+      "reply": {
+        "reply": "설정을 적용하지 않았어요. 온도는 16~30도 사이로 말씀해 주세요.",
+        "actions": [],
+        "results": [],
+        "state": {
+          "revision": 0,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 87,
+        "llmMs": 2394,
+        "planner": "Qwen/Qwen3.5-4B",
+        "modelLoadMs": 4809,
+        "decisionMs": 7343,
+        "vehicleTools": true,
+        "intent": "clarify",
+        "validationError": "온도는 16~30도 사이로 말씀해 주세요.",
+        "diagnosis": "validation-rejected",
+        "turnId": "808ff683-dafd-4f05-b806-2b2ca4b7f302"
+      },
+      "audio": true
+    },
+    {
+      "id": "passenger-25",
+      "metrics": {
+        "id": "8aa6cc69-59da-490e-8034-13d72ec482ea",
+        "at": "2026-10-16T15:16:47.610Z",
+        "intent": "control",
+        "modelProposedActions": [
+          {
+            "type": "temperature",
+            "zone": "passenger",
+            "value": 25
+          }
+        ],
+        "modelReply": "",
+        "generationProfile": "deterministic",
+        "validationError": null,
+        "promptVersion": "compact-v2",
+        "engine": "cascade",
+        "input": "조수석 온도를 25도로 맞춰줘.",
+        "rawTranscript": "조수석 온도를 25도로 맞춰줘.",
+        "asrModel": "openai/whisper-large-v3-turbo",
+        "asrId": "whisper",
+        "inputMeaning": "transcript",
+        "reply": "조수석 온도를 25도로 맞췄어요.",
+        "actions": [
+          {
+            "type": "temperature",
+            "zone": "passenger",
+            "value": 25
+          }
+        ],
+        "results": [
+          "조수석 온도를 25도로 맞췄어요."
+        ],
+        "state": {
+          "revision": 1,
+          "temperature": {
+            "driver": 22,
+            "passenger": 25
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 82,
+        "llmMs": 1183,
+        "planner": "Qwen/Qwen3.5-4B",
+        "plannerRevision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "modelLoadMs": 0,
+        "vehicleTools": true,
+        "plannerPasses": 1,
+        "ttsProvider": "polly",
+        "ttsMeasurement": "aws-api-round-trip",
+        "inputMode": "file",
+        "feedback": null,
+        "ttsMs": 217,
+        "serverAudioReadyMs": 1593
+      },
+      "reply": {
+        "reply": "조수석 온도를 25도로 맞췄어요.",
+        "actions": [
+          {
+            "type": "temperature",
+            "zone": "passenger",
+            "value": 25
+          }
+        ],
+        "results": [
+          "조수석 온도를 25도로 맞췄어요."
+        ],
+        "state": {
+          "revision": 1,
+          "temperature": {
+            "driver": 22,
+            "passenger": 25
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 82,
+        "llmMs": 1183,
+        "planner": "Qwen/Qwen3.5-4B",
+        "modelLoadMs": 0,
+        "decisionMs": 1376,
+        "vehicleTools": true,
+        "intent": "control",
+        "validationError": null,
+        "diagnosis": "executed",
+        "turnId": "8aa6cc69-59da-490e-8034-13d72ec482ea"
+      },
+      "audio": true
+    },
+    {
+      "id": "fan-5",
+      "metrics": {
+        "id": "fd92646a-a77e-4d95-b866-a59befe512f1",
+        "at": "2026-10-16T15:16:48.866Z",
+        "intent": "control",
+        "modelProposedActions": [
+          {
+            "type": "fan",
+            "value": 5
+          }
+        ],
+        "modelReply": "",
+        "generationProfile": "deterministic",
+        "validationError": null,
+        "promptVersion": "compact-v2",
+        "engine": "cascade",
+        "input": "바람 세기를 5단으로 해줘.",
+        "rawTranscript": "바람 세기를 5단으로 해줘.",
+        "asrModel": "openai/whisper-large-v3-turbo",
+        "asrId": "whisper",
+        "inputMeaning": "transcript",
+        "reply": "바람 세기를 5단으로 바꿨어요.",
+        "actions": [
+          {
+            "type": "fan",
+            "value": 5
+          }
+        ],
+        "results": [
+          "바람 세기를 5단으로 바꿨어요."
+        ],
+        "state": {
+          "revision": 1,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 5,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 70,
+        "llmMs": 914,
+        "planner": "Qwen/Qwen3.5-4B",
+        "plannerRevision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "modelLoadMs": 0,
+        "vehicleTools": true,
+        "plannerPasses": 1,
+        "ttsProvider": "polly",
+        "ttsMeasurement": "aws-api-round-trip",
+        "inputMode": "file",
+        "feedback": null,
+        "ttsMs": 183,
+        "serverAudioReadyMs": 1213
+      },
+      "reply": {
+        "reply": "바람 세기를 5단으로 바꿨어요.",
+        "actions": [
+          {
+            "type": "fan",
+            "value": 5
+          }
+        ],
+        "results": [
+          "바람 세기를 5단으로 바꿨어요."
+        ],
+        "state": {
+          "revision": 1,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 5,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 70,
+        "llmMs": 914,
+        "planner": "Qwen/Qwen3.5-4B",
+        "modelLoadMs": 0,
+        "decisionMs": 1030,
+        "vehicleTools": true,
+        "intent": "control",
+        "validationError": null,
+        "diagnosis": "executed",
+        "turnId": "fd92646a-a77e-4d95-b866-a59befe512f1"
+      },
+      "audio": true
+    },
+    {
+      "id": "defrost-on",
+      "metrics": {
+        "id": "24294d24-e0e7-46e2-803e-1cbdd208c88e",
+        "at": "2026-10-16T15:16:50.133Z",
+        "intent": "control",
+        "modelProposedActions": [
+          {
+            "type": "defrost",
+            "value": true
+          }
+        ],
+        "modelReply": "",
+        "generationProfile": "deterministic",
+        "validationError": null,
+        "promptVersion": "compact-v2",
+        "engine": "cascade",
+        "input": "앞유리 김서림 제거 켜줘.",
+        "rawTranscript": "앞유리 김서림 제거 켜줘.",
+        "asrModel": "openai/whisper-large-v3-turbo",
+        "asrId": "whisper",
+        "inputMeaning": "transcript",
+        "reply": "앞유리 김서림 제거 기능을 켰어요.",
+        "actions": [
+          {
+            "type": "defrost",
+            "value": true
+          }
+        ],
+        "results": [
+          "앞유리 김서림 제거 기능을 켰어요."
+        ],
+        "state": {
+          "revision": 1,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": true,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 80,
+        "llmMs": 946,
+        "planner": "Qwen/Qwen3.5-4B",
+        "plannerRevision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "modelLoadMs": 0,
+        "vehicleTools": true,
+        "plannerPasses": 1,
+        "ttsProvider": "polly",
+        "ttsMeasurement": "aws-api-round-trip",
+        "inputMode": "file",
+        "feedback": null,
+        "ttsMs": 208,
+        "serverAudioReadyMs": 1284
+      },
+      "reply": {
+        "reply": "앞유리 김서림 제거 기능을 켰어요.",
+        "actions": [
+          {
+            "type": "defrost",
+            "value": true
+          }
+        ],
+        "results": [
+          "앞유리 김서림 제거 기능을 켰어요."
+        ],
+        "state": {
+          "revision": 1,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": true,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "asrMs": 80,
+        "llmMs": 946,
+        "planner": "Qwen/Qwen3.5-4B",
+        "modelLoadMs": 0,
+        "decisionMs": 1076,
+        "vehicleTools": true,
+        "intent": "control",
+        "validationError": null,
+        "diagnosis": "executed",
+        "turnId": "24294d24-e0e7-46e2-803e-1cbdd208c88e"
+      },
+      "audio": true
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ac-off",
+    "text": "에어컨 꺼줘.",
+    "elapsedMs": 1070,
+    "model": "openai/whisper-large-v3-turbo",
+    "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9"
+  },
+  {
+    "id": "fan-5",
+    "text": "바람 세기를 5단으로 해줘.",
+    "elapsedMs": 78,
+    "model": "openai/whisper-large-v3-turbo",
+    "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9"
+  },
+  {
+    "id": "defrost-on",
+    "text": "앞유리 김서림 제거 켜줘.",
+    "elapsedMs": 80,
+    "model": "openai/whisper-large-v3-turbo",
+    "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9"
+  },
+  {
+    "id": "media-play",
+    "text": "음악 재생해줘",
+    "elapsedMs": 52,
+    "model": "openai/whisper-large-v3-turbo",
+    "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9"
+  },
+  {
+    "id": "media-next",
+    "text": "다음 곡으로 넘겨줘.",
+    "elapsedMs": 61,
+    "model": "openai/whisper-large-v3-turbo",
+    "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9"
+  }
+]

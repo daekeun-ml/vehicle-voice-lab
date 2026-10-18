@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-16T10:46:32.013Z",
+  "syntheticAudioOnly": true,
+  "integrationVersion": 2,
+  "generatedText": "조수석 오른쪽에 25도는 설정할 수 없습니다.",
+  "nativeSeconds": 6,
+  "pollySeconds": 3.3,
+  "readings": [
+    {
+      "source": "native",
+      "transcript": ""
+    },
+    {
+      "source": "polly",
+      "transcript": "조수석 오른쪽에 이십오도는 설정할 수 없습니다."
+    }
+  ],
+  "note": "Independent ASR is a diagnostic indicator, not a human pronunciation rating. Listen to the paired WAV files.",
+  "model": "openbmb/MiniCPM-o-4_5",
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "reference": "neutral synthetic English voice",
+  "asr": "nvidia/nemotron-3.5-asr-streaming-0.6b, ko-KR",
+  "nativeWave": "output/minicpm-pronunciation/native.wav",
+  "controlWave": "output/minicpm-pronunciation/polly.wav"
+}

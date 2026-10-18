@@ -1,0 +1,19 @@
+{
+  "syntheticAudioOnly": true,
+  "input": "조수석 온도를 이십오 도로 맞춰 주세요.",
+  "bypassed": "MiniCPM TTS text-to-audio-token prediction",
+  "results": [
+    {
+      "reference": "ko",
+      "file": "reconstructed-ko.wav",
+      "tokens": 128,
+      "asr": "조수석 온도를 이십오도로 맞춰주세요."
+    },
+    {
+      "reference": "en",
+      "file": "reconstructed-en.wav",
+      "tokens": 128,
+      "asr": "조수석 온도를 이십오도로 맞춰주세요."
+    }
+  ]
+}

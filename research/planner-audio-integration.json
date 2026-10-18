@@ -1,0 +1,167 @@
+{
+  "at": "2026-10-16T11:34:59.213Z",
+  "input": "Synthetic Korean passenger-25 WAV; not human microphone",
+  "rows": [
+    {
+      "plannerId": "gemma4-e2b",
+      "transcript": "조수석 온도를 이십오도로 맞춰주세요.",
+      "planner": "google/gemma-4-E2B-it",
+      "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "reply": "조수석 온도를 25도로 맞췄어요.",
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "asrMs": 108,
+      "llmMs": 1279,
+      "loadMs": 0,
+      "ttsProvider": "polly",
+      "ttsMs": 200,
+      "audioReceived": true,
+      "commandCorrect": true
+    },
+    {
+      "plannerId": "hyperclova-05b",
+      "transcript": "조수석 온도를 이십오도로 맞춰주세요.",
+      "planner": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+      "revision": "3da5046fb0195d14f2497de198136987d35fd644",
+      "actions": [],
+      "reply": "25도 올리겠습니다.",
+      "state": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "asrMs": 108,
+      "llmMs": 404,
+      "loadMs": 2643,
+      "ttsProvider": "polly",
+      "ttsMs": 155,
+      "audioReceived": true,
+      "commandCorrect": false
+    },
+    {
+      "plannerId": "exaone4-12b",
+      "transcript": "조수석 온도를 이십오도로 맞춰주세요.",
+      "planner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "revision": "3abf2810673c7c0778df64a73c2d52eab32d91c4",
+      "actions": [
+        {
+          "type": "seatHeat",
+          "value": 1
+        }
+      ],
+      "reply": "열선을 1단으로 켰어요.",
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 1,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "asrMs": 106,
+      "llmMs": 1284,
+      "loadMs": 2473,
+      "ttsProvider": "polly",
+      "ttsMs": 173,
+      "audioReceived": true,
+      "commandCorrect": false
+    },
+    {
+      "plannerId": "smollm3",
+      "transcript": "조수석 온도를 이십오도로 맞춰주세요.",
+      "planner": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "reply": "조수석 온도를 25도로 맞췄어요.",
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "asrMs": 106,
+      "llmMs": 1082,
+      "loadMs": 4180,
+      "ttsProvider": "polly",
+      "ttsMs": 202,
+      "audioReceived": true,
+      "commandCorrect": true
+    }
+  ]
+}

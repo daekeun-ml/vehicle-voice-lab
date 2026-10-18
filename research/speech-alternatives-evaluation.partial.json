@@ -1,0 +1,129 @@
+{
+  "id": "qwen3-omni",
+  "tests": [
+    {
+      "language": "en",
+      "operation": "plan-audio",
+      "status": 200,
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+      "quantization": "NF4 thinker linear layers",
+      "elapsedMs": 16082,
+      "loadMs": 0,
+      "jsonValid": true,
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "heard": "Set the driver temperature to 24 degrees.",
+      "reply": "",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "commandCorrect": true,
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      }
+    },
+    {
+      "language": "ko",
+      "operation": "plan-audio",
+      "status": 200,
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+      "quantization": "NF4 thinker linear layers",
+      "elapsedMs": 23737,
+      "loadMs": 0,
+      "jsonValid": true,
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "heard": "조수석 온도를 이십오도로 맞춰주세요",
+      "reply": "알겠습니다. 조수석 온도를 25도로 설정합니다.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "commandCorrect": true,
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      }
+    },
+    {
+      "language": "en",
+      "operation": "s2s",
+      "status": 200,
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+      "quantization": "NF4 thinker linear layers",
+      "elapsedMs": 31467,
+      "loadMs": 129335,
+      "audioBytes": 429014,
+      "nativeAudio": true,
+      "reply": "I can't adjust the temperature settings. Please use the climate controls in your vehicle to set the driver's temperature to 24 degrees."
+    },
+    {
+      "language": "ko",
+      "operation": "s2s",
+      "status": 200,
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+      "quantization": "NF4 thinker linear layers",
+      "elapsedMs": 48897,
+      "loadMs": 0,
+      "audioBytes": 636374,
+      "nativeAudio": true,
+      "reply": "죄송합니다. 저는 차량의 온도 조절 기능을 제어할 수 없습니다. 조수석 온도를 25도로 맞추려면 차량의 온도 조절 버튼을 직접 조작해 주세요."
+    }
+  ]
+}

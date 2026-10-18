@@ -1,0 +1,364 @@
+{
+  "at": "2026-10-16T11:16:46.234Z",
+  "purpose": "Phi JSON formatting regression; command accuracy evaluated separately",
+  "beforeInvalid": 2,
+  "total": 8,
+  "valid": 8,
+  "results": [
+    {
+      "name": "existing-history: 운전석 이십팔도로",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"운전석 온도 28도로 설정했습니다.\",\"actions\":[{\"type\":\"temperature\",\"zone\":\"driver\",\"value\":28}]}",
+      "elapsedMs": 1727,
+      "totalMs": 6887,
+      "loadMs": 5160,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 37,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 28
+        }
+      ],
+      "state": {
+        "revision": 2,
+        "temperature": {
+          "driver": 28,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 28
+        }
+      ],
+      "commandCorrect": true
+    },
+    {
+      "name": "existing-history: 운전석 온도를 28도로 맞춰줘",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"운전석 온도를 28도로 맞췄어요.\",\"actions\":[{\"type\":\"temperature\",\"zone\":\"driver\",\"value\":28}]}",
+      "elapsedMs": 1075,
+      "totalMs": 1075,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 41,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 28
+        }
+      ],
+      "state": {
+        "revision": 2,
+        "temperature": {
+          "driver": 28,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 28
+        }
+      ],
+      "commandCorrect": true
+    },
+    {
+      "name": "existing-history: 조수석 온도를 25도로 맞춰줘",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"조수석 온도를 25도로 설정했습니다.\",\"actions\":[{\"type\":\"seatHeat\",\"value\":25}]}",
+      "elapsedMs": 928,
+      "totalMs": 928,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 35,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "seatHeat",
+          "value": 25
+        }
+      ],
+      "error": "값은 0~3 정수여야 합니다.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "commandCorrect": false
+    },
+    {
+      "name": "fresh: 운전석 이십팔도로",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"안녕, 이십팔도로 가고 있어. 도와줄게.\",\"actions\":[{\"type\":\"navigate\",\"value\":\"이십팔도로\"}]}",
+      "elapsedMs": 1054,
+      "totalMs": 1054,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 41,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "navigate",
+          "value": "이십팔도로"
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "이십팔도로",
+          "active": true
+        },
+        "speed": 0
+      },
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 28
+        }
+      ],
+      "commandCorrect": false
+    },
+    {
+      "name": "fresh: 운전석 온도를 28도로 맞춰줘",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"운전석 온도 28도로 맞춰줘\",\"actions\":[{\"type\":\"temperature\",\"zone\":\"driver\",\"value\":28}]}",
+      "elapsedMs": 1002,
+      "totalMs": 1002,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 39,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 28
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 28,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 28
+        }
+      ],
+      "commandCorrect": true
+    },
+    {
+      "name": "fresh: 조수석 온도를 25도로 맞춰줘",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"조수석 온도 25도로 맞춰줘\",\"actions\":[{\"type\":\"temperature\",\"zone\":\"passenger\",\"value\":25}]}",
+      "elapsedMs": 1030,
+      "totalMs": 1030,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 40,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "commandCorrect": true
+    },
+    {
+      "name": "fresh: 앞유리 김서림 제거 켜줘",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"앞유리 김서림 제거 켜졌다\",\"actions\":[{\"type\":\"defrost\",\"value\":true}]}",
+      "elapsedMs": 851,
+      "totalMs": 851,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 33,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "commandCorrect": true
+    },
+    {
+      "name": "fresh: 온도를 50도로 맞춰줘",
+      "status": 200,
+      "text": "{\"intent\":\"control\",\"reply\":\"온도 설정 범위 16~30도로. 50도로 설정 불가능. 30도로 설정\",\"actions\":[{\"type\":\"temperature\",\"zone\":\"both\",\"value\":30}]}",
+      "elapsedMs": 1257,
+      "totalMs": 1257,
+      "loadMs": 0,
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "generatedTokens": 49,
+      "validJson": true,
+      "actions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 30
+        }
+      ],
+      "state": {
+        "revision": 1,
+        "temperature": {
+          "driver": 30,
+          "passenger": 30
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "expectedActions": [],
+      "commandCorrect": false
+    }
+  ],
+  "commandCorrect": 5
+}

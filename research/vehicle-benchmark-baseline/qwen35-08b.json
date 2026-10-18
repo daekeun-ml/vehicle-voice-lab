@@ -1,0 +1,2440 @@
+{
+  "modelId": "qwen35-08b",
+  "name": "Qwen3.5 · 0.8B",
+  "repo": "Qwen/Qwen3.5-0.8B",
+  "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "size": "0.87B total",
+  "startedAt": "2026-10-16T14:36:49.894Z",
+  "status": "complete",
+  "syntheticAudio": true,
+  "pipeline": "Nemotron ASR → selected sLLM → vehicle executor → Polly",
+  "rows": [
+    {
+      "id": "driver-24",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 이십사도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도는 22도입니다. 14도까지 내려주세요. 14도입니다.",
+      "asrMs": 86,
+      "llmMs": 1385,
+      "ttsMs": 342,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1875,
+      "elapsedMs": 1875,
+      "audioValid": true,
+      "audioBytes": 196764,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "passenger-25",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "조수석 온도를 이십오도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석 온도는 16~30 범위입니다. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도로 선택하세요. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도 중 16~30 범위 내에서 선택하세요.",
+      "asrMs": 85,
+      "llmMs": 6604,
+      "ttsMs": 1313,
+      "modelLoadMs": 0,
+      "firstAudioMs": 8073,
+      "elapsedMs": 8078,
+      "audioValid": true,
+      "audioBytes": 1080764,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "both-23",
+      "text": "양쪽 온도를 23도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "양쪽 온도를 이십삼도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "양쪽 온도는 16~30 범위입니다. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도로 설정 가능합니다. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도로 설정 가능합니다. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도로 설정 가능합니다. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도로 ",
+      "asrMs": 82,
+      "llmMs": 11127,
+      "ttsMs": 1681,
+      "modelLoadMs": 0,
+      "firstAudioMs": 12974,
+      "elapsedMs": 12974,
+      "audioValid": true,
+      "audioBytes": 1968284,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "driver-up",
+      "text": "운전석 온도를 1도 올려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 일도 올려줘.",
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 1
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 1,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "열선을 1단으로 켰어요.",
+      "asrMs": 78,
+      "llmMs": 1624,
+      "ttsMs": 157,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1912,
+      "elapsedMs": 1912,
+      "audioValid": true,
+      "audioBytes": 65244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "both-down",
+      "text": "온도를 1도 내려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 21
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "온도를 일도 내려줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "현재 온도는 22도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다. 1도 내려주면 21도, 1도 올리면 23도입니다.",
+      "asrMs": 69,
+      "llmMs": 9613,
+      "ttsMs": 2245,
+      "modelLoadMs": 0,
+      "firstAudioMs": 11989,
+      "elapsedMs": 11990,
+      "audioValid": true,
+      "audioBytes": 1831964,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "fan-5",
+      "text": "바람 세기를 5단으로 해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "바람세기를 오단으로 해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "바람세기를 오단으로 하면 1~7 범위 내의 정수 값을 입력하세요. 예를 들어 3을 입력하면 바람이 3 초당 1 초당 1 초로 오단됩니다. 1~7 중 1은 가장 느린 속도, 7은 가장 빠른 속도입니다. 1~7 범위 밖의 숫자는 임의로 변경됩니다. 바람세기를 조절하려면 '바람세기를 오단으로' 또는 '바람세기를 저단으로' 명령을 입력하세요.",
+      "asrMs": 74,
+      "llmMs": 4171,
+      "ttsMs": 1049,
+      "modelLoadMs": 0,
+      "firstAudioMs": 5352,
+      "elapsedMs": 5353,
+      "audioValid": true,
+      "audioBytes": 807484,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "ac-off",
+      "text": "에어컨 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": false,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "에어컨 거죠.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "어떤 차량의 에어컨이 있는지 확인해 주시겠어요. 현재 온도는 22도입니다. 에어컨을 켜고 끄는 명령을 알려주세요. ",
+      "asrMs": 60,
+      "llmMs": 1726,
+      "ttsMs": 434,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2268,
+      "elapsedMs": 2269,
+      "audioValid": true,
+      "audioBytes": 296364,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "ac-on",
+      "text": "에어컨 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "에어컨 켜줘",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "어컨 켜기 명령을 요청하신 것으로 보아, 현재 에어컨은 켜져 있습니다. 에어컨을 끕니다.",
+      "asrMs": 57,
+      "llmMs": 1491,
+      "ttsMs": 245,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1841,
+      "elapsedMs": 1841,
+      "audioValid": true,
+      "audioBytes": 199004,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "defrost-on",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김설임 제곱켜줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "압력 조절은 차량 내의 공기압 조절 기능으로, '김설임 제거' 기능과 다른 기능입니다. '김설임 제거'는 앞유리 김서림 제거 기능을 의미합니다. '압력 조절'은 차량 내 공기압을 조절하는 기능입니다. '김설임 제거'는 앞유리 김서림 제거 기능을 의미합니다. '압력 조절'은 차량 내 공기압을 조절하는 기능입니다. '김설임 제거'는 앞유리 김서림 제거 기능을 의미합니다. '압력 조절'은 차량 내 공기압을 조절하는 기능입니다. '김설임 제거'는 앞유리 김서림 제거 기능을 의미합니다. '압력 조절'은 차량 내 공기압을 조절하는 기능입니다. '김설임 제거'는 앞유리 김서림 제거 기능을 의미합니다. '압력 조절'은 차량 내 공기압",
+      "asrMs": 75,
+      "llmMs": 6802,
+      "ttsMs": 1743,
+      "modelLoadMs": 0,
+      "firstAudioMs": 8707,
+      "elapsedMs": 8710,
+      "audioValid": true,
+      "audioBytes": 1421244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "defrost-off",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김설임 제거 꺼줘.",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "asrMs": 76,
+      "llmMs": 830,
+      "ttsMs": 183,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1146,
+      "elapsedMs": 1146,
+      "audioValid": true,
+      "audioBytes": 82844,
+      "failureCategory": null,
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "seat-2",
+      "text": "시트 열선을 2단으로 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 2
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 2,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "시트 열선을 이단으로 켜줘.",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        },
+        {
+          "type": "fan",
+          "value": 1
+        },
+        {
+          "type": "ac",
+          "value": true
+        },
+        {
+          "type": "defrost",
+          "value": true
+        },
+        {
+          "type": "fan",
+          "value": 1
+        },
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 1,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 켰어요. 바람 세기를 1단으로 바꿨어요. 에어컨을 켰어요. 앞유리 김서림 제거 기능을 켰어요. 바람 세기를 1단으로 바꿨어요. 에어컨을 켰어요.",
+      "asrMs": 77,
+      "llmMs": 2210,
+      "ttsMs": 943,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2506,
+      "elapsedMs": 3280,
+      "audioValid": true,
+      "audioBytes": 418664,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "seat-off",
+      "text": "시트 열선 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "시트 열성 꺼",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        },
+        {
+          "type": "fan",
+          "value": 1
+        },
+        {
+          "type": "ac",
+          "value": true
+        },
+        {
+          "type": "defrost",
+          "value": true
+        },
+        {
+          "type": "defrost",
+          "value": true
+        },
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 1,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 켰어요. 바람 세기를 1단으로 바꿨어요. 에어컨을 켰어요. 앞유리 김서림 제거 기능을 켰어요. 앞유리 김서림 제거 기능을 켰어요. 앞유리 김서림 제거 기능을 켰어요.",
+      "asrMs": 62,
+      "llmMs": 2247,
+      "ttsMs": 988,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2526,
+      "elapsedMs": 3341,
+      "audioValid": true,
+      "audioBytes": 459064,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "volume-20",
+      "text": "음량을 20으로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "volume",
+          "value": 20
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 20,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음량을 이십으로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음량 설정은 0~100 범위입니다. 현재는 35입니다. 100으로 설정해 주세요.",
+      "asrMs": 73,
+      "llmMs": 1439,
+      "ttsMs": 339,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1900,
+      "elapsedMs": 1900,
+      "audioValid": true,
+      "audioBytes": 214364,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "media-play",
+      "text": "음악 재생해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": true,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음악재생이죠.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음악 재생 기능은 연결되어 있지 않습니다. 현재 차량 상태는 다음과 같습니다: temperature: 22°C, fan: 2, ac: true, defrost: false, seatHeat: 0, media: playing, volume: 35, navigation: null, speed: 0. 음악 재생 기능을 연결하지 못합니다. ",
+      "asrMs": 62,
+      "llmMs": 2830,
+      "ttsMs": 910,
+      "modelLoadMs": 0,
+      "firstAudioMs": 3855,
+      "elapsedMs": 3856,
+      "audioValid": true,
+      "audioBytes": 715164,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "media-pause",
+      "text": "음악 멈춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음악 멈춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음악 재생을 멈추려면 '음악 멈춰줘' 명령어를 사용하세요.",
+      "asrMs": 62,
+      "llmMs": 1042,
+      "ttsMs": 225,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1384,
+      "elapsedMs": 1384,
+      "audioValid": true,
+      "audioBytes": 124044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "media-next",
+      "text": "다음 곡으로 넘겨줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "next"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "다음 드라이브 곡"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "다음 국으로 넘겨줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "길 안내를 시작하려면 먼저 목적지를 입력해주세요. 현재 목적지 설정이 없습니다. ",
+      "asrMs": 70,
+      "llmMs": 1107,
+      "ttsMs": 321,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1621,
+      "elapsedMs": 1621,
+      "audioValid": true,
+      "audioBytes": 203404,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "navigate",
+      "text": "서울역으로 길 안내해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "서울역",
+          "active": true
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "서울역으로 길 안내해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "서울역으로 길 안내해줘. 서울역은 서울특별시에서 위치해 있으며, 주요 주요역으로 100번역, 101번역, 102번역, 103번역, 104번역, 105번역, 106번역, 107번역, 108번역, 109번역, 110번역, 111번역, 112번역, 113번역, 114번역, 115번역, 116번역, 117번역, 118번역, 119번역, 120번역, 121번역, 122번역, 123번역, 124번역, 125번역, 126번역, 127번역, 128번역, 129번역, 130번역, 131번역, 132번역, 133번역, 134번역, 135번역, 136번역, 137번역, 138번역, 139번역, 140번역, 141번역, 142번역, 143번",
+      "asrMs": 73,
+      "llmMs": 11730,
+      "ttsMs": 2236,
+      "modelLoadMs": 0,
+      "firstAudioMs": 14107,
+      "elapsedMs": 14107,
+      "audioValid": true,
+      "audioBytes": 1887804,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "nav-stop",
+      "text": "길 안내 종료해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "navigationStop"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "길 안내 종료해줘.",
+      "actualActions": [
+        {
+          "type": "navigationStop"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "모의 길 안내를 종료했어요.",
+      "asrMs": 68,
+      "llmMs": 702,
+      "ttsMs": 188,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1011,
+      "elapsedMs": 1011,
+      "audioValid": true,
+      "audioBytes": 70844,
+      "failureCategory": null,
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "clarify",
+      "text": "목적지는 아직 안 정했는데 길 안내해줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": false,
+      "denialCorrect": true,
+      "heard": "목적지는 아직 안정했는데 귀에 안내해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "길 안내를 요청하신다면 '길 안내해' 명령어를 사용하세요. 현재 목적지 설정이 안 되어 있습니다. 어떤 목적지를 설정하시겠습니까? (예: 서울, 부산 등) ",
+      "asrMs": 87,
+      "llmMs": 1855,
+      "ttsMs": 525,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2581,
+      "elapsedMs": 2582,
+      "audioValid": true,
+      "audioBytes": 381964,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "unsupported-sensor",
+      "text": "타이어 공기압 센서 값을 40으로 바꿔줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "heard": "타이어 공개압 센서 값을 사십으로 바꿔줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "타이어 공개압 센서 값을 100%로 설정하려면 '타이어 압력 조절' 기능을 사용하세요. 이 기능은 현재 작동 중입니다. '타이어 압력 조절 켜줘'로 설정을 하거나 '타이어 압력 조절 끄'로 끕니다. 현재 설정은 '타이어 압력 조절 켜져 있습니다.'입니다.",
+      "asrMs": 92,
+      "llmMs": 3233,
+      "ttsMs": 784,
+      "modelLoadMs": 0,
+      "firstAudioMs": 4171,
+      "elapsedMs": 4171,
+      "audioValid": true,
+      "audioBytes": 601084,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "status",
+      "text": "지금 조수석 온도가 몇 도야?",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "지금 조수석 온도가 몇도야?",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석의 현재 온도는 22도입니다.",
+      "asrMs": 79,
+      "llmMs": 923,
+      "ttsMs": 189,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1249,
+      "elapsedMs": 1249,
+      "audioValid": true,
+      "audioBytes": 92044,
+      "failureCategory": null,
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "out-of-range",
+      "text": "조수석 온도를 40도로 설정해줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "heard": "조수석 온도를 사십도로 설정해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석 온도는 22도입니다. 22도 이상은 1도 낮추고, 22도 이하는 1도 높입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도에서 1도 낮추면 21도, 1도 높이면 23도입니다. 22도 ",
+      "asrMs": 86,
+      "llmMs": 9990,
+      "ttsMs": 2124,
+      "modelLoadMs": 0,
+      "firstAudioMs": 12278,
+      "elapsedMs": 12279,
+      "audioValid": true,
+      "audioBytes": 1734604,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "compound",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 21
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 21
+        },
+        {
+          "type": "fan",
+          "value": 2
+        },
+        {
+          "type": "ac",
+          "value": true
+        },
+        {
+          "type": "defrost",
+          "value": false
+        },
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 21도로 맞췄어요. 조수석 온도를 21도로 맞췄어요. 바람 세기를 2단으로 바꿨어요. 에어컨을 켰어요. 앞유리 김서림 제거 기능을 껐어요. 열선을 껐어요.",
+      "asrMs": 105,
+      "llmMs": 5080,
+      "ttsMs": 1001,
+      "modelLoadMs": 0,
+      "firstAudioMs": 5453,
+      "elapsedMs": 6282,
+      "audioValid": true,
+      "audioBytes": 429464,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "correction",
+      "text": "아니, 24도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": false,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "아니 이십사도로 맞춰줘",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석 온도는 16~30 범위입니다. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도로 선택하세요. 16도, 17도, 18도, 19도, 20도, 21도, 22도, 23도, 24도, 25도, 26도, 27도, 28도, 29도, 30도 중 16~30 범위 내에서 선택하세요.",
+      "asrMs": 70,
+      "llmMs": 6903,
+      "ttsMs": 1318,
+      "modelLoadMs": 0,
+      "firstAudioMs": 8349,
+      "elapsedMs": 8349,
+      "audioValid": true,
+      "audioBytes": 1080764,
+      "failureCategory": "context-prelude",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "undo",
+      "text": "방금 설정 되돌려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": false,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "방금 설정 되돌려줘.",
+      "actualActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "되돌릴 차량 명령이 없어요.",
+      "asrMs": 70,
+      "llmMs": 705,
+      "ttsMs": 163,
+      "modelLoadMs": 0,
+      "firstAudioMs": 997,
+      "elapsedMs": 997,
+      "audioValid": true,
+      "audioBytes": 69644,
+      "failureCategory": "context-prelude",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "passenger-25-sohee",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "주수석 온도를 이십오도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "주수석 온도는 22도입니다. 145도로는 145도입니다. 145도보다 1도 낮추려면 144도, 144도보다 1도 높이는 145도입니다. 145도보다 1도 높이는 146도입니다. 145도보다 1도 낮추려면 144도입니다. 145도보다 1도 높이는 146도입니다. 145도보다 1도 낮추려면 144도입니다. 145도보다 1도 높이는 146도입니다. 145도보다 1도 낮추려면 144도입니다. 145도보다 1도 높이는 146도입니다. 145도보다 1도 낮추려면 144도입니다. 145도보다 1도 높이는 146도입니다. 145도보다 1도 낮추려면 144도입니다. 145도보다 1도 높이는 146도입니다. 145도보다 1도 낮추려면 1",
+      "asrMs": 110,
+      "llmMs": 9961,
+      "ttsMs": 2402,
+      "modelLoadMs": 0,
+      "firstAudioMs": 12533,
+      "elapsedMs": 12534,
+      "audioValid": true,
+      "audioBytes": 1954684,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "defrost-off-sohee",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김서림 제곱 꺼줘.",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "asrMs": 95,
+      "llmMs": 839,
+      "ttsMs": 169,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1357,
+      "elapsedMs": 1357,
+      "audioValid": true,
+      "audioBytes": 83244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "compound-sohee",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 21
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 21
+        },
+        {
+          "type": "fan",
+          "value": 2
+        },
+        {
+          "type": "ac",
+          "value": true
+        },
+        {
+          "type": "defrost",
+          "value": false
+        },
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 21도로 맞췄어요. 조수석 온도를 21도로 맞췄어요. 바람 세기를 2단으로 바꿨어요. 에어컨을 켰어요. 앞유리 김서림 제거 기능을 껐어요. 열선을 껐어요.",
+      "asrMs": 128,
+      "llmMs": 5163,
+      "ttsMs": 907,
+      "modelLoadMs": 0,
+      "firstAudioMs": 5488,
+      "elapsedMs": 6266,
+      "audioValid": true,
+      "audioBytes": 429464,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "driver-24-noise",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 이십사도로 맞춰줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도는 22도입니다. 14도까지 내려주세요. 14도입니다.",
+      "asrMs": 85,
+      "llmMs": 1367,
+      "ttsMs": 329,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1817,
+      "elapsedMs": 1817,
+      "audioValid": true,
+      "audioBytes": 196764,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "defrost-on-noise",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압류리 김설임 제곱혀줘.",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "asrMs": 75,
+      "llmMs": 833,
+      "ttsMs": 180,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1128,
+      "elapsedMs": 1129,
+      "audioValid": true,
+      "audioBytes": 83244,
+      "failureCategory": null,
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    {
+      "id": "fan-5-noise",
+      "text": "바람 세기를 5단으로 해줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "바람색을 오단으로 해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "바람색을 오단으로 설정하려면 다음 명령어를 입력하세요: '바람색 오단' 또는 '바람색 오단 켜줘'. '바람색 오단 끄'는 반대입니다. '바람색' 설정은 공조 기능이며, '오단'은 바람 방향을 변경하는 기능입니다. 현재 바람색은 '드라이브 플레이리스트'입니다. '바람색' 설정을 변경하려면 '바람색' 명령어를 입력하세요.",
+      "asrMs": 73,
+      "llmMs": 3990,
+      "ttsMs": 684,
+      "modelLoadMs": 0,
+      "firstAudioMs": 4790,
+      "elapsedMs": 4790,
+      "audioValid": true,
+      "audioBytes": 730684,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "Qwen/Qwen3.5-0.8B",
+      "actualRevision": "2fc06364715b967f1860aea9cf38778875588b17"
+    }
+  ],
+  "warmup": {
+    "elapsedMs": 24825,
+    "modelLoadMs": 16773
+  },
+  "completedAt": "2026-10-16T14:40:02.275Z"
+}

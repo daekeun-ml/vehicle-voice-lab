@@ -1,0 +1,281 @@
+{
+  "model": "hyperclova-05b",
+  "at": "2026-10-16T15:12:41.161Z",
+  "method": "10 exact-transcript text cases; prompt language isolation. Not end-to-end audio score.",
+  "rows": [
+    {
+      "version": "full-v1",
+      "tests": [
+        {
+          "id": "driver-24",
+          "passed": false,
+          "actions": [],
+          "reply": "운전자 좌석은 24°C입니다.",
+          "llmMs": 1452
+        },
+        {
+          "id": "passenger-25",
+          "passed": false,
+          "actions": [],
+          "reply": "조수석은 25도로 맞추겠습니다.",
+          "llmMs": 1417
+        },
+        {
+          "id": "fan-5",
+          "passed": true,
+          "actions": [
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "reply": "바람세기 조절하기 (켜주세요)",
+          "llmMs": 1611
+        },
+        {
+          "id": "ac-off",
+          "passed": false,
+          "actions": [],
+          "reply": "콤포트 에어컨 끄기",
+          "llmMs": 1455
+        },
+        {
+          "id": "defrost-off",
+          "passed": false,
+          "actions": [],
+          "reply": "깜빡임 소리 없음.",
+          "llmMs": 1450
+        },
+        {
+          "id": "seat-2",
+          "passed": false,
+          "actions": [],
+          "reply": "시트를 열선 켜줘.",
+          "llmMs": 1402
+        },
+        {
+          "id": "media-next",
+          "passed": false,
+          "actions": [],
+          "reply": "drive-playlist-01.mp3",
+          "llmMs": 1464
+        },
+        {
+          "id": "clarify",
+          "passed": true,
+          "actions": [],
+          "reply": "길 안내해줘.",
+          "llmMs": 1379
+        },
+        {
+          "id": "out-of-range",
+          "passed": true,
+          "actions": [],
+          "reply": "40도로 조수석을 높입니다.",
+          "llmMs": 1413
+        },
+        {
+          "id": "compound",
+          "passed": false,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 20
+            },
+            {
+              "type": "fan",
+              "value": 1
+            }
+          ],
+          "reply": "바람 세기를켜줘",
+          "llmMs": 1825
+        }
+      ],
+      "passed": 3
+    },
+    {
+      "version": "compact-v2",
+      "tests": [
+        {
+          "id": "driver-24",
+          "passed": false,
+          "actions": [],
+          "reply": "운전자 좌석의 온도 조절",
+          "llmMs": 1407
+        },
+        {
+          "id": "passenger-25",
+          "passed": false,
+          "actions": [],
+          "reply": "Korean reply",
+          "llmMs": 1323
+        },
+        {
+          "id": "fan-5",
+          "passed": false,
+          "actions": [
+            {
+              "type": "fan",
+              "value": 10
+            }
+          ],
+          "reply": "Korean reply",
+          "llmMs": 1491
+        },
+        {
+          "id": "ac-off",
+          "passed": false,
+          "actions": [],
+          "reply": "AC off",
+          "llmMs": 1299
+        },
+        {
+          "id": "defrost-off",
+          "passed": false,
+          "actions": [],
+          "reply": "김서림 제거 꺼",
+          "llmMs": 1375
+        },
+        {
+          "id": "seat-2",
+          "passed": false,
+          "actions": [],
+          "reply": "승객용 시트 열선이 켜졌습니다.",
+          "llmMs": 1417
+        },
+        {
+          "id": "media-next",
+          "passed": false,
+          "actions": [],
+          "reply": "play next.",
+          "llmMs": 1326
+        },
+        {
+          "id": "clarify",
+          "passed": true,
+          "actions": [],
+          "reply": "길안내",
+          "llmMs": 1361
+        },
+        {
+          "id": "out-of-range",
+          "passed": true,
+          "actions": [],
+          "reply": "40",
+          "llmMs": 1286
+        },
+        {
+          "id": "compound",
+          "passed": false,
+          "actions": [],
+          "reply": "운전자 좌석의 온도를 20도에서 25도로 올립니다.",
+          "llmMs": 1575
+        }
+      ],
+      "passed": 2
+    },
+    {
+      "version": "korean-compact-v2",
+      "tests": [
+        {
+          "id": "driver-24",
+          "passed": true,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 24
+            }
+          ],
+          "reply": "운전자용 시트 조절",
+          "llmMs": 1760
+        },
+        {
+          "id": "passenger-25",
+          "passed": false,
+          "actions": [],
+          "reply": "조수석의 온도는 25도입니다.",
+          "llmMs": 1481
+        },
+        {
+          "id": "fan-5",
+          "passed": false,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "passenger",
+              "value": 20
+            },
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "reply": "바람 세기는 조절할 수 없습니다.",
+          "llmMs": 1914
+        },
+        {
+          "id": "ac-off",
+          "passed": false,
+          "actions": [],
+          "reply": "꺼짐",
+          "llmMs": 1304
+        },
+        {
+          "id": "defrost-off",
+          "passed": false,
+          "actions": [],
+          "reply": "김서림을 제거합니다.",
+          "llmMs": 1359
+        },
+        {
+          "id": "seat-2",
+          "passed": false,
+          "actions": [],
+          "reply": "시트 열선은 꺼져 있습니다.",
+          "llmMs": 1404
+        },
+        {
+          "id": "media-next",
+          "passed": false,
+          "actions": [],
+          "reply": "driving playlist",
+          "llmMs": 1331
+        },
+        {
+          "id": "clarify",
+          "passed": true,
+          "actions": [],
+          "reply": "길안내",
+          "llmMs": 1331
+        },
+        {
+          "id": "out-of-range",
+          "passed": true,
+          "actions": [],
+          "reply": "40도",
+          "llmMs": 1296
+        },
+        {
+          "id": "compound",
+          "passed": false,
+          "actions": [
+            {
+              "type": "temperature",
+              "zone": "driver",
+              "value": 25
+            },
+            {
+              "type": "fan",
+              "value": 5
+            }
+          ],
+          "reply": "한국어 답변",
+          "llmMs": 1752
+        }
+      ],
+      "passed": 3
+    }
+  ]
+}

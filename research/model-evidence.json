@@ -1,0 +1,241 @@
+[
+  {
+    "repo": "Qwen/Qwen3.5-4B",
+    "latestRevision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "gated": false,
+    "metadataLicense": "apache-2.0",
+    "licenseName": null,
+    "languages": null,
+    "parameters": 4659865088,
+    "pipeline": "image-text-to-text",
+    "source": "https://huggingface.co/Qwen/Qwen3.5-4B",
+    "checkedAt": "2026-10-16T10:10:09.447279+00:00"
+  },
+  {
+    "repo": "Qwen/Qwen3.5-2B",
+    "latestRevision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+    "gated": false,
+    "metadataLicense": "apache-2.0",
+    "licenseName": null,
+    "languages": null,
+    "parameters": 2274069824,
+    "pipeline": "image-text-to-text",
+    "source": "https://huggingface.co/Qwen/Qwen3.5-2B",
+    "checkedAt": "2026-10-16T10:10:09.436595+00:00"
+  },
+  {
+    "repo": "Qwen/Qwen3.5-0.8B",
+    "latestRevision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "gated": false,
+    "metadataLicense": "apache-2.0",
+    "licenseName": null,
+    "languages": null,
+    "parameters": 873438784,
+    "pipeline": "image-text-to-text",
+    "source": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+    "checkedAt": "2026-10-16T10:10:09.451686+00:00"
+  },
+  {
+    "repo": "google/gemma-4-E2B-it",
+    "latestRevision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+    "gated": false,
+    "metadataLicense": "apache-2.0",
+    "licenseName": null,
+    "languages": null,
+    "parameters": 5123178051,
+    "pipeline": "any-to-any",
+    "source": "https://huggingface.co/google/gemma-4-E2B-it",
+    "checkedAt": "2026-10-16T10:10:09.456235+00:00"
+  },
+  {
+    "repo": "microsoft/Phi-4-mini-instruct",
+    "latestRevision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+    "gated": false,
+    "metadataLicense": "mit",
+    "licenseName": null,
+    "languages": [
+      "multilingual",
+      "ar",
+      "zh",
+      "cs",
+      "da",
+      "nl",
+      "en",
+      "fi",
+      "fr",
+      "de",
+      "he",
+      "hu",
+      "it",
+      "ja",
+      "ko",
+      "no",
+      "pl",
+      "pt",
+      "ru",
+      "es",
+      "sv",
+      "th",
+      "tr",
+      "uk"
+    ],
+    "parameters": 3836021760,
+    "pipeline": "text-generation",
+    "source": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
+    "checkedAt": "2026-10-16T10:10:09.431449+00:00"
+  },
+  {
+    "repo": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-1.5B",
+    "latestRevision": "0728a47d632019a8da5f53b663db1c175dc04115",
+    "gated": "auto",
+    "metadataLicense": "other",
+    "licenseName": "hyperclovax-seed",
+    "languages": null,
+    "parameters": 1585547264,
+    "pipeline": "text-generation",
+    "source": "https://huggingface.co/naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-1.5B",
+    "checkedAt": "2026-10-16T10:10:09.431329+00:00"
+  },
+  {
+    "repo": "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+    "latestRevision": "3da5046fb0195d14f2497de198136987d35fd644",
+    "gated": false,
+    "metadataLicense": "other",
+    "licenseName": "hyperclovax-seed",
+    "languages": null,
+    "parameters": 566281216,
+    "pipeline": "text-generation",
+    "source": "https://huggingface.co/naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+    "checkedAt": "2026-10-16T10:10:09.666891+00:00"
+  },
+  {
+    "repo": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+    "latestRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4",
+    "gated": false,
+    "metadataLicense": "other",
+    "licenseName": "exaone",
+    "languages": [
+      "en",
+      "ko",
+      "es"
+    ],
+    "parameters": 1279391488,
+    "pipeline": "text-generation",
+    "source": "https://huggingface.co/LGAI-EXAONE/EXAONE-4.0-1.2B",
+    "checkedAt": "2026-10-16T10:10:09.658804+00:00"
+  },
+  {
+    "repo": "HuggingFaceTB/SmolLM3-3B",
+    "latestRevision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "gated": false,
+    "metadataLicense": "apache-2.0",
+    "licenseName": null,
+    "languages": [
+      "en",
+      "fr",
+      "es",
+      "it",
+      "pt",
+      "zh",
+      "ar",
+      "ru"
+    ],
+    "parameters": 3075098624,
+    "pipeline": "text-generation",
+    "source": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+    "checkedAt": "2026-10-16T10:10:09.677227+00:00"
+  },
+  {
+    "repo": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+    "latestRevision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+    "gated": false,
+    "metadataLicense": "other",
+    "licenseName": "apache-2.0",
+    "languages": [
+      "en"
+    ],
+    "parameters": 35259818545,
+    "pipeline": "any-to-any",
+    "source": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct",
+    "checkedAt": "2026-10-16T10:10:09.684684+00:00"
+  },
+  {
+    "repo": "nvidia/personaplex-7b-v1",
+    "latestRevision": "fdaf4090a61cb315c138a1faee287ffd6c716309",
+    "gated": "auto",
+    "metadataLicense": "other",
+    "licenseName": "nvidia-open-model-license",
+    "languages": [
+      "en"
+    ],
+    "parameters": 8371408896,
+    "pipeline": "audio-to-audio",
+    "source": "https://huggingface.co/nvidia/personaplex-7b-v1",
+    "checkedAt": "2026-10-16T10:10:09.679261+00:00"
+  },
+  {
+    "repo": "openbmb/MiniCPM-o-4_5",
+    "latestRevision": "503e754207c94da6bb26850b4469f367c9ea3582",
+    "gated": false,
+    "metadataLicense": "apache-2.0",
+    "licenseName": null,
+    "languages": null,
+    "parameters": 9371787666,
+    "pipeline": "any-to-any",
+    "source": "https://huggingface.co/openbmb/MiniCPM-o-4_5",
+    "checkedAt": "2026-10-16T10:10:09.682570+00:00"
+  },
+  {
+    "repo": "stepfun-ai/Step-Audio-2-mini",
+    "latestRevision": "e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36",
+    "gated": false,
+    "metadataLicense": "apache-2.0",
+    "licenseName": null,
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "parameters": 8315179264,
+    "pipeline": "any-to-any",
+    "source": "https://huggingface.co/stepfun-ai/Step-Audio-2-mini",
+    "checkedAt": "2026-10-16T10:10:09.900717+00:00"
+  },
+  {
+    "repo": "XiaomiMiMo/MiMo-Audio-7B-Instruct",
+    "latestRevision": "c359441c22c2a1c74be5f99a91e83392680e9cc8",
+    "gated": false,
+    "metadataLicense": "mit",
+    "licenseName": null,
+    "languages": null,
+    "parameters": 8018587648,
+    "pipeline": "any-to-any",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-Audio-7B-Instruct",
+    "checkedAt": "2026-10-16T10:10:09.895767+00:00"
+  },
+  {
+    "repo": "kyutai/moshiko-pytorch-bf16",
+    "latestRevision": "2bfc9ae6e89079a5cc7ed2a68436010d91a3d289",
+    "gated": false,
+    "metadataLicense": "cc-by-4.0",
+    "licenseName": null,
+    "languages": [
+      "en"
+    ],
+    "parameters": 7687729152,
+    "pipeline": null,
+    "source": "https://huggingface.co/kyutai/moshiko-pytorch-bf16",
+    "checkedAt": "2026-10-16T10:10:09.914631+00:00"
+  },
+  {
+    "repo": "THUDM/glm-4-voice-9b",
+    "latestRevision": "352e5a64063448d5e46394753fb65bf1dbab975b",
+    "gated": false,
+    "metadataLicense": null,
+    "licenseName": null,
+    "languages": null,
+    "parameters": 9542557728,
+    "pipeline": null,
+    "source": "https://huggingface.co/THUDM/glm-4-voice-9b",
+    "checkedAt": "2026-10-16T10:10:10.134376+00:00"
+  }
+]

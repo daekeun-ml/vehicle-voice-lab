@@ -1,0 +1,98 @@
+{
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "syntheticAudioOnly": true,
+  "seed": 42,
+  "method": "teacher forcing fixes the exact text; only native TTS generates speech",
+  "results": [
+    {
+      "profile": "en-reference",
+      "case": "defrost",
+      "text": "앞유리 김서림 제거 기능을 켰어요.",
+      "temperature": 0.8,
+      "seconds": 4.52,
+      "elapsedMs": 4620,
+      "file": "en-reference-defrost.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    },
+    {
+      "profile": "en-reference",
+      "case": "temperature",
+      "text": "양쪽 온도를 이십삼 도로 맞췄어요.",
+      "temperature": 0.8,
+      "seconds": 7.48,
+      "elapsedMs": 5355,
+      "file": "en-reference-temperature.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    },
+    {
+      "profile": "ko-reference",
+      "case": "defrost",
+      "text": "앞유리 김서림 제거 기능을 켰어요.",
+      "temperature": 0.8,
+      "seconds": 4.32,
+      "elapsedMs": 3483,
+      "file": "ko-reference-defrost.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    },
+    {
+      "profile": "ko-reference",
+      "case": "temperature",
+      "text": "양쪽 온도를 이십삼 도로 맞췄어요.",
+      "temperature": 0.8,
+      "seconds": 6.4,
+      "elapsedMs": 4696,
+      "file": "ko-reference-temperature.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    },
+    {
+      "profile": "ko-reference-zh-prompt",
+      "case": "defrost",
+      "text": "앞유리 김서림 제거 기능을 켰어요.",
+      "temperature": 0.8,
+      "seconds": 4.12,
+      "elapsedMs": 3102,
+      "file": "ko-reference-zh-prompt-defrost.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    },
+    {
+      "profile": "ko-reference-zh-prompt",
+      "case": "temperature",
+      "text": "양쪽 온도를 이십삼 도로 맞췄어요.",
+      "temperature": 0.8,
+      "seconds": 5.36,
+      "elapsedMs": 4170,
+      "file": "ko-reference-zh-prompt-temperature.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    },
+    {
+      "profile": "ko-reference-low-temperature",
+      "case": "defrost",
+      "text": "앞유리 김서림 제거 기능을 켰어요.",
+      "temperature": 0.3,
+      "seconds": 5.84,
+      "elapsedMs": 4373,
+      "file": "ko-reference-low-temperature-defrost.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    },
+    {
+      "profile": "ko-reference-low-temperature",
+      "case": "temperature",
+      "text": "양쪽 온도를 이십삼 도로 맞췄어요.",
+      "temperature": 0.3,
+      "seconds": 4.92,
+      "elapsedMs": 3611,
+      "file": "ko-reference-low-temperature-temperature.wav",
+      "asr": "",
+      "characterErrorRate": 1
+    }
+  ],
+  "note": "ASR-based diagnostic only; Korean reference does not establish native Korean support. Human listening required.",
+  "englishControl": "Same teacher-forcing path produced The windshield defroster is on., verified with independent en-US ASR."
+}

@@ -1,0 +1,122 @@
+{
+  "modelId": "qwen35-4b-nf4",
+  "name": "Qwen3.5 · 4B · 4bit NF4",
+  "repo": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "size": "4.66B total",
+  "startedAt": "2026-10-16T16:17:28.588Z",
+  "status": "running",
+  "asrId": "whisper",
+  "promptVersion": "compact-v2",
+  "generationProfile": "deterministic",
+  "quantization": "nf4",
+  "syntheticAudio": true,
+  "pipeline": "Whisper turbo ASR → selected sLLM → vehicle executor → Polly",
+  "rows": [
+    {
+      "id": "holdout-passenger-27",
+      "text": "조수석 온도를 스물일곱 도로 바꿔 주세요.",
+      "variant": "holdout",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 27
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 27
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "조수석 온도를 27도로 바꿔주세요.",
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 27
+        }
+      ],
+      "quantization": "nf4",
+      "plannerMemory": {
+        "modelFootprintMiB": 3081.34,
+        "cudaAllocatedDeltaMiB": 3150.43,
+        "linear4bitLayers": 346,
+        "measurement": "this process CUDA allocated delta after planner load; excludes other workers, includes model quantization buffers; not vehicle shared RAM",
+        "processPeakAllocatedMiB": 5843.8,
+        "requestAdditionalPeakMiB": 242.37
+      },
+      "modelReply": "",
+      "rawTranscript": "조수석 온도를 27도로 바꿔주세요.",
+      "asrModel": "openai/whisper-large-v3-turbo",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 27
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 27
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석 온도를 27도로 맞췄어요.",
+      "asrMs": 81,
+      "llmMs": 1996,
+      "ttsMs": 186,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2400,
+      "elapsedMs": 2400,
+      "audioValid": true,
+      "audioBytes": 88044,
+      "validationError": null,
+      "failureCategory": null,
+      "actualPlanner": "Qwen/Qwen3.5-4B",
+      "actualRevision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+    }
+  ],
+  "warmup": {
+    "elapsedMs": 2772,
+    "modelLoadMs": 0
+  }
+}

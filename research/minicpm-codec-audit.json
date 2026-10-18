@@ -1,0 +1,21 @@
+{
+  "syntheticAudioOnly": true,
+  "input": "앞유리 김서림 제거 켜줘.",
+  "bypassed": "MiniCPM TTS text-to-audio-token prediction",
+  "results": [
+    {
+      "reference": "ko",
+      "file": "reconstructed-ko.wav",
+      "tokens": 53,
+      "asr": "압률이 김사림 제곱하죠."
+    },
+    {
+      "reference": "en",
+      "file": "reconstructed-en.wav",
+      "tokens": 53,
+      "asr": "압률이 김사림 제곱하죠."
+    }
+  ],
+  "originalAsr": "압률이 김설임 제곱켜줘.",
+  "note": "Original synthetic input also has ASR errors; use the separately verified command sample for codec interpretation."
+}

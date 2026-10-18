@@ -1,0 +1,25 @@
+{
+  "name": "vehicle-voice-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:minicpm": "python3 runtime/test_minicpm_protocol.py",
+    "prepare:samples": "node scripts/prepare-samples.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.1152.0",
+    "@aws-sdk/client-polly": "^3.1152.0",
+    "@aws-sdk/credential-providers": "^3.1152.0",
+    "@smithy/node-http-handler": "^4.12.1",
+    "express": "^5.1.0",
+    "ws": "^8.22.0"
+  },
+  "description": "Bilingual UI for a Korean in-car voice assistant simulator with self-hosted speech models and Amazon Nova Sonic.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.9.0"
+  }
+}

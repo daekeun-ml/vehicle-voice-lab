@@ -1,0 +1,183 @@
+{
+  "at": "2026-10-16T16:14:05.831Z",
+  "hardware": "AWS g6e.2xlarge / NVIDIA L40S 48GB",
+  "method": "same pinned original model, same Korean text and schema, only loading precision changes; memory is CUDA allocated, not vehicle RAM",
+  "rows": [
+    {
+      "text": "{\"intent\":\"control\",\"reply\":\"\",\"actions\":[{\"type\":\"temperature\",\"zone\":\"passenger\",\"value\":25}]}",
+      "quantization": "bf16",
+      "plan": {
+        "intent": "control",
+        "reply": "",
+        "actions": [
+          {
+            "type": "temperature",
+            "zone": "passenger",
+            "value": 25
+          }
+        ]
+      },
+      "elapsedMs": 4980,
+      "totalMs": 4980,
+      "loadMs": 0,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "generatedTokens": 25,
+      "generationProfile": "deterministic",
+      "memory": {
+        "modelFootprintMiB": 8657.96,
+        "cudaAllocatedDeltaMiB": 8657.99,
+        "linear4bitLayers": 0,
+        "measurement": "this process CUDA allocated delta after planner load; excludes other workers, includes model quantization buffers; not vehicle shared RAM",
+        "processPeakAllocatedMiB": 11344.42,
+        "requestAdditionalPeakMiB": 252.67
+      }
+    },
+    {
+      "text": "{\"intent\":\"control\",\"reply\":\"\",\"actions\":[{\"type\":\"defrost\",\"value\":true}]}",
+      "quantization": "bf16",
+      "plan": {
+        "intent": "control",
+        "reply": "",
+        "actions": [
+          {
+            "type": "defrost",
+            "value": true
+          }
+        ]
+      },
+      "elapsedMs": 959,
+      "totalMs": 959,
+      "loadMs": 0,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "generatedTokens": 20,
+      "generationProfile": "deterministic",
+      "memory": {
+        "modelFootprintMiB": 8657.96,
+        "cudaAllocatedDeltaMiB": 8657.99,
+        "linear4bitLayers": 0,
+        "measurement": "this process CUDA allocated delta after planner load; excludes other workers, includes model quantization buffers; not vehicle shared RAM",
+        "processPeakAllocatedMiB": 11346.27,
+        "requestAdditionalPeakMiB": 246.39
+      }
+    },
+    {
+      "text": "{\"intent\":\"control\",\"reply\":\"\",\"actions\":[{\"type\":\"fan\",\"value\":5}]}",
+      "quantization": "bf16",
+      "plan": {
+        "intent": "control",
+        "reply": "",
+        "actions": [
+          {
+            "type": "fan",
+            "value": 5
+          }
+        ]
+      },
+      "elapsedMs": 917,
+      "totalMs": 918,
+      "loadMs": 0,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "generatedTokens": 19,
+      "generationProfile": "deterministic",
+      "memory": {
+        "modelFootprintMiB": 8657.96,
+        "cudaAllocatedDeltaMiB": 8657.99,
+        "linear4bitLayers": 0,
+        "measurement": "this process CUDA allocated delta after planner load; excludes other workers, includes model quantization buffers; not vehicle shared RAM",
+        "processPeakAllocatedMiB": 11345.95,
+        "requestAdditionalPeakMiB": 246.06
+      }
+    },
+    {
+      "text": "{\"intent\":\"control\",\"reply\":\"\",\"actions\":[{\"type\":\"temperature\",\"zone\":\"passenger\",\"value\":25}]}",
+      "quantization": "nf4",
+      "plan": {
+        "intent": "control",
+        "reply": "",
+        "actions": [
+          {
+            "type": "temperature",
+            "zone": "passenger",
+            "value": 25
+          }
+        ]
+      },
+      "elapsedMs": 1952,
+      "totalMs": 69105,
+      "loadMs": 67152,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "generatedTokens": 25,
+      "generationProfile": "deterministic",
+      "memory": {
+        "modelFootprintMiB": 3081.34,
+        "cudaAllocatedDeltaMiB": 3150.03,
+        "linear4bitLayers": 346,
+        "measurement": "this process CUDA allocated delta after planner load; excludes other workers, includes model quantization buffers; not vehicle shared RAM",
+        "processPeakAllocatedMiB": 5835.66,
+        "requestAdditionalPeakMiB": 243.73
+      }
+    },
+    {
+      "text": "{\"intent\":\"control\",\"reply\":\"\",\"actions\":[{\"type\":\"defrost\",\"value\":true}]}",
+      "quantization": "nf4",
+      "plan": {
+        "intent": "control",
+        "reply": "",
+        "actions": [
+          {
+            "type": "defrost",
+            "value": true
+          }
+        ]
+      },
+      "elapsedMs": 1571,
+      "totalMs": 13243,
+      "loadMs": 5284,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "generatedTokens": 20,
+      "generationProfile": "deterministic",
+      "memory": {
+        "modelFootprintMiB": 3081.34,
+        "cudaAllocatedDeltaMiB": 3150.43,
+        "linear4bitLayers": 346,
+        "measurement": "this process CUDA allocated delta after planner load; excludes other workers, includes model quantization buffers; not vehicle shared RAM",
+        "processPeakAllocatedMiB": 5844.93,
+        "requestAdditionalPeakMiB": 243.5
+      }
+    },
+    {
+      "text": "{\"intent\":\"control\",\"reply\":\"\",\"actions\":[{\"type\":\"fan\",\"value\":5}]}",
+      "quantization": "nf4",
+      "plan": {
+        "intent": "control",
+        "reply": "",
+        "actions": [
+          {
+            "type": "fan",
+            "value": 5
+          }
+        ]
+      },
+      "elapsedMs": 1473,
+      "totalMs": 1473,
+      "loadMs": 0,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "generatedTokens": 19,
+      "generationProfile": "deterministic",
+      "memory": {
+        "modelFootprintMiB": 3081.34,
+        "cudaAllocatedDeltaMiB": 3150.43,
+        "linear4bitLayers": 346,
+        "measurement": "this process CUDA allocated delta after planner load; excludes other workers, includes model quantization buffers; not vehicle shared RAM",
+        "processPeakAllocatedMiB": 5843.8,
+        "requestAdditionalPeakMiB": 242.38
+      }
+    }
+  ]
+}

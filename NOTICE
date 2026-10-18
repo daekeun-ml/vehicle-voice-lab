@@ -1,0 +1,14 @@
+Vehicle voice model evaluation lab — model weights remain on the private GPU workers.
+
+HyperCLOVA X SEED Model is licensed under the HyperCLOVA X SEED Model License Agreement, Copyright © NAVER Corp. All Rights Reserved.
+Powered by HyperCLOVA X. License copy: research/model-sources/HyperCLOVAX-SEED-Text-Instruct-0.5B/LICENSE.
+
+EXAONE 4.0: LG AI Research, EXAONE 1.2-NC license. Local research/evaluation only. No product distribution or commercial deployment is authorized by this lab configuration.
+License copy: research/model-sources/EXAONE-4.0-1.2B/LICENSE.
+
+Moshi: Kyutai, model weights CC-BY-4.0. https://huggingface.co/kyutai/moshiko-pytorch-bf16
+The native comparison adapter does not imply Korean or vehicle-tool support.
+
+Other models retain the licenses and attribution shown in model-catalog.json and their official model cards. No model weights are distributed with this application.
+
+Whisper large-v3-turbo: OpenAI, MIT license, self-hosted weights. https://huggingface.co/openai/whisper-large-v3-turbo

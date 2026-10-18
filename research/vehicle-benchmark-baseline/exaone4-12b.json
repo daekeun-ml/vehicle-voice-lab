@@ -1,0 +1,2421 @@
+{
+  "modelId": "exaone4-12b",
+  "name": "EXAONE 4.0 · 1.2B",
+  "repo": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+  "revision": "3abf2810673c7c0778df64a73c2d52eab32d91c4",
+  "size": "1.28B total",
+  "startedAt": "2026-10-16T14:44:52.085Z",
+  "status": "complete",
+  "syntheticAudio": true,
+  "pipeline": "Nemotron ASR → selected sLLM → vehicle executor → Polly",
+  "rows": [
+    {
+      "id": "driver-24",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 이십사도로 맞춰줘.",
+      "firstAudioMs": null,
+      "elapsedMs": 1532,
+      "audioValid": false,
+      "audioBytes": 0,
+      "error": {
+        "error": "값은 16~30여야 합니다.",
+        "state": {
+          "revision": 0,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "failureStage": "vehicle-validation",
+        "vehicleTools": true,
+        "turnId": "0fbe7dc2-6097-43aa-b986-cd30c5be39b1"
+      },
+      "failureCategory": "vehicle-validation"
+    },
+    {
+      "id": "passenger-25",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "조수석 온도를 이십오도로 맞춰줘.",
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 3,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "열선을 3단으로 켰어요.",
+      "asrMs": 84,
+      "llmMs": 1309,
+      "ttsMs": 190,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1731,
+      "elapsedMs": 1732,
+      "audioValid": true,
+      "audioBytes": 65644,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "both-23",
+      "text": "양쪽 온도를 23도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "양쪽 온도를 이십삼도로 맞춰줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "양쪽 온도를 23도로 맞췄어요.",
+      "asrMs": 83,
+      "llmMs": 1475,
+      "ttsMs": 178,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1824,
+      "elapsedMs": 1825,
+      "audioValid": true,
+      "audioBytes": 82444,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "driver-up",
+      "text": "운전석 온도를 1도 올려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 일도 올려줘.",
+      "firstAudioMs": null,
+      "elapsedMs": 1353,
+      "audioValid": false,
+      "audioBytes": 0,
+      "error": {
+        "error": "값은 16~30여야 합니다.",
+        "state": {
+          "revision": 0,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "failureStage": "vehicle-validation",
+        "vehicleTools": true,
+        "turnId": "9ed006b4-e133-4f47-b6bf-e621dc446a47"
+      },
+      "failureCategory": "vehicle-validation"
+    },
+    {
+      "id": "both-down",
+      "text": "온도를 1도 내려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 21
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "온도를 일도 내려줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 19
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 19,
+          "passenger": 19
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "양쪽 온도를 19도로 맞췄어요.",
+      "asrMs": 68,
+      "llmMs": 1416,
+      "ttsMs": 164,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1696,
+      "elapsedMs": 1696,
+      "audioValid": true,
+      "audioBytes": 78444,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "fan-5",
+      "text": "바람 세기를 5단으로 해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "바람세기를 오단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "바람 세기를 5단으로 바꿨어요.",
+      "asrMs": 74,
+      "llmMs": 1046,
+      "ttsMs": 175,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1339,
+      "elapsedMs": 1339,
+      "audioValid": true,
+      "audioBytes": 76844,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "ac-off",
+      "text": "에어컨 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": false,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "에어컨 거죠.",
+      "actualActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "에어컨을 켰어요.",
+      "asrMs": 60,
+      "llmMs": 903,
+      "ttsMs": 129,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1274,
+      "elapsedMs": 1274,
+      "audioValid": true,
+      "audioBytes": 48044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "ac-on",
+      "text": "에어컨 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "에어컨 켜줘",
+      "actualActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "에어컨을 켰어요.",
+      "asrMs": 58,
+      "llmMs": 910,
+      "ttsMs": 118,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1157,
+      "elapsedMs": 1157,
+      "audioValid": true,
+      "audioBytes": 48044,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "defrost-on",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김설임 제곱켜줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "현재 온도는 운전석과 동승석 모두 22도로 comfortable합니다.",
+      "asrMs": 75,
+      "llmMs": 934,
+      "ttsMs": 244,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1310,
+      "elapsedMs": 1314,
+      "audioValid": true,
+      "audioBytes": 146044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "defrost-off",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김설임 제거 꺼줘.",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "asrMs": 76,
+      "llmMs": 1109,
+      "ttsMs": 142,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1386,
+      "elapsedMs": 1386,
+      "audioValid": true,
+      "audioBytes": 82844,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "seat-2",
+      "text": "시트 열선을 2단으로 켜줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 2
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 2,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "시트 열선을 이단으로 켜줘.",
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 1
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 1,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "열선을 1단으로 켰어요.",
+      "asrMs": 78,
+      "llmMs": 971,
+      "ttsMs": 156,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1250,
+      "elapsedMs": 1250,
+      "audioValid": true,
+      "audioBytes": 65244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "seat-off",
+      "text": "시트 열선 꺼줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "시트 열성 꺼",
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        },
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "열선을 껐어요. 열선을 껐어요.",
+      "asrMs": 63,
+      "llmMs": 1344,
+      "ttsMs": 240,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1588,
+      "elapsedMs": 1718,
+      "audioValid": true,
+      "audioBytes": 94488,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "volume-20",
+      "text": "음량을 20으로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "volume",
+          "value": 20
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 20,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음량을 이십으로 맞춰줘.",
+      "actualActions": [
+        {
+          "type": "volume",
+          "value": 45
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 45,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음량을 45으로 맞췄어요.",
+      "asrMs": 72,
+      "llmMs": 1284,
+      "ttsMs": 474,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1875,
+      "elapsedMs": 1875,
+      "audioValid": true,
+      "audioBytes": 69244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "media-play",
+      "text": "음악 재생해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": true,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음악재생이죠.",
+      "actualActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": true,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음악을 재생했어요.",
+      "asrMs": 62,
+      "llmMs": 991,
+      "ttsMs": 133,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1419,
+      "elapsedMs": 1419,
+      "audioValid": true,
+      "audioBytes": 51244,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "media-pause",
+      "text": "음악 멈춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "음악 멈춰줘.",
+      "actualActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "음악을 멈췄어요.",
+      "asrMs": 62,
+      "llmMs": 1042,
+      "ttsMs": 129,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1273,
+      "elapsedMs": 1273,
+      "audioValid": true,
+      "audioBytes": 50044,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "media-next",
+      "text": "다음 곡으로 넘겨줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "next"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "다음 드라이브 곡"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "다음 국으로 넘겨줘.",
+      "firstAudioMs": null,
+      "elapsedMs": 1360,
+      "audioValid": false,
+      "audioBytes": 0,
+      "error": {
+        "error": "값은 16~30여야 합니다.",
+        "state": {
+          "revision": 0,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "failureStage": "vehicle-validation",
+        "vehicleTools": true,
+        "turnId": "57935458-b764-401f-a34a-d6d9fd02f0f4"
+      },
+      "failureCategory": "vehicle-validation"
+    },
+    {
+      "id": "navigate",
+      "text": "서울역으로 길 안내해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "서울역",
+          "active": true
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "서울역으로 길 안내해줘.",
+      "actualActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "서울역",
+          "active": true
+        },
+        "speed": 0
+      },
+      "reply": "서울역을 모의 목적지로 설정했어요.",
+      "asrMs": 73,
+      "llmMs": 1147,
+      "ttsMs": 187,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1489,
+      "elapsedMs": 1489,
+      "audioValid": true,
+      "audioBytes": 84444,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "nav-stop",
+      "text": "길 안내 종료해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "navigationStop"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "길 안내 종료해줘.",
+      "actualActions": [
+        {
+          "type": "navigationStop"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "모의 길 안내를 종료했어요.",
+      "asrMs": 68,
+      "llmMs": 916,
+      "ttsMs": 186,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1350,
+      "elapsedMs": 1351,
+      "audioValid": true,
+      "audioBytes": 70844,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "clarify",
+      "text": "목적지는 아직 안 정했는데 길 안내해줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": false,
+      "denialCorrect": true,
+      "heard": "목적지는 아직 안정했는데 귀에 안내해줘.",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "목적지 알려주세요.",
+      "asrMs": 88,
+      "llmMs": 677,
+      "ttsMs": 140,
+      "modelLoadMs": 0,
+      "firstAudioMs": 967,
+      "elapsedMs": 967,
+      "audioValid": true,
+      "audioBytes": 53244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "unsupported-sensor",
+      "text": "타이어 공기압 센서 값을 40으로 바꿔줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "heard": "타이어 공개압 센서 값을 사십으로 바꿔줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 30
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 30,
+          "passenger": 30
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "양쪽 온도를 30도로 맞췄어요.",
+      "asrMs": 93,
+      "llmMs": 1432,
+      "ttsMs": 172,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1787,
+      "elapsedMs": 1788,
+      "audioValid": true,
+      "audioBytes": 80044,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "status",
+      "text": "지금 조수석 온도가 몇 도야?",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "지금 조수석 온도가 몇도야?",
+      "actualActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "조수석 온도는 22도입니다.",
+      "asrMs": 78,
+      "llmMs": 840,
+      "ttsMs": 169,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1144,
+      "elapsedMs": 1144,
+      "audioValid": true,
+      "audioBytes": 75644,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "out-of-range",
+      "text": "조수석 온도를 40도로 설정해줘.",
+      "variant": "clean",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "heard": "조수석 온도를 사십도로 설정해줘.",
+      "firstAudioMs": null,
+      "elapsedMs": 1429,
+      "audioValid": false,
+      "audioBytes": 0,
+      "error": {
+        "error": "값은 0~3 정수여야 합니다.",
+        "state": {
+          "revision": 0,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "failureStage": "vehicle-validation",
+        "vehicleTools": true,
+        "turnId": "431e9e54-556e-4196-815c-43630d9e01dc"
+      },
+      "failureCategory": "vehicle-validation"
+    },
+    {
+      "id": "compound",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 22
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 22도로 맞췄어요. 바람 세기를 3단으로 바꿨어요.",
+      "asrMs": 107,
+      "llmMs": 1724,
+      "ttsMs": 381,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2133,
+      "elapsedMs": 2327,
+      "audioValid": true,
+      "audioBytes": 164088,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "correction",
+      "text": "아니, 24도로 맞춰줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": false,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "아니 이십사도로 맞춰줘",
+      "firstAudioMs": null,
+      "elapsedMs": 1380,
+      "audioValid": false,
+      "audioBytes": 0,
+      "error": {
+        "error": "값은 0~3 정수여야 합니다.",
+        "state": {
+          "revision": 1,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 3,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "failureStage": "vehicle-validation",
+        "vehicleTools": true,
+        "turnId": "ecfaff86-9cd4-454c-9b10-5dcbabb9448b"
+      },
+      "failureCategory": "vehicle-validation"
+    },
+    {
+      "id": "undo",
+      "text": "방금 설정 되돌려줘.",
+      "variant": "clean",
+      "expectedActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": false,
+      "passed": false,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "방금 설정 되돌려줘.",
+      "actualActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "actualState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "직전 차량 설정을 되돌렸어요.",
+      "asrMs": 71,
+      "llmMs": 900,
+      "ttsMs": 168,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1185,
+      "elapsedMs": 1185,
+      "audioValid": true,
+      "audioBytes": 76444,
+      "failureCategory": "context-prelude",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "passenger-25-sohee",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "주수석 온도를 이십오도로 맞춰줘.",
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 1
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 1,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "열선을 1단으로 켰어요.",
+      "asrMs": 107,
+      "llmMs": 1149,
+      "ttsMs": 155,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1509,
+      "elapsedMs": 1509,
+      "audioValid": true,
+      "audioBytes": 65244,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "defrost-off-sohee",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압률이 김서림 제곱 꺼줘.",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "asrMs": 94,
+      "llmMs": 1106,
+      "ttsMs": 134,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1413,
+      "elapsedMs": 1413,
+      "audioValid": true,
+      "audioBytes": 82844,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "compound-sohee",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "variant": "second-voice",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석은 이십사도로 하고 바람색이는 삼단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 22
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "운전석 온도를 22도로 맞췄어요. 바람 세기를 3단으로 바꿨어요.",
+      "asrMs": 130,
+      "llmMs": 1698,
+      "ttsMs": 315,
+      "modelLoadMs": 0,
+      "firstAudioMs": 2163,
+      "elapsedMs": 2333,
+      "audioValid": true,
+      "audioBytes": 164088,
+      "failureCategory": "understanding-or-planning",
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "driver-24-noise",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": false,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "운전석 온도를 이십사도로 맞춰줘.",
+      "firstAudioMs": null,
+      "elapsedMs": 1478,
+      "audioValid": false,
+      "audioBytes": 0,
+      "error": {
+        "error": "값은 16~30여야 합니다.",
+        "state": {
+          "revision": 0,
+          "temperature": {
+            "driver": 22,
+            "passenger": 22
+          },
+          "fan": 2,
+          "ac": true,
+          "defrost": false,
+          "seatHeat": 0,
+          "media": {
+            "playing": false,
+            "volume": 35,
+            "track": "드라이브 플레이리스트"
+          },
+          "navigation": {
+            "destination": null,
+            "active": false
+          },
+          "speed": 0
+        },
+        "failureStage": "vehicle-validation",
+        "vehicleTools": true,
+        "turnId": "8d1786eb-bbd3-4b0b-9a4d-fe4d8651bfe3"
+      },
+      "failureCategory": "vehicle-validation"
+    },
+    {
+      "id": "defrost-on-noise",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "압류리 김설임 제곱혀줘.",
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "asrMs": 75,
+      "llmMs": 1085,
+      "ttsMs": 173,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1388,
+      "elapsedMs": 1388,
+      "audioValid": true,
+      "audioBytes": 83244,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    },
+    {
+      "id": "fan-5-noise",
+      "text": "바람 세기를 5단으로 해줘.",
+      "variant": "noise-20dB",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "preludeCorrect": true,
+      "passed": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "heard": "바람색을 오단으로 해줘.",
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "reply": "바람 세기를 5단으로 바꿨어요.",
+      "asrMs": 74,
+      "llmMs": 1080,
+      "ttsMs": 178,
+      "modelLoadMs": 0,
+      "firstAudioMs": 1487,
+      "elapsedMs": 1487,
+      "audioValid": true,
+      "audioBytes": 76844,
+      "failureCategory": null,
+      "actualPlanner": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+      "actualRevision": "3abf2810673c7c0778df64a73c2d52eab32d91c4"
+    }
+  ],
+  "warmup": {
+    "elapsedMs": 22766,
+    "modelLoadMs": 21042
+  },
+  "completedAt": "2026-10-16T14:46:04.393Z"
+}

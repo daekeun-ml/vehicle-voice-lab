@@ -1,0 +1,1972 @@
+{
+  "date": "2026-10-16",
+  "sourceChecks": [
+    {
+      "model": "Qwen3.5",
+      "source": "https://huggingface.co/Qwen/Qwen3.5-0.8B#best-practices",
+      "finding": "Official text non-thinking recommends sampling T=1, top_p=1, top_k=20, presence=2; original harness used deterministic structured generation. Add explicit official profile and compare with fixed seed, without assuming it helps vehicle commands."
+    },
+    {
+      "model": "Phi-4 mini",
+      "source": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
+      "finding": "Official example uses do_sample=False, temperature=0. Existing greedy choice is consistent. Native Phi3 loader supports checkpoint. Previous whitespace truncation already fixed with compact XGrammar and JSON validation."
+    },
+    {
+      "model": "HyperCLOVA0.5B",
+      "source": "https://huggingface.co/naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B/blob/main/README.md",
+      "finding": "tool_list and repetition_penalty=1.2 already matched. Add official stop_strings/endofturn and stop token handling."
+    },
+    {
+      "model": "SmolLM3",
+      "source": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "finding": "enable_thinking=False is officially supported, so it was not ignored. Add official sampling profile T=.6, top_p=.95 for controlled comparison."
+    },
+    {
+      "model": "MiniCPM-o4.5",
+      "source": "https://github.com/OpenBMB/MiniCPM-V/blob/main/docs/minicpm_o4dot5_en.md",
+      "finding": "16kHz float mono native ndarray matches official format. Vendor automatically forces use_tts_template=True when ndarray audio is present, so our false argument was not the cause. Move task text before audio per official audio-understanding example. Fix app blanket relative-temperature guard: permit exact explicit seat/delta matches only."
+    },
+    {
+      "model": "Tokenizer audit",
+      "source": "https://huggingface.co/docs/transformers/chat_templating",
+      "finding": "Compared template tokenization against two-step current/fixed tokenization for Qwen0.8B, Phi, Gemma, HyperCLOVA. Extra tokens=0 for all four; token IDs match native template. Set add_special_tokens=False explicitly as documented, but do not attribute low scores to duplicate BOS."
+    },
+    {
+      "model": "ASR",
+      "finding": "Same 31 synthetic waves: Nemotron CER11.64%, exact17/31, median75ms; Whisper turbo CER2.09%, exact26/31, median88ms. Separate ASR benchmark isolates recognizer effect. Preserve originals and rerun full vehicle pipelines with Whisper+compact prompt+numeric notation normalization."
+    },
+    {
+      "model": "Latency",
+      "finding": "Pinned cached planners now local_files_only=True to avoid remote metadata delays during swaps. Qwen reference gated-delta/conv kernels remain; throughput numbers are this specific Transformers/L40S setup, not vendor optimized serving benchmarks."
+    }
+  ],
+  "notEquivalentToPublishedBenchmarks": "Korean audio + custom vehicle schema + executor + TTS differs from text-only BFCL/IFEval scores, language distribution and thinking/sampling mode. This is a small application development/regression set. A separate 10-utterance new-number/paraphrase holdout is used for finalists.",
+  "generationProfileComparison": {
+    "at": "2026-10-16T15:11:03.707Z",
+    "method": "10 text controls; exact same compact prompt and correct transcript; isolates sampling only. Not the 31-waveform demo score.",
+    "rows": [
+      {
+        "id": "qwen35-2b",
+        "profile": "deterministic",
+        "seed": null,
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "reply": "",
+            "llmMs": 959,
+            "loadMs": 4718,
+            "tokens": 25,
+            "elapsedMs": 5725
+          },
+          {
+            "id": "passenger-25",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "reply": "",
+            "llmMs": 947,
+            "loadMs": 0,
+            "tokens": 26,
+            "elapsedMs": 972
+          },
+          {
+            "id": "fan-5",
+            "passed": true,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "",
+            "llmMs": 740,
+            "loadMs": 0,
+            "tokens": 20,
+            "elapsedMs": 755
+          },
+          {
+            "id": "ac-off",
+            "passed": true,
+            "actions": [
+              {
+                "type": "ac",
+                "value": false
+              }
+            ],
+            "reply": "",
+            "llmMs": 756,
+            "loadMs": 0,
+            "tokens": 20,
+            "elapsedMs": 774
+          },
+          {
+            "id": "defrost-off",
+            "passed": true,
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "reply": "",
+            "llmMs": 780,
+            "loadMs": 0,
+            "tokens": 21,
+            "elapsedMs": 797
+          },
+          {
+            "id": "seat-2",
+            "passed": true,
+            "actions": [
+              {
+                "type": "seatHeat",
+                "value": 2
+              }
+            ],
+            "reply": "",
+            "llmMs": 782,
+            "loadMs": 0,
+            "tokens": 21,
+            "elapsedMs": 798
+          },
+          {
+            "id": "media-next",
+            "passed": false,
+            "actions": [],
+            "reply": "",
+            "llmMs": 474,
+            "loadMs": 0,
+            "tokens": 12,
+            "elapsedMs": 485
+          },
+          {
+            "id": "compound",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "reply": "",
+            "llmMs": 1190,
+            "loadMs": 0,
+            "tokens": 33,
+            "elapsedMs": 1206
+          },
+          {
+            "id": "out-of-range",
+            "passed": false,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 40
+              }
+            ],
+            "reply": "",
+            "llmMs": 951,
+            "loadMs": 0,
+            "tokens": 26,
+            "elapsedMs": 969
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "길 안내를 위해 목적지를 알려주세요.",
+            "llmMs": 817,
+            "loadMs": 0,
+            "tokens": 22,
+            "elapsedMs": 833
+          }
+        ],
+        "passed": 8
+      },
+      {
+        "id": "qwen35-2b",
+        "profile": "official",
+        "seed": 42,
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "reply": "",
+            "llmMs": 1011,
+            "loadMs": 0,
+            "tokens": 25,
+            "elapsedMs": 1022
+          },
+          {
+            "id": "passenger-25",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "reply": "",
+            "llmMs": 964,
+            "loadMs": 0,
+            "tokens": 26,
+            "elapsedMs": 982
+          },
+          {
+            "id": "fan-5",
+            "passed": true,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "",
+            "llmMs": 760,
+            "loadMs": 0,
+            "tokens": 20,
+            "elapsedMs": 808
+          },
+          {
+            "id": "ac-off",
+            "passed": false,
+            "actions": [],
+            "reply": "",
+            "llmMs": 483,
+            "loadMs": 0,
+            "tokens": 12,
+            "elapsedMs": 493
+          },
+          {
+            "id": "defrost-off",
+            "passed": false,
+            "actions": [],
+            "reply": "",
+            "llmMs": 481,
+            "loadMs": 0,
+            "tokens": 12,
+            "elapsedMs": 498
+          },
+          {
+            "id": "seat-2",
+            "passed": true,
+            "actions": [
+              {
+                "type": "seatHeat",
+                "value": 2
+              }
+            ],
+            "reply": "",
+            "llmMs": 799,
+            "loadMs": 0,
+            "tokens": 21,
+            "elapsedMs": 817
+          },
+          {
+            "id": "media-next",
+            "passed": false,
+            "actions": [],
+            "reply": "어디로 가시나요?",
+            "llmMs": 728,
+            "loadMs": 0,
+            "tokens": 19,
+            "elapsedMs": 740
+          },
+          {
+            "id": "compound",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "reply": "",
+            "llmMs": 1215,
+            "loadMs": 0,
+            "tokens": 33,
+            "elapsedMs": 1228
+          },
+          {
+            "id": "out-of-range",
+            "passed": true,
+            "actions": [],
+            "reply": "조수석 온도를 10~24 도까지 설정할 수 있어요.",
+            "llmMs": 1117,
+            "loadMs": 0,
+            "tokens": 30,
+            "elapsedMs": 1129
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "안녕하세요. 목적지 주소가 정확하지 않거나 도로명 주소로 입력하신 적이 없으므로 길 안내를 시작할 수 없습니다. 정해진 장소의 목적지를 확인해 주시면 바로 안내드리겠습니다.",
+            "llmMs": 2074,
+            "loadMs": 0,
+            "tokens": 57,
+            "elapsedMs": 2104
+          }
+        ],
+        "passed": 7
+      },
+      {
+        "id": "qwen35-08b",
+        "profile": "deterministic",
+        "seed": null,
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "reply": "운전석 24도입니다.",
+            "llmMs": 1278,
+            "loadMs": 4388,
+            "tokens": 36,
+            "elapsedMs": 5677
+          },
+          {
+            "id": "passenger-25",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "reply": "조수석 온도를 25도로 설정합니다. 현재 조수석 온도는 22도입니다. 25도 설정을 완료했습니다.",
+            "llmMs": 2042,
+            "loadMs": 0,
+            "tokens": 59,
+            "elapsedMs": 2061
+          },
+          {
+            "id": "fan-5",
+            "passed": true,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "바람 세기 5단으로 설정되었습니다.",
+            "llmMs": 1170,
+            "loadMs": 0,
+            "tokens": 33,
+            "elapsedMs": 1181
+          },
+          {
+            "id": "ac-off",
+            "passed": false,
+            "actions": [],
+            "reply": "에어컨 꺼짐을 요청합니다. (Air Conditioning OFF) ",
+            "llmMs": 972,
+            "loadMs": 0,
+            "tokens": 27,
+            "elapsedMs": 983
+          },
+          {
+            "id": "defrost-off",
+            "passed": true,
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "reply": "김서림 제거 꺼줘.",
+            "llmMs": 1069,
+            "loadMs": 0,
+            "tokens": 30,
+            "elapsedMs": 1081
+          },
+          {
+            "id": "seat-2",
+            "passed": true,
+            "actions": [
+              {
+                "type": "seatHeat",
+                "value": 2
+              }
+            ],
+            "reply": "시트 열선 2단으로 켜졌습니다.",
+            "llmMs": 1254,
+            "loadMs": 0,
+            "tokens": 36,
+            "elapsedMs": 1271
+          },
+          {
+            "id": "media-next",
+            "passed": false,
+            "actions": [],
+            "reply": "다음 곡은 없습니다. 현재 플레이리스트는 없습니다. 다음 곡으로 이동하려면 다음 곡을 선택해주세요.",
+            "llmMs": 1257,
+            "loadMs": 0,
+            "tokens": 36,
+            "elapsedMs": 1269
+          },
+          {
+            "id": "compound",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "reply": "운전석 24도, 바람 세기 3단 (1~7) 을 설정합니다.",
+            "llmMs": 1993,
+            "loadMs": 0,
+            "tokens": 58,
+            "elapsedMs": 2098
+          },
+          {
+            "id": "out-of-range",
+            "passed": false,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 40
+              }
+            ],
+            "reply": "조수석 온도를 40도로 설정했습니다.",
+            "llmMs": 1398,
+            "loadMs": 0,
+            "tokens": 40,
+            "elapsedMs": 1409
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "길 안내해 주세요. 현재 위치는 어디인가요? 어떤 목적지를 찾으시나요? (예: 서울, 부산, 공항 등)",
+            "llmMs": 1480,
+            "loadMs": 0,
+            "tokens": 42,
+            "elapsedMs": 1490
+          }
+        ],
+        "passed": 7
+      },
+      {
+        "id": "qwen35-08b",
+        "profile": "official",
+        "seed": 42,
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": false,
+            "actions": [],
+            "reply": "}suserassistant<think>(uuserassistantuassistantassistant",
+            "llmMs": 1959,
+            "loadMs": 0,
+            "tokens": 55,
+            "elapsedMs": 1979
+          },
+          {
+            "id": "passenger-25",
+            "passed": false,
+            "actions": [],
+            "reply": "}suserassistant<think>(uuserassistantuassistantassistant",
+            "llmMs": 1966,
+            "loadMs": 0,
+            "tokens": 55,
+            "elapsedMs": 1982
+          },
+          {
+            "id": "fan-5",
+            "passed": true,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "풍기의 5개를 조절합니다.",
+            "llmMs": 1080,
+            "loadMs": 0,
+            "tokens": 30,
+            "elapsedMs": 1091
+          },
+          {
+            "id": "ac-off",
+            "passed": false,
+            "actions": [
+              {
+                "type": "defrost",
+                "value": true
+              }
+            ],
+            "reply": "}s.userassistant<think>assistantuserplantextuseruserassistant> ",
+            "llmMs": 2226,
+            "loadMs": 0,
+            "tokens": 64,
+            "elapsedMs": 2237
+          },
+          {
+            "id": "defrost-off",
+            "passed": true,
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "reply": "김서림 제거 꺼=defrost=false",
+            "llmMs": 1140,
+            "loadMs": 0,
+            "tokens": 32,
+            "elapsedMs": 1150
+          },
+          {
+            "id": "seat-2",
+            "passed": true,
+            "actions": [
+              {
+                "type": "seatHeat",
+                "value": 2
+              }
+            ],
+            "reply": "시트 열선은 0 단으로 켜집니다.",
+            "llmMs": 1272,
+            "loadMs": 0,
+            "tokens": 36,
+            "elapsedMs": 1282
+          },
+          {
+            "id": "media-next",
+            "passed": false,
+            "actions": [],
+            "reply": "",
+            "llmMs": 466,
+            "loadMs": 0,
+            "tokens": 12,
+            "elapsedMs": 485
+          },
+          {
+            "id": "compound",
+            "passed": false,
+            "actions": [],
+            "reply": "운전석에 열선이 24도 입니다. 바람 세기는 3 단입니다. 다시 주문해주세요.",
+            "llmMs": 1341,
+            "loadMs": 0,
+            "tokens": 38,
+            "elapsedMs": 1359
+          },
+          {
+            "id": "out-of-range",
+            "passed": true,
+            "actions": [],
+            "reply": "}suserassistant<think>(usercolorassistantuseruservalue",
+            "llmMs": 1935,
+            "loadMs": 0,
+            "tokens": 55,
+            "elapsedMs": 1953
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "",
+            "llmMs": 478,
+            "loadMs": 0,
+            "tokens": 12,
+            "elapsedMs": 496
+          }
+        ],
+        "passed": 5
+      },
+      {
+        "id": "smollm3",
+        "profile": "deterministic",
+        "seed": null,
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "reply": "운전석 온도를 24도로 맞췄습니다.",
+            "llmMs": 1076,
+            "loadMs": 3979,
+            "tokens": 38,
+            "elapsedMs": 5079
+          },
+          {
+            "id": "passenger-25",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "reply": "Korean reply",
+            "llmMs": 786,
+            "loadMs": 0,
+            "tokens": 28,
+            "elapsedMs": 812
+          },
+          {
+            "id": "fan-5",
+            "passed": true,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "바람 5단으로 설정되었습니다.",
+            "llmMs": 871,
+            "loadMs": 0,
+            "tokens": 31,
+            "elapsedMs": 891
+          },
+          {
+            "id": "ac-off",
+            "passed": true,
+            "actions": [
+              {
+                "type": "ac",
+                "value": false
+              }
+            ],
+            "reply": "에어컨을 껐습니다.",
+            "llmMs": 814,
+            "loadMs": 0,
+            "tokens": 29,
+            "elapsedMs": 840
+          },
+          {
+            "id": "defrost-off",
+            "passed": true,
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "reply": "Korean reply",
+            "llmMs": 673,
+            "loadMs": 0,
+            "tokens": 24,
+            "elapsedMs": 690
+          },
+          {
+            "id": "seat-2",
+            "passed": true,
+            "actions": [
+              {
+                "type": "seatHeat",
+                "value": 2
+              }
+            ],
+            "reply": "시트 열선 2단으로 켜졌습니다.",
+            "llmMs": 953,
+            "loadMs": 0,
+            "tokens": 34,
+            "elapsedMs": 990
+          },
+          {
+            "id": "media-next",
+            "passed": true,
+            "actions": [
+              {
+                "type": "media",
+                "value": "next"
+              }
+            ],
+            "reply": "음악을 다음 곡으로 넘겨줍니다.",
+            "llmMs": 926,
+            "loadMs": 0,
+            "tokens": 33,
+            "elapsedMs": 942
+          },
+          {
+            "id": "compound",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "reply": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+            "llmMs": 1420,
+            "loadMs": 0,
+            "tokens": 51,
+            "elapsedMs": 1442
+          },
+          {
+            "id": "out-of-range",
+            "passed": false,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 40
+              }
+            ],
+            "reply": "Korean reply",
+            "llmMs": 782,
+            "loadMs": 0,
+            "tokens": 28,
+            "elapsedMs": 809
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "목적지를 정해주세요.",
+            "llmMs": 559,
+            "loadMs": 0,
+            "tokens": 20,
+            "elapsedMs": 569
+          }
+        ],
+        "passed": 9
+      },
+      {
+        "id": "smollm3",
+        "profile": "official",
+        "seed": 42,
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "reply": "운전석에 24도 설정되었습니다.",
+            "llmMs": 1040,
+            "loadMs": 0,
+            "tokens": 36,
+            "elapsedMs": 1059
+          },
+          {
+            "id": "passenger-25",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "reply": "Korean reply",
+            "llmMs": 797,
+            "loadMs": 0,
+            "tokens": 28,
+            "elapsedMs": 818
+          },
+          {
+            "id": "fan-5",
+            "passed": true,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "바람 5단 설정되었습니다.",
+            "llmMs": 857,
+            "loadMs": 0,
+            "tokens": 30,
+            "elapsedMs": 869
+          },
+          {
+            "id": "ac-off",
+            "passed": true,
+            "actions": [
+              {
+                "type": "ac",
+                "value": false
+              }
+            ],
+            "reply": "에어컨을 껐습니다.",
+            "llmMs": 826,
+            "loadMs": 0,
+            "tokens": 29,
+            "elapsedMs": 844
+          },
+          {
+            "id": "defrost-off",
+            "passed": false,
+            "actions": [],
+            "reply": "김서림을 꺼줘.",
+            "llmMs": 627,
+            "loadMs": 0,
+            "tokens": 22,
+            "elapsedMs": 645
+          },
+          {
+            "id": "seat-2",
+            "passed": true,
+            "actions": [
+              {
+                "type": "seatHeat",
+                "value": 2
+              }
+            ],
+            "reply": "시트 열선 2단으로 켜졌습니다.",
+            "llmMs": 971,
+            "loadMs": 0,
+            "tokens": 34,
+            "elapsedMs": 988
+          },
+          {
+            "id": "media-next",
+            "passed": true,
+            "actions": [
+              {
+                "type": "media",
+                "value": "next"
+              }
+            ],
+            "reply": "드라이브 플레이리스트에서 다음 곡으로 넘어갑니다.",
+            "llmMs": 1025,
+            "loadMs": 0,
+            "tokens": 36,
+            "elapsedMs": 1036
+          },
+          {
+            "id": "compound",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "reply": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+            "llmMs": 1456,
+            "loadMs": 0,
+            "tokens": 51,
+            "elapsedMs": 1468
+          },
+          {
+            "id": "out-of-range",
+            "passed": false,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 40
+              }
+            ],
+            "reply": "Korean reply",
+            "llmMs": 805,
+            "loadMs": 0,
+            "tokens": 28,
+            "elapsedMs": 816
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "목적지를 정해주세요.",
+            "llmMs": 610,
+            "loadMs": 0,
+            "tokens": 21,
+            "elapsedMs": 626
+          }
+        ],
+        "passed": 8
+      }
+    ]
+  },
+  "speechProfileComparison": {
+    "at": "2026-10-16T14:58:39.532Z",
+    "method": "5 Korean and 5 English synthetic commands, same compact prompt; deterministic vs upstream sampling. Diagnostic; main scores use 31 Korean app-level scenarios.",
+    "rows": [
+      {
+        "modelId": "step-audio2-mini",
+        "profile": "deterministic",
+        "tests": [
+          {
+            "id": "driver-24",
+            "language": "ko",
+            "passed": true,
+            "heard": ": 운전석 온도를 24도로 맞춰줘요",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "llmMs": 4939,
+            "loadMs": 19343,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "passenger-25",
+            "language": "ko",
+            "passed": true,
+            "heard": ": 조수석 온도를 25도로 맞춰줘요",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "llmMs": 4272,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "defrost-off",
+            "language": "ko",
+            "passed": true,
+            "heard": ", 앞유리 김서림 제거 꺼",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "llmMs": 4340,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "fan-5",
+            "language": "ko",
+            "passed": true,
+            "heard": ", 바람 세기를 5단으로 설정했습니다.",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "llmMs": 4094,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "compound",
+            "language": "ko",
+            "passed": true,
+            "heard": ": 운전석 온도 24도로, 바람 세기 3단으로 설정합니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 5567,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "driver-24",
+            "language": "en",
+            "passed": true,
+            "heard": ":driver 24도로 설정합니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "llmMs": 3574,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "passenger-25",
+            "language": "en",
+            "passed": true,
+            "heard": ": 조수석 온도 25도로 설정합니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "llmMs": 3919,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "defrost-off",
+            "language": "en",
+            "passed": true,
+            "heard": ":(",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "llmMs": 2409,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "fan-5",
+            "language": "en",
+            "passed": true,
+            "heard": ": 바람 세기 5단으로 설정합니다.",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "llmMs": 3018,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "compound",
+            "language": "en",
+            "passed": true,
+            "heard": ", 운전석 온도 24도로 설정하고 바람 세기 3단으로 조절했습니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 7864,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          }
+        ],
+        "koreanPassed": 5,
+        "englishPassed": 5
+      },
+      {
+        "modelId": "step-audio2-mini",
+        "profile": "official",
+        "tests": [
+          {
+            "id": "driver-24",
+            "language": "ko",
+            "passed": true,
+            "heard": ": 운전석 온도를 24도로 맞춰줘",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "llmMs": 3727,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "passenger-25",
+            "language": "ko",
+            "passed": true,
+            "heard": ": 조수석 온도를 25도로 맞춰줘.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "llmMs": 3768,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "defrost-off",
+            "language": "ko",
+            "passed": true,
+            "heard": ":앞 유리 김서림을 없애겠습니다.",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "llmMs": 2919,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "fan-5",
+            "language": "ko",
+            "passed": true,
+            "heard": "바람세기를 5단으로 해줘",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "llmMs": 2667,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "compound",
+            "language": "ko",
+            "passed": true,
+            "heard": ": 운전석 온도 24도로, 바람 세기 3단으로 설정합니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 4968,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "driver-24",
+            "language": "en",
+            "passed": true,
+            "heard": ":24도로 운전석 온도를 설정했습니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "llmMs": 3554,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "passenger-25",
+            "language": "en",
+            "passed": true,
+            "heard": ": 조수석 온도 25도로 설정합니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "llmMs": 3650,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "defrost-off",
+            "language": "en",
+            "passed": true,
+            "heard": "김서림 제거 꺼",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "llmMs": 2613,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "fan-5",
+            "language": "en",
+            "passed": true,
+            "heard": "팬을 레벨 5로 설정합니다.",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "llmMs": 2835,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "compound",
+            "language": "en",
+            "passed": true,
+            "heard": ":온도를 24도로, 바람을 세 단으로 설정합니다.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 4538,
+            "loadMs": 0,
+            "actualProfile": "official"
+          }
+        ],
+        "koreanPassed": 5,
+        "englishPassed": 5
+      },
+      {
+        "modelId": "mimo-audio",
+        "profile": "deterministic",
+        "tests": [
+          {
+            "id": "driver-24",
+            "language": "ko",
+            "passed": false,
+            "heard": "운전석 공두를 24도로 바꿔줘",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 24
+              }
+            ],
+            "llmMs": 3773,
+            "loadMs": 10152,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "passenger-25",
+            "language": "ko",
+            "passed": false,
+            "heard": "운전석 온도를 20도로 맞춰줘요",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 20
+              },
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 20
+              }
+            ],
+            "llmMs": 3161,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "defrost-off",
+            "language": "ko",
+            "passed": false,
+            "heard": "앞유리 김서림 제거/성에 제거",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": true
+              }
+            ],
+            "llmMs": 2080,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "fan-5",
+            "language": "ko",
+            "passed": false,
+            "heard": "파람새기류를 오단으로 해줘",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 7
+              }
+            ],
+            "llmMs": 2014,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "compound",
+            "language": "ko",
+            "passed": true,
+            "heard": "운전석은 24도로 하고, 바람 세기는 3단으로 해줘.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 3061,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "driver-24",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the driver temperature to 24 degrees.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "llmMs": 2684,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "passenger-25",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the passenger temperature to 25 degrees.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "llmMs": 2434,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "defrost-off",
+            "language": "en",
+            "passed": true,
+            "heard": "Turn off the front windshield defroster.",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "llmMs": 1903,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "fan-5",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the fan speed to level 5.",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "llmMs": 1904,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          },
+          {
+            "id": "compound",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the driver temperature to 24 degrees and the fan speed to level 3.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 3946,
+            "loadMs": 0,
+            "actualProfile": "deterministic"
+          }
+        ],
+        "koreanPassed": 1,
+        "englishPassed": 5
+      },
+      {
+        "modelId": "mimo-audio",
+        "profile": "official",
+        "tests": [
+          {
+            "id": "driver-24",
+            "language": "ko",
+            "passed": false,
+            "heard": "운전석 온도를 24도로 바꿔줘",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 24
+              }
+            ],
+            "llmMs": 3136,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "passenger-25",
+            "language": "ko",
+            "passed": false,
+            "heard": "운전석 온도를 20도로 맞춰줘요",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 20
+              },
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 20
+              }
+            ],
+            "llmMs": 3164,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "defrost-off",
+            "language": "ko",
+            "passed": false,
+            "heard": "앞유리 김서림 제거/성에 제거",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": true
+              }
+            ],
+            "llmMs": 2084,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "fan-5",
+            "language": "ko",
+            "passed": false,
+            "heard": "파람새기류를 오단으로 해줘",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 7
+              }
+            ],
+            "llmMs": 2447,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "compound",
+            "language": "ko",
+            "passed": true,
+            "heard": "운전석은 24도로 하고, 바람 세기는 3단으로 해줘.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 3067,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "driver-24",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the driver temperature to 24 degrees.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "llmMs": 2713,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "passenger-25",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the passenger temperature to 25 degrees.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 25
+              }
+            ],
+            "llmMs": 2566,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "defrost-off",
+            "language": "en",
+            "passed": true,
+            "heard": "Turn off the front windshield defroster.",
+            "actions": [
+              {
+                "type": "defrost",
+                "value": false
+              }
+            ],
+            "llmMs": 1932,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "fan-5",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the fan speed to level 5.",
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "llmMs": 1918,
+            "loadMs": 0,
+            "actualProfile": "official"
+          },
+          {
+            "id": "compound",
+            "language": "en",
+            "passed": true,
+            "heard": "Set the driver temperature to 24 degrees and the fan speed to level 3.",
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              },
+              {
+                "type": "fan",
+                "value": 3
+              }
+            ],
+            "llmMs": 3961,
+            "loadMs": 0,
+            "actualProfile": "official"
+          }
+        ],
+        "koreanPassed": 1,
+        "englishPassed": 5
+      }
+    ]
+  },
+  "koreanPromptComparison": {
+    "model": "hyperclova-05b",
+    "at": "2026-10-16T15:12:41.161Z",
+    "method": "10 exact-transcript text cases; prompt language isolation. Not end-to-end audio score.",
+    "rows": [
+      {
+        "version": "full-v1",
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": false,
+            "actions": [],
+            "reply": "운전자 좌석은 24°C입니다.",
+            "llmMs": 1452
+          },
+          {
+            "id": "passenger-25",
+            "passed": false,
+            "actions": [],
+            "reply": "조수석은 25도로 맞추겠습니다.",
+            "llmMs": 1417
+          },
+          {
+            "id": "fan-5",
+            "passed": true,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "바람세기 조절하기 (켜주세요)",
+            "llmMs": 1611
+          },
+          {
+            "id": "ac-off",
+            "passed": false,
+            "actions": [],
+            "reply": "콤포트 에어컨 끄기",
+            "llmMs": 1455
+          },
+          {
+            "id": "defrost-off",
+            "passed": false,
+            "actions": [],
+            "reply": "깜빡임 소리 없음.",
+            "llmMs": 1450
+          },
+          {
+            "id": "seat-2",
+            "passed": false,
+            "actions": [],
+            "reply": "시트를 열선 켜줘.",
+            "llmMs": 1402
+          },
+          {
+            "id": "media-next",
+            "passed": false,
+            "actions": [],
+            "reply": "drive-playlist-01.mp3",
+            "llmMs": 1464
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "길 안내해줘.",
+            "llmMs": 1379
+          },
+          {
+            "id": "out-of-range",
+            "passed": true,
+            "actions": [],
+            "reply": "40도로 조수석을 높입니다.",
+            "llmMs": 1413
+          },
+          {
+            "id": "compound",
+            "passed": false,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 20
+              },
+              {
+                "type": "fan",
+                "value": 1
+              }
+            ],
+            "reply": "바람 세기를켜줘",
+            "llmMs": 1825
+          }
+        ],
+        "passed": 3
+      },
+      {
+        "version": "compact-v2",
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": false,
+            "actions": [],
+            "reply": "운전자 좌석의 온도 조절",
+            "llmMs": 1407
+          },
+          {
+            "id": "passenger-25",
+            "passed": false,
+            "actions": [],
+            "reply": "Korean reply",
+            "llmMs": 1323
+          },
+          {
+            "id": "fan-5",
+            "passed": false,
+            "actions": [
+              {
+                "type": "fan",
+                "value": 10
+              }
+            ],
+            "reply": "Korean reply",
+            "llmMs": 1491
+          },
+          {
+            "id": "ac-off",
+            "passed": false,
+            "actions": [],
+            "reply": "AC off",
+            "llmMs": 1299
+          },
+          {
+            "id": "defrost-off",
+            "passed": false,
+            "actions": [],
+            "reply": "김서림 제거 꺼",
+            "llmMs": 1375
+          },
+          {
+            "id": "seat-2",
+            "passed": false,
+            "actions": [],
+            "reply": "승객용 시트 열선이 켜졌습니다.",
+            "llmMs": 1417
+          },
+          {
+            "id": "media-next",
+            "passed": false,
+            "actions": [],
+            "reply": "play next.",
+            "llmMs": 1326
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "길안내",
+            "llmMs": 1361
+          },
+          {
+            "id": "out-of-range",
+            "passed": true,
+            "actions": [],
+            "reply": "40",
+            "llmMs": 1286
+          },
+          {
+            "id": "compound",
+            "passed": false,
+            "actions": [],
+            "reply": "운전자 좌석의 온도를 20도에서 25도로 올립니다.",
+            "llmMs": 1575
+          }
+        ],
+        "passed": 2
+      },
+      {
+        "version": "korean-compact-v2",
+        "tests": [
+          {
+            "id": "driver-24",
+            "passed": true,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 24
+              }
+            ],
+            "reply": "운전자용 시트 조절",
+            "llmMs": 1760
+          },
+          {
+            "id": "passenger-25",
+            "passed": false,
+            "actions": [],
+            "reply": "조수석의 온도는 25도입니다.",
+            "llmMs": 1481
+          },
+          {
+            "id": "fan-5",
+            "passed": false,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "passenger",
+                "value": 20
+              },
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "바람 세기는 조절할 수 없습니다.",
+            "llmMs": 1914
+          },
+          {
+            "id": "ac-off",
+            "passed": false,
+            "actions": [],
+            "reply": "꺼짐",
+            "llmMs": 1304
+          },
+          {
+            "id": "defrost-off",
+            "passed": false,
+            "actions": [],
+            "reply": "김서림을 제거합니다.",
+            "llmMs": 1359
+          },
+          {
+            "id": "seat-2",
+            "passed": false,
+            "actions": [],
+            "reply": "시트 열선은 꺼져 있습니다.",
+            "llmMs": 1404
+          },
+          {
+            "id": "media-next",
+            "passed": false,
+            "actions": [],
+            "reply": "driving playlist",
+            "llmMs": 1331
+          },
+          {
+            "id": "clarify",
+            "passed": true,
+            "actions": [],
+            "reply": "길안내",
+            "llmMs": 1331
+          },
+          {
+            "id": "out-of-range",
+            "passed": true,
+            "actions": [],
+            "reply": "40도",
+            "llmMs": 1296
+          },
+          {
+            "id": "compound",
+            "passed": false,
+            "actions": [
+              {
+                "type": "temperature",
+                "zone": "driver",
+                "value": 25
+              },
+              {
+                "type": "fan",
+                "value": 5
+              }
+            ],
+            "reply": "한국어 답변",
+            "llmMs": 1752
+          }
+        ],
+        "passed": 3
+      }
+    ]
+  },
+  "selectedGeneration": "deterministic: official fixed-seed samples did not improve these controlled probes (Qwen2B 8→7, Qwen0.8B 7→5, Smol 9→8 /10). Step 5/5 Korean and 5/5 English in either profile; MiMo 1/5 Korean vs 5/5 English in either profile.",
+  "hyperclovaSelection": {
+    "method": "Select highest observed command success among fully measured 31-waveform configurations. Same development set, not a vendor benchmark.",
+    "choices": [
+      {
+        "path": "research/vehicle-benchmark-baseline/hyperclova-05b.json",
+        "passed": 4,
+        "total": 31
+      },
+      {
+        "path": "research/vehicle-benchmark-configurations/hyperclova-full-whisper.json",
+        "asrId": "whisper",
+        "promptVersion": "full-v1",
+        "passed": 3,
+        "total": 31
+      },
+      {
+        "path": "research/vehicle-benchmark-configurations/hyperclova-korean-compact.json",
+        "asrId": "whisper",
+        "promptVersion": "korean-compact-v2",
+        "passed": 2,
+        "total": 31
+      }
+    ],
+    "selected": "research/vehicle-benchmark-baseline/hyperclova-05b.json"
+  },
+  "quantizationExperiment": {
+    "source": [
+      "https://huggingface.co/Qwen/Qwen3.5-4B",
+      "https://huggingface.co/docs/transformers/quantization/bitsandbytes"
+    ],
+    "checkpoint": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "comparison": "research/qwen35-quantization-comparison.json",
+    "relativeGuardFix": "The bounds guard incorrectly treated a 1-degree relative change as an absolute 1-degree target. Added relative-vs-absolute parsing and regression test; preserved pre-fix comparison files in research/quantization-before-relative-guard-fix and reran both BF16 and NF4 under the corrected same guard. Original model proposals remain recorded."
+  }
+}
