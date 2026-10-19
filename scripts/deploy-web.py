@@ -5,10 +5,13 @@ def ssh(ip,command):return subprocess.run(['ssh','-o','UserKnownHostsFile='+str(
 def scp(ip,source,target):return subprocess.run(['scp','-o','UserKnownHostsFile='+str(ROOT/'.runtime/known_hosts'),'-i',str(ROOT/'.runtime/vehicle-key'),str(source),'ubuntu@'+ip+':'+target],check=True)
 bundle=ROOT/'.runtime/web-release.tar.gz'
 with tarfile.open(bundle,'w:gz') as tar:
- for p in list(ROOT.glob('*.mjs'))+[ROOT/n for n in ['package.json','package-lock.json','model-catalog.json','runtime/bootstrap_web.sh','research/vehicle-benchmark-summary.json','research/vehicle-model-comparison.csv']]+list((ROOT/'public').rglob('*'))+list((ROOT/'output/vehicle-benchmark').glob('*-reply.wav')):
+ for p in list(ROOT.glob('*.mjs'))+[ROOT/n for n in ['package.json','package-lock.json','model-catalog.json','runtime/bootstrap_web.sh','research/vehicle-benchmark-summary.json','research/vehicle-model-comparison.csv','research/assistant-tool-latency.json','scripts/assistant-tool-benchmark.mjs']]+list((ROOT/'public').rglob('*'))+list((ROOT/'output/vehicle-benchmark').glob('*-reply.wav')):
   if p.is_file():tar.add(p,arcname=str(p.relative_to(ROOT)))
 public=state.get('url','https://pending.invalid')
 env={'PORT':'8787','BIND_HOST':'0.0.0.0','PUBLIC_ORIGIN':public,'ORIGIN_HOST':state['originPrivateDns'],'ORIGIN_VERIFY_SECRET':state['originSecret'],'AWS_CREDENTIAL_MODE':'instance','AWS_REGION':state['region'],'SONIC_REGION':os.environ.get('SONIC_REGION','ap-northeast-1'),'SONIC_MODEL':os.environ.get('SONIC_MODEL','amazon.nova-2-5-sonic'),'CORE_URL':'http://127.0.0.1:9101','TTS_URL':'http://127.0.0.1:9102','MINICPM_URL':'http://127.0.0.1:9103','WHISPER_URL':'http://127.0.0.1:9105','SPEECH_URL':'http://'+state['speechPrivateIp']+':9204','NODE_ENV':'production'}
+tools_state=ROOT/'.runtime/assistant-tools.json'
+if tools_state.exists():
+ tools=json.loads(tools_state.read_text());env.update(AGENTCORE_GATEWAY_URL=tools['gatewayUrl'],AGENTCORE_REGION=tools['region'])
 envfile=ROOT/'.runtime/web.env';envfile.write_text('\n'.join(k+'='+v for k,v in env.items())+'\n');os.chmod(envfile,0o600)
 ssh(core['publicIp'],'sudo mkdir -p /opt/vehicle-web && sudo chown ubuntu:ubuntu /opt/vehicle-web')
 scp(core['publicIp'],bundle,'/tmp/vehicle-web-release.tar.gz');scp(core['publicIp'],envfile,'/tmp/vehicle-web.env')

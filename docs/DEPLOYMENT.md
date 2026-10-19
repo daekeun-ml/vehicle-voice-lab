@@ -117,3 +117,12 @@ The cloud smoke checks static assets, model results, synthetic Korean audio cont
 ## 5. SageMaker migration
 
 See [the README comparison](../README.md#what-would-improve-with-sagemaker). A migration requires adapting model workers to SageMaker containers and changing the backend's invocation adapter. Web/session/tool code remains an application service. This repository does not claim to deploy a SageMaker endpoint yet.
+
+
+## 6. AgentCore information tools
+
+With an existing `.runtime/cloud-deployment.json`, run `python3 infra/deploy_assistant_tools.py` using the authorized AWS profile. The script creates/reuses an IAM-authenticated MCP Gateway in Tokyo, a Node.js provider Lambda, and a managed Web Search connector. It grants the web instance role access only to that Gateway. No external API keys or additional GPUs are needed. IAM, Lambda and AgentCore permissions are required for setup; resource IDs are checkpointed in ignored `.runtime/assistant-tools.json`.
+
+`python3 scripts/deploy-web.py` reads that checkpoint and sets `AGENTCORE_GATEWAY_URL` and `AGENTCORE_REGION` on the web host. For local development, set those variables in `.env` and use an authorized AWS profile. Without a Gateway, fixed providers run locally and web search is unavailable.
+
+Run `scripts/assistant-tool-benchmark.mjs` from the Seoul web host with its instance role/environment, then retrieve `research/assistant-tool-latency.json` and redeploy it. The three-call screen includes the first call and cached repeats; it is not a capacity test. Exclude tools with any failed sample or p95 above 3 seconds. Validate speech with `TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net node scripts/assistant-demo-smoke.mjs` (AWS Polly access required to synthesize inputs) and Sonic tools with `scripts/sonic-assistant-smoke.mjs`. Validate actual radio playback in the browser, not just station metadata or HTTP status.

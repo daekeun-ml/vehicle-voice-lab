@@ -503,3 +503,21 @@ export const fragments = {
   " · 추가 ": " · Holdout ",
   " · 진행 중": " · In progress"
 };
+
+Object.assign(english,{
+ "연결된 도구":"Connected tools",
+ "말로 꺼내 쓰는 도구":"Tools for your drive",
+ "도구 연결 확인 중":"Checking tool connections",
+ "차량 제어는 기존 경로를 유지합니다. 외부 정보는 출처와 조회 시간을 표시합니다. 버튼으로 예시를 실행하거나 마이크로 말씀해 주세요.":"Vehicle controls keep their existing path. External information includes sources and lookup timing. Try a button or use your microphone.",
+ "서울시청 데모 좌표 · 실제 GPS 아님":"Seoul City Hall demo coordinate · Not live GPS",
+ "내 위치 사용":"Use my location",
+ "라디오 정지":"Radio stopped",
+ "실제 라디오 플레이어":"Live radio player",
+ "라디오 중지":"Stop radio",
+ "실제 재생 중":"Live playback",
+ "라디오 연결 중…":"Connecting radio…",
+ "도구 속도·연결 상태":"Tool latency and availability",
+ "도구 왕복 중앙값 / p95":"Tool round-trip median / p95",
+ "호출 성공":"Successful calls",
+ "외부 도구 조회 · 차량 제어 경로 유지":"External tool lookup · Vehicle control path unchanged"
+});

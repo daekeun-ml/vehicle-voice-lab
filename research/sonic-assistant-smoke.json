@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-19T10:59:11.911Z",
+  "method": "English text inputs through the deployed Sonic bidirectional connection; real tool calls and native audio required. First audio may precede completion of a tool (spoken acknowledgement).",
+  "results": [
+    {
+      "operation": "exchange",
+      "text": "Convert 100 US dollars to Korean won.",
+      "tools": [
+        {
+          "operation": "exchange",
+          "ok": true,
+          "elapsedMs": 2358,
+          "amount": 100,
+          "converted": 133533
+        }
+      ],
+      "reply": "One hundred US dollars is approximately one hundred thirty three thousand five hundred thirty three Korean won.",
+      "audioBytes": 322560,
+      "firstAudioMs": 3667,
+      "pass": true
+    },
+    {
+      "operation": "radio",
+      "text": "Play jazz radio.",
+      "tools": [
+        {
+          "operation": "radio",
+          "ok": true,
+          "elapsedMs": 207,
+          "effect": {
+            "type": "radio",
+            "stationId": "secretagent"
+          }
+        }
+      ],
+      "reply": "The radio player is ready.",
+      "audioBytes": 67200,
+      "firstAudioMs": 1243,
+      "pass": true
+    },
+    {
+      "operation": "timer",
+      "text": "Set a timer for ten minutes.",
+      "tools": [
+        {
+          "operation": "timer",
+          "ok": true,
+          "elapsedMs": 2,
+          "effect": {
+            "type": "timers",
+            "timers": [
+              {
+                "id": "59917be9-ac34-4b93-a247-b775eea517f3",
+                "deadline": 1792408150221,
+                "label": "Break timer"
+              }
+            ]
+          }
+        }
+      ],
+      "reply": "Ten minute timer set.",
+      "audioBytes": 63360,
+      "firstAudioMs": 1078,
+      "pass": true
+    }
+  ]
+}

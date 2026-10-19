@@ -14,6 +14,13 @@ flowchart TB
     TTS -->|"Response audio"| App
     State -->|"Tool result"| Sonic
     App -->|"State + spoken reply"| User
+    ASR -->|"Information intent"| Tools["Backend information adapter"]
+    Audio -->|"Reported understanding"| Tools
+    Sonic -->|"assistant_tool"| Tools
+    Tools <-->|"IAM + MCP"| Gateway["AgentCore Gateway · Tokyo"]
+    Gateway --> Provider["Keyless provider Lambda / Web Search"]
+    Tools --> Local["Session notes / timers / calculations"]
+    Tools -->|"Sources + result"| App
     classDef app fill:#e5f5ee,stroke:#397c65,color:#173d30
     classDef model fill:#edf3ff,stroke:#5278b3,color:#203e69
     class App,Guard,State,Confirm app

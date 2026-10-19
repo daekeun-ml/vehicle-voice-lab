@@ -23,6 +23,13 @@ flowchart TB
     TTS -->|"Response audio"| App
     State -->|"Tool result"| Sonic
     App -->|"State + spoken reply"| User
+    ASR -->|"Information intent"| Tools["Backend information adapter"]
+    Audio -->|"Reported understanding"| Tools
+    Sonic -->|"assistant_tool"| Tools
+    Tools <-->|"IAM + MCP"| Gateway["AgentCore Gateway · Tokyo"]
+    Gateway --> Provider["Keyless provider Lambda / Web Search"]
+    Tools --> Local["Session notes / timers / calculations"]
+    Tools -->|"Sources + result"| App
     classDef app fill:#e5f5ee,stroke:#397c65,color:#173d30
     classDef model fill:#edf3ff,stroke:#5278b3,color:#203e69
     class App,Guard,State,Confirm app
@@ -127,7 +134,9 @@ This exercises language understanding, tool routing, validation, application sta
 
 Sonic uses provider-native tool calling. Cascade planners output a structured action plan interpreted by the application; they do not currently use provider-native function calling. These paths share the same execution boundary.
 
-**MCP is not currently connected.** A future backend MCP client can discover selected tools, adapt schemas to each model interface, validate arguments, execute a call, and return its result to the model. No model must speak MCP directly. Real vehicle integration requires an authorized vehicle API/gateway behind the executor. Tool results and externally retrieved content remain data, not permission to execute arbitrary commands.
+**External information tools use AgentCore MCP.** `assistant-service.mjs` discovers Gateway tools and signs MCP requests with the EC2 instance role. The Tokyo Gateway exposes a fixed-provider Lambda and managed Web Search. Vehicle commands never traverse Gateway. Timers, session notes and numeric calculations stay local. The self-hosted cascade uses a bounded intent router after ASR to dispatch these information requests without an extra sLLM pass; direct-audio planners use their reported understanding for the same dispatch. Sonic has a separate native `assistant_tool` interface. This does not establish that every model can select arbitrary tools. Unknown operations are rejected, source text is displayed as data, and the browser can play only curated radio URLs.
+
+The tool catalog enforces the published latency/reliability gate. Excluded tools remain visible with their measured results, but normal execution returns an exclusion notice. An internal benchmark script can retest them. See [tool evaluation](ASSISTANT_TOOLS.md). Real vehicle integration still requires an authorized vehicle API behind the executor. Tool results never authorize unrelated vehicle writes.
 
 ## UI language
 

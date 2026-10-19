@@ -1,0 +1,127 @@
+{
+  "at": "2026-10-19T10:52:30.718Z",
+  "method": "One Polly Seoyeon synthetic input per enabled tool, through CloudFront, Whisper and Polly output. First audio is first received audio event, not browser playback; input generation excluded.",
+  "results": [
+    {
+      "operation": "weather",
+      "syntheticText": "서울 날씨 알려줘",
+      "transcript": "서울 날씨 알려줘.",
+      "pass": true,
+      "firstAudioMs": 878,
+      "toolMs": 397,
+      "reply": "서울 예보는 기온 14도, 바람 초속 1.4미터, 다음 한 시간 강수량 0밀리미터예요.",
+      "asrMs": 56,
+      "ttsMs": 312
+    },
+    {
+      "operation": "web",
+      "syntheticText": "전기차 최근 뉴스 웹검색해줘",
+      "transcript": "전기차 최근 뉴스 웹 검색해줘.",
+      "pass": true,
+      "firstAudioMs": 2902,
+      "toolMs": 361,
+      "reply": "정부 보조금 298억 썼는데…전기차 충전기, 6천대 넘게 방치: 정부 보조금 298억 썼는데…전기차 충전기, 6천대 넘게 방치 기사입력 2026-10-15 11:11 l 최종수정 2026-10-15 14:00 전기차 충전시설 구축 예산 규모만 급증…\"사후관리 재점검해야\" ↑ 전기차 충전 모습 / 사진=MBN 정부가 지난해 대대적인 합동점검을 벌여 전기차 충전시설 방치 실태를 확인하고 대책을 내놨지만, 여전히 상황이 개선되지 않은 것으로 나타났다고 국민의힘 윤재옥 의원이 오늘(15일) 지적했습니다. \n\n국회 기후에너지환경노동위원회 소속인 윤 의원이 이날 한국환경공단으로부터 제출받은 자료를 분석한 결과에 ",
+      "asrMs": 77,
+      "ttsMs": 1912
+    },
+    {
+      "operation": "radio",
+      "syntheticText": "재즈 라디오 틀어줘",
+      "transcript": "재즈 라디오 틀어줘",
+      "pass": true,
+      "firstAudioMs": 617,
+      "toolMs": 162,
+      "reply": "SomaFM Secret Agent 방송을 준비했어요. 실제 재생 상태는 플레이어에서 확인해 주세요.",
+      "asrMs": 63,
+      "ttsMs": 327
+    },
+    {
+      "operation": "wiki",
+      "syntheticText": "경복궁 설명해줘",
+      "transcript": "경복궁 설명해줘",
+      "pass": true,
+      "firstAudioMs": 740,
+      "toolMs": 112,
+      "reply": "경복궁(景福宮, 영어: Gyeongbokgung Palace)은 대한민국 서울특별시 종로구 사직로에 위치한 조선 왕조의 법궁(法宮, 정궁)이다.",
+      "asrMs": 58,
+      "ttsMs": 482
+    },
+    {
+      "operation": "holidays",
+      "syntheticText": "다음 공휴일 언제야",
+      "transcript": "다음 공휴일 언제야?",
+      "pass": true,
+      "firstAudioMs": 498,
+      "toolMs": 110,
+      "reply": "한국 공휴일은 2026-12-25 크리스마스이에요.",
+      "asrMs": 62,
+      "ttsMs": 266
+    },
+    {
+      "operation": "exchange",
+      "syntheticText": "100달러 원화로 환율 계산해줘",
+      "transcript": "100달러 원화로 환율 계산해줘",
+      "pass": true,
+      "firstAudioMs": 695,
+      "toolMs": 124,
+      "reply": "2026-10-19 기준 100 USD는 약 133,533원이에요. 환전 수수료는 제외했어요.",
+      "asrMs": 77,
+      "ttsMs": 403
+    },
+    {
+      "operation": "sun",
+      "syntheticText": "강릉 일몰 알려줘",
+      "transcript": "강릉 일몰 알려줘",
+      "pass": true,
+      "firstAudioMs": 705,
+      "toolMs": 113,
+      "reply": "강릉 2026-10-19, 일출은 AM 06:36, 일몰은 PM 05:42예요.",
+      "asrMs": 67,
+      "ttsMs": 355
+    },
+    {
+      "operation": "route",
+      "syntheticText": "서울시청에서 서울역까지 거리 알려줘",
+      "transcript": "서울시청에서 서울역까지 거리 알려줘.",
+      "pass": true,
+      "firstAudioMs": 706,
+      "toolMs": 194,
+      "reply": "서울에서 서울역까지 약 3.1킬로미터, 교통 미반영 예상 4분이에요. 실제 내비게이션 안내는 아니에요.",
+      "asrMs": 77,
+      "ttsMs": 359
+    },
+    {
+      "operation": "timer",
+      "syntheticText": "10분 타이머 맞춰줘",
+      "transcript": "10분 타이머 맞춰줘.",
+      "pass": true,
+      "firstAudioMs": 309,
+      "toolMs": 1,
+      "reply": "10분 타이머를 맞췄어요. 알림을 받으려면 이 데모 탭을 열어 두세요.",
+      "asrMs": 65,
+      "ttsMs": 189
+    },
+    {
+      "operation": "notes",
+      "syntheticText": "메모해줘 주차 위치 지하 2층 B12",
+      "transcript": "메모해줘 주차 위치 지하 2층 B12",
+      "pass": true,
+      "firstAudioMs": 338,
+      "toolMs": 1,
+      "reply": "메모했어요. 주차 위치 지하 2층 B12",
+      "asrMs": 83,
+      "ttsMs": 203
+    },
+    {
+      "operation": "calculate",
+      "syntheticText": "충전비 20킬로와트시, 킬로와트시당 350원 계산해줘",
+      "transcript": "충전비 20kWh씩 kWh씩당 350원 계산해줘",
+      "pass": true,
+      "firstAudioMs": 423,
+      "toolMs": 12,
+      "reply": "20 kWh × 350 KRW/kWh, 결과는 7,000이에요.",
+      "asrMs": 95,
+      "ttsMs": 251
+    }
+  ]
+}

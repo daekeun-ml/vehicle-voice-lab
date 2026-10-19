@@ -10,7 +10,7 @@ Compare how well speech models and small language models turn **vehicle requests
 
 Speak, type, or upload an audio file to change the simulated driver/passenger temperature, climate controls, seat heating, media state, or navigation destination. Follow-up corrections and undo use the conversation and current vehicle state. The server validates commands before applying them.
 
-**This is a functional state simulator, not a connection to a real car.** It does not simulate cabin thermodynamics, physical sensors, CAN traffic, real music playback, or map routing.
+**This is a functional state simulator, not a connection to a real car.** Cabin controls and the vehicle media/navigation cards remain simulated. A separate radio player streams real audio; information tools can look up route estimates without live traffic. Cabin thermodynamics, physical sensors and CAN traffic are not simulated.
 
 - Self-hosted path: Whisper or Nemotron ASR → selected sLLM → validated vehicle executor → Polly or Qwen TTS.
 - Audio-model path: selected audio model → validated vehicle executor → selected Korean TTS; native voice-only comparisons are explicitly separate.
@@ -19,6 +19,16 @@ Speak, type, or upload an audio file to change the simulated driver/passenger te
 - **UI language selector** in the header. `/?lang=en` opens English; `/?lang=ko` opens Korean. Selection persists in the browser. UI language does not change speech language, model behavior, evaluation data, or conversation text.
 
 ## Try these test scenarios
+
+### Connected information tools and live radio
+
+The **Connected tools** panel has runnable examples, source links, a real radio player, location selection, and measured tool latency. In Sonic English mode try **“Play jazz radio,” “Tell me about Gyeongbokgung,” “Convert 100 US dollars to Korean won,”** or **“Set a timer for ten minutes.”** Weather, web search, Korean holidays, sunset, route estimates, session notes, and charging-cost calculations are also connected. Nearby-place lookup is excluded after repeated provider failures.
+
+External information uses an **IAM-authenticated AgentCore Gateway in Tokyo**, with a provider Lambda and AWS's managed Web Search connector. No third-party API keys are required. Existing vehicle controls, timers, notes and calculations execute locally in the backend. For self-hosted speech, a bounded application router handles these new information intents after ASR; vehicle commands still use the selected planner. Sonic uses native `assistant_tool` calls. This is not a benchmark of each small model's ability to choose arbitrary MCP tools.
+
+See [tool examples, measured latency, playback checks and limitations](docs/ASSISTANT_TOOLS.md). These tool measurements are separate from the historical 31-case vehicle model benchmark below.
+
+### Vehicle control scenarios
 
 For the **English voice demo**, open the [English UI](https://dys3pnz3y08gk.cloudfront.net/?lang=en), select **Nova 2.5 Sonic · Realtime S2S**, then set **Sonic speech language** to **English · Officially supported**. Click **English audio sample** for a microphone-free end-to-end check. The [included English recording](public/sample-english.wav) says **“Set the driver temperature to twenty-four degrees.”** You should see the driver temperature change to 24°C and hear an English confirmation.
 
@@ -84,7 +94,7 @@ The UI contains the full per-model table, failure examples, synthetic reply audi
 
 ## Architecture overview
 
-The application owns the simulated state and validates commands from every control-capable model. Sonic calls a named tool; the self-hosted planners return structured JSON. MCP is not currently connected.
+The application owns the simulated state and validates commands from every control-capable model. Sonic calls named tools; the self-hosted vehicle planners return structured JSON. External information tools connect through AgentCore MCP; vehicle controls stay in the existing executor.
 
 ```mermaid
 flowchart LR
@@ -95,6 +105,9 @@ flowchart LR
     State --> Voice["Spoken confirmation<br/>+ visible result"]
     App <-->|"Native S2S + tool results"| Sonic["Nova 2.5 Sonic"]
     Sonic -->|"vehicle_control"| Execute
+    Sonic -->|"assistant_tool"| Tools["Backend tool adapter"]
+    App --> Tools
+    Tools <-->|"IAM + MCP"| Gateway["AgentCore Gateway<br/>Provider Lambda + Web Search"]
 ```
 
 See [Architecture & tools](docs/ARCHITECTURE.md) for the full inference flow, the two-GPU AWS deployment diagram, and a command sequence diagram.
@@ -149,7 +162,7 @@ For this lab, a useful next experiment is to **keep the main Whisper + Qwen4B pa
 
 Migration alone does **not** improve Korean understanding, pronunciation, model accuracy, or single-request GPU inference speed. Cost is workload-dependent: compare steady GPU usage, minimum warm capacity, model loading, and operating effort. Autoscaling new replicas requires startup/loading time and does not make an existing long-lived speech session migrate automatically.
 
-The web UI, sessions, vehicle command executor, and future MCP clients remain in the application backend. The backend would call SageMaker endpoints instead of the current worker URLs. Sonic remains on its existing Bedrock path. SageMaker supports response and bidirectional streaming, but the container and model must implement the appropriate streaming contract; a deployment change does not turn an utterance-based model into full-duplex S2S.
+The web UI, sessions, vehicle command executor, and the MCP client remain in the application backend. The backend would call SageMaker endpoints instead of the current worker URLs. Sonic remains on its existing Bedrock path. SageMaker supports response and bidirectional streaming, but the container and model must implement the appropriate streaming contract; a deployment change does not turn an utterance-based model into full-duplex S2S.
 
 **Status:** this repository implements EC2 + CloudFront deployment. It does not currently contain a production SageMaker migration. GPU type availability, quotas, streaming compatibility, concurrency, and first-audio latency must be verified for the chosen region and endpoint configuration.
 

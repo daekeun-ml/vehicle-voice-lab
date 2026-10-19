@@ -1,3 +1,4 @@
+import {configureAssistant,renderAssistantResult,stopRadio,syncRadioState,duckRadio} from './assistant-ui.js';
 const $=id=>document.getElementById(id);
 let sessionId,ready=false,micEnabled=false,audioContext,mediaStream,recorder,source,muteGain;
 let micStarting=false;
@@ -20,6 +21,7 @@ function toast(message){$('toast').textContent=message;$('toast').hidden=false;c
 function setStatus(text,kind='idle'){ $('voice-status').textContent=text;$('status-dot').className='status-dot '+kind; }
 function idleStatus(){if(speech)setStatus('말씀을 듣고 있어요…','listening');else setStatus(micEnabled?'듣고 있어요 · 편하게 말씀해 주세요':ready?'마이크를 켜거나 텍스트로 시작하세요':'GPU 모델을 준비하고 있어요',micEnabled?'listening':'idle');}
 function renderState(s){
+  syncRadioState(s);
   $('driver-temp').innerHTML=`${s.temperature.driver}<em>°</em>`;$('passenger-temp').innerHTML=`${s.temperature.passenger}<em>°</em>`;
   $('ac-state').textContent=s.ac?'켜짐':'꺼짐';$('ac-tile').classList.toggle('active',s.ac);
   $('fan-state').textContent=s.fan+'단';$('defrost-state').textContent=s.defrost?'켜짐':'꺼짐';$('defrost-tile').classList.toggle('active',s.defrost);
@@ -64,8 +66,8 @@ async function playAudio(base64,number){
   if(currentAudio){audioQueue.push({base64,number});return;}
   const bytes=Uint8Array.from(atob(base64),c=>c.charCodeAt(0));currentAudioUrl=URL.createObjectURL(new Blob([bytes],{type:'audio/wav'}));
   const audio=new Audio(currentAudioUrl);currentAudio=audio;
-  audio.addEventListener('playing',()=>{if(number===requestNumber){if(!playedFirst){playedFirst=true;const ms=performance.now()-currentStart;metric('first-audio-ms',ms);api('metrics',{method:'POST',body:JSON.stringify({turnId:lastTurnId,firstPlaybackMs:ms,basis:currentBasis})}).catch(()=>{});}setStatus(bargeInEnabled?'온이 말하고 있어요 · 끼어들어도 괜찮아요':'온이 말하고 있어요 · 응답이 끝나면 말씀해 주세요','busy');}},{once:true});
-  audio.onended=()=>{if(number===requestNumber){stopPlayback(false);const next=audioQueue.shift();if(next)playAudio(next.base64,next.number);else if(generationDone){busy=false;stage='idle';idleStatus();}else setStatus('다음 응답 음성을 만들고 있어요…','busy');}};
+  audio.addEventListener('playing',()=>{duckRadio(true);if(number===requestNumber){if(!playedFirst){playedFirst=true;const ms=performance.now()-currentStart;metric('first-audio-ms',ms);api('metrics',{method:'POST',body:JSON.stringify({turnId:lastTurnId,firstPlaybackMs:ms,basis:currentBasis})}).catch(()=>{});}setStatus(bargeInEnabled?'온이 말하고 있어요 · 끼어들어도 괜찮아요':'온이 말하고 있어요 · 응답이 끝나면 말씀해 주세요','busy');}},{once:true});
+  audio.onended=()=>{duckRadio(false);if(number===requestNumber){stopPlayback(false);const next=audioQueue.shift();if(next)playAudio(next.base64,next.number);else if(generationDone){busy=false;stage='idle';idleStatus();}else setStatus('다음 응답 음성을 만들고 있어요…','busy');}};
   try{await audio.play();}catch{if(number===requestNumber){busy=false;idleStatus();toast('음성 재생이 차단됐어요. 화면을 한 번 클릭한 뒤 다시 테스트해 주세요.');}}
 }
 async function submit(payload,{basis='text',endedAt=performance.now()}={}){
@@ -102,11 +104,14 @@ async function submit(payload,{basis='text',endedAt=performance.now()}={}){
           userBubble.lastChild.textContent=(d.model||'MiniCPM')+'이 이해한 요청: '+d.text;
         }else if(event==='transcript'){
           userBubble.lastChild.textContent=d.rawText&&d.rawText!==d.text?d.rawText+' (숫자 표기 정리: '+d.text+')':d.text;metric('asr-ms',basis==='text'||engine==='minicpm-control'?null:d.asrMs);
+        }else if(event==='assistant'){
+          renderAssistantResult(d);
         }else if(event==='reply'){
           const el=bubble(d.reply,'assistant');
           if(engine==='audio-native'){const note=document.createElement('div');note.className='tool-result';note.textContent='음성 모델 발화 비교 · 차량 명령은 실행되지 않았어요';el.append(note);}
-          if(!d.results.length&&d.vehicleTools){const note=document.createElement('div');note.className='tool-result';note.textContent=d.validationError?'제어 연결 정상 · 잘못된 명령을 검증 단계에서 거부했어요. '+d.validationError:d.guardReason?'제어 연결 정상 · 불확실한 명령을 확인 질문으로 처리했어요':'제어 연결 정상 · 모델이 실행할 명령을 제안하지 않았어요. 위의 이해한 요청과 답변을 확인하세요.';el.append(note);}if(d.results.length){const tools=document.createElement('div');tools.className='tool-result';tools.textContent='차량 시뮬레이터에 반영됨 · '+d.actions.map(a=>a.type).join(', ');el.append(tools);}
-          renderState(d.state);$('state-change').textContent=d.results.length?d.results.join(' '):'차량 설정 변경 없음';metric('llm-ms',d.llmMs);
+          if(d.assistant){const note=document.createElement('div');note.className='tool-result';note.textContent=`${d.assistant.operation} · ${d.assistant.elapsedMs??'—'} ms`;el.append(note);$('metric-context').textContent='외부 도구 조회 · 차량 제어 경로 유지';}
+          if(!d.assistant&&!d.results.length&&d.vehicleTools){const note=document.createElement('div');note.className='tool-result';note.textContent=d.validationError?'제어 연결 정상 · 잘못된 명령을 검증 단계에서 거부했어요. '+d.validationError:d.guardReason?'제어 연결 정상 · 불확실한 명령을 확인 질문으로 처리했어요':'제어 연결 정상 · 모델이 실행할 명령을 제안하지 않았어요. 위의 이해한 요청과 답변을 확인하세요.';el.append(note);}if(d.results.length){const tools=document.createElement('div');tools.className='tool-result';tools.textContent='차량 시뮬레이터에 반영됨 · '+d.actions.map(a=>a.type).join(', ');el.append(tools);}
+          renderState(d.state);syncRadioState(d.state,d.actions);$('state-change').textContent=d.results.length?d.results.join(' '):'차량 설정 변경 없음';metric('llm-ms',d.llmMs);
           lastTurnId=d.turnId;$('feedback').hidden=false;document.querySelectorAll('[data-rating]').forEach(b=>b.classList.remove('selected'));
           if(d.modelLoadMs>1000)toast(`${isExtraAudio()?'음성':'판단'} 모델 전환·로딩에 ${(d.modelLoadMs/1000).toFixed(1)}초 걸렸어요. 다음 요청부터는 로딩 시간을 제외하고 비교할 수 있어요.`);
         }else if(event==='s2sText'){
@@ -197,10 +202,10 @@ async function ensureSonic(){
       if(!item){item={el:bubble('',data.role==='USER'?'user':'assistant'),text:''};sonicBubbles.set(key,item);}item.text+=data.text;item.el.lastChild.textContent=item.text;
       if(data.role==='USER'){busy=true;resetSonicMetrics();setStatus('Sonic이 요청을 처리하고 있어요…','busy');}
     }
-    if(event==='tool'){if(data.state)renderState(data.state);$('state-change').textContent=data.ok?(data.results?.join(' ')||'차량 상태 조회'):data.error;}
-    if(event==='audio'){busy=true;setStatus('Sonic이 말하고 있어요…','busy');}
+    if(event==='tool'){if(data.operation)renderAssistantResult(data);if(data.state){renderState(data.state);syncRadioState(data.state,data.actions);}$('state-change').textContent=data.operation?`${data.operation} · ${data.elapsedMs??'—'} ms`:data.ok?(data.results?.join(' ')||'차량 상태 조회'):data.error;}
+    if(event==='audio'){duckRadio(true);busy=true;setStatus('Sonic이 말하고 있어요…','busy');}
     if(event==='firstPlayback'){metric('first-audio-ms',data.ms);$('metric-context').textContent=data.basis==='text'?'Sonic · 텍스트 제출 → 재생 예약':data.basis==='file'?'Sonic · 입력 음성 종료 → 재생 예약':'Sonic · 마지막 발화 추정 → 재생 예약';}
-    if(event==='playbackEnd'){busy=false;idleStatus();}
+    if(event==='playbackEnd'){duckRadio(false);busy=false;idleStatus();}
     if(event==='error'){busy=false;bubble(data.error,'error');idleStatus();}
     if(event==='closed'){busy=false;if(micEnabled)void toggleMic();idleStatus();}
   }});
@@ -240,7 +245,7 @@ document.querySelectorAll('[data-rating]').forEach(button=>button.addEventListen
   if(!lastTurnId)return;
   try{const r=await api('feedback',{method:'POST',body:JSON.stringify({turnId:lastTurnId,rating:button.dataset.rating})});if(!r.ok)throw new Error((await r.json()).error);document.querySelectorAll('[data-rating]').forEach(b=>b.classList.toggle('selected',b===button));$('feedback-status').textContent='이 대화의 피드백을 서버에 저장했어요.';}catch(e){toast(e.message);}
 }));
-$('reset').addEventListener('click',async()=>{await interrupt(false);const r=await api('reset',{method:'POST',body:'{}'});const d=await r.json();renderState(d.state);$('state-change').textContent='차량 상태와 대화 기록을 초기화했어요.';$('conversation').replaceChildren();$('feedback').hidden=true;lastTurnId=null;idleStatus();});
+$('reset').addEventListener('click',async()=>{await interrupt(false);stopRadio();renderAssistantResult({operation:'reset',effect:{type:'timers',timers:[]}});$('assistant-result').hidden=true;const r=await api('reset',{method:'POST',body:'{}'});const d=await r.json();renderState(d.state);$('state-change').textContent='차량 상태와 대화 기록을 초기화했어요.';$('conversation').replaceChildren();$('feedback').hidden=true;lastTurnId=null;idleStatus();});
 $('export').addEventListener('click',async()=>{try{const r=await api('export');const blob=await r.blob();const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='vehicle-voice-session.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e){toast(e.message);}});
 $('audio-file').addEventListener('change',async e=>{
   const f=e.target.files[0];if(!f)return;
@@ -251,6 +256,7 @@ $('audio-file').addEventListener('change',async e=>{
     submit({audio:base64(wavFromFrames([mono],decoded.sampleRate))},{basis:'file'});
   }catch(err){toast(err.message);}finally{e.target.value='';}
 });
+document.addEventListener('vehicle-assistant-prompt',e=>{void submit({text:e.detail.text});});
 document.addEventListener('vehicle-ui-language',()=>{void checkHealth();});
 window.addEventListener('beforeunload',()=>{mediaStream?.getTracks().forEach(t=>t.stop());sonicVoice?.close();stopPlayback();});
-try{const d=await(await api('session',{method:'POST',body:'{}'})).json();sessionId=d.id;renderState(d.state);await checkHealth();setInterval(checkHealth,10000);}catch(e){toast('서버에 연결할 수 없어요. '+e.message);}
+try{const d=await(await api('session',{method:'POST',body:'{}'})).json();sessionId=d.id;configureAssistant(api);renderState(d.state);await checkHealth();setInterval(checkHealth,10000);}catch(e){toast('서버에 연결할 수 없어요. '+e.message);}

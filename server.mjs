@@ -11,6 +11,7 @@ import {guardExplicitBounds} from './plan-guards.mjs';
 import {compactPlannerPrompt,compactKoreanPlannerPrompt} from './planner-prompt-v2.mjs';
 import {normalizeTranscript} from './transcript.mjs';
 import {guardMiniPlan} from './minicpm-tools.mjs';
+import {inferAssistant,executeAssistant,toolCatalog,radioStations} from './assistant-service.mjs';
 
 const app=express(), port=Number(process.env.PORT||8787);
 const core=process.env.CORE_URL||'http://127.0.0.1:19101', tts=process.env.TTS_URL||'http://127.0.0.1:19102';
@@ -37,7 +38,7 @@ app.use((req,res,next)=>{
   const host=req.headers.host;
   if(!allowedRequest(req,port))return res.status(403).json({error:'Request origin rejected'});
   res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');
-  res.setHeader('Content-Security-Policy',`default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' ${cloudMode?process.env.PUBLIC_ORIGIN.replace('https:','wss:'):`ws://localhost:${port} ws://127.0.0.1:${port}`}; media-src 'self' blob:; worker-src 'self'; object-src 'none'; frame-ancestors 'none'`);
+  res.setHeader('Content-Security-Policy',`default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' ${cloudMode?process.env.PUBLIC_ORIGIN.replace('https:','wss:'):`ws://localhost:${port} ws://127.0.0.1:${port}`}; media-src 'self' blob: https://ice2.somafm.com https://ice1.somafm.com https://ice4.somafm.com https://antares.dribbcast.com; worker-src 'self'; object-src 'none'; frame-ancestors 'none'`);
   next();
 });
 app.use(express.json({limit:'3mb'}));
@@ -79,11 +80,25 @@ app.post('/api/session',(req,res)=>{
   const id=randomUUID();sessions.set(id,{id,miniConversation:randomUUID(),state:initialState(),previous:null,history:[],turns:[],updated:Date.now()});
   res.json({id,state:sessions.get(id).state});
 });
+app.get('/api/tools',async(req,res)=>res.json(await toolCatalog()));
+app.post('/api/location',(req,res)=>{
+ try{const s=session(req),{latitude,longitude}=req.body;if(!Number.isFinite(latitude)||Math.abs(latitude)>90||!Number.isFinite(longitude)||Math.abs(longitude)>180)throw Error('Invalid coordinates');s.location={latitude:Math.round(latitude*1e4)/1e4,longitude:Math.round(longitude*1e4)/1e4};s.updated=Date.now();res.json({location:s.location});}catch(e){res.status(400).json({error:e.message});}
+});
+app.post('/api/tools/run',async(req,res)=>{
+ let s;try{s=session(req);}catch(e){return res.status(400).json({error:e.message});}
+ active.get(s.id)?.controller.abort();sonicConnections.get(s.id)?.stop();
+ const controller=new AbortController(),task={controller,turnId:randomUUID()};active.set(s.id,task);
+ res.on('close',()=>{if(!res.writableEnded)controller.abort();});
+ try{const r=await executeAssistant(req.body,s,{signal:controller.signal});s.updated=Date.now();res.json(r);}catch(e){if(!controller.signal.aborted)res.status(502).json({ok:false,error:e.message});}finally{if(active.get(s.id)===task)active.delete(s.id);}
+});
+app.post('/api/radio/station',(req,res)=>{
+ try{const s=session(req),station=radioStations.find(x=>x.id===req.body.stationId);if(!station)throw Error('Unknown station');s.updated=Date.now();res.json(station);}catch(e){res.status(400).json({error:e.message});}
+});
 app.post('/api/cancel',(req,res)=>{
   try {const s=session(req);const a=active.get(s.id);if(a)a.controller.abort();const sonic=sonicConnections.get(s.id);sonic?.stop();res.json({cancelled:!!a||!!sonic,state:s.state});}catch(e){res.status(400).json({error:e.message});}
 });
 app.post('/api/reset',(req,res)=>{
-  try{const s=session(req);active.get(s.id)?.controller.abort();sonicConnections.get(s.id)?.stop();s.miniConversation=randomUUID();s.state=initialState();s.previous=null;s.history=[];s.turns=[];res.json({state:s.state});}catch(e){res.status(400).json({error:e.message});}
+  try{const s=session(req);active.get(s.id)?.controller.abort();sonicConnections.get(s.id)?.stop();s.miniConversation=randomUUID();s.state=initialState();s.previous=null;s.history=[];s.turns=[];s.notes=[];s.timers=[];res.json({state:s.state});}catch(e){res.status(400).json({error:e.message});}
 });
 app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-native','/api/s2s'],async(req,res,next)=>{
   // Voice-only comparison requires an explicit opt-out. Default routes execute
@@ -120,7 +135,9 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
     const currentState=structuredClone(s.state);const requestedPrompt=req.body.promptVersion||(miniControl?'compact-v2':audioModel?.demoConfig?.promptVersion||planner?.demoConfig?.promptVersion||'compact-v2');const promptVersion=['compact-v2','korean-compact-v2'].includes(requestedPrompt)?requestedPrompt:'full-v1';const selectedPrompt=promptVersion==='korean-compact-v2'?compactKoreanPlannerPrompt:promptVersion==='compact-v2'?compactPlannerPrompt:systemPrompt;
     const messages=[{role:'system',content:selectedPrompt+'\n현재 차량 상태: '+JSON.stringify(currentState)+(audioControl?'\nJSON에 heard 문자열 필드를 추가하여 음성에서 이해한 요청을 적어라. 형식: {"heard":"이해한 요청","intent":"control|question|clarify","actions":[],"reply":"짧은 답변"}. 사용자는 차량 시뮬레이터를 조작할 수 있다. 지원 동작을 수행하지 못한다고 거절하지 마라.':'' )},...s.history.slice(-12)];
     let data;failureStage='model-planning';
-    if(audioControl){
+    const requestedAssistant=!audioControl?inferAssistant(text):null;
+    if(requestedAssistant){data={text:JSON.stringify({intent:'question',actions:[],reply:''}),elapsedMs:0,model:'Application tool router',loadMs:0};}
+    else if(audioControl){
       const form=new FormData();form.append('file',new Blob([Buffer.from(req.body.audio,'base64')],{type:'audio/wav'}),'speech.wav');form.append('messages',JSON.stringify(messages));
       if(otherAudio){form.append('model_id',audioModel.id);form.append('generation_profile',req.body.generationProfile==='official'?'official':'deterministic');}
       data=await(await remote((otherAudio?speechWorker:mini)+'/plan-audio',{method:'POST',body:form},controller.signal,otherAudio?360000:120000)).json();
@@ -131,6 +148,13 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
     if(miniControl){miniGate=guardMiniPlan(plan,currentState);plan=miniGate.plan;}
     const boundsGate=guardExplicitBounds(audioControl?plan.heard:text,plan);plan=boundsGate.plan;
     if(audioControl){text=typeof plan.heard==='string'?plan.heard.slice(0,500):'[음성 요청 · 모델의 원문 전사 없음]';send('understood',{text,model:audioModel?.name||'MiniCPM'});}
+    let assistantResult;const assistantCall=requestedAssistant||(audioControl&&!plan.actions.length?inferAssistant(text):null);
+    if(assistantCall){
+      failureStage='assistant-tool';send('stage',{stage:'tool',tool:assistantCall.operation});
+      try{assistantResult=await executeAssistant({...assistantCall,language:'ko'},s,{signal:controller.signal});}
+      catch(e){controller.signal.throwIfAborted();assistantResult={ok:false,operation:assistantCall.operation,reply:'정보 조회가 제한 시간 안에 완료되지 않았어요. 잠시 후 다시 시도해 주세요.',error:e.message,sources:[]};}
+      plan={intent:'question',actions:[],reply:assistantResult.reply?.slice(0,350)||'조회 결과를 확인하지 못했어요.'};send('assistant',assistantResult);
+    }
     controller.signal.throwIfAborted();
     if(active.get(s.id)!==task||s.state.revision!==revision)throw new Error('새로운 요청으로 차량 상태가 바뀌었습니다. 다시 말씀해 주세요.');
     failureStage='vehicle-validation';let result,validationError=boundsGate.reason,proposedActions=boundsGate.proposedActions;try{result=executePlan(s.state,s.previous,plan);}catch(error){validationError=error.message;proposedActions=plan.actions;plan={...plan,intent:'clarify',actions:[],reply:'설정을 적용하지 않았어요. '+validationError};result=executePlan(s.state,s.previous,plan);}
@@ -139,8 +163,9 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
     const ttsProvider=req.body.ttsProvider==='qwen'?'qwen':'polly';
     record={id:turnId,at:new Date().toISOString(),intent:plan.intent,modelProposedActions,modelReply,generationProfile:data.generationProfile,validationError,proposedActions,promptVersion,engine:otherAudio?'audio-control':miniControl?'minicpm-control':'cascade',audioModelId:audioModel?.id,quantization:data.quantization,plannerId:planner?.id,plannerMemory:data.memory,input:text,rawTranscript,asrModel,asrId:audioControl?null:asrId,inputMeaning:audioControl?'model-understanding-not-verbatim-transcript':'transcript',reply:result.reply,actions:plan.actions,results:result.results,state:structuredClone(s.state),asrMs:audioControl?null:asrMs,llmMs:data.elapsedMs,planner:data.model,plannerRevision:data.revision,modelLoadMs:data.loadMs||0,vehicleTools:true,plannerPasses:data.plannerPasses||1,ttsProvider,ttsMeasurement:ttsProvider==='polly'?'aws-api-round-trip':'gpu-inference',inputMode:req.body.text?'text':['microphone','file'].includes(req.body.inputMode)?req.body.inputMode:'audio',feedback:null};
     s.turns.push(record);
+    if(assistantResult){record.assistant=assistantResult;record.toolMs=assistantResult.elapsedMs;record.planner='Application tool router';}
     if(miniGate?.reason){record.guardReason=miniGate.reason;record.proposedActions=miniGate.proposedActions;}
-    send('reply',{reply:result.reply,actions:plan.actions,results:result.results,state:s.state,asrMs,llmMs:data.elapsedMs,planner:data.model,modelLoadMs:data.loadMs||0,decisionMs:Math.round(performance.now()-start),vehicleTools:true,intent:plan.intent,guardReason:miniGate?.reason,validationError,diagnosis:validationError?'validation-rejected':result.results.length?'executed':miniGate?.reason?'guard-clarification':'no-action-proposed'});
+    send('reply',{reply:result.reply,actions:plan.actions,results:result.results,state:s.state,asrMs,llmMs:data.elapsedMs,planner:data.model,modelLoadMs:data.loadMs||0,decisionMs:Math.round(performance.now()-start),vehicleTools:true,intent:plan.intent,guardReason:miniGate?.reason,validationError,assistant:assistantResult,diagnosis:assistantResult?'assistant-tool':validationError?'validation-rejected':result.results.length?'executed':miniGate?.reason?'guard-clarification':'no-action-proposed'});
     if(req.body.speak===false){record.ttsMs=0;record.audioDisabled=true;send('done',{metrics:record});return;}
     failureStage='speech-output';send('stage',{stage:'speaking'});
     const sentences=result.results.length>1?result.results:[result.reply];
@@ -246,6 +271,12 @@ wss.on('connection',(ws,req,url)=>{
     const result=executePlan(s.state,s.previous,plan);s.state=result.state;s.previous=result.previous;s.updated=Date.now();
     if(!record||record.completed)newRecord();record.modelProposedActions.push(...proposedPlan.actions);if(gate.reason)record.validationError=gate.reason;record.actions.push(...plan.actions);record.results.push(...result.results);record.state=structuredClone(s.state);
     return{ok:true,state:s.state,reply:result.reply,results:result.results,actions:plan.actions};
+  },executeAssistantTool:async(args,signal)=>{
+    if(stopped||sonicConnections.get(s.id)?.stop!==stop)throw Error('Canceled assistant tool');
+    if(!record||record.completed)newRecord();const currentRecord=record;
+    const result=await executeAssistant(args,s,{signal});
+    if(stopped||currentRecord!==record)throw Error('Canceled assistant result');
+    currentRecord.assistant=result;currentRecord.toolMs=result.elapsedMs;s.updated=Date.now();return result;
   },emit:(event,data)=>{
     s.updated=Date.now();
     if(event==='text'){

@@ -1,0 +1,411 @@
+{
+  "at": "2026-10-19T10:51:10.190Z",
+  "host": "Seoul EC2 web backend",
+  "transport": "IAM-authenticated AgentCore Gateway, Tokyo; local utilities stay local",
+  "method": "3 consecutive serial calls per tool: first call plus two repeats. Provider caches included. p95 is nearest-rank (maximum with n=3). Includes MCP tool discovery on first call; excludes ASR, model inference, TTS and browser playback. Synthetic requests only. A smoke screen, not a load test.",
+  "cutoffMs": 3000,
+  "tools": [
+    {
+      "id": "weather",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 189,
+      "p95Ms": 1553,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 1553,
+          "ok": true,
+          "providerMs": 1553,
+          "reply": "서울 예보는 기온 14도, 바람 초속 1.4미터, 다음 한 시간 강수량 0밀리미터예요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 189,
+          "ok": true,
+          "providerMs": 189,
+          "reply": "서울 예보는 기온 14도, 바람 초속 1.4미터, 다음 한 시간 강수량 0밀리미터예요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 161,
+          "ok": true,
+          "providerMs": 161,
+          "reply": "서울 예보는 기온 14도, 바람 초속 1.4미터, 다음 한 시간 강수량 0밀리미터예요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "places",
+      "sampleCount": 3,
+      "successCount": 0,
+      "medianMs": 414,
+      "p95Ms": 1105,
+      "enabled": false,
+      "samples": [
+        {
+          "elapsedMs": 1105,
+          "ok": false,
+          "providerMs": 1105,
+          "error": "Provider HTTP 502",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 414,
+          "ok": false,
+          "providerMs": 414,
+          "error": "Provider HTTP 502",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 412,
+          "ok": false,
+          "providerMs": 412,
+          "error": "Provider HTTP 502",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "radio",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 177,
+      "p95Ms": 177,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 177,
+          "ok": true,
+          "providerMs": 177,
+          "reply": "SomaFM Secret Agent 방송을 준비했어요. 실제 재생 상태는 플레이어에서 확인해 주세요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 177,
+          "ok": true,
+          "providerMs": 177,
+          "reply": "SomaFM Secret Agent 방송을 준비했어요. 실제 재생 상태는 플레이어에서 확인해 주세요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 171,
+          "ok": true,
+          "providerMs": 171,
+          "reply": "SomaFM Secret Agent 방송을 준비했어요. 실제 재생 상태는 플레이어에서 확인해 주세요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "wiki",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 165,
+      "p95Ms": 2972,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 2972,
+          "ok": true,
+          "providerMs": 2972,
+          "reply": "경복궁(景福宮, 영어: Gyeongbokgung Palace)은 대한민국 서울특별시 종로구 사직로에 위치한 조선 왕조의 법궁(法宮, 정궁)이다.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 155,
+          "ok": true,
+          "providerMs": 155,
+          "reply": "경복궁(景福宮, 영어: Gyeongbokgung Palace)은 대한민국 서울특별시 종로구 사직로에 위치한 조선 왕조의 법궁(法宮, 정궁)이다.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 165,
+          "ok": true,
+          "providerMs": 165,
+          "reply": "경복궁(景福宮, 영어: Gyeongbokgung Palace)은 대한민국 서울특별시 종로구 사직로에 위치한 조선 왕조의 법궁(法宮, 정궁)이다.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "holidays",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 182,
+      "p95Ms": 277,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 277,
+          "ok": true,
+          "providerMs": 277,
+          "reply": "한국 공휴일은 2026-12-25 크리스마스이에요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 182,
+          "ok": true,
+          "providerMs": 182,
+          "reply": "한국 공휴일은 2026-12-25 크리스마스이에요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 161,
+          "ok": true,
+          "providerMs": 161,
+          "reply": "한국 공휴일은 2026-12-25 크리스마스이에요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "exchange",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 111,
+      "p95Ms": 153,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 111,
+          "ok": true,
+          "providerMs": 111,
+          "reply": "2026-10-19 기준 100 USD는 약 133,533원이에요. 환전 수수료는 제외했어요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 153,
+          "ok": true,
+          "providerMs": 153,
+          "reply": "2026-10-19 기준 100 USD는 약 133,533원이에요. 환전 수수료는 제외했어요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 109,
+          "ok": true,
+          "providerMs": 109,
+          "reply": "2026-10-19 기준 100 USD는 약 133,533원이에요. 환전 수수료는 제외했어요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "sun",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 186,
+      "p95Ms": 445,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 445,
+          "ok": true,
+          "providerMs": 445,
+          "reply": "강릉 2026-10-19, 일출은 AM 06:36, 일몰은 PM 05:42예요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 186,
+          "ok": true,
+          "providerMs": 186,
+          "reply": "강릉 2026-10-19, 일출은 AM 06:36, 일몰은 PM 05:42예요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 167,
+          "ok": true,
+          "providerMs": 167,
+          "reply": "강릉 2026-10-19, 일출은 AM 06:36, 일몰은 PM 05:42예요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "route",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 174,
+      "p95Ms": 845,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 845,
+          "ok": true,
+          "providerMs": 845,
+          "reply": "서울에서 서울역까지 약 3.1킬로미터, 교통 미반영 예상 4분이에요. 실제 내비게이션 안내는 아니에요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 112,
+          "ok": true,
+          "providerMs": 112,
+          "reply": "서울에서 서울역까지 약 3.1킬로미터, 교통 미반영 예상 4분이에요. 실제 내비게이션 안내는 아니에요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 174,
+          "ok": true,
+          "providerMs": 174,
+          "reply": "서울에서 서울역까지 약 3.1킬로미터, 교통 미반영 예상 4분이에요. 실제 내비게이션 안내는 아니에요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "web",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 453,
+      "p95Ms": 453,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 453,
+          "ok": true,
+          "providerMs": 453,
+          "reply": "중국산 전기차, 가격 경쟁력 앞세워 세계 시장점유율 확대｜주간동아: 주간동아 1553호 [조진혁의 Car Talk] 침체된 내수시장 탈출구로 유럽·한국 시장에서 약진 조진혁 자유기",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 453,
+          "ok": true,
+          "providerMs": 453,
+          "reply": "중국산 전기차, 가격 경쟁력 앞세워 세계 시장점유율 확대｜주간동아: 주간동아 1553호 [조진혁의 Car Talk] 침체된 내수시장 탈출구로 유럽·한국 시장에서 약진 조진혁 자유기",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 379,
+          "ok": true,
+          "providerMs": 379,
+          "reply": "중국산 전기차, 가격 경쟁력 앞세워 세계 시장점유율 확대｜주간동아: 주간동아 1553호 [조진혁의 Car Talk] 침체된 내수시장 탈출구로 유럽·한국 시장에서 약진 조진혁 자유기",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "timer",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 0,
+      "p95Ms": 1,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 1,
+          "ok": true,
+          "providerMs": 1,
+          "reply": "10분 타이머를 맞췄어요. 알림을 받으려면 이 데모 탭을 열어 두세요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 0,
+          "ok": true,
+          "providerMs": 0,
+          "reply": "10분 타이머를 맞췄어요. 알림을 받으려면 이 데모 탭을 열어 두세요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 0,
+          "ok": true,
+          "providerMs": 0,
+          "reply": "10분 타이머를 맞췄어요. 알림을 받으려면 이 데모 탭을 열어 두세요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 0,
+      "p95Ms": 0,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 0,
+          "ok": true,
+          "providerMs": 0,
+          "reply": "메모했어요. 지하 2층 B12",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 0,
+          "ok": true,
+          "providerMs": 0,
+          "reply": "메모했어요. 지하 2층 B12",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 0,
+          "ok": true,
+          "providerMs": 0,
+          "reply": "메모했어요. 지하 2층 B12",
+          "cachePosition": "repeat"
+        }
+      ]
+    },
+    {
+      "id": "calculate",
+      "sampleCount": 3,
+      "successCount": 3,
+      "medianMs": 0,
+      "p95Ms": 70,
+      "enabled": true,
+      "samples": [
+        {
+          "elapsedMs": 70,
+          "ok": true,
+          "providerMs": 70,
+          "reply": "20 kWh × 350 KRW/kWh, 결과는 7,000이에요.",
+          "cachePosition": "first"
+        },
+        {
+          "elapsedMs": 0,
+          "ok": true,
+          "providerMs": 0,
+          "reply": "20 kWh × 350 KRW/kWh, 결과는 7,000이에요.",
+          "cachePosition": "repeat"
+        },
+        {
+          "elapsedMs": 0,
+          "ok": true,
+          "providerMs": 0,
+          "reply": "20 kWh × 350 KRW/kWh, 결과는 7,000이에요.",
+          "cachePosition": "repeat"
+        }
+      ]
+    }
+  ],
+  "radioStreams": [
+    {
+      "id": "groovesalad",
+      "ok": true,
+      "bytes": 8777,
+      "firstByteMs": 648,
+      "contentType": "audio/mpeg"
+    },
+    {
+      "id": "secretagent",
+      "ok": true,
+      "bytes": 8777,
+      "firstByteMs": 535,
+      "contentType": "audio/mpeg"
+    },
+    {
+      "id": "dronezone",
+      "ok": true,
+      "bytes": 8777,
+      "firstByteMs": 269,
+      "contentType": "audio/mpeg"
+    },
+    {
+      "id": "kpop",
+      "ok": true,
+      "bytes": 8192,
+      "firstByteMs": 1018,
+      "contentType": "audio/mpeg"
+    }
+  ]
+}
