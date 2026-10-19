@@ -66,6 +66,8 @@ Click **Reset cabin** once, then run these requests in order. This checks whethe
 
 After a response, inspect the **vehicle state**, **recognized request**, **execution note**, **spoken reply**, and **live timing** together. Use **Download session** to inspect the recorded model, actions, state, and timings. Select another model and repeat the same scenario to compare results. Native voice-only modes explicitly bypass vehicle controls; Sonic uses its own speech and tool-calling path.
 
+Sonic displays a **Response preview** as soon as its speculative text arrives, then replaces the same bubble with the actual spoken transcript at turn completion. Only final text enters history/export. This follows [AWS's output event sequence](https://docs.aws.amazon.com/nova/latest/nova2-userguide/sonic-output-events.html); user ASR transcripts arrive after an utterance, rather than as word-by-word live captions.
+
 ## Benchmark at a glance
 
 We ran **14 control configurations × the same 31 Korean synthetic audio cases = 434 evaluated cases**. Finalists also received a separate 10-case holdout set. The configurations include the Qwen4B BF16/NF4 precision comparison; they are not 14 unrelated base models.
@@ -193,6 +195,7 @@ python3 runtime/test_speech_protocol.py
 mkdir -p output
 TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net node scripts/cloud-deployment-smoke.mjs
 TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net node scripts/sonic-smoke.mjs
+TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net node scripts/sonic-caption-smoke.mjs
 ```
 
 Unit and routing tests use local stubs and require no AWS account or GPU. Live smoke tests invoke paid model services and use synthetic samples. `TEST_LONG_SSE=1` adds a Qwen3-Omni model switch and long-stream check. Benchmark generators write to `output/`; run `npm run prepare:samples` to refresh the allowlisted synthetic reply files served by the UI.

@@ -1,5 +1,13 @@
 /* UI copy only. Model messages and test transcripts retain their source language. */
 export const english = {
+  "타이머 알림음·배너는 이 탭이 열려 있을 때 작동합니다. 새로고침하면 초기화됩니다.": "Timer chimes and banners require this tab to stay open. Reloading clears timers.",
+  "휴식 타이머가 끝났어요.": "Your break timer has finished.",
+  "안전한 곳에서 잠시 쉬어 가세요.": "Take a short break somewhere safe.",
+  "알림음을 재생했어요.": "Alert chime played.",
+  "브라우저에서 소리를 켜려면 알림음 테스트를 눌러 주세요.": "Press Test chime to enable sound in this browser.",
+  "알림음 테스트": "Test chime",
+  "알림 확인": "Dismiss alert",
+  "온 · 응답 미리보기": "On · Response preview",
   "온": "On",
   "제어 없는 내장 음성 비교 · 온도·공조 상태가 바뀌지 않습니다": "Native voice comparison only · Temperature and climate state will not change",
   "자체 GPU 불가. 관리형 API만 이용": "Cannot self-host; managed API only",

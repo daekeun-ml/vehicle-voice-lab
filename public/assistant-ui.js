@@ -1,7 +1,36 @@
+import {TimerMonitor} from './timer-monitor.js';
 const $=id=>document.getElementById(id);
 let api,radio,radioStation,playbackStarted=0,refreshTimer,radioRequest=0,radioVolume=.35,radioDucked=false,lastResult;
 const en=()=>document.documentElement.lang==='en';
 const text=(ko,english)=>en()?english:ko;
+let timerAudio,timerSounds=[];
+function armTimerAudio(){try{timerAudio??=new AudioContext();if(timerAudio.state==='suspended')void timerAudio.resume().catch(()=>{});}catch{}}
+function stopTimerSound(){for(const sound of timerSounds)try{sound.stop();}catch{}timerSounds=[];}
+function timerChime(){
+ stopTimerSound();
+ if(timerAudio?.state!=='running')return false;
+ const start=timerAudio.currentTime;
+ for(let i=0;i<3;i++){
+  const tone=timerAudio.createOscillator(),gain=timerAudio.createGain(),at=start+i*.4;
+  tone.frequency.value=i===1?880:660;gain.gain.setValueAtTime(0,at);gain.gain.linearRampToValueAtTime(.15,at+.02);gain.gain.exponentialRampToValueAtTime(.001,at+.28);
+  tone.connect(gain);gain.connect(timerAudio.destination);tone.onended=()=>{tone.disconnect();gain.disconnect();};tone.start(at);tone.stop(at+.3);timerSounds.push(tone);
+ }
+ return true;
+}
+const timerMonitor=new TimerMonitor(()=>{
+ $('timer-alert').hidden=false;
+ $('timer-alert-status').textContent=timerChime()?'알림음을 재생했어요.':'브라우저에서 소리를 켜려면 알림음 테스트를 눌러 주세요.';
+ document.dispatchEvent(new CustomEvent('vehicle-timer-expired'));
+});
+function renderTimers(remaining=timerMonitor.tick()){
+ $('assistant-timers').textContent=remaining.filter(t=>t.seconds>0).map(t=>`${text('휴식 타이머','Break timer')}: ${t.seconds}s`).join(' · ');
+ if(!remaining.some(t=>t.seconds>0)){clearInterval(refreshTimer);refreshTimer=null;}
+}
+document.addEventListener('pointerdown',armTimerAudio,{passive:true});
+document.addEventListener('keydown',armTimerAudio,{passive:true});
+document.addEventListener('visibilitychange',()=>renderTimers());
+$('timer-dismiss')?.addEventListener('click',()=>{$('timer-alert').hidden=true;stopTimerSound();});
+$('timer-sound-test')?.addEventListener('click',async()=>{armTimerAudio();await timerAudio?.resume().catch(()=>{});$('timer-alert-status').textContent=timerChime()?'알림음을 재생했어요.':'브라우저에서 소리를 켜려면 알림음 테스트를 눌러 주세요.';});
 const examples={weather:['서울 날씨 알려줘','Weather in Seoul'],web:['전기차 최근 뉴스 웹검색해줘','Search the web for recent electric vehicle news'],radio:['재즈 라디오 틀어줘','Play jazz radio'],wiki:['경복궁 설명해줘','Tell me about Gyeongbokgung'],holidays:['다음 공휴일 언제야','When is the next public holiday?'],exchange:['100달러 원화로 환율 계산해줘','Convert 100 USD to KRW'],sun:['강릉 일몰 알려줘','Sunset in Gangneung'],route:['서울시청에서 서울역까지 거리 알려줘','Distance from Seoul City Hall to Seoul Station'],places:['근처 카페 찾아줘','Find nearby cafes'],timer:['10분 타이머 맞춰줘','Set a timer for 10 minutes'],notes:['메모: 주차 위치 지하 2층 B12','Note: parking spot B12 on basement level 2'],calculate:['충전비 20kWh, kWh당 350원 계산해줘','Calculate 20 * 350']};
 function prompt(value){document.dispatchEvent(new CustomEvent('vehicle-assistant-prompt',{detail:{text:value}}));}
 export function configureAssistant(client){api=client;void refreshTools();}
@@ -45,14 +74,13 @@ export function renderAssistantResult(result,{applyEffect=true}={}){
  const effect=applyEffect?result.effect:null;
  if(effect?.type==='radio')void playStation(effect.stationId);
  if(effect?.type==='radio-stop')stopRadio();
- if(effect?.type==='timers'){clearInterval(refreshTimer);const tick=()=>{
-   const remaining=effect.timers.map(t=>({...t,seconds:Math.max(0,Math.ceil((t.deadline-Date.now())/1000))}));
-   $('assistant-timers').textContent=remaining.map(t=>`${t.label}: ${t.seconds}s`).join(' · ');
-   if(remaining.some(t=>t.seconds===0)){$('assistant-timers').textContent=text('휴식 타이머가 끝났어요.','Your break timer has finished.')+' '+remaining.filter(t=>t.seconds>0).map(t=>`${t.label}: ${t.seconds}s`).join(' · ');if(remaining.every(t=>t.seconds===0))clearInterval(refreshTimer);}
-  };tick();if(effect.timers.length)refreshTimer=setInterval(tick,1000);
+ if(effect?.type==='timers'){
+  clearInterval(refreshTimer);renderTimers(timerMonitor.set(effect.timers));
+  if(!effect.timers.length){$('timer-alert').hidden=true;stopTimerSound();}
+  if(effect.timers.some(t=>t.deadline>Date.now()))refreshTimer=setInterval(renderTimers,250);
  }
 }
-document.addEventListener('vehicle-ui-language',()=>{void refreshTools();if(lastResult)renderAssistantResult(lastResult,{applyEffect:false});if(!radioStation)$('radio-now').textContent=text('라디오 정지','Radio stopped');});
+document.addEventListener('vehicle-ui-language',()=>{void refreshTools();renderTimers();if(lastResult)renderAssistantResult(lastResult,{applyEffect:false});if(!radioStation)$('radio-now').textContent=text('라디오 정지','Radio stopped');});
 $('radio-stop')?.addEventListener('click',stopRadio);
 $('radio-play')?.addEventListener('click',()=>void playStation($('radio-station').value));
 $('use-location')?.addEventListener('click',()=>{

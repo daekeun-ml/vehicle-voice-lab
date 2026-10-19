@@ -51,3 +51,6 @@
 
 .conversation-panel .conversation-settings[open] ~ .conversation{min-height:0}
 .vehicle-panel .radio-player>.radio-actions{flex-direction:row;align-items:center}
+.timer-note{display:block;font-size:10px;line-height:1.6;color:#91aaa9}
+.timer-alert{position:fixed;z-index:100;right:24px;bottom:24px;width:min(360px,calc(100vw - 48px));padding:22px;background:#234940;border:2px solid #b6edd9;border-radius:14px;box-shadow:0 12px 50px #0008;color:#e7fff5}
+.timer-alert[hidden]{display:none}.timer-alert strong{font-size:18px}.timer-alert p{font-size:13px;line-height:1.6}.timer-alert small{display:block;font-size:11px;line-height:1.6}.timer-alert>div{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}.timer-alert button{font:inherit;font-size:12px;padding:9px 14px;border:1px solid #9accb9;border-radius:7px;background:#17352e;color:#dffced;cursor:pointer}.timer-alert #timer-dismiss{background:#b6edd9;color:#16382c}

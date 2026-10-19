@@ -63,22 +63,33 @@ Use vehicle_control for EVERY vehicle command and state question. Never claim su
       if(d.role==='USER'&&d.type==='TEXT'&&fields.generationStage==='FINAL'&&!this.contents.has(d.contentId||d.contentName))this.beginTurn();
       this.contents.set(d.contentId||d.contentName,{...d,stage:fields.generationStage,text:'',tool:null});}
     if(event.textOutput){const d=event.textOutput;const block=this.contents.get(d.contentId||d.contentName);
-      if(/"interrupted"\s*:\s*true/.test(d.content)){this.emit('interrupted',{});return;}
-      if(block){block.text+=d.content;if(block.stage==='FINAL')this.emit('text',{id:d.contentId||d.contentName,role:block.role,text:d.content,final:true});}}
+      if(/"interrupted"\s*:\s*true/.test(d.content)){this.interrupted();return;}
+      if(block){block.text+=d.content;
+        if(block.stage==='FINAL')this.emit('text',{id:d.contentId||d.contentName,role:block.role,text:d.content,final:true});
+        if(block.role==='ASSISTANT'){
+          // SPECULATIVE precedes audio; FINAL transcribes what was actually spoken.
+          // Display a single replaceable caption, keeping only FINAL in history.
+          this.caption??={id:randomUUID(),preview:'',spoken:''};
+          if(block.stage==='SPECULATIVE'){this.caption.preview+=d.content;this.captionUpdate(false);}
+          if(block.stage==='FINAL'){this.caption.spoken+=d.content;if(!this.caption.preview)this.captionUpdate(false);}
+        }
+      }}
     if(event.audioOutput)this.emit('audio',{audio:event.audioOutput.content,sampleRate:24000});
     if(event.toolUse){const d=event.toolUse;const block=this.contents.get(d.contentId||d.contentName);if(block)block.tool=d;else await this.tool(d);}
     if(event.contentEnd){const d=event.contentEnd;const block=this.contents.get(d.contentId||d.contentName);
       if(block?.tool)await this.tool(block.tool);
       this.contents.delete(d.contentId||d.contentName);
-      if(d.stopReason==='INTERRUPTED')this.emit('interrupted',{});
+      if(d.stopReason==='INTERRUPTED')this.interrupted();
       // Bedrock can finish a spoken turn without emitting completionEnd.
       if(block?.role==='ASSISTANT'&&block.stage==='FINAL'&&d.stopReason==='END_TURN')this.done(d);
     }
     if(event.completionEnd)this.done(event.completionEnd);
     if(event.usageEvent)this.emit('usage',event.usageEvent);
   }
-  beginTurn(){this.turnNumber++;this.turnFinished=false;}
-  done(data){if(this.turnFinished)return;this.turnFinished=true;this.emit('done',{...data,sonicTurn:this.turnNumber});}
+  captionUpdate(final){if(this.caption)this.emit('caption',{id:this.caption.id,role:'ASSISTANT',text:final?this.caption.spoken:(this.caption.preview||this.caption.spoken),final});}
+  interrupted(){if(this.caption){this.caption.preview='';this.captionUpdate(true);}this.emit('interrupted',{});}
+  beginTurn(){this.turnNumber++;this.turnFinished=false;this.caption=null;}
+  done(data){if(this.turnFinished)return;this.turnFinished=true;this.captionUpdate(true);this.emit('done',{...data,sonicTurn:this.turnNumber});}
   async tool(d){
     if(this.closed||this.toolIds.has(d.toolUseId))return;this.toolIds.add(d.toolUseId);
     let result;

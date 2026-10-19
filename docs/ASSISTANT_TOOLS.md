@@ -54,7 +54,7 @@ Browser playback was separately checked with the HTML audio element: Secret Agen
 - [OSRM](https://project-osrm.org/) / OpenStreetMap: route distance and estimated time, without live traffic. Two known Seoul endpoints were tested; arbitrary destinations may add geocoding latency. Public demo servers have no availability guarantee.
 - [Overpass](https://wiki.openstreetmap.org/wiki/Overpass_API): nearby OSM features, currently excluded after repeated failures; never represents live charger occupancy.
 
-Timers require the demo tab to remain open and are not durable background reminders. Notes are per-session and disappear on reset, expiration or server restart. Calculation uses a bounded numeric parser, never JavaScript evaluation; charging/fuel unit prices must be provided by the user. Selecting precise location sends coordinates through the backend to the selected information provider. Export/feedback can contain request text and tool results; treat those records accordingly.
+Timers show a countdown, then a persistent dismissible banner and a three-tone chime. Browser audio is unlocked by interaction; **Test chime** can enable/check sound. Deadline-based expiry prevents repeated alerts even if a background-tab tick is delayed. Keep the demo tab open: these are not OS push notifications or durable reminders, and reload/reset clears the timer. Notes are per-session and disappear on reset, expiration or server restart. Calculation uses a bounded numeric parser, never JavaScript evaluation; charging/fuel unit prices must be provided by the user. Selecting precise location sends coordinates through the backend to the selected information provider. Export/feedback can contain request text and tool results; treat those records accordingly.
 
 ## Reproduce
 

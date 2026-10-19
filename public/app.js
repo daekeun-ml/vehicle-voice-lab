@@ -13,6 +13,7 @@ const isExtraAudio=()=>engine.startsWith('audio-');
 const isAudioInput=()=>engine.startsWith('minicpm')||isExtraAudio();
 const audioModelName=()=>$('audio-model').selectedOptions[0]?.textContent||'음성 모델';
 const sonicBubbles=new Map();
+function clearSonicPreviews(){for(const[id,item]of sonicBubbles)if(item.preview){item.el.remove();sonicBubbles.delete(id);}}
 let bargeInEnabled=false;
 let speech=false,frames=[],preRoll=[],voiceMs=0,silenceMs=0,noiseFloor=.004,lastVoiceAt=0;
 let currentBasis='text',currentStart=0;
@@ -61,6 +62,7 @@ async function checkHealth(){
 }
 function stopPlayback(clearQueue=true){if(currentAudio){currentAudio.pause();currentAudio.src='';currentAudio=null;}if(currentAudioUrl){URL.revokeObjectURL(currentAudioUrl);currentAudioUrl=null;}if(clearQueue)audioQueue=[];}
 async function interrupt(announce=true){
+  clearSonicPreviews();
   sonicVoice?.close();sonicVoice=null;
   requestNumber++;currentController?.abort();currentController=null;stopPlayback();busy=false;stage='idle';
   try{const response=await api('cancel',{method:'POST',body:'{}'});const d=await response.json();if(d.state)renderState(d.state);}catch{}
@@ -204,7 +206,16 @@ async function ensureSonic(){
     if(voice!==sonicVoice)return;
     if(event==='ready')setStatus('Sonic 연결됨 · 말씀하거나 샘플을 눌러 주세요','listening');
     if(event==='turn'){lastTurnId=data.turnId;$('feedback').hidden=false;}
-    if(event==='text'){
+    if(event==='caption'){
+      let item=sonicBubbles.get(data.id);
+      if(!data.text){item?.el.remove();sonicBubbles.delete(data.id);}
+      else{
+        if(!item){item={el:bubble('','assistant')};sonicBubbles.set(data.id,item);}
+        item.preview=!data.final;item.el.lastChild.textContent=data.text;item.el.querySelector('.label').textContent=data.final?'온':'온 · 응답 미리보기';
+        $('conversation').scrollTop=$('conversation').scrollHeight;
+      }
+    }
+    if(event==='text'&&data.role==='USER'){
       const key=data.id;let item=sonicBubbles.get(key);
       if(!item){item={el:bubble('',data.role==='USER'?'user':'assistant'),text:''};sonicBubbles.set(key,item);}item.text+=data.text;item.el.lastChild.textContent=item.text;$('conversation').scrollTop=$('conversation').scrollHeight;
       if(data.role==='USER'){busy=true;resetSonicMetrics();setStatus('Sonic이 요청을 처리하고 있어요…','busy');}
@@ -213,8 +224,8 @@ async function ensureSonic(){
     if(event==='audio'){duckRadio(true);busy=true;setStatus('Sonic이 말하고 있어요…','busy');}
     if(event==='firstPlayback'){metric('first-audio-ms',data.ms);$('metric-context').textContent=data.basis==='text'?'Sonic · 텍스트 제출 → 재생 예약':data.basis==='file'?'Sonic · 입력 음성 종료 → 재생 예약':'Sonic · 마지막 발화 추정 → 재생 예약';}
     if(event==='playbackEnd'){duckRadio(false);busy=false;idleStatus();}
-    if(event==='error'){busy=false;bubble(data.error,'error');idleStatus();}
-    if(event==='closed'){busy=false;if(micEnabled)void toggleMic();idleStatus();}
+    if(event==='error'){clearSonicPreviews();busy=false;bubble(data.error,'error');idleStatus();}
+    if(event==='closed'){clearSonicPreviews();busy=false;if(micEnabled)void toggleMic();idleStatus();}
   }});
   sonicVoice=voice;sonicConnecting=voice.connect();
   try{return await sonicConnecting;}finally{sonicConnecting=null;}
