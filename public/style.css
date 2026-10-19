@@ -50,3 +50,4 @@
 @media(max-width:420px){.lower-cards{grid-template-columns:1fr}.conversation-panel{height:720px}}
 
 .conversation-panel .conversation-settings[open] ~ .conversation{min-height:0}
+.vehicle-panel .radio-player>.radio-actions{flex-direction:row;align-items:center}

@@ -120,6 +120,7 @@ async function submit(payload,{basis='text',endedAt=performance.now()}={}){
           renderState(d.state);syncRadioState(d.state,d.actions);$('state-change').textContent=d.results.length?d.results.join(' '):'차량 설정 변경 없음';metric('llm-ms',d.llmMs);
           lastTurnId=d.turnId;$('feedback').hidden=false;document.querySelectorAll('[data-rating]').forEach(b=>b.classList.remove('selected'));
           if(d.modelLoadMs>1000)toast(`${isExtraAudio()?'음성':'판단'} 모델 전환·로딩에 ${(d.modelLoadMs/1000).toFixed(1)}초 걸렸어요. 다음 요청부터는 로딩 시간을 제외하고 비교할 수 있어요.`);
+          $('conversation').scrollTop=$('conversation').scrollHeight;
         }else if(event==='s2sText'){
           spokenBubble??=bubble('','assistant');spokenText+=d.text;spokenBubble.lastChild.textContent=spokenText;$('conversation').scrollTop=$('conversation').scrollHeight;lastTurnId=d.turnId;$('feedback').hidden=false;
         }else if(event==='audio'){
