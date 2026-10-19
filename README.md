@@ -22,7 +22,7 @@ Speak, type, or upload an audio file to change the simulated driver/passenger te
 
 ### Connected information tools and live radio
 
-The **Connected tools** panel has runnable examples, source links, a real radio player, location selection, and measured tool latency. In Sonic English mode try **“Play jazz radio,” “Tell me about Gyeongbokgung,” “Convert 100 US dollars to Korean won,”** or **“Set a timer for ten minutes.”** Weather, web search, Korean holidays, sunset, route estimates, session notes, and charging-cost calculations are also connected. Nearby-place lookup is excluded after repeated provider failures.
+The **Cabin assistant** section inside the vehicle panel has runnable examples, source links, location selection, and measured tool latency. The existing MEDIA card contains the real radio player. Chat shows the latest six messages in a fixed-height panel; session download retains the full history. In Sonic English mode try **“Play jazz radio,” “Tell me about Gyeongbokgung,” “Convert 100 US dollars to Korean won,”** or **“Set a timer for ten minutes.”** Weather, web search, Korean holidays, sunset, route estimates, session notes, and charging-cost calculations are also connected. Nearby-place lookup is excluded after repeated provider failures.
 
 External information uses an **IAM-authenticated AgentCore Gateway in Tokyo**, with a provider Lambda and AWS's managed Web Search connector. No third-party API keys are required. Existing vehicle controls, timers, notes and calculations execute locally in the backend. For self-hosted speech, a bounded application router handles these new information intents after ASR; vehicle commands still use the selected planner. Sonic uses native `assistant_tool` calls. This is not a benchmark of each small model's ability to choose arbitrary MCP tools.
 
@@ -30,7 +30,7 @@ See [tool examples, measured latency, playback checks and limitations](docs/ASSI
 
 ### Vehicle control scenarios
 
-For the **English voice demo**, open the [English UI](https://dys3pnz3y08gk.cloudfront.net/?lang=en), select **Nova 2.5 Sonic · Realtime S2S**, then set **Sonic speech language** to **English · Officially supported**. Click **English audio sample** for a microphone-free end-to-end check. The [included English recording](public/sample-english.wav) says **“Set the driver temperature to twenty-four degrees.”** You should see the driver temperature change to 24°C and hear an English confirmation.
+For the **English voice demo**, open the [English UI](https://dys3pnz3y08gk.cloudfront.net/?lang=en), select **Nova 2.5 Sonic · Realtime S2S**, expand **Model and voice settings**, then set **Sonic speech language** to **English · Officially supported**. Click **English audio sample** for a microphone-free end-to-end check. The [included English recording](public/sample-english.wav) says **“Set the driver temperature to twenty-four degrees.”** You should see the driver temperature change to 24°C and hear an English confirmation.
 
 For your own tests, click **Start microphone** and say the English requests below, or type them into the command box. Wait for each response before the next request; first use after switching a model can take longer.
 
@@ -127,7 +127,7 @@ cp .env.example .env
 npm start
 ```
 
-Open [localhost:8787](http://localhost:8787) or [English UI](http://localhost:8787/?lang=en). For English speech, select **Nova 2.5 Sonic · Realtime S2S**, choose **English · Officially supported**, and click **English audio sample** to test without microphone permissions. This route requires working Bedrock access. Microphone input requires localhost or HTTPS and browser/OS permission.
+Open [localhost:8787](http://localhost:8787) or [English UI](http://localhost:8787/?lang=en). For English speech, select **Nova 2.5 Sonic · Realtime S2S**, expand **Model and voice settings**, choose **English · Officially supported**, and click **English audio sample** to test without microphone permissions. This route requires working Bedrock access. Microphone input requires localhost or HTTPS and browser/OS permission.
 
 Workers are not bundled with the Node application. Follow [the GPU and CloudFront deployment guide](docs/DEPLOYMENT.md) to provision your own infrastructure. The repository contains no AWS keys, SSH keys, private infrastructure state, model weights, or user microphone recordings. AWS and model downloads require your own access and applicable licenses.
 

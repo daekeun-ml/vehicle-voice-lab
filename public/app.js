@@ -1,4 +1,4 @@
-import {configureAssistant,renderAssistantResult,stopRadio,syncRadioState,duckRadio} from './assistant-ui.js';
+import {configureAssistant,renderAssistantResult,stopRadio,syncRadioState,duckRadio,getRadioState} from './assistant-ui.js';
 const $=id=>document.getElementById(id);
 let sessionId,ready=false,micEnabled=false,audioContext,mediaStream,recorder,source,muteGain;
 let micStarting=false;
@@ -16,24 +16,30 @@ const sonicBubbles=new Map();
 let bargeInEnabled=false;
 let speech=false,frames=[],preRoll=[],voiceMs=0,silenceMs=0,noiseFloor=.004,lastVoiceAt=0;
 let currentBasis='text',currentStart=0;
+let cabinState;
 const api=(path,options={})=>fetch('/api/'+path,{...options,headers:{'Content-Type':'application/json','X-Session-Id':sessionId,...options.headers}});
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').hidden=true,7000);}
 function setStatus(text,kind='idle'){ $('voice-status').textContent=text;$('status-dot').className='status-dot '+kind; }
 function idleStatus(){if(speech)setStatus('말씀을 듣고 있어요…','listening');else setStatus(micEnabled?'듣고 있어요 · 편하게 말씀해 주세요':ready?'마이크를 켜거나 텍스트로 시작하세요':'GPU 모델을 준비하고 있어요',micEnabled?'listening':'idle');}
 function renderState(s){
+  cabinState=s;
   syncRadioState(s);
   $('driver-temp').innerHTML=`${s.temperature.driver}<em>°</em>`;$('passenger-temp').innerHTML=`${s.temperature.passenger}<em>°</em>`;
   $('ac-state').textContent=s.ac?'켜짐':'꺼짐';$('ac-tile').classList.toggle('active',s.ac);
   $('fan-state').textContent=s.fan+'단';$('defrost-state').textContent=s.defrost?'켜짐':'꺼짐';$('defrost-tile').classList.toggle('active',s.defrost);
   $('seat-state').textContent=s.seatHeat?s.seatHeat+'단':'꺼짐';$('seat-tile').classList.toggle('active',s.seatHeat>0);
   $('track').textContent=s.media.track;$('media-state').textContent=s.media.playing?'모의 재생 중':'일시 정지';$('equalizer').classList.toggle('playing',s.media.playing);
+  const liveRadio=getRadioState();if(liveRadio){$('track').textContent=liveRadio.name;$('media-state').textContent=liveRadio.playing?'실제 라디오 재생 중':'라디오 일시 정지';$('equalizer').classList.toggle('playing',liveRadio.playing);}
   $('volume-value').textContent=s.media.volume;$('volume-bar').style.width=s.media.volume+'%';
   $('destination').textContent=s.navigation.destination||'어디로 갈까요?';$('nav-state').textContent=s.navigation.active?'모의 안내 중 · 실제 경로 조회 없음':'목적지를 말해 주세요 · 모의 길 안내';
 }
 function bubble(text,type){
   $('welcome')?.remove();const el=document.createElement('div');el.className='bubble '+type;
   const label=document.createElement('span');label.className='label';label.textContent=type==='user'?'YOU':type==='error'?'안내':'온';el.append(label,document.createTextNode(text));
-  $('conversation').append(el);$('conversation').scrollTop=$('conversation').scrollHeight;return el;
+  const list=$('conversation');list.append(el);
+  const messages=[...list.querySelectorAll('.bubble')];for(const old of messages.slice(0,-6))old.remove();
+  for(const[id,item]of sonicBubbles)if(!item.el.isConnected)sonicBubbles.delete(id);
+  list.scrollTop=list.scrollHeight;return el;
 }
 async function checkHealth(){
   try{const h=await(await fetch('/api/health')).json();$('conversation-engine').querySelector('[value="minicpm-control"]').disabled=!h.minicpmControl;for(const mode of ['audio-control','audio-native'])$('conversation-engine').querySelector(`[value="${mode}"]`).disabled=(mode==='audio-native'&&!$('comparison-only').checked)||!h.researchWorkers?.speech?.ready||![...$('audio-model').options].some(o=>o.dataset.ready==='true'&&(mode==='audio-control'?o.dataset.audioPlanner==='true':o.dataset.nativeAudio==='true'));ready=isExtraAudio()?!!(h.researchWorkers?.speech?.ready&&h.researchWorkers.speech.available?.includes($('audio-model').value)&&!$('audio-model').selectedOptions[0]?.disabled):engine==='minicpm-control'?!!(h.minicpmControl&&h.researchWorkers?.minicpm?.ready&&h.researchWorkers.minicpm.audioPlanner):engine==='sonic'?!!h.sonic:engine.startsWith('minicpm')?!!h.researchWorkers?.minicpm?.ready:h.ready&&(asrChoice!=='whisper'||h.asrWorkers?.whisper?.ready);
@@ -115,7 +121,7 @@ async function submit(payload,{basis='text',endedAt=performance.now()}={}){
           lastTurnId=d.turnId;$('feedback').hidden=false;document.querySelectorAll('[data-rating]').forEach(b=>b.classList.remove('selected'));
           if(d.modelLoadMs>1000)toast(`${isExtraAudio()?'음성':'판단'} 모델 전환·로딩에 ${(d.modelLoadMs/1000).toFixed(1)}초 걸렸어요. 다음 요청부터는 로딩 시간을 제외하고 비교할 수 있어요.`);
         }else if(event==='s2sText'){
-          spokenBubble??=bubble('','assistant');spokenText+=d.text;spokenBubble.lastChild.textContent=spokenText;lastTurnId=d.turnId;$('feedback').hidden=false;
+          spokenBubble??=bubble('','assistant');spokenText+=d.text;spokenBubble.lastChild.textContent=spokenText;$('conversation').scrollTop=$('conversation').scrollHeight;lastTurnId=d.turnId;$('feedback').hidden=false;
         }else if(event==='audio'){
           metric('tts-ms',d.ttsMs);playAudio(d.audio,number);
         }else if(event==='done'){
@@ -199,7 +205,7 @@ async function ensureSonic(){
     if(event==='turn'){lastTurnId=data.turnId;$('feedback').hidden=false;}
     if(event==='text'){
       const key=data.id;let item=sonicBubbles.get(key);
-      if(!item){item={el:bubble('',data.role==='USER'?'user':'assistant'),text:''};sonicBubbles.set(key,item);}item.text+=data.text;item.el.lastChild.textContent=item.text;
+      if(!item){item={el:bubble('',data.role==='USER'?'user':'assistant'),text:''};sonicBubbles.set(key,item);}item.text+=data.text;item.el.lastChild.textContent=item.text;$('conversation').scrollTop=$('conversation').scrollHeight;
       if(data.role==='USER'){busy=true;resetSonicMetrics();setStatus('Sonic이 요청을 처리하고 있어요…','busy');}
     }
     if(event==='tool'){if(data.operation)renderAssistantResult(data);if(data.state){renderState(data.state);syncRadioState(data.state,data.actions);}$('state-change').textContent=data.operation?`${data.operation} · ${data.elapsedMs??'—'} ms`:data.ok?(data.results?.join(' ')||'차량 상태 조회'):data.error;}
@@ -257,6 +263,7 @@ $('audio-file').addEventListener('change',async e=>{
   }catch(err){toast(err.message);}finally{e.target.value='';}
 });
 document.addEventListener('vehicle-assistant-prompt',e=>{void submit({text:e.detail.text});});
+document.addEventListener('vehicle-radio-state',()=>{if(cabinState)renderState(cabinState);});
 document.addEventListener('vehicle-ui-language',()=>{void checkHealth();});
 window.addEventListener('beforeunload',()=>{mediaStream?.getTracks().forEach(t=>t.stop());sonicVoice?.close();stopPlayback();});
 try{const d=await(await api('session',{method:'POST',body:'{}'})).json();sessionId=d.id;configureAssistant(api);renderState(d.state);await checkHealth();setInterval(checkHealth,10000);}catch(e){toast('서버에 연결할 수 없어요. '+e.message);}

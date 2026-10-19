@@ -25,6 +25,10 @@ Tools require **3/3 successful samples and tool round-trip p95 ≤3,000 ms** to 
 
 The speech column is **one synthetic Korean input per tool**, through deployed CloudFront → Whisper → tool → Polly. It measures the first received audio event, excluding synthetic input generation, microphone endpointing and browser playback. All 11 enabled scenarios returned the expected operation, successful tool result and reply audio; this is an integration check, not a language-quality score. See [tool samples](../research/assistant-tool-latency.json) and [speech cases](../research/assistant-demo-smoke.json).
 
+## Cabin UI and recent conversation
+
+The existing vehicle MEDIA card contains the real radio player, station selector, Play and Stop controls. Its title and playback indicator follow the actual radio state. Information shortcuts and the bounded results area live inside the vehicle cabin panel. Voice/model options are in a scrollable disclosure. The conversation panel has a fixed height and keeps only the latest six messages in the browser; the backend conversation and downloaded session keep the full history.
+
 ## Radio playback
 
 The player uses a small curated station list, selected after researching Radio Browser and checking the upstream streams. There is no Spotify/Apple Music login. The four streams returned audio/mpeg with at least 8 KiB of real audio on the Seoul host:

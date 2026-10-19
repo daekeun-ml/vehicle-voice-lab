@@ -16,3 +16,37 @@
 @media(max-width:600px){header{flex-wrap:wrap;gap:12px}.header-right{width:100%;justify-content:space-between}.ui-language-note{margin:0 0 16px}.voice-provider{flex-wrap:wrap}.voice-provider select{max-width:100%}}
 
 .assistant-panel{margin:18px 0;padding:24px;border:1px solid #45695e;border-radius:12px;background:var(--panel)}.assistant-panel h2{margin:6px 0 0;font-size:19px;font-weight:500}.assistant-panel .panel-top{gap:16px;flex-wrap:wrap}.assistant-panel .panel-top>span{font-size:11px;color:var(--mint)}.assistant-panel button{cursor:pointer;border:1px solid #42615c;background:#223b39;border-radius:7px;color:#c5e8dc;padding:9px 12px;font:inherit;font-size:12px}.assistant-panel button:disabled{opacity:.4;cursor:not-allowed}.assistant-tool-chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.assistant-location{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:14px 0}.assistant-result{border-left:3px solid var(--mint);background:#213a3555;padding:16px;line-height:1.8;font-size:12px;overflow-wrap:anywhere}.assistant-result>strong{color:var(--mint);font-size:11px}.assistant-item{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #304944}.assistant-sources{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}.assistant-sources a{color:var(--mint);font-size:11px}.assistant-result small{display:block;color:var(--muted);margin-top:8px}.radio-player{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:18px 0}.radio-player>div{display:flex;flex-direction:column;gap:7px;min-width:200px;font-size:11px}.radio-player strong{font-size:9px;color:var(--mint);letter-spacing:2px}.radio-player audio{max-width:100%;height:36px;color-scheme:dark}.assistant-panel details{font-size:12px;line-height:1.8}.assistant-panel summary{cursor:pointer;color:var(--mint)}.assistant-table{width:100%;border-collapse:collapse;text-align:left;font-size:12px;min-width:470px}.assistant-table td,.assistant-table th{padding:10px;border-bottom:1px solid #304944}.assistant-panel #assistant-timers{color:var(--mint);font-size:12px}@media(max-width:600px){.assistant-panel{padding:18px}.assistant-tool-chips button{flex:1 1 30%}.radio-player{gap:12px}}
+
+/* Cabin-integrated services and a conversation whose size does not grow with history. */
+.workspace{align-items:start}
+.conversation-panel{height:clamp(700px,calc(100dvh - 36px),820px);min-height:0;position:sticky;top:18px}
+.conversation-panel>.panel-top,.conversation-panel>.voice-provider,.conversation-settings,.conversation-note,.suggestions,.voice-controls,.feedback{flex-shrink:0}
+.conversation-panel .conversation{flex:1 1 0;min-height:120px;height:auto;max-height:none;overflow-y:auto;overscroll-behavior:contain;overflow-anchor:none;scrollbar-gutter:stable}
+.conversation-note{margin:12px 0 0;font-size:10px;line-height:1.6;color:var(--muted)}
+.conversation-settings{margin-top:12px;border:1px solid #314b52;border-radius:8px;font-size:11px;color:#a9c5bd}
+.conversation-settings summary{cursor:pointer;padding:10px 12px;color:var(--mint)}
+.settings-content{max-height:140px;overflow:auto;padding:0 12px 12px;overscroll-behavior:contain}
+.settings-content .voice-provider:first-child{margin-top:0}
+.vehicle-panel .assistant-panel{margin:16px 0 0;padding:16px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+.vehicle-panel .assistant-panel .panel-top{margin-bottom:0}
+.vehicle-panel .assistant-panel h2{font-size:15px;margin-top:4px}
+.vehicle-panel .assistant-panel .catalog-intro{font-size:10px;line-height:1.6;margin:9px 0}
+.vehicle-panel .assistant-tool-chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:12px 0}
+.vehicle-panel .assistant-tool-chips button{min-width:0;padding:9px 4px;font-size:10px;line-height:1.4;overflow-wrap:anywhere}
+.vehicle-panel .assistant-location{font-size:10px;gap:8px;margin:10px 0;justify-content:space-between}
+.vehicle-panel .assistant-location button{font-size:10px;padding:6px 9px}
+.vehicle-panel .assistant-result{max-height:190px;overflow:auto;overscroll-behavior:contain;padding:10px 12px;font-size:11px}
+.vehicle-panel .assistant-result p{margin:7px 0}
+.vehicle-panel .assistant-item{font-size:10px}
+.vehicle-panel .assistant-panel details{font-size:10px;margin-top:12px}
+.vehicle-panel .assistant-panel .catalog-scroll{max-height:220px}
+.vehicle-panel .radio-player{display:grid;gap:9px;padding:12px 0 8px}
+.vehicle-panel .radio-player>div{min-width:0;font-size:10px;line-height:1.6}
+.vehicle-panel .radio-player audio{display:block;width:100%;min-width:0;height:32px}
+.radio-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.radio-actions select{min-width:0;flex:1 1 120px;width:120px;font:inherit;font-size:10px;background:#20353c;border:1px solid #42615c;border-radius:6px;color:#c5e8dc;padding:7px 5px}
+.radio-actions button{font:inherit;font-size:10px;padding:7px 9px;cursor:pointer;background:#223b39;border:1px solid #42615c;border-radius:6px;color:#c5e8dc}
+@media(max-width:720px){.conversation-panel{position:static;height:700px;min-height:0}.vehicle-panel .assistant-tool-chips{grid-template-columns:repeat(3,minmax(0,1fr))}.conversation-settings .settings-content{max-height:140px}.conversation-panel .conversation{min-height:100px}}
+@media(max-width:420px){.lower-cards{grid-template-columns:1fr}.conversation-panel{height:720px}}
+
+.conversation-panel .conversation-settings[open] ~ .conversation{min-height:0}

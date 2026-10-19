@@ -16,18 +16,20 @@ async function refreshTools(){
   $('assistant-benchmark-note').textContent=text('외부 도구 왕복 p95 3초 초과 또는 반복 실패 시 기본 제외. ASR·모델·TTS 시간은 별도이며 캐시 적중도 포함됩니다.','External tools are excluded if round-trip p95 exceeds 3 s or repeated failures occur. ASR, model and TTS time are separate; cached calls are included.')+(d.reportAt?' '+d.reportAt:'');
  }catch{$('assistant-transport').textContent=text('도구 연결 확인 중','Checking tools');}
 }
-export function stopRadio(cancelPending=true){if(cancelPending)radioRequest++;radio?.pause();if(radio){radio.removeAttribute('src');radio.load();}radio=null;radioStation=null;$('radio-now').textContent=text('라디오 정지','Radio stopped');}
+const radioChanged=()=>document.dispatchEvent(new CustomEvent('vehicle-radio-state'));
+export function getRadioState(){return radioStation?{name:radioStation.name,playing:!!radio&&!radio.paused}:null;}
+export function stopRadio(cancelPending=true){if(cancelPending)radioRequest++;radio?.pause();if(radio){radio.removeAttribute('src');radio.load();}radio=null;radioStation=null;$('radio-now').textContent=text('라디오 정지','Radio stopped');radioChanged();}
 export function syncRadioState(state,actions=[]){radioVolume=Math.max(0,Math.min(1,state.media.volume/100));if(!radio)return;radio.volume=radioDucked?Math.min(.08,radioVolume):radioVolume;const command=actions.find(x=>x.type==='media');if(command?.value==='pause')radio.pause();else if(command?.value==='play')radio.play().catch(()=>{});}
 export function duckRadio(duck){radioDucked=duck;if(radio)radio.volume=duck?Math.min(.08,radioVolume):radioVolume;}
 async function playStation(id){
  const request=++radioRequest;
  try{
   const response=await api('radio/station',{method:'POST',body:JSON.stringify({stationId:id})});if(!response.ok)throw Error('Station unavailable');const station=await response.json();
-  if(request!==radioRequest)return;stopRadio(false);radioStation=station;const player=$('radio-player');radio=player;player.src=station.url;player.volume=radioVolume;playbackStarted=performance.now();
+  if(request!==radioRequest)return;stopRadio(false);radioStation=station;$('radio-station').value=id;const player=$('radio-player');radio=player;player.src=station.url;player.volume=radioVolume;playbackStarted=performance.now();
   $('radio-now').textContent=text('라디오 연결 중…','Connecting radio…');
-  player.onplaying=()=>{$('radio-now').textContent=`${text('실제 재생 중','Live playback')} · ${station.name} · ${Math.round(performance.now()-playbackStarted)} ms`;document.dispatchEvent(new CustomEvent('vehicle-radio-playback',{detail:{status:'playing',stationId:id,firstPlaybackMs:Math.round(performance.now()-playbackStarted)}}));};
-  player.onerror=()=>{$('radio-now').textContent=text('이 방송은 재생할 수 없어요. 다른 방송을 선택해 주세요.','This station could not play. Please choose another.');};
-  player.onpause=()=>{if(radioStation)$('radio-now').textContent=`${text('일시 정지','Paused')} · ${station.name}`;};
+  player.onplaying=()=>{$('radio-now').textContent=`${text('실제 재생 중','Live playback')} · ${station.name} · ${Math.round(performance.now()-playbackStarted)} ms`;radioChanged();document.dispatchEvent(new CustomEvent('vehicle-radio-playback',{detail:{status:'playing',stationId:id,firstPlaybackMs:Math.round(performance.now()-playbackStarted)}}));};
+  player.onerror=()=>{$('radio-now').textContent=text('이 방송은 재생할 수 없어요. 다른 방송을 선택해 주세요.','This station could not play. Please choose another.');radioChanged();};
+  player.onpause=()=>{if(radioStation)$('radio-now').textContent=`${text('일시 정지','Paused')} · ${station.name}`;radioChanged();};
   await player.play();
  }catch{$('radio-now').textContent=text('재생 버튼을 눌러 시작하거나 다른 방송을 선택해 주세요.','Press Play to start, or choose another station.');}
 }
@@ -36,7 +38,7 @@ export function renderAssistantResult(result,{applyEffect=true}={}){
  const box=$('assistant-result');box.replaceChildren();box.hidden=false;
  const header=document.createElement('strong');header.textContent=`${result.operation||''} · ${result.elapsedMs??'—'} ms · ${result.transport||'tool'}`;box.append(header);
  const reply=document.createElement('p');reply.textContent=result.reply||result.error||'';box.append(reply);
- for(const item of result.items||[]){const line=document.createElement('div');line.className='assistant-item';line.textContent=[item.date,item.name||item.title,item.text].filter(Boolean).join(' · ');if(item.id&&result.operation==='radio'){const button=document.createElement('button');button.textContent=text('재생','Play');button.addEventListener('click',()=>playStation(item.id));line.append(button);}box.append(line);}
+ for(const item of result.operation==='radio'?[]:result.items||[]){const line=document.createElement('div');line.className='assistant-item';line.textContent=[item.date,item.name||item.title,item.text].filter(Boolean).join(' · ');box.append(line);}
  const links=document.createElement('div');links.className='assistant-sources';
  for(const s of result.sources||[]){if(!/^https?:\/\//.test(s.url))continue;const a=document.createElement('a');a.href=s.url;a.textContent=s.title||s.url;a.target='_blank';a.rel='noopener noreferrer';links.append(a);}box.append(links);
  if(result.notice){const note=document.createElement('small');note.textContent=result.notice;box.append(note);}
@@ -50,8 +52,9 @@ export function renderAssistantResult(result,{applyEffect=true}={}){
   };tick();if(effect.timers.length)refreshTimer=setInterval(tick,1000);
  }
 }
-document.addEventListener('vehicle-ui-language',()=>{void refreshTools();if(lastResult)renderAssistantResult(lastResult,{applyEffect:false});});
+document.addEventListener('vehicle-ui-language',()=>{void refreshTools();if(lastResult)renderAssistantResult(lastResult,{applyEffect:false});if(!radioStation)$('radio-now').textContent=text('라디오 정지','Radio stopped');});
 $('radio-stop')?.addEventListener('click',stopRadio);
+$('radio-play')?.addEventListener('click',()=>void playStation($('radio-station').value));
 $('use-location')?.addEventListener('click',()=>{
  if(!navigator.geolocation){$('assistant-location').textContent=text('위치 기능을 지원하지 않아요.','Geolocation is unavailable.');return;}
  navigator.geolocation.getCurrentPosition(async({coords})=>{try{const r=await api('location',{method:'POST',body:JSON.stringify({latitude:coords.latitude,longitude:coords.longitude})});if(!r.ok)throw Error();$('assistant-location').textContent=`${coords.latitude.toFixed(4)}, ${coords.longitude.toFixed(4)}`;}catch{$('assistant-location').textContent=text('위치를 저장하지 못했어요.','Could not set location.');}},()=>{$('assistant-location').textContent=text('위치 권한이 없어 서울시청 데모 좌표를 사용합니다.','Location permission unavailable; using the Seoul City Hall demo coordinate.');},{timeout:6000,maximumAge:300000});

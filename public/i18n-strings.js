@@ -521,3 +521,16 @@ Object.assign(english,{
  "호출 성공":"Successful calls",
  "외부 도구 조회 · 차량 제어 경로 유지":"External tool lookup · Vehicle control path unchanged"
 });
+
+Object.assign(english,{
+ "차량 도우미":"Cabin assistant",
+ "필요한 기능을 누르거나 말해 보세요. 결과는 이 차량 패널에 표시됩니다.":"Tap a service or ask by voice. Results appear in this cabin panel.",
+ "라디오 채널":"Radio station",
+ "재생":"Play",
+ "중지":"Stop",
+ "라디오는 실제 방송을 재생합니다. 플레이리스트는 모의 상태입니다.":"Radio plays live audio. The playlist state is simulated.",
+ "실제 라디오 재생 중":"Live radio playing",
+ "라디오 일시 정지":"Radio paused",
+ "모델·음성 설정":"Model and voice settings",
+ "최근 6개 메시지 표시 · 전체 대화는 기록 내려받기로 확인하세요.":"Showing the latest 6 messages. Download the session for full history."
+});
