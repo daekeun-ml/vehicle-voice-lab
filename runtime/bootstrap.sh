@@ -6,13 +6,13 @@ sudo apt-get update -qq
 sudo apt-get install -y -qq python3-venv ffmpeg libsndfile1 sox
 curl -LsSf https://astral.sh/uv/install.sh | sh
 export PATH="$HOME/.local/bin:$PATH"
-BASE_PYTHON=/opt/pytorch/bin/python
-if [ ! -x "$BASE_PYTHON" ]; then BASE_PYTHON=$(find /opt -path '*/bin/python' -type f 2>/dev/null | head -1); fi
-if [ -z "$BASE_PYTHON" ]; then BASE_PYTHON=python3; fi
-uv venv --system-site-packages --python "$BASE_PYTHON" core-env
-uv venv --system-site-packages --python "$BASE_PYTHON" tts-env
+# DLAMI's /opt/pytorch interpreter can change independently of the app.
+uv python install 3.12
+uv venv --python 3.12 core-env
+uv venv --python 3.12 tts-env
+uv pip install --python core-env/bin/python 'torch==2.14.1' torchvision torchaudio pillow
 uv pip install --python core-env/bin/python 'transformers==5.20.0' accelerate fastapi uvicorn python-multipart soundfile librosa 'xgrammar==0.2.8' 'bitsandbytes==0.49.2'
-uv pip install --python tts-env/bin/python qwen-tts accelerate fastapi uvicorn python-multipart soundfile
+uv pip install --python tts-env/bin/python 'qwen-tts==0.1.1' 'torch==2.14.1' 'transformers==4.57.3' accelerate fastapi uvicorn python-multipart soundfile
 HF_HOME=/opt/vehicle-voice/models core-env/bin/python cache_planners.py
 for role in core tts; do
   port=9101; [ "$role" = tts ] && port=9102

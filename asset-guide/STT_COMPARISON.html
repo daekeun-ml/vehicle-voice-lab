@@ -1,0 +1,569 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STT 4종 비교와 실습</title><style>body{font:16px/1.8 system-ui,sans-serif;color:#232f3e;background:#fff;max-width:1120px;margin:auto;padding:32px}a{color:#0972d3}h1,h2,h3{line-height:1.4}h2{margin-top:44px;border-top:1px solid #d5dbdb;padding-top:24px}pre{background:#f2f3f3;padding:18px;overflow:auto;border-radius:6px}code{font-size:.9em}table{display:block;overflow:auto;border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #d5dbdb;padding:10px}img{max-width:100%;height:auto}blockquote{border-left:4px solid #ec7211;padding-left:20px;margin-left:0}.nav{font-size:14px}</style></head><body><p class="nav"><a href="/">데모 앱</a> · <a href="hands-on.html">핸즈온</a> · <a href="README.html">가이드 시작</a></p><h1 id="stt-4종-비교와-실습">STT 4종 비교와 실습</h1>
+<p>Qwen3-ASR 0.6B·1.7B를 GPU2에 연결했습니다. Whisper와 Nemotron은 GPU1에서, Qwen3-ASR 두 모델은 GPU2에서 실행합니다. 모두 서울 리전의 동일한 g6e.2xlarge / NVIDIA L40S 사양입니다.</p>
+<h2 id="웹에서-직접-비교">웹에서 직접 비교</h2>
+<ol>
+<li><a href="https://d2ub6bbyf1c3sv.cloudfront.net/#asr-lab">STT 비교 화면</a>을 엽니다.</li>
+<li>30초 이하 음성 파일 하나를 선택하고 <strong>4개 STT 비교</strong>를 누릅니다.</li>
+<li>브라우저가 한 번만 16kHz 모노 WAV로 변환한 동일 입력을 네 모델에 보냅니다.</li>
+<li>인식문, 모델 이름, 인식 시간, 모델 로드 시간, 전체 요청 시간을 비교합니다. 이 시험은 차량 설정이나 대화 기록을 변경하지 않습니다.</li>
+<li><strong>차량 대화에 사용</strong>을 누르면 해당 STT가 선택됩니다. 차량 대화의 <strong>모델·음성 설정 → 음성 인식</strong>에서도 직접 선택할 수 있습니다.</li>
+</ol>
+<p>Qwen3-ASR은 한국어를 명시하고 BF16/Transformers/SDPA로 실행합니다. 현재 GPU2의 Qwen3-ASR 0.6B·1.7B는 각각 독립 프로세스로 상주합니다. Step·MiMo·Qwen3-Omni의 교체 잠금과 분리돼 있어, 제어 벤치마크가 실행 중이어도 STT를 호출할 수 있습니다. 같은 STT의 요청은 모델별 최대 4개 대기열에서 순서대로 처리합니다. 대기열이 가득 차면 503으로 알리며 다른 STT로 대체하지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>선택 ID</th>
+<th>정확한 모델</th>
+<th>고정 revision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>whisper</td>
+<td>openai/whisper-large-v3-turbo</td>
+<td>41f01f3fe87f28c78e2fbf8b568835947dd65ed9</td>
+</tr>
+<tr>
+<td>nemotron</td>
+<td>nvidia/nemotron-3.5-asr-streaming-0.6b</td>
+<td>기존 core worker의 설치 버전; 이번 비교에서 별도 revision 고정 없음</td>
+</tr>
+<tr>
+<td>qwen3-asr-06b</td>
+<td>Qwen/Qwen3-ASR-0.6B</td>
+<td>5eb144179a02acc5e5ba31e748d22b0cf3e303b0</td>
+</tr>
+<tr>
+<td>qwen3-asr-17b</td>
+<td>Qwen/Qwen3-ASR-1.7B</td>
+<td>7278e1e70fe206f11671096ffdd38061171dd6e5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="고정-벤치마크">고정 벤치마크</h2>
+<p>총 <strong>206개 입력 × 4개 STT = 824건</strong>입니다. 결과는 <a href="https://d2ub6bbyf1c3sv.cloudfront.net/#asr-lab">웹 표</a>와 <a href="https://d2ub6bbyf1c3sv.cloudfront.net/api/asr/evaluation">요약 JSON</a>에 표시합니다.</p>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th style="text-align: right;">STT별 입력 수</th>
+<th>목적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기존 31개 + 고난도 48개 원음</td>
+<td style="text-align: right;">79</td>
+<td>동일 문장에 대한 인식 비교</td>
+</tr>
+<tr>
+<td>동일 79개 + 노이즈 제거</td>
+<td style="text-align: right;">79</td>
+<td>전처리로 깨끗한 음성이 손상되는지 확인</td>
+</tr>
+<tr>
+<td>유색 잡음 10dB, 전처리 전/후</td>
+<td style="text-align: right;">12 × 2</td>
+<td>저주파 중심 합성 잡음</td>
+</tr>
+<tr>
+<td>백색 잡음 0dB, 전처리 전/후</td>
+<td style="text-align: right;">12 × 2</td>
+<td>강한 광대역 합성 잡음</td>
+</tr>
+</tbody>
+</table>
+<p>잡음 부분집합은 STT 결과를 보기 전에 각 원본 세트의 앞 6개로 고정했습니다. 원래 31개 중 3개는 이미 백색 잡음 20dB가 적용된 입력입니다. 따라서 표의 ‘원음’은 입력 세트를 변경하지 않았다는 뜻이며, 전부 무잡음이라는 뜻이 아닙니다. 합성 잡음은 실제 도로·차량 실내 녹음의 대체물이 아닙니다.</p>
+<p>전처리는 <code>conservative-dd-wiener-v1</code>을 그대로 사용합니다. 발화 전체의 조용한 프레임에서 잡음을 추정하고, 주파수별 감쇠와 시간 평활화를 적용합니다. 최대 감쇠 9dB, 고주파 자음 보호, 원음 15% 혼합을 사용합니다. 신뢰할 조용한 구간이 없으면 원음을 통과시킵니다. 음성 인식 정답을 이용해 필터를 조정하지 않습니다. 웹 직접 비교는 원음 경로이며, 전처리 A/B는 고정 벤치마크에서 수행합니다.</p>
+<p>이번 입력에서는 원음 79개와 유색 잡음 12개에 필터가 적용됐고, <strong>백색 잡음 0dB의 12개는 모두 ‘신뢰할 조용한 프레임 없음’으로 우회</strong>했습니다. 필터 감쇠는 적용되지 않았습니다. 다만 float64→float32→PCM16 저장 경로 때문에 각 파일의 2~21개 샘플에서 최대 1 LSB 차이가 있어 비트 단위 동일 파일은 아닙니다. 이 조건의 작은 점수 차이를 노이즈 제거 효과로 해석하면 안 됩니다. 강한 잡음에서 현재 추정기의 한계로 기록합니다.</p>
+<h3 id="점수를-읽는-방법">점수를 읽는 방법</h3>
+<ul>
+<li><strong>CER</strong>: 공백·문장부호를 제거한 한국어 문자 편집 거리 / 정답 문자 수. 숫자 <code>24</code>와 <code>이십사</code>의 표기 차이는 유지합니다. 의미가 같아도 표기 차이로 오류가 늘 수 있으므로 CER만으로 결론내리지 않습니다.</li>
+<li><strong>숫자·좌석·목적지</strong>: 정답에 있는 명시적 언급의 순서와 값이 일치하는지 봅니다. 숫자는 기존 숫자 표기 정리와 일부 고유어 수사를 정리합니다. 음수 부호와 모든 고유어 수사를 완전히 다루는 지표는 아닙니다. 좌석은 운전석/조수석/양쪽, 목적지는 서울역/서울숲에 한정한 보조 지표입니다. 일반적인 개체명 인식 점수가 아닙니다.</li>
+<li><strong>인식 시간</strong>: 워커에서 한 건을 처리한 시간의 중앙값. 모델 초기 로드와 네트워크 왕복은 제외합니다. RTF는 이 시간을 음성 길이로 나눈 값입니다.</li>
+<li><strong>제어 동작·상태</strong>: 인식문을 같은 <strong>Qwen3.5 4B BF16 / compact-v2 / deterministic</strong>에 넣고 실제 앱의 동작과 최종 상태를 정답과 비교합니다. 답변 의미나 TTS 청취 품질 점수는 포함하지 않습니다.</li>
+</ul>
+<p>고난도 48개는 고정된 이전 차량 상태·대화 문맥을 매 입력마다 주입합니다. 기존 31개의 후속 명령은 동일 정답 텍스트로 선행 명령을 실행합니다. 이 방식은 이전 발화의 STT 오류가 다음 발화에 누적되지 않도록 STT 한 건의 영향을 분리합니다.</p>
+<p>원본 파형, 필터 설정, 해시, 인식문, 모델 버전, 오류, 최종 동작은 결과 파일에 보존합니다. 824건은 GPU2의 순차 모델 교체 구성에서 측정한 기록입니다. 이후 웹 STT의 429 충돌을 해결하기 위해 ASR 워커를 분리했습니다. 따라서 표의 지연은 측정 당시 구성의 값이며, 독립 ASR과 다른 모델의 동시 요청 지연은 별도 검증입니다. 워커는 웹 데모와 공유하므로 독점 GPU 성능 측정은 아닙니다. STT 비교 동안 MiniCPM은 GPU1 메모리 확보를 위해 일시 중지하며 완료 후 복구합니다.</p>
+<p>제어 실패에는 STT 오류와 고정 제어 모델의 추론 오류가 모두 포함됩니다. 제어 모델을 고정했다는 이유만으로 모든 실패를 STT 탓으로 해석하면 안 됩니다. 모델별 원시 결과는 <code>/api/asr/evaluation/whisper</code>, <code>/api/asr/evaluation/nemotron</code>, <code>/api/asr/evaluation/qwen3-asr-06b</code>, <code>/api/asr/evaluation/qwen3-asr-17b</code>에서 확인합니다.</p>
+<h2 id="재현">재현</h2>
+<p>GPU2의 <code>/opt/vehicle-speech</code>에 <code>runtime/qwen_asr_worker.py</code>, <code>runtime/speech_manager.py</code>, <code>runtime/bootstrap_asr.sh</code>, <code>runtime/bootstrap_asr_services.sh</code>를 배치하고 <code>bash bootstrap_asr.sh</code>를 실행합니다. 라이브러리 환경은 <code>asr-requirements.lock</code>에 저장됩니다.</p>
+<pre><code class="language-bash">python scripts/build-asr-comparison.py
+ASR_BENCH_BASE=http://127.0.0.1:8789 node scripts/run-asr-comparison.mjs
+</code></pre>
+<p>평가 API는 별도 디렉터리와 loopback 포트 8789에서 실행합니다. 고정 fixture 키는 private 평가 서비스에만 설정하고 공개 웹 서비스에는 설정하지 않습니다. 키와 AWS 자격 증명은 결과나 가이드에 포함하지 않습니다.</p>
+<p>현재 두 GPU의 종료 예약은 <strong>2026-10-23 06:08:30 / 06:10:17 KST</strong>입니다. 이번에는 부팅 후 16시간으로 연장했습니다.</p>
+<!-- ASR_RESULTS -->
+
+<h2 id="실측-결과">실측 결과</h2>
+<p>집계 시각: 2026-10-22T10:55:01.394Z. 네 모델 모두 동일한 206개 입력을 처리했습니다.</p>
+<p>아래 제어 점수는 답변 의미를 제외한 동작·최종 상태 일치입니다. CER은 숫자의 문자 표기 차이도 오류로 셉니다.</p>
+<h3 id="기존-79개-원음">기존 79개 원음</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th style="text-align: right;">CER ↓</th>
+<th style="text-align: right;">숫자</th>
+<th style="text-align: right;">좌석</th>
+<th style="text-align: right;">목적지</th>
+<th style="text-align: right;">인식 중앙값 / P95</th>
+<th style="text-align: right;">제어 동작·상태</th>
+<th style="text-align: right;">실행 오류</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td style="text-align: right;">2.5%</td>
+<td style="text-align: right;">33/37</td>
+<td style="text-align: right;">29/29</td>
+<td style="text-align: right;">4/4</td>
+<td style="text-align: right;">107 / 168 ms</td>
+<td style="text-align: right;">60/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td style="text-align: right;">11.6%</td>
+<td style="text-align: right;">30/37</td>
+<td style="text-align: right;">26/29</td>
+<td style="text-align: right;">2/4</td>
+<td style="text-align: right;">112 / 150 ms</td>
+<td style="text-align: right;">49/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td style="text-align: right;">9.0%</td>
+<td style="text-align: right;">29/37</td>
+<td style="text-align: right;">28/29</td>
+<td style="text-align: right;">4/4</td>
+<td style="text-align: right;">642 / 1024 ms</td>
+<td style="text-align: right;">53/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td style="text-align: right;">6.5%</td>
+<td style="text-align: right;">31/37</td>
+<td style="text-align: right;">27/29</td>
+<td style="text-align: right;">4/4</td>
+<td style="text-align: right;">669 / 1042 ms</td>
+<td style="text-align: right;">58/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="기존-79개-노이즈-제거">기존 79개 노이즈 제거</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th style="text-align: right;">CER ↓</th>
+<th style="text-align: right;">숫자</th>
+<th style="text-align: right;">좌석</th>
+<th style="text-align: right;">목적지</th>
+<th style="text-align: right;">인식 중앙값 / P95</th>
+<th style="text-align: right;">제어 동작·상태</th>
+<th style="text-align: right;">실행 오류</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td style="text-align: right;">2.3%</td>
+<td style="text-align: right;">33/37</td>
+<td style="text-align: right;">29/29</td>
+<td style="text-align: right;">4/4</td>
+<td style="text-align: right;">107 / 172 ms</td>
+<td style="text-align: right;">60/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td style="text-align: right;">11.0%</td>
+<td style="text-align: right;">30/37</td>
+<td style="text-align: right;">27/29</td>
+<td style="text-align: right;">2/4</td>
+<td style="text-align: right;">111 / 151 ms</td>
+<td style="text-align: right;">50/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td style="text-align: right;">9.0%</td>
+<td style="text-align: right;">29/37</td>
+<td style="text-align: right;">28/29</td>
+<td style="text-align: right;">4/4</td>
+<td style="text-align: right;">630 / 1026 ms</td>
+<td style="text-align: right;">53/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td style="text-align: right;">6.7%</td>
+<td style="text-align: right;">31/37</td>
+<td style="text-align: right;">27/29</td>
+<td style="text-align: right;">4/4</td>
+<td style="text-align: right;">668 / 1041 ms</td>
+<td style="text-align: right;">59/79</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="유색-잡음-10db">유색 잡음 10dB</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th style="text-align: right;">CER ↓</th>
+<th style="text-align: right;">숫자</th>
+<th style="text-align: right;">좌석</th>
+<th style="text-align: right;">목적지</th>
+<th style="text-align: right;">인식 중앙값 / P95</th>
+<th style="text-align: right;">제어 동작·상태</th>
+<th style="text-align: right;">실행 오류</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td style="text-align: right;">6.0%</td>
+<td style="text-align: right;">9/11</td>
+<td style="text-align: right;">8/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">123 / 176 ms</td>
+<td style="text-align: right;">8/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td style="text-align: right;">25.5%</td>
+<td style="text-align: right;">6/11</td>
+<td style="text-align: right;">3/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">127 / 167 ms</td>
+<td style="text-align: right;">7/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td style="text-align: right;">14.2%</td>
+<td style="text-align: right;">9/11</td>
+<td style="text-align: right;">8/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">760 / 1243 ms</td>
+<td style="text-align: right;">9/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td style="text-align: right;">11.6%</td>
+<td style="text-align: right;">9/11</td>
+<td style="text-align: right;">8/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">773 / 1256 ms</td>
+<td style="text-align: right;">10/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="유색-잡음-10db-노이즈-제거">유색 잡음 10dB + 노이즈 제거</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th style="text-align: right;">CER ↓</th>
+<th style="text-align: right;">숫자</th>
+<th style="text-align: right;">좌석</th>
+<th style="text-align: right;">목적지</th>
+<th style="text-align: right;">인식 중앙값 / P95</th>
+<th style="text-align: right;">제어 동작·상태</th>
+<th style="text-align: right;">실행 오류</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td style="text-align: right;">6.4%</td>
+<td style="text-align: right;">9/11</td>
+<td style="text-align: right;">8/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">129 / 190 ms</td>
+<td style="text-align: right;">8/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">6/11</td>
+<td style="text-align: right;">3/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">126 / 162 ms</td>
+<td style="text-align: right;">8/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td style="text-align: right;">13.5%</td>
+<td style="text-align: right;">9/11</td>
+<td style="text-align: right;">8/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">759 / 1236 ms</td>
+<td style="text-align: right;">9/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td style="text-align: right;">11.2%</td>
+<td style="text-align: right;">10/11</td>
+<td style="text-align: right;">8/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">776 / 1259 ms</td>
+<td style="text-align: right;">10/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="백색-잡음-0db">백색 잡음 0dB</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th style="text-align: right;">CER ↓</th>
+<th style="text-align: right;">숫자</th>
+<th style="text-align: right;">좌석</th>
+<th style="text-align: right;">목적지</th>
+<th style="text-align: right;">인식 중앙값 / P95</th>
+<th style="text-align: right;">제어 동작·상태</th>
+<th style="text-align: right;">실행 오류</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td style="text-align: right;">25.5%</td>
+<td style="text-align: right;">5/11</td>
+<td style="text-align: right;">3/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">122 / 184 ms</td>
+<td style="text-align: right;">5/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td style="text-align: right;">70.4%</td>
+<td style="text-align: right;">0/11</td>
+<td style="text-align: right;">0/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">122 / 159 ms</td>
+<td style="text-align: right;">2/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td style="text-align: right;">45.7%</td>
+<td style="text-align: right;">1/11</td>
+<td style="text-align: right;">4/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">667 / 1156 ms</td>
+<td style="text-align: right;">2/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">4/11</td>
+<td style="text-align: right;">7/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">747 / 1178 ms</td>
+<td style="text-align: right;">7/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="백색-잡음-0db-노이즈-제거">백색 잡음 0dB + 노이즈 제거</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th style="text-align: right;">CER ↓</th>
+<th style="text-align: right;">숫자</th>
+<th style="text-align: right;">좌석</th>
+<th style="text-align: right;">목적지</th>
+<th style="text-align: right;">인식 중앙값 / P95</th>
+<th style="text-align: right;">제어 동작·상태</th>
+<th style="text-align: right;">실행 오류</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td style="text-align: right;">25.5%</td>
+<td style="text-align: right;">5/11</td>
+<td style="text-align: right;">3/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">122 / 266 ms</td>
+<td style="text-align: right;">5/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td style="text-align: right;">70.4%</td>
+<td style="text-align: right;">0/11</td>
+<td style="text-align: right;">0/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">122 / 160 ms</td>
+<td style="text-align: right;">2/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td style="text-align: right;">45.3%</td>
+<td style="text-align: right;">2/11</td>
+<td style="text-align: right;">4/8</td>
+<td style="text-align: right;">1/1</td>
+<td style="text-align: right;">688 / 1159 ms</td>
+<td style="text-align: right;">2/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td style="text-align: right;">26.6%</td>
+<td style="text-align: right;">5/11</td>
+<td style="text-align: right;">7/8</td>
+<td style="text-align: right;">0/1</td>
+<td style="text-align: right;">748 / 1178 ms</td>
+<td style="text-align: right;">7/12</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="원음-세트별-제어-결과">원음 세트별 제어 결과</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th style="text-align: right;">기존 31개 동작·상태</th>
+<th style="text-align: right;">고난도 48개 동작·상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td style="text-align: right;">30/31</td>
+<td style="text-align: right;">30/48</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td style="text-align: right;">22/31</td>
+<td style="text-align: right;">27/48</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td style="text-align: right;">26/31</td>
+<td style="text-align: right;">27/48</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td style="text-align: right;">30/31</td>
+<td style="text-align: right;">28/48</td>
+</tr>
+</tbody>
+</table>
+<h3 id="전처리의-짝지은-영향">전처리의 짝지은 영향</h3>
+<p>같은 모델·같은 원본 음성에서 전처리로 제어 결과가 개선되거나 악화된 수입니다. 두 조건 모두 성공하거나 모두 실패한 입력은 개선·악화에 포함하지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>입력 조건</th>
+<th style="text-align: right;">실패 → 성공</th>
+<th style="text-align: right;">성공 → 실패</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whisper turbo</td>
+<td>기존 79개 원음</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Whisper turbo</td>
+<td>유색 잡음 10dB</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Whisper turbo</td>
+<td>백색 잡음 0dB</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td>기존 79개 원음</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td>유색 잡음 10dB</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Nemotron 3.5</td>
+<td>백색 잡음 0dB</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td>기존 79개 원음</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td>유색 잡음 10dB</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 0.6B</td>
+<td>백색 잡음 0dB</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td>기존 79개 원음</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td>유색 잡음 10dB</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Qwen3-ASR 1.7B</td>
+<td>백색 잡음 0dB</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p>입력 manifest SHA-256: <code>6e420ce00aca5eb7fad515c7c6864b2454699417387740aec37825b8d1528241</code>.</p>
+<p>원본 79개와 별도 12개 잡음 부분집합의 크기가 다릅니다. 표의 비율을 서로 다른 전체 모집단의 일반 성능으로 해석하지 마세요.</p>
+<h2 id="독립-stt-워커-운영">독립 STT 워커 운영</h2>
+<ul>
+<li><code>vehicle-qwen3-asr-06b</code>: GPU2 loopback 9116</li>
+<li><code>vehicle-qwen3-asr-17b</code>: GPU2 loopback 9117</li>
+<li>외부 공개 포트는 추가하지 않고 기존 사설 9204 → manager의 <code>/asr</code> 경로로 전달합니다.</li>
+<li><code>/api/health</code>의 <code>researchWorkers.speech.independentAsr</code>와 <code>asrWorkers</code>에서 각 모델 준비·대기 요청 수를 확인합니다.</li>
+</ul></body></html>

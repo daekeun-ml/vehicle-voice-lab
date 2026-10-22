@@ -41,7 +41,7 @@ elif action=='tunnel':
   for name,state in states.items():
    s=status(name,state)
    if s['state']!='running' or not s['publicIp']:raise RuntimeError(name+' GPU를 시작한 후 다시 실행하세요.')
-   ports=[(19104,9104)] if name=='speech' else [(19101,9101),(19102,9102),(19103,9103)]+([(19105,9105)] if state.get('whisperEnabled') else [])
+   ports=[(19104,9104)] if name=='speech' else [(19101,9101),(19102,9102),(19103,9103)]+([(19105,9105)] if state.get('whisperEnabled') else [])+([(19106,9106),(19107,9107),(19108,9108)] if state.get('ttsCandidatesEnabled') else [])
    command=['ssh','-N','-o','ExitOnForwardFailure=yes','-o','ServerAliveInterval=30','-o','ServerAliveCountMax=3']
    for local,remote in ports:command+=['-L',f'127.0.0.1:{local}:127.0.0.1:{remote}']
    processes.append(subprocess.Popen(command+ssh_args(s['publicIp'])))
@@ -54,11 +54,11 @@ else:
   s=status(name,state);ip=s['publicIp']
   if s['state']!='running' or not ip:raise SystemExit(name+' GPU가 실행 중이 아닙니다.')
   if action=='logs':
-   units=['vehicle-speech'] if name=='speech' else ['vehicle-core','vehicle-tts','vehicle-minicpm','vehicle-whisper']
+   units=['vehicle-speech','vehicle-qwen3-asr-06b','vehicle-qwen3-asr-17b'] if name=='speech' else ['vehicle-core','vehicle-tts','vehicle-minicpm','vehicle-whisper','vehicle-tts-qwen17','vehicle-tts-supertonic','vehicle-tts-ppaso']
    subprocess.run(['ssh',*ssh_args(ip),'sudo journalctl '+' '.join('-u '+unit for unit in units)+' -n 60 --no-pager'],check=True)
   elif action=='deploy':
-   files=['speech_manager.py','speech_worker.py','speech_protocol.py','mimo-planner-prompt.txt','planner-schema.json','bootstrap_speech.sh','cache_speech.py'] if name=='speech' else ['model_server.py','bootstrap.sh','minicpm_server.py','minicpm_protocol.py','bootstrap_minicpm.sh','whisper_server.py','bootstrap_whisper.sh','cache_planners.py']
+   files=['speech_manager.py','speech_worker.py','speech_protocol.py','mimo-planner-prompt.txt','planner-schema.json','bootstrap_speech.sh','cache_speech.py','qwen_asr_worker.py','bootstrap_asr.sh','bootstrap_asr_services.sh'] if name=='speech' else ['model_server.py','bootstrap.sh','minicpm_server.py','minicpm_protocol.py','bootstrap_minicpm.sh','whisper_server.py','bootstrap_whisper.sh','cache_planners.py','tts_worker.py','bootstrap_tts_candidates.sh','bootstrap_ppaso.sh','ppaso_text.py']
    directory='/opt/vehicle-speech/' if name=='speech' else '/opt/vehicle-voice/'
    subprocess.run(['scp',*ssh_args(ip)[:-1],*[str(ROOT/'runtime'/f) for f in files],*([str(ROOT/'public/reference-neutral.wav')] if name=='core' else []),'ubuntu@'+ip+':'+directory],check=True)
-   command='sudo systemctl restart vehicle-speech' if name=='speech' else 'sudo systemctl restart vehicle-core vehicle-tts; if systemctl is-enabled --quiet vehicle-whisper; then sudo systemctl restart vehicle-whisper; fi; if systemctl is-enabled --quiet vehicle-minicpm; then sudo systemctl restart vehicle-minicpm; fi'
+   command='sudo systemctl restart vehicle-speech; for unit in vehicle-qwen3-asr-06b vehicle-qwen3-asr-17b; do if systemctl is-enabled --quiet $unit; then sudo systemctl restart $unit; fi; done' if name=='speech' else 'sudo systemctl restart vehicle-core vehicle-tts; if systemctl is-enabled --quiet vehicle-whisper; then sudo systemctl restart vehicle-whisper; fi; if systemctl is-enabled --quiet vehicle-minicpm; then sudo systemctl restart vehicle-minicpm; fi; for unit in vehicle-tts-qwen17 vehicle-tts-supertonic vehicle-tts-ppaso; do if systemctl is-enabled --quiet $unit; then sudo systemctl restart $unit; fi; done'
    subprocess.run(['ssh',*ssh_args(ip),command],check=True)

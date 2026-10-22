@@ -1,0 +1,2715 @@
+{
+  "modelId": "sonic",
+  "name": "Nova 2.5 Sonic",
+  "repo": "amazon.nova-2-5-sonic",
+  "suite": "original31",
+  "status": "complete",
+  "startedAt": "2026-10-22T08:11:34.699Z",
+  "releaseSha256": "aa3098e89ccf4d650a1510e631559393a0fef66d171fce4482159d2c4dde10fb",
+  "audioCorpusHash": "4d11199b3576baa14b08db4988adb56bb4043379f556a59892241e8c21341377",
+  "asrId": null,
+  "promptVersion": "full-v1",
+  "generationProfile": "native temperature 0.3, topP 0.9",
+  "quantization": "managed",
+  "timingBasis": "first audio minus complete real-time input transmission",
+  "rows": [
+    {
+      "id": "driver-24",
+      "variant": "clean",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "driver"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "driver"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "운전석 온도를 이십사도로 맞춰줘",
+      "reply": "운전석 온도를 이십사도로 맞췄습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 149760,
+      "firstAudioMs": 1353,
+      "elapsedMs": 7182,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "passenger-25",
+      "variant": "clean",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 25,
+          "zone": "passenger"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 25,
+          "zone": "passenger"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "조수석 온도를 이십오도로 맞춰줘",
+      "reply": "조수석 온도를 이십오도로 맞췄습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 124800,
+      "firstAudioMs": 1475,
+      "elapsedMs": 6876,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "both-23",
+      "variant": "clean",
+      "text": "양쪽 온도를 23도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 23,
+          "zone": "both"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 23,
+          "zone": "both"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "양쪽 온도를 이십삼도로 맞춰줘",
+      "reply": "양쪽 온도를 이십삼도로 맞췄습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 115200,
+      "firstAudioMs": 1322,
+      "elapsedMs": 6393,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "driver-up",
+      "variant": "clean",
+      "text": "운전석 온도를 1도 올려줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 23,
+          "zone": "driver"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 23,
+          "zone": "driver"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "운전석 온도를 일도 올려줘",
+      "reply": "운전석 온도를 이십삼 도로 맞췄어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 147840,
+      "firstAudioMs": 1400,
+      "elapsedMs": 6968,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "both-down",
+      "variant": "clean",
+      "text": "온도를 1도 내려줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 21
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 21,
+          "zone": "both"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 21,
+          "zone": "both"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "온도를 일도 내려줘",
+      "reply": "양쪽 온도를 이십일도로 맞췄어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 132480,
+      "firstAudioMs": 1304,
+      "elapsedMs": 5976,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "fan-5",
+      "variant": "clean",
+      "text": "바람 세기를 5단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "바람새기를 오단으로 해줘",
+      "reply": "바람 세기를 오단으로 설정했습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 128640,
+      "firstAudioMs": 1284,
+      "elapsedMs": 6274,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "ac-off",
+      "variant": "clean",
+      "text": "에어컨 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": false,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "ac",
+          "value": false
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "ac",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": false,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "에어컨 꺼줘",
+      "reply": "에어컨을 껐어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 65280,
+      "firstAudioMs": 1432,
+      "elapsedMs": 4177,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "ac-on",
+      "variant": "clean",
+      "text": "에어컨 켜줘.",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "에어컨 켜줘",
+      "reply": "에어컨을 켰습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 65280,
+      "firstAudioMs": 1704,
+      "elapsedMs": 4473,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "defrost-on",
+      "variant": "clean",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "앞누리 김사림 제거 켜줘",
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 117120,
+      "firstAudioMs": 1326,
+      "elapsedMs": 6080,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "defrost-off",
+      "variant": "clean",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "앞누리 김서림 제거 꺼져",
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 132480,
+      "firstAudioMs": 1372,
+      "elapsedMs": 6386,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "seat-2",
+      "variant": "clean",
+      "text": "시트 열선을 2단으로 켜줘.",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 2
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 2,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 2,
+          "zone": "both"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "seatHeat",
+          "value": 2,
+          "zone": "both"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 2,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "시트의 열선을 이단으로 켜줘",
+      "reply": "시트 열선을 이단으로 켰습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 122880,
+      "firstAudioMs": 1366,
+      "elapsedMs": 6374,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "seat-off",
+      "variant": "clean",
+      "text": "시트 열선 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 0,
+          "zone": "both"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "seatHeat",
+          "value": 0,
+          "zone": "both"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "시트의 열선 꺼져",
+      "reply": "시트 열선을 껐습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 96000,
+      "firstAudioMs": 1396,
+      "elapsedMs": 5180,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "volume-20",
+      "variant": "clean",
+      "text": "음량을 20으로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "volume",
+          "value": 20
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 20,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 20,
+          "zone": "both"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 20,
+          "zone": "both"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 20,
+          "passenger": 20
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "응량을 이십으로 맞춰줘",
+      "reply": "양쪽 온도를 이십 도로 맞췄어요.",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 128640,
+      "firstAudioMs": 1401,
+      "elapsedMs": 6179,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "media-play",
+      "variant": "clean",
+      "text": "음악 재생해줘.",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": true,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": true,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "음악 재생해줘",
+      "reply": "음악을 재생했습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 78720,
+      "firstAudioMs": 1279,
+      "elapsedMs": 4566,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "media-pause",
+      "variant": "clean",
+      "text": "음악 멈춰줘.",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "음악 멈춰줘",
+      "reply": "음악을 멈췄어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 71040,
+      "firstAudioMs": 1361,
+      "elapsedMs": 4369,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "media-next",
+      "variant": "clean",
+      "text": "다음 곡으로 넘겨줘.",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "next"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "다음 드라이브 곡"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "media",
+          "value": "next"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "media",
+          "value": "next"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "다음 드라이브 곡"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "다음곡으로 넘겨줘",
+      "reply": "다음 곡으로 바꿨어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 80640,
+      "firstAudioMs": 1321,
+      "elapsedMs": 4973,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "navigate",
+      "variant": "clean",
+      "text": "서울역으로 길 안내해줘.",
+      "expectedActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "서울역",
+          "active": true
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "서울역",
+          "active": true
+        },
+        "speed": 0
+      },
+      "heard": "서울역으로 길 안내해줘",
+      "reply": "서울역으로 길 안내를 시작합니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 126720,
+      "firstAudioMs": 1334,
+      "elapsedMs": 6169,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "nav-stop",
+      "variant": "clean",
+      "text": "길 안내 종료해줘.",
+      "expectedActions": [
+        {
+          "type": "navigationStop"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "길안내종류해줘",
+      "reply": "어디로 안내해 드릴까요?목적지를 말씀해 주세요.",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 145920,
+      "firstAudioMs": 991,
+      "elapsedMs": 5975,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "clarify",
+      "variant": "clean",
+      "text": "목적지는 아직 안 정했는데 길 안내해줘.",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "목적지는 아직 안정했는데 길이 안내해줘",
+      "reply": "목적지를 말씀해 주시면 바로 길 안내를 시작하겠습니다. 어디로 갈까요?",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 226560,
+      "firstAudioMs": 1045,
+      "elapsedMs": 8886,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "unsupported-sensor",
+      "variant": "clean",
+      "text": "타이어 공기압 센서 값을 40으로 바꿔줘.",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "타이어 공기압 센서 값을 사십으로 바꿔줘",
+      "reply": "죄송합니다. 타이어 공기압은 제가 제어할 수 있는 항목이 아닙니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 215040,
+      "firstAudioMs": 1138,
+      "elapsedMs": 9076,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "status",
+      "variant": "clean",
+      "text": "지금 조수석 온도가 몇 도야?",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger"
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "지금 조수석 온도가 몇 도야",
+      "reply": "조수석 온도는 이십이 도입니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": true,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 126720,
+      "firstAudioMs": 1411,
+      "elapsedMs": 6573,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [
+        "값은 16~30여야 합니다."
+      ],
+      "quantization": "managed"
+    },
+    {
+      "id": "out-of-range",
+      "variant": "clean",
+      "text": "조수석 온도를 40도로 설정해줘.",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 30,
+          "zone": "passenger"
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "조수석 온도를 사십 도로 설정해줘",
+      "reply": "온도는 십육 도에서 삼십 도 사이로만 설정할 수 있어요. 다시 말씀해 주세요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": true,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": false,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 255360,
+      "firstAudioMs": 1398,
+      "elapsedMs": 9573,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "validationError": "온도는 16~30도 사이로 말씀해 주세요.",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "compound",
+      "variant": "clean",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "driver"
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "driver"
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "운전석은 이십사도로 하고 바람세기는 삼단으로 해줘",
+      "reply": "운전석 온도를 이십사도로 맞췄고 바람 세기를 삼단으로 변경했습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 241920,
+      "firstAudioMs": 1299,
+      "elapsedMs": 10883,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "correction",
+      "variant": "clean",
+      "text": "아니, 24도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "passenger"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "passenger"
+        }
+      ],
+      "actualState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "아니 이십사도로 맞춰줘",
+      "reply": "조수석 온도를 이십사도로 맞췄습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 155520,
+      "firstAudioMs": 1183,
+      "elapsedMs": 6679,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "undo",
+      "variant": "clean",
+      "text": "방금 설정 되돌려줘.",
+      "expectedActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "actualState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "방금 설정 되돌려줘",
+      "reply": "이전 설정으로 되돌렸습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 109440,
+      "firstAudioMs": 1098,
+      "elapsedMs": 5474,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "passenger-25-sohee",
+      "variant": "second-voice",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 25,
+          "zone": "driver"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 25,
+          "zone": "driver"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 25,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "주 수석 온도를 이십오 도로 맞춰줘",
+      "reply": "운전석 온도를 이십오 도로 맞췄습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 145920,
+      "firstAudioMs": 421,
+      "elapsedMs": 8271,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "defrost-off-sohee",
+      "variant": "second-voice",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "앞별이 김설임 제거 꺼져",
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 138240,
+      "firstAudioMs": -2363,
+      "elapsedMs": 12385,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "compound-sohee",
+      "variant": "second-voice",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "both"
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "both"
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 24
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "온전석은 이십사도로하고 바람세기는 삼단으로 해줘",
+      "reply": "양쪽 온도를 이십사도로 맞췄고 바람 세기를 삼단으로 변경했습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 209280,
+      "firstAudioMs": 217,
+      "elapsedMs": 11179,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "driver-24-noise",
+      "variant": "noise-20dB",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "driver"
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "value": 24,
+          "zone": "driver"
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "운전석 온도를 이십사 도로 맞춰줘",
+      "reply": "운전석 온도를 이십사 도로 맞췄습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 134400,
+      "firstAudioMs": 1358,
+      "elapsedMs": 6880,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "defrost-on-noise",
+      "variant": "noise-20dB",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "앞누리 김사림 제거켜줘",
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 149760,
+      "firstAudioMs": 1233,
+      "elapsedMs": 6773,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    },
+    {
+      "id": "fan-5-noise",
+      "variant": "noise-20dB",
+      "text": "바람 세기를 5단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "바람새기를 오단으로 해줘",
+      "reply": "바람 세기를 오단으로 설정했습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 117120,
+      "firstAudioMs": 1248,
+      "elapsedMs": 5880,
+      "modelLoadMs": 0,
+      "ttsModel": "amazon.nova-2-5-sonic",
+      "nativeTurns": 1,
+      "toolErrors": [],
+      "quantization": "managed"
+    }
+  ],
+  "completedAt": "2026-10-22T08:15:28.988Z"
+}

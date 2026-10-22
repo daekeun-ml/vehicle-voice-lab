@@ -1,6 +1,6 @@
 const labels={ready:'연결됨',integrating:'연동 중',candidate:'후보', 'license-review':'라이선스 검토','access-needed':'접근 동의 필요','hardware-needed':'장비 필요','low-priority':'참고 후보'};
 let catalog,filter='all';
-function plannerOption(model){const config=model.demoConfig||{},option=Object.assign(document.createElement('option'),{value:model.id,textContent:(config.recommended?'✓ ':'')+model.name+(config.qualityScore!=null?' · '+config.qualityScore+'점':'')+(model.status==='ready'?'':' · '+(labels[model.status]||model.status)),disabled:model.status!=='ready'});Object.assign(option.dataset,{promptVersion:config.promptVersion||'compact-v2',generationProfile:config.generationProfile||'deterministic'});return option;}
+function plannerOption(model){const config=model.demoConfig||{},option=Object.assign(document.createElement('option'),{value:model.id,textContent:model.name+(model.status==='ready'?'':' · '+(labels[model.status]||model.status)),disabled:model.status!=='ready'});Object.assign(option.dataset,{promptVersion:config.promptVersion||'compact-v2',generationProfile:config.generationProfile||'deterministic',asrId:config.asrId||'whisper'});return option;}
 function render(){
   const body=document.getElementById('candidate-rows');body.replaceChildren();
   for(const model of catalog.models.filter(m=>filter==='all'||m.role===filter)){
@@ -21,6 +21,7 @@ try{
     const option=Object.assign(document.createElement('option'),{value:model.id,textContent:model.name+(model.audioPlanner?'':' · 차량 제어 미지원'),disabled:model.status!=='ready'});
     Object.assign(option.dataset,{promptVersion:model.demoConfig?.promptVersion||'full-v1',generationProfile:model.demoConfig?.generationProfile||'deterministic',ready:String(model.status==='ready'),audioPlanner:String(!!model.audioPlanner),nativeAudio:String(!!model.nativeAudio)});return option;
   }));
+  if(catalog.defaultAudioModelId&&[...audio.options].some(o=>o.value===catalog.defaultAudioModelId&&!o.disabled))audio.value=catalog.defaultAudioModelId;
   if(catalog.defaultPlannerId&&[...planners.options].some(o=>o.value===catalog.defaultPlannerId&&!o.disabled))planners.value=catalog.defaultPlannerId;document.dispatchEvent(new Event('vehicle-catalog-ready'));
   function notice(){const model=catalog.models.find(m=>m.id===planners.value),element=document.getElementById('planner-notice');element.hidden=!['hyperclova-05b','exaone4-12b','smollm3'].includes(model?.id);element.textContent=model?.id==='hyperclova-05b'?'Powered by HyperCLOVA X · 자체 라이선스 · 실험용':model?.id==='exaone4-12b'?'EXAONE · 연구·평가용 비상업 라이선스 · 제품 배포는 별도 허가 필요':model?.korean||'';}
   planners.addEventListener('change',notice);notice();

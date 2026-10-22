@@ -1,0 +1,75 @@
+{
+  "suiteId": "korean-vehicle-tts-v1",
+  "caseCount": 8,
+  "outputCount": 24,
+  "humanListeningCompleted": false,
+  "scope": "one generation per model/case; normalized ASR re-transcription, not MOS or a general model ranking",
+  "timingBasis": "warm whole-utterance synthesis, valid audio only; not first streamed audio",
+  "models": [
+    {
+      "id": "supertonic3",
+      "repo": "Supertone/supertonic-3",
+      "revision": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+      "device": "CPU",
+      "validAudio": 8,
+      "total": 8,
+      "normalizedExact": 6,
+      "normalizedCer": 0.045112781954887216,
+      "numericSequenceMatches": 2,
+      "numericCases": 4,
+      "medianSynthesisMs": 587.920764500268,
+      "medianRealTimeFactor": 0.15709454775488163,
+      "processLifetimePeakRssMiB": 509.16015625,
+      "torchCudaPeakAllocatedMiB": null,
+      "invalidAudioIds": [],
+      "mismatchIds": [
+        "rejection",
+        "compound"
+      ]
+    },
+    {
+      "id": "qwen17",
+      "repo": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+      "revision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+      "device": "cuda:0",
+      "validAudio": 8,
+      "total": 8,
+      "normalizedExact": 7,
+      "normalizedCer": 0.007518796992481203,
+      "numericSequenceMatches": 4,
+      "numericCases": 4,
+      "medianSynthesisMs": 4211.123567999493,
+      "medianRealTimeFactor": 1.0651485182694405,
+      "processLifetimePeakRssMiB": 4635.55859375,
+      "torchCudaPeakAllocatedMiB": 4238.6015625,
+      "invalidAudioIds": [],
+      "mismatchIds": [
+        "compound"
+      ]
+    },
+    {
+      "id": "cosyvoice3",
+      "repo": "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+      "revision": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+      "device": "cuda:0",
+      "validAudio": 7,
+      "total": 8,
+      "normalizedExact": 5,
+      "normalizedCer": 0.05263157894736842,
+      "numericSequenceMatches": 4,
+      "numericCases": 4,
+      "medianSynthesisMs": 1462.1776570002112,
+      "medianRealTimeFactor": 0.38878707404580054,
+      "processLifetimePeakRssMiB": 6642.07421875,
+      "torchCudaPeakAllocatedMiB": 4368.75830078125,
+      "invalidAudioIds": [
+        "greeting"
+      ],
+      "mismatchIds": [
+        "greeting",
+        "rejection",
+        "compound"
+      ]
+    }
+  ]
+}

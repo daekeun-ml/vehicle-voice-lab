@@ -1,0 +1,2810 @@
+{
+  "modelId": "step-audio2-mini",
+  "name": "Step-Audio 2 mini",
+  "repo": "stepfun-ai/Step-Audio-2-mini",
+  "revision": "e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36",
+  "suite": "original31",
+  "status": "complete",
+  "startedAt": "2026-10-22T08:51:55.831Z",
+  "releaseSha256": "aa3098e89ccf4d650a1510e631559393a0fef66d171fce4482159d2c4dde10fb",
+  "audioCorpusHash": "4d11199b3576baa14b08db4988adb56bb4043379f556a59892241e8c21341377",
+  "asrId": null,
+  "promptVersion": "compact-v2",
+  "generationProfile": "deterministic",
+  "quantization": "bf16",
+  "timingBasis": "HTTP submit to first received audio; private backend on Seoul GPU host",
+  "rows": [
+    {
+      "id": "driver-24",
+      "variant": "clean",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":운전석 온도를 24도로 맞춰줘",
+      "rawTranscript": null,
+      "reply": "운전석 온도를 24도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 89244,
+      "firstAudioMs": 165205,
+      "elapsedMs": 165205,
+      "modelLoadMs": 157558,
+      "asrMs": null,
+      "llmMs": 7464,
+      "ttsMs": 154,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "passenger-25",
+      "variant": "clean",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 조수석 온도를 25도로 맞춰줘요",
+      "rawTranscript": null,
+      "reply": "조수석 온도를 25도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 85644,
+      "firstAudioMs": 4788,
+      "elapsedMs": 4788,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4616,
+      "ttsMs": 155,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "both-23",
+      "variant": "clean",
+      "text": "양쪽 온도를 23도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 23
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 23
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 양쪽 온도를 23도로 맞춰줘요",
+      "rawTranscript": null,
+      "reply": "양쪽 온도를 23도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 82444,
+      "firstAudioMs": 4657,
+      "elapsedMs": 4657,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4491,
+      "ttsMs": 150,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "driver-up",
+      "variant": "clean",
+      "text": "운전석 온도를 1도 올려줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 23
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 23,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 21
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 21
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 운전석 온도 1도 올리기",
+      "rawTranscript": null,
+      "reply": "운전석 온도를 21도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 88844,
+      "firstAudioMs": 4353,
+      "elapsedMs": 4353,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4226,
+      "ttsMs": 112,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "both-down",
+      "variant": "clean",
+      "text": "온도를 1도 내려줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "both",
+          "value": 21
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 21,
+          "passenger": 21
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 15
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":온도를 1도 내려줘",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 값은 16~30여야 합니다.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 154604,
+      "firstAudioMs": 4121,
+      "elapsedMs": 4121,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3870,
+      "ttsMs": 234,
+      "ttsModel": "Amazon Polly",
+      "validationError": "값은 16~30여야 합니다."
+    },
+    {
+      "id": "fan-5",
+      "variant": "clean",
+      "text": "바람 세기를 5단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 바람 세기를 5단으로 설정합니다.",
+      "rawTranscript": null,
+      "reply": "바람 세기를 5단으로 바꿨어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 76844,
+      "firstAudioMs": 3692,
+      "elapsedMs": 3692,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3539,
+      "ttsMs": 137,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "ac-off",
+      "variant": "clean",
+      "text": "에어컨 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": false,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 에어컨 켜기",
+      "rawTranscript": null,
+      "reply": "에어컨을 켰어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 48044,
+      "firstAudioMs": 3137,
+      "elapsedMs": 3137,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3015,
+      "ttsMs": 103,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "ac-on",
+      "variant": "clean",
+      "text": "에어컨 켜줘.",
+      "expectedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "ac",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 에어컨 켜줘",
+      "rawTranscript": null,
+      "reply": "에어컨을 켰어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 48044,
+      "firstAudioMs": 3117,
+      "elapsedMs": 3117,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3003,
+      "ttsMs": 99,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "defrost-on",
+      "variant": "clean",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ", 앞유리 김서림 제거 켜요.",
+      "rawTranscript": null,
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "modelReply": ", 앞유리 김서림 제거 켜요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 83244,
+      "firstAudioMs": 4854,
+      "elapsedMs": 4854,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4686,
+      "ttsMs": 152,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "defrost-off",
+      "variant": "clean",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ", 앞유리 김서림 제거 꺼",
+      "rawTranscript": null,
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "modelReply": ", 앞유리 김서림 제거 꺼",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 82844,
+      "firstAudioMs": 4670,
+      "elapsedMs": 4670,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4504,
+      "ttsMs": 151,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "seat-2",
+      "variant": "clean",
+      "text": "시트 열선을 2단으로 켜줘.",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 2
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 2,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 2
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "seatHeat",
+          "value": 2
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 2,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":시트 열선을 2단으로 켜줘요",
+      "rawTranscript": null,
+      "reply": "열선을 2단으로 켰어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 63244,
+      "firstAudioMs": 4043,
+      "elapsedMs": 4043,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3902,
+      "ttsMs": 125,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "seat-off",
+      "variant": "clean",
+      "text": "시트 열선 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "seatHeat",
+          "value": 0
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":시트 열선 꺼요",
+      "rawTranscript": null,
+      "reply": "열선을 껐어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 47244,
+      "firstAudioMs": 3280,
+      "elapsedMs": 3280,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3189,
+      "ttsMs": 77,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "volume-20",
+      "variant": "clean",
+      "text": "음량을 20으로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "volume",
+          "value": 20
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 20,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "volume",
+          "value": 20
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "volume",
+          "value": 20
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 20,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 음량을 20으로 맞춰줘요",
+      "rawTranscript": null,
+      "reply": "음량을 20으로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 64444,
+      "firstAudioMs": 3866,
+      "elapsedMs": 3866,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3730,
+      "ttsMs": 122,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "media-play",
+      "variant": "clean",
+      "text": "음악 재생해줘.",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "play"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": true,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "media",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 음악 재생합니다.",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 지원하지 않는 미디어 명령입니다.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 156604,
+      "firstAudioMs": 3260,
+      "elapsedMs": 3260,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3014,
+      "ttsMs": 229,
+      "ttsModel": "Amazon Polly",
+      "validationError": "지원하지 않는 미디어 명령입니다."
+    },
+    {
+      "id": "media-pause",
+      "variant": "clean",
+      "text": "음악 멈춰줘.",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "pause"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "media",
+          "value": 1
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 음악 멈추기",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 지원하지 않는 미디어 명령입니다.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 156604,
+      "firstAudioMs": 3271,
+      "elapsedMs": 3271,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3017,
+      "ttsMs": 232,
+      "ttsModel": "Amazon Polly",
+      "validationError": "지원하지 않는 미디어 명령입니다."
+    },
+    {
+      "id": "media-next",
+      "variant": "clean",
+      "text": "다음 곡으로 넘겨줘.",
+      "expectedActions": [
+        {
+          "type": "media",
+          "value": "next"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "다음 드라이브 곡"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "media",
+          "value": 1
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":)",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 지원하지 않는 미디어 명령입니다.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 156604,
+      "firstAudioMs": 2760,
+      "elapsedMs": 2760,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 2514,
+      "ttsMs": 229,
+      "ttsModel": "Amazon Polly",
+      "validationError": "지원하지 않는 미디어 명령입니다."
+    },
+    {
+      "id": "navigate",
+      "variant": "clean",
+      "text": "서울역으로 길 안내해줘.",
+      "expectedActions": [
+        {
+          "type": "navigate",
+          "value": "서울역"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": "서울역",
+          "active": true
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "navigate",
+          "value": 1
+        },
+        {
+          "type": "navigationStop",
+          "value": 0
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 서울역으로 길 안내 해줘",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 목적지를 다시 말씀해 주세요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 151404,
+      "firstAudioMs": 4336,
+      "elapsedMs": 4337,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4092,
+      "ttsMs": 228,
+      "ttsModel": "Amazon Polly",
+      "validationError": "목적지를 다시 말씀해 주세요."
+    },
+    {
+      "id": "nav-stop",
+      "variant": "clean",
+      "text": "길 안내 종료해줘.",
+      "expectedActions": [
+        {
+          "type": "navigationStop"
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 16
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 16
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 16,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":)",
+      "rawTranscript": null,
+      "reply": "운전석 온도를 16도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 86044,
+      "firstAudioMs": 3201,
+      "elapsedMs": 3201,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3035,
+      "ttsMs": 151,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "clarify",
+      "variant": "clean",
+      "text": "목적지는 아직 안 정했는데 길 안내해줘.",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "navigate",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 목적지를 설정하지 않았는데도 길 안내를 해줘요.",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 목적지를 다시 말씀해 주세요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 151404,
+      "firstAudioMs": 4105,
+      "elapsedMs": 4105,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3859,
+      "ttsMs": 229,
+      "ttsModel": "Amazon Polly",
+      "validationError": "목적지를 다시 말씀해 주세요."
+    },
+    {
+      "id": "unsupported-sensor",
+      "variant": "clean",
+      "text": "타이어 공기압 센서 값을 40으로 바꿔줘.",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 40
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 공기압을 40으로 설정합니다.",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 값은 16~30여야 합니다.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 154604,
+      "firstAudioMs": 4379,
+      "elapsedMs": 4380,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4137,
+      "ttsMs": 225,
+      "ttsModel": "Amazon Polly",
+      "validationError": "값은 16~30여야 합니다."
+    },
+    {
+      "id": "status",
+      "variant": "clean",
+      "text": "지금 조수석 온도가 몇 도야?",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": "조수석 온도가 몇도야?",
+      "rawTranscript": null,
+      "reply": ": 조수석 온도는 22도입니다.",
+      "modelReply": ": 조수석 온도는 22도입니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 81644,
+      "firstAudioMs": 3742,
+      "elapsedMs": 3742,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3583,
+      "ttsMs": 144,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "out-of-range",
+      "variant": "clean",
+      "text": "조수석 온도를 40도로 설정해줘.",
+      "expectedActions": [],
+      "expectedState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 40
+        }
+      ],
+      "actualState": {
+        "revision": 0,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 조수석 온도 40도로 설정합니다.",
+      "rawTranscript": null,
+      "reply": "설정을 적용하지 않았어요. 온도는 16~30도 사이로 말씀해 주세요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": false,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 178604,
+      "firstAudioMs": 4757,
+      "elapsedMs": 4757,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4479,
+      "ttsMs": 261,
+      "ttsModel": "Amazon Polly",
+      "validationError": "온도는 16~30도 사이로 말씀해 주세요."
+    },
+    {
+      "id": "compound",
+      "variant": "clean",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":운전석 24도, 바람 3단",
+      "rawTranscript": null,
+      "reply": "운전석 온도를 24도로 맞췄어요. 바람 세기를 3단으로 바꿨어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 166888,
+      "firstAudioMs": 5142,
+      "elapsedMs": 5283,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4968,
+      "ttsMs": 293,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "correction",
+      "variant": "clean",
+      "text": "아니, 24도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 24
+        }
+      ],
+      "actualState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 24
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 조수석 온도를 24도로 맞춰줘요.",
+      "rawTranscript": null,
+      "reply": "조수석 온도를 24도로 맞췄어요.",
+      "modelReply": ": 조수석 온도를 24도로 맞췄어요.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 86844,
+      "firstAudioMs": 6277,
+      "elapsedMs": 6277,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 6112,
+      "ttsMs": 150,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "undo",
+      "variant": "clean",
+      "text": "방금 설정 되돌려줘.",
+      "expectedActions": [
+        {
+          "type": "undo"
+        }
+      ],
+      "expectedState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 22
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 22
+        },
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "actualState": {
+        "revision": 2,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 조수석 온도를 25도로 맞춰줘요",
+      "rawTranscript": null,
+      "reply": "운전석 온도를 22도로 맞췄어요. 조수석 온도를 25도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": false,
+      "stateCorrect": false,
+      "stateIgnoringRevisionCorrect": false,
+      "modelActionCorrect": false,
+      "actionStateCorrect": false,
+      "passed": false,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 172088,
+      "firstAudioMs": 6060,
+      "elapsedMs": 6166,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 5890,
+      "ttsMs": 260,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "passenger-25-sohee",
+      "variant": "second-voice",
+      "text": "조수석 온도를 25도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "passenger",
+          "value": 25
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 25
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 조수석 온도 25도로 맞춰줘요",
+      "rawTranscript": null,
+      "reply": "조수석 온도를 25도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 85644,
+      "firstAudioMs": 4875,
+      "elapsedMs": 4875,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4708,
+      "ttsMs": 151,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "defrost-off-sohee",
+      "variant": "second-voice",
+      "text": "앞유리 김서림 제거 꺼줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": false
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ", 앞유리 김서림 제거 꺼",
+      "rawTranscript": null,
+      "reply": "앞유리 김서림 제거 기능을 껐어요.",
+      "modelReply": ", 앞유리 김서림 제거 꺼",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 82844,
+      "firstAudioMs": 5388,
+      "elapsedMs": 5389,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 5218,
+      "ttsMs": 151,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "compound-sohee",
+      "variant": "second-voice",
+      "text": "운전석은 24도로 하고 바람 세기는 3단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        },
+        {
+          "type": "fan",
+          "value": 3
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 3,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":운전석 24도로 바람 3단",
+      "rawTranscript": null,
+      "reply": "운전석 온도를 24도로 맞췄어요. 바람 세기를 3단으로 바꿨어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 166888,
+      "firstAudioMs": 5489,
+      "elapsedMs": 5624,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 5316,
+      "ttsMs": 291,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "driver-24-noise",
+      "variant": "noise-20dB",
+      "text": "운전석 온도를 24도로 맞춰줘.",
+      "expectedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "temperature",
+          "zone": "driver",
+          "value": 24
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 24,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ":운전석 온도를 24도로 맞춰줘",
+      "rawTranscript": null,
+      "reply": "운전석 온도를 24도로 맞췄어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 89244,
+      "firstAudioMs": 4729,
+      "elapsedMs": 4729,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4551,
+      "ttsMs": 158,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "defrost-on-noise",
+      "variant": "noise-20dB",
+      "text": "앞유리 김서림 제거 켜줘.",
+      "expectedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "defrost",
+          "value": true
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 2,
+        "ac": true,
+        "defrost": true,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ", 앞유리 김서림 제거를 켜겠습니다.",
+      "rawTranscript": null,
+      "reply": "앞유리 김서림 제거 기능을 켰어요.",
+      "modelReply": ", 앞유리 김서림 제거를 켜겠습니다.",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 83244,
+      "firstAudioMs": 5144,
+      "elapsedMs": 5144,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 4974,
+      "ttsMs": 154,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    },
+    {
+      "id": "fan-5-noise",
+      "variant": "noise-20dB",
+      "text": "바람 세기를 5단으로 해줘.",
+      "expectedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "expectedState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "actualActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "modelProposedActions": [
+        {
+          "type": "fan",
+          "value": 5
+        }
+      ],
+      "actualState": {
+        "revision": 1,
+        "temperature": {
+          "driver": 22,
+          "passenger": 22
+        },
+        "fan": 5,
+        "ac": true,
+        "defrost": false,
+        "seatHeat": 0,
+        "media": {
+          "playing": false,
+          "volume": 35,
+          "track": "드라이브 플레이리스트"
+        },
+        "navigation": {
+          "destination": null,
+          "active": false
+        },
+        "speed": 0
+      },
+      "heard": ": 바람 세기를 5단으로 설정합니다.",
+      "rawTranscript": null,
+      "reply": "바람 세기를 5단으로 바꿨어요.",
+      "modelReply": "",
+      "preludeCorrect": true,
+      "actionCorrect": true,
+      "stateCorrect": true,
+      "stateIgnoringRevisionCorrect": true,
+      "modelActionCorrect": true,
+      "actionStateCorrect": true,
+      "passed": true,
+      "answerCorrect": true,
+      "intentCorrect": true,
+      "denialCorrect": true,
+      "semanticReviewRequired": false,
+      "audioValid": true,
+      "audioBytes": 76844,
+      "firstAudioMs": 3734,
+      "elapsedMs": 3734,
+      "modelLoadMs": 0,
+      "asrMs": null,
+      "llmMs": 3619,
+      "ttsMs": 99,
+      "ttsModel": "Amazon Polly",
+      "validationError": null
+    }
+  ],
+  "completedAt": "2026-10-22T08:57:01.039Z"
+}

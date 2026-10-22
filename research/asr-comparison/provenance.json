@@ -1,0 +1,53 @@
+{
+  "recordedAt": "2026-10-22T10:23:01.948983+00:00",
+  "region": "ap-northeast-2",
+  "gpu": "NVIDIA L40S",
+  "instanceType": "g6e.2xlarge",
+  "sourceSha256": {
+    "runtime/qwen_asr_worker.py": "00f7406277267223ee847054fa5ba11f562057549e68e38d65d913b012595830",
+    "runtime/speech_manager.py": "4d2c7022c4959f466dddafd96578c7e52b1c679538871a6a801c6ce338cb0754",
+    "runtime/model_server.py": "ad8ec9e15b95963deb5feb8b00d7911f187c3faa17ccbd2b0177d91ca70fc66b",
+    "runtime/whisper_server.py": "254f30937c8ac342df79c9e7ba6a8cb8acd131151589626caaeacc4638f6d0c0",
+    "runtime/experimental_denoise.py": "36601e676d0c468d6a300e58361841663a9998c0665ab6ee35c1deea272a140f",
+    "runtime/asr-requirements.lock": "57f33d27ce0cdfec72310ab523f192e04fa08f0f5f4e47dbf47c45797e091cf5",
+    "scripts/run-asr-comparison.mjs": "5c70744586679d05463ae6f21a155ac0d8a50bbd155f3f1fbe009227d2999847",
+    "scripts/build-asr-comparison.py": "b5d5d24b5ddc06865b4ad8c57b38ab6643d0b8b505c61ce9f8e87e43dc9fcdf6",
+    "transcript.mjs": "2d4bae053ac2cf4ee21193508f195865b0d206a5e1564f1dbccd72d9979c25e8",
+    "planner-prompt-v2.mjs": "10d2704559344d96f33be7611f0f4a425da7f24f7dbea8a13bfcfd2cf10a87d0"
+  },
+  "models": {
+    "whisper": {
+      "repo": "openai/whisper-large-v3-turbo",
+      "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+      "precision": "float16",
+      "gpu": 1
+    },
+    "nemotron": {
+      "repo": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+      "cacheMainRevision": "ea30d66debe3740a08b573244286791d423d6b3e2",
+      "revisionCaveat": "Observed cache refs/main; existing loader does not pin revision",
+      "precision": "float32",
+      "gpu": 1
+    },
+    "qwen3-asr-06b": {
+      "repo": "Qwen/Qwen3-ASR-0.6B",
+      "revision": "5eb144179a02acc5e5ba31e748d22b0cf3e303b0",
+      "precision": "bfloat16",
+      "gpu": 2
+    },
+    "qwen3-asr-17b": {
+      "repo": "Qwen/Qwen3-ASR-1.7B",
+      "revision": "7278e1e70fe206f11671096ffdd38061171dd6e5",
+      "precision": "bfloat16",
+      "gpu": 2
+    }
+  },
+  "miniCpmTemporarilyStopped": true,
+  "audioIsSynthetic": true,
+  "runtimeNotes": [
+    "Readiness wait added before Qwen ASR warmup, without changes to scored inference.",
+    "Public TTS smoke tests shared hosts during the run."
+  ],
+  "resumedRunnerSha256": "f0a47a170a096ccb239816b89e7cd5d81c5f428c85b06761d3905b0a15c22c64",
+  "whiteNoiseBypassNote": "No suppression applied. Float64 to float32 to PCM16 storage produced 2–21 differing samples per pair, max 1 LSB. Small score differences are not evidence of noise suppression."
+}

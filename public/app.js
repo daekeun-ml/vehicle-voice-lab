@@ -6,6 +6,7 @@ window.voiceLabAudioStatus=()=>({enabled:micEnabled,starting:micStarting,context
 let currentController,currentAudio,currentAudioUrl,lastTurnId,requestNumber=0,busy=false,stage='idle';
 let audioQueue=[],generationDone=false,playedFirst=false;
 let ttsChoice='polly';
+const ttsName=()=>({polly:'Amazon Polly · Seoyeon',qwen:'Qwen3-TTS 0.6B · Sohee',qwen17:'Qwen3-TTS 1.7B · Sohee',supertonic:'Supertonic 3 · F1 · CPU',ppaso:'Ppaso-TTS · 한국어 · ONNX CPU'}[ttsChoice]);
 let plannerChoice='qwen35-4b';let asrChoice='whisper';
 document.addEventListener('vehicle-catalog-ready',()=>{plannerChoice=$('planner-model').value;});
 let engine='cascade',sonicVoice,sonicConnecting;
@@ -43,16 +44,18 @@ function bubble(text,type){
   list.scrollTop=list.scrollHeight;return el;
 }
 async function checkHealth(){
-  try{const h=await(await fetch('/api/health')).json();$('conversation-engine').querySelector('[value="minicpm-control"]').disabled=!h.minicpmControl;for(const mode of ['audio-control','audio-native'])$('conversation-engine').querySelector(`[value="${mode}"]`).disabled=(mode==='audio-native'&&!$('comparison-only').checked)||!h.researchWorkers?.speech?.ready||![...$('audio-model').options].some(o=>o.dataset.ready==='true'&&(mode==='audio-control'?o.dataset.audioPlanner==='true':o.dataset.nativeAudio==='true'));ready=isExtraAudio()?!!(h.researchWorkers?.speech?.ready&&h.researchWorkers.speech.available?.includes($('audio-model').value)&&!$('audio-model').selectedOptions[0]?.disabled):engine==='minicpm-control'?!!(h.minicpmControl&&h.researchWorkers?.minicpm?.ready&&h.researchWorkers.minicpm.audioPlanner):engine==='sonic'?!!h.sonic:engine.startsWith('minicpm')?!!h.researchWorkers?.minicpm?.ready:h.ready&&(asrChoice!=='whisper'||h.asrWorkers?.whisper?.ready);
+  try{const [h,t]=await Promise.all([fetch('/api/health').then(r=>r.json()),fetch('/api/tts').then(r=>r.json())]);const selectedTts=t.providers.find(p=>p.id===ttsChoice);for(const p of t.providers){const option=$('tts-provider').querySelector(`[value="${p.id}"]`);if(option)option.disabled=p.ready===false;}$('conversation-engine').querySelector('[value="minicpm-control"]').disabled=!h.minicpmControl;for(const mode of ['audio-control','audio-native'])$('conversation-engine').querySelector(`[value="${mode}"]`).disabled=(mode==='audio-native'&&!$('comparison-only').checked)||!h.researchWorkers?.speech?.ready||![...$('audio-model').options].some(o=>o.dataset.ready==='true'&&(mode==='audio-control'?o.dataset.audioPlanner==='true':o.dataset.nativeAudio==='true'));ready=isExtraAudio()?!!(!h.researchWorkers?.speech?.loading&&h.researchWorkers?.speech?.ready&&h.researchWorkers.speech.available?.includes($('audio-model').value)&&!$('audio-model').selectedOptions[0]?.disabled):engine==='minicpm-control'?!!(h.minicpmControl&&h.researchWorkers?.minicpm?.ready&&h.researchWorkers.minicpm.audioPlanner):engine==='sonic'?!!h.sonic:engine.startsWith('minicpm')?!!h.researchWorkers?.minicpm?.ready:h.workers?.[0]?.ready&&(asrChoice.startsWith('qwen3-asr-')?h.researchWorkers?.speech?.asrAvailable?.includes(asrChoice)&&(h.researchWorkers.speech.independentAsr||!h.researchWorkers.speech.loading):asrChoice!=='whisper'||h.asrWorkers?.whisper?.ready);
+    if(['cascade','minicpm-control','audio-control'].includes(engine)&&selectedTts?.ready===false)ready=false;
     $('connection').className='connection'+(ready?' ready':'');$('connection').replaceChildren(Object.assign(document.createElement('i'),{}),document.createTextNode(isExtraAudio()?(h.researchWorkers?.speech?.loading?'음성 모델 교체·로딩 중':ready?'추가 음성 GPU 연결됨':'음성 GPU 준비 중'):engine==='sonic'?'Sonic · 도쿄 API 준비':engine.startsWith('minicpm')?(ready?'MiniCPM · GPU 연결됨':'MiniCPM 모델 준비 중'):ready?'GPU 연결됨':'GPU 모델 준비 중'));
     const m=h.workers.flatMap(w=>Object.keys(w.models||{}));
     for(const key of ['asr','llm','tts'])$('model-'+key).classList.toggle('ready',engine!=='cascade'?ready:m.includes(key));
-    $('model-tts').replaceChildren(document.createElement('i'),document.createTextNode(ttsChoice==='polly'?'Amazon Polly · Seoyeon':'Qwen3-TTS · Sohee'));
+    if(engine==='cascade')$('model-asr').classList.toggle('ready',asrChoice.startsWith('qwen3-asr-')?!!h.researchWorkers?.speech?.asrAvailable?.includes(asrChoice):asrChoice==='whisper'?!!h.asrWorkers?.whisper?.ready:!!(h.workers?.[0]?.asrAvailable||h.workers?.[0]?.models?.asr));
+    $('model-tts').replaceChildren(document.createElement('i'),document.createTextNode(ttsName()));
     if(engine==='sonic')for(const [key,label]of Object.entries({asr:'Nova 2.5 Sonic · 음성 이해',llm:'Sonic · 통합 추론',tts:'Sonic · Tiffany'}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
-    else if(engine==='minicpm-control')for(const [key,label]of Object.entries({asr:'MiniCPM · 음성 입력',llm:'MiniCPM · 명령 판단',tts:ttsChoice==='polly'?'Amazon Polly · Seoyeon':'Qwen3-TTS · Sohee'}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
+    else if(engine==='minicpm-control')for(const [key,label]of Object.entries({asr:'MiniCPM · 음성 입력',llm:'MiniCPM · 명령 판단',tts:ttsName()}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
     else if(engine==='minicpm')for(const [key,label]of Object.entries({asr:'MiniCPM-o · 음성 이해',llm:'MiniCPM · 음성 대화',tts:'MiniCPM · 내장 음성 출력'}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
-    else if(isExtraAudio())for(const [key,label]of Object.entries({asr:audioModelName()+' · 음성 입력',llm:audioModelName(),tts:engine==='audio-control'?(ttsChoice==='polly'?'Amazon Polly · Seoyeon':'Qwen3-TTS · Sohee'):'모델 내장 음성'}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
-    else for(const [key,label]of Object.entries({asr:asrChoice==='whisper'?'Whisper large-v3-turbo':'Nemotron 3.5 ASR',llm:$('planner-model').selectedOptions[0].textContent}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
+    else if(isExtraAudio())for(const [key,label]of Object.entries({asr:audioModelName()+' · 음성 입력',llm:audioModelName(),tts:engine==='audio-control'?(ttsName()):'모델 내장 음성'}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
+    else for(const [key,label]of Object.entries({asr:$('asr-model').selectedOptions[0].textContent,llm:$('planner-model').selectedOptions[0].textContent}))$('model-'+key).replaceChildren(document.createElement('i'),document.createTextNode(label));
     $('speech-language-label').textContent='VOICE · '+(engine==='sonic'?$('sonic-language').value:engine==='minicpm'?$('minicpm-language').value:engine==='audio-native'?$('audio-language').value:'ko').toUpperCase();
     $('deployment').textContent=engine==='sonic'?'AWS 도쿄 · Bedrock S2S':isExtraAudio()?'AWS 서울 · 음성 전용 L40S 48GB':'AWS 서울 · L40S 48GB';
     $('mic').disabled=!ready||micStarting;$('send').disabled=!ready||isAudioInput();$('text-input').disabled=isAudioInput();$('text-input').placeholder=isAudioInput()?'마이크나 음성 샘플로 테스트하세요':'마이크 없이 텍스트로도 테스트할 수 있어요';
@@ -107,7 +110,7 @@ async function submit(payload,{basis='text',endedAt=performance.now()}={}){
         const raw=block.split('\n').find(l=>l.startsWith('data: '))?.slice(6);if(!raw||number!==requestNumber)continue;
         const d=JSON.parse(raw);
         if(event==='stage'){
-          stage=d.stage;setStatus(d.stage==='nativeSpeech'?`${d.model} 내장 음성을 생성하고 있어요 · 첫 로딩은 수 분 걸릴 수 있어요`:d.stage==='audioPlanning'?`${d.model||'MiniCPM'}이 음성을 이해하고 차량 명령을 판단하고 있어요 · 첫 로딩은 수 분 걸릴 수 있어요`:d.stage==='s2s'?'MiniCPM 음성 대화를 처리하고 있어요 · 차량 제어 미연결':d.stage==='recognizing'?'한국어 음성을 인식하고 있어요…':d.stage==='thinking'?'선택한 판단 모델로 요청을 확인하고 있어요 · 첫 전환은 모델 준비 시간이 필요해요':ttsChoice==='qwen'?'Qwen 음성을 합성하고 있어요 · 수십 초 걸릴 수 있어요':'답변 음성을 만들고 있어요…','busy');
+          stage=d.stage;setStatus(d.stage==='nativeSpeech'?`${d.model} 내장 음성을 생성하고 있어요 · 첫 로딩은 수 분 걸릴 수 있어요`:d.stage==='audioPlanning'?`${d.model||'MiniCPM'}이 음성을 이해하고 차량 명령을 판단하고 있어요 · 첫 로딩은 수 분 걸릴 수 있어요`:d.stage==='s2s'?'MiniCPM 음성 대화를 처리하고 있어요 · 차량 제어 미연결':d.stage==='recognizing'?`${d.model||'선택한 STT'}로 음성을 인식하고 있어요…`:d.stage==='thinking'?'선택한 판단 모델로 요청을 확인하고 있어요 · 첫 전환은 모델 준비 시간이 필요해요':ttsChoice==='qwen'?'Qwen 음성을 합성하고 있어요 · 수십 초 걸릴 수 있어요':'답변 음성을 만들고 있어요…','busy');
         }else if(event==='understood'){
           userBubble.lastChild.textContent=(d.model||'MiniCPM')+'이 이해한 요청: '+d.text;
         }else if(event==='transcript'){
@@ -246,6 +249,7 @@ $('sonic-language').addEventListener('change',async()=>{if(micEnabled)await togg
 $('sonic-english').addEventListener('click',async()=>{
   try{const response=await fetch(engine==='minicpm'?'/sample-greeting.wav':'/sample-english.wav');if(!response.ok)throw new Error('영어 샘플을 불러오지 못했어요.');await submit({audio:base64(new Uint8Array(await response.arrayBuffer()))},{basis:'file'});}catch(error){toast(error.message);}
 });
+document.addEventListener('vehicle-tts-lab-focus',()=>{if(micEnabled)void toggleMic();void interrupt(false);stopRadio();});
 $('mic').addEventListener('click',toggleMic);
 $('barge-in').addEventListener('change',e=>{bargeInEnabled=e.target.checked;});
 $('interrupt').addEventListener('click',()=>interrupt());
@@ -253,8 +257,8 @@ $('text-form').addEventListener('submit',e=>{e.preventDefault();const text=$('te
 document.querySelectorAll('[data-prompt]').forEach(button=>button.addEventListener('click',()=>submit({text:button.dataset.prompt})));
 $('tts-provider').addEventListener('change',e=>{
   if(busy){e.target.value=ttsChoice;toast('답변이 끝나면 응답 음성을 변경할 수 있어요.');return;}
-  ttsChoice=e.target.value;
-  $('model-tts').replaceChildren(document.createElement('i'),document.createTextNode(ttsChoice==='polly'?'Amazon Polly · Seoyeon':'Qwen3-TTS · Sohee'));
+  ttsChoice=e.target.value;void checkHealth();
+  $('model-tts').replaceChildren(document.createElement('i'),document.createTextNode(ttsName()));
 });
 $('sample-audio').addEventListener('click',async()=>{
   try{const r=await fetch('/sample-command.wav');if(!r.ok)throw new Error('샘플 음성을 불러오지 못했어요.');await submit({audio:base64(new Uint8Array(await r.arrayBuffer()))},{basis:'file'});}catch(e){toast(e.message);}

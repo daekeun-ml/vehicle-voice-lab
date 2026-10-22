@@ -1,0 +1,62 @@
+[
+  {
+    "repo": "Supertone/supertonic-3",
+    "revision": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+    "files": [
+      "config.json",
+      "onnx/duration_predictor.onnx",
+      "onnx/text_encoder.onnx",
+      "onnx/tts.json",
+      "onnx/unicode_indexer.json",
+      "onnx/vector_estimator.onnx",
+      "onnx/vocoder.onnx",
+      "voice_styles/F1.json",
+      "voice_styles/F2.json",
+      "voice_styles/F3.json",
+      "voice_styles/F4.json",
+      "voice_styles/F5.json",
+      "voice_styles/M1.json",
+      "voice_styles/M2.json",
+      "voice_styles/M3.json",
+      "voice_styles/M4.json",
+      "voice_styles/M5.json"
+    ]
+  },
+  {
+    "repo": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+    "revision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+    "files": [
+      "config.json",
+      "generation_config.json",
+      "merges.txt",
+      "model.safetensors",
+      "preprocessor_config.json",
+      "speech_tokenizer/config.json",
+      "speech_tokenizer/configuration.json",
+      "speech_tokenizer/model.safetensors",
+      "speech_tokenizer/preprocessor_config.json",
+      "tokenizer_config.json",
+      "vocab.json"
+    ]
+  },
+  {
+    "repo": "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+    "revision": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+    "files": [
+      "CosyVoice-BlankEN/config.json",
+      "CosyVoice-BlankEN/generation_config.json",
+      "CosyVoice-BlankEN/merges.txt",
+      "CosyVoice-BlankEN/model.safetensors",
+      "CosyVoice-BlankEN/tokenizer_config.json",
+      "CosyVoice-BlankEN/vocab.json",
+      "campplus.onnx",
+      "config.json",
+      "configuration.json",
+      "cosyvoice3.yaml",
+      "flow.pt",
+      "hift.pt",
+      "llm.pt",
+      "speech_tokenizer_v3.onnx"
+    ]
+  }
+]

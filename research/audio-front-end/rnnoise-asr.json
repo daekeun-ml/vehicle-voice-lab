@@ -1,0 +1,152 @@
+{
+  "model": "openai/whisper-large-v3-turbo",
+  "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+  "hardware": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+  "torch": "2.14.1",
+  "normalization": "NFKC, lowercase, alphanumeric only; explicit Korean number variants for 24 and 25",
+  "humanListeningCompleted": false,
+  "scope": "ASR diagnostic, not perceptual quality or end-to-end vehicle benchmark",
+  "referenceBasis": "ASR output on clean reference; not independently human-transcribed ground truth",
+  "rows": [
+    {
+      "id": "command-clean",
+      "condition": "clean",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "asr": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 63.97170400032337
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "command-stationary-colored-20dB",
+      "condition": "stationary-colored",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "asr": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.1698429999451
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "command-stationary-colored-10dB",
+      "condition": "stationary-colored",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "asr": {
+        "text": "조수석 온도를 25도로 맞춰주세요",
+        "ms": 61.4823020005133
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "command-stationary-colored-0dB",
+      "condition": "stationary-colored",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "asr": {
+        "text": "중수석 검토를 25도로 맞춰주세요.",
+        "ms": 64.2653610002526
+      },
+      "agreementErrorRate": 0.2
+    },
+    {
+      "id": "command-colored-plus-bursts-20dB",
+      "condition": "colored-plus-bursts",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "asr": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.11397899955773
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "command-colored-plus-bursts-10dB",
+      "condition": "colored-plus-bursts",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "asr": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.67839100059791
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "command-colored-plus-bursts-0dB",
+      "condition": "colored-plus-bursts",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "asr": {
+        "text": "중수석 공도를 25도로 맞춰주세요.",
+        "ms": 64.12452300082805
+      },
+      "agreementErrorRate": 0.13333333333333333
+    },
+    {
+      "id": "defrost-reply-clean",
+      "condition": "clean",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "asr": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.34642499982147
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-stationary-colored-20dB",
+      "condition": "stationary-colored",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "asr": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.47202599985758
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-stationary-colored-10dB",
+      "condition": "stationary-colored",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "asr": {
+        "text": "앞미리 김사림 제거 기능을 켰어요.",
+        "ms": 71.9203649996416
+      },
+      "agreementErrorRate": 0.07142857142857142
+    },
+    {
+      "id": "defrost-reply-stationary-colored-0dB",
+      "condition": "stationary-colored",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "asr": {
+        "text": "앞머리 빈사를 제거 기밀에 켰어요.",
+        "ms": 74.7405609999987
+      },
+      "agreementErrorRate": 0.35714285714285715
+    },
+    {
+      "id": "defrost-reply-colored-plus-bursts-20dB",
+      "condition": "colored-plus-bursts",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "asr": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.41178400029457
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-colored-plus-bursts-10dB",
+      "condition": "colored-plus-bursts",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "asr": {
+        "text": "앞유리 김사림 제거 기능을 켰어요",
+        "ms": 66.70856500022637
+      },
+      "agreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-colored-plus-bursts-0dB",
+      "condition": "colored-plus-bursts",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "asr": {
+        "text": "방미를 빙서림 제거 기능을 켰어요",
+        "ms": 72.02657899961196
+      },
+      "agreementErrorRate": 0.35714285714285715
+    }
+  ]
+}

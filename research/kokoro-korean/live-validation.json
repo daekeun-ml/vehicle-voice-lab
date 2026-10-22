@@ -1,0 +1,39 @@
+{
+  "rows": [
+    {
+      "id": "6d222bc0-2f19-460a-8363-871ab5f5a62f",
+      "provider": "kokoro",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "model": "hexgrad/Kokoro-82M",
+      "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "voice": "af_heart",
+      "sampleRate": 24000,
+      "inferenceMs": 1601,
+      "elapsedMs": 1608,
+      "mediaType": "audio/wav",
+      "vehicleStateChanged": false,
+      "durationSeconds": 3.325,
+      "language": "ko",
+      "file": "research/kokoro-korean/live-ko.wav"
+    },
+    {
+      "id": "95a3d779-6ecb-42f1-b700-d867cabffe4d",
+      "provider": "kokoro",
+      "text": "The passenger temperature is now twenty four degrees.",
+      "model": "hexgrad/Kokoro-82M",
+      "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "voice": "af_heart",
+      "sampleRate": 24000,
+      "inferenceMs": 1461,
+      "elapsedMs": 1465,
+      "mediaType": "audio/wav",
+      "vehicleStateChanged": false,
+      "durationSeconds": 3.55,
+      "language": "en",
+      "file": "research/kokoro-korean/live-en.wav"
+    }
+  ],
+  "vehicleStateUnchanged": true,
+  "koreanOfficialSupport": false,
+  "humanListeningCompleted": false
+}

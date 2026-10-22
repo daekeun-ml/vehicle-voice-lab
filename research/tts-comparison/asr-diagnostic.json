@@ -1,0 +1,479 @@
+{
+  "asrModel": "openai/whisper-large-v3-turbo",
+  "asrRevision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+  "hardware": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "5.20.2",
+    "scipy": "1.18.1"
+  },
+  "scope": "8 fixed authored TTS inputs, one generation each; ASR proxy only, no human listening/MOS",
+  "numberNormalization": {
+    "이십이점오": "22.5",
+    "스물두점오": "22.5",
+    "스물네": "24",
+    "스물넷": "24",
+    "이십사": "24",
+    "열아홉": "19",
+    "십구": "19",
+    "스물일곱": "27",
+    "이십칠": "27",
+    "아홉단": "9단",
+    "구단": "9단",
+    "세단": "3단",
+    "삼단": "3단"
+  },
+  "rows": [
+    {
+      "model": "supertonic3",
+      "id": "greeting",
+      "text": "안녕하세요.",
+      "transcript": "안녕하세요.",
+      "file": "research/tts-comparison/supertonic3/greeting.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 5,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "supertonic3",
+      "id": "temperature",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "transcript": "조수석 온도를 24도로 맞췄어요.",
+      "file": "research/tts-comparison/supertonic3/temperature.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 14,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [
+        "24"
+      ],
+      "numberSequenceHeard": [
+        "24"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "supertonic3",
+      "id": "negation",
+      "text": "에어컨을 끄지 않았어요.",
+      "transcript": "에어컨을 끄지 않았어요.",
+      "file": "research/tts-comparison/supertonic3/negation.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 10,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "supertonic3",
+      "id": "seat-scope",
+      "text": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "transcript": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "file": "research/tts-comparison/supertonic3/seat-scope.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 17,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "supertonic3",
+      "id": "decimal",
+      "text": "운전석은 22.5도, 조수석은 24도로 설정했어요.",
+      "transcript": "운전석은 22.5도, 조수석은 24도로 설정했어요.",
+      "file": "research/tts-comparison/supertonic3/decimal.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 22,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [
+        "22.5",
+        "24"
+      ],
+      "numberSequenceHeard": [
+        "22.5",
+        "24"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "supertonic3",
+      "id": "rejection",
+      "text": "풍량 9단은 지원하지 않아요. 설정을 변경하지 않았어요.",
+      "transcript": "풍량 구호단은 지원하지 않아요. 설정을 변경하지 않았어요.",
+      "file": "research/tts-comparison/supertonic3/rejection.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": false,
+      "characterErrors": 2,
+      "referenceCharacters": 23,
+      "normalizedCer": 0.08695652173913043,
+      "numberSequenceExpected": [
+        "9"
+      ],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": false
+    },
+    {
+      "model": "supertonic3",
+      "id": "destination",
+      "text": "목적지를 서울역에서 서울숲으로 바꿨어요.",
+      "transcript": "목적지를 서울역에서 서울숲으로 바꿨어요.",
+      "file": "research/tts-comparison/supertonic3/destination.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 18,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "supertonic3",
+      "id": "compound",
+      "text": "운전석은 19도, 조수석은 27도, 바람 세기는 3단이에요.",
+      "transcript": "운전석은 19도, 조수석은 27도, 바람 새기는 센 단위예요.",
+      "file": "research/tts-comparison/supertonic3/compound.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": false,
+      "characterErrors": 4,
+      "referenceCharacters": 24,
+      "normalizedCer": 0.16666666666666666,
+      "numberSequenceExpected": [
+        "19",
+        "27",
+        "3"
+      ],
+      "numberSequenceHeard": [
+        "19",
+        "27"
+      ],
+      "numberSequenceMatches": false
+    },
+    {
+      "model": "qwen17",
+      "id": "greeting",
+      "text": "안녕하세요.",
+      "transcript": "안녕하세요.",
+      "file": "research/tts-comparison/qwen17/greeting.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 5,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "qwen17",
+      "id": "temperature",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "transcript": "조수석 온도를 24도로 맞췄어요.",
+      "file": "research/tts-comparison/qwen17/temperature.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 14,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [
+        "24"
+      ],
+      "numberSequenceHeard": [
+        "24"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "qwen17",
+      "id": "negation",
+      "text": "에어컨을 끄지 않았어요.",
+      "transcript": "에어컨을 끄지 않았어요",
+      "file": "research/tts-comparison/qwen17/negation.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 10,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "qwen17",
+      "id": "seat-scope",
+      "text": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "transcript": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "file": "research/tts-comparison/qwen17/seat-scope.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 17,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "qwen17",
+      "id": "decimal",
+      "text": "운전석은 22.5도, 조수석은 24도로 설정했어요.",
+      "transcript": "운전석은 22.5도, 조수석은 24도로 설정했어요.",
+      "file": "research/tts-comparison/qwen17/decimal.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 22,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [
+        "22.5",
+        "24"
+      ],
+      "numberSequenceHeard": [
+        "22.5",
+        "24"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "qwen17",
+      "id": "rejection",
+      "text": "풍량 9단은 지원하지 않아요. 설정을 변경하지 않았어요.",
+      "transcript": "풍량 9단은 지원하지 않아요 설정을 변경하지 않았어요",
+      "file": "research/tts-comparison/qwen17/rejection.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 23,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [
+        "9"
+      ],
+      "numberSequenceHeard": [
+        "9"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "qwen17",
+      "id": "destination",
+      "text": "목적지를 서울역에서 서울숲으로 바꿨어요.",
+      "transcript": "목적지를 서울역에서 서울숲으로 바꿨어요.",
+      "file": "research/tts-comparison/qwen17/destination.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 18,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "qwen17",
+      "id": "compound",
+      "text": "운전석은 19도, 조수석은 27도, 바람 세기는 3단이에요.",
+      "transcript": "운전석은 19도, 조수석은 27도, 바람새기는 3단이에요.",
+      "file": "research/tts-comparison/qwen17/compound.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": false,
+      "characterErrors": 1,
+      "referenceCharacters": 24,
+      "normalizedCer": 0.041666666666666664,
+      "numberSequenceExpected": [
+        "19",
+        "27",
+        "3"
+      ],
+      "numberSequenceHeard": [
+        "19",
+        "27",
+        "3"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "greeting",
+      "text": "안녕하세요.",
+      "transcript": "",
+      "file": "research/tts-comparison/cosyvoice3/greeting.wav",
+      "asrSkipped": true,
+      "skipReason": "audio shorter than 100ms",
+      "normalizedExact": false,
+      "characterErrors": 5,
+      "referenceCharacters": 5,
+      "normalizedCer": 1.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "temperature",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "transcript": "조수석 온도를 스물네 도로 맞췄어요.",
+      "file": "research/tts-comparison/cosyvoice3/temperature.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 14,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [
+        "24"
+      ],
+      "numberSequenceHeard": [
+        "24"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "negation",
+      "text": "에어컨을 끄지 않았어요.",
+      "transcript": "에어컨을 끄지 않았어요.",
+      "file": "research/tts-comparison/cosyvoice3/negation.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 10,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "seat-scope",
+      "text": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "transcript": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "file": "research/tts-comparison/cosyvoice3/seat-scope.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 17,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "decimal",
+      "text": "운전석은 22.5도, 조수석은 24도로 설정했어요.",
+      "transcript": "운전석은 22.5도, 조수석은 24도로 설정했어요.",
+      "file": "research/tts-comparison/cosyvoice3/decimal.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 22,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [
+        "22.5",
+        "24"
+      ],
+      "numberSequenceHeard": [
+        "22.5",
+        "24"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "rejection",
+      "text": "풍량 9단은 지원하지 않아요. 설정을 변경하지 않았어요.",
+      "transcript": "폭량 구단은 지원하지 않아요, 설정을 변경하지 않았어요.",
+      "file": "research/tts-comparison/cosyvoice3/rejection.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": false,
+      "characterErrors": 1,
+      "referenceCharacters": 23,
+      "normalizedCer": 0.043478260869565216,
+      "numberSequenceExpected": [
+        "9"
+      ],
+      "numberSequenceHeard": [
+        "9"
+      ],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "destination",
+      "text": "목적지를 서울역에서 서울숲으로 바꿨어요.",
+      "transcript": "목적지를 서울역에서 서울숲으로 바꿨어요.",
+      "file": "research/tts-comparison/cosyvoice3/destination.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": true,
+      "characterErrors": 0,
+      "referenceCharacters": 18,
+      "normalizedCer": 0.0,
+      "numberSequenceExpected": [],
+      "numberSequenceHeard": [],
+      "numberSequenceMatches": true
+    },
+    {
+      "model": "cosyvoice3",
+      "id": "compound",
+      "text": "운전석은 19도, 조수석은 27도, 바람 세기는 3단이에요.",
+      "transcript": "운전석은 19도, 조수석은 27도, 바람 새기는 3단이에요.",
+      "file": "research/tts-comparison/cosyvoice3/compound.wav",
+      "asrSkipped": false,
+      "skipReason": null,
+      "normalizedExact": false,
+      "characterErrors": 1,
+      "referenceCharacters": 24,
+      "normalizedCer": 0.041666666666666664,
+      "numberSequenceExpected": [
+        "19",
+        "27",
+        "3"
+      ],
+      "numberSequenceHeard": [
+        "19",
+        "27",
+        "3"
+      ],
+      "numberSequenceMatches": true
+    }
+  ],
+  "cosyvoiceReferenceCheck": {
+    "text": "안녕하세요. 차량의 설정과 안내를 도와드릴게요. 편하게 말씀해 주세요.",
+    "transcript": "안녕하세요, 차량의 설정과 안내를 도와드릴게요, 편하게 말씀해 주세요."
+  }
+}

@@ -1,5 +1,5 @@
 import WebSocket from 'ws';
-import {readFile,writeFile} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const base=process.env.TEST_BASE||'http://localhost:8787';
 const origin=process.env.TEST_ORIGIN||base,headers=process.env.ORIGIN_VERIFY_SECRET?{'X-Vehicle-Origin-Key':process.env.ORIGIN_VERIFY_SECRET}:{};
 async function probe(language,file,expected){
@@ -38,5 +38,6 @@ for(const [language,file,expected]of[
   try{results.push(await probe(language,file,expected));}catch(error){results.push({language,error:error.message});}
   console.log(JSON.stringify(results.at(-1)));
 }
+await mkdir('output',{recursive:true});
 await writeFile(process.env.TEST_BASE?'output/sonic-cloud-smoke.json':'output/sonic-smoke.json',JSON.stringify({at:new Date().toISOString(),base,results},null,2));
 if(!results[0].commandCorrect||!results[0].audioGenerated)process.exitCode=1;

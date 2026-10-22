@@ -1,5 +1,7 @@
 # Deployment guide
 
+For the Korean workshop, use the [hands-on guide](../asset-guide/HANDS_ON.md), including the validated TTS choices, expected results, and stop/cleanup procedure.
+
 This repository contains the Node UI/backend, GPU worker adapters, deployment scripts, synthetic evaluation records, and reply samples. Model weights and credentials are downloaded/configured separately. The reference installation was tested on Ubuntu NVIDIA DLAMI, Python 3.12, L40S 48 GB, and Node 22. Pinned model revisions and adapter dependencies are in `runtime/` and `model-catalog.json`. Other images/hardware need compatibility verification; provisioning a brand-new account is not covered by the existing live smoke-test results.
 
 ## 1. Local UI and existing workers
@@ -17,6 +19,8 @@ The default URLs expect SSH forwards on localhost:
 | --- | --- | --- | --- |
 | CORE_URL | 19101 | 9101 | Nemotron ASR / planners |
 | TTS_URL | 19102 | 9102 | Qwen TTS |
+| QWEN17_TTS_URL | 19106 | 9106 | Pinned Qwen3-TTS 1.7B |
+| SUPERTONIC_TTS_URL | 19107 | 9107 | Supertonic 3 on CPU |
 | MINICPM_URL | 19103 | 9103 | Optional MiniCPM |
 | SPEECH_URL | 19104 | 9104 | Optional swappable audio models |
 | WHISPER_URL | 19105 | 9105 | Whisper |
@@ -49,7 +53,7 @@ Provisioning creates `g6e.2xlarge` instances and encrypted storage, and allows S
 Install workers:
 
 ```bash
-python3 scripts/bootstrap-workers.py --worker core
+python3 scripts/bootstrap-workers.py --worker core --with-tts-candidates
 # Optional native MiniCPM research path:
 # python3 scripts/bootstrap-workers.py --worker core --with-minicpm
 python3 scripts/bootstrap-workers.py --worker speech
@@ -58,7 +62,7 @@ python3 scripts/gpu.py tunnel
 npm start
 ```
 
-The core bootstrap downloads reviewed planner checkpoints and starts core/TTS/Whisper services. MiniCPM is optional and defaults to disabled until installed. The speech manager loads the selected model on demand; the first request may download large weights. `runtime/cache_speech.py` can prefetch them in the speech environment. Not every candidate in the catalog is deployable without license approval; a catalog score refers to the recorded experiment, not an automatic hardware readiness check on your host.
+The bootstrap explicitly creates Python 3.12 environments rather than inheriting the DLAMI interpreter version. The core bootstrap downloads reviewed planner checkpoints and starts core/TTS/Whisper services. MiniCPM is optional and defaults to disabled until installed. The speech manager loads the selected model on demand; the first request may download large weights. `runtime/cache_speech.py` can prefetch them in the speech environment. Not every candidate in the catalog is deployable without license approval; a catalog score refers to the recorded experiment, not an automatic hardware readiness check on your host.
 
 Fresh instances have a **four-hour auto-stop timer** to limit unattended GPU runtime. For a deliberately persistent shared deployment, disable it on each worker with `sudo systemctl disable --now vehicle-auto-stop.timer` and record that choice in your private state. This incurs continuing GPU charges. Do not expose model ports to the internet.
 
@@ -107,6 +111,7 @@ python3 runtime/test_minicpm_protocol.py
 python3 runtime/test_speech_protocol.py
 mkdir -p output
 TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net node scripts/cloud-deployment-smoke.mjs
+TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net node scripts/cloud-tts-smoke.mjs
 TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net node scripts/sonic-smoke.mjs
 # Optional cold-loading / SSE continuity check:
 TEST_BASE=https://YOUR_DISTRIBUTION.cloudfront.net TEST_LONG_SSE=1 node scripts/cloud-deployment-smoke.mjs

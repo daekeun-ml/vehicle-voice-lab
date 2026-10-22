@@ -2,7 +2,8 @@
 set -euo pipefail
 cd /opt/vehicle-voice
 export PATH="$HOME/.local/bin:$PATH"
-if [ ! -x minicpm-env/bin/python ]; then uv venv --python /opt/pytorch/bin/python minicpm-env; fi
+uv python install 3.12
+if [ ! -x minicpm-env/bin/python ]; then uv venv --python 3.12 minicpm-env; fi
 uv pip install --python minicpm-env/bin/python torch==2.8.0 torchaudio==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cu128
 uv pip install --python minicpm-env/bin/python 'transformers==4.51.0' 'minicpmo-utils[all]==1.0.6' 'stepaudio2-minicpmo==0.1.1' accelerate fastapi uvicorn python-multipart soundfile 'numpy<2' sentencepiece
 echo 'MiniCPM environment installed'

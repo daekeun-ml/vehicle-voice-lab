@@ -1,0 +1,29 @@
+[
+  {
+    "at": "2026-10-22T08:31:52.582256+00:00",
+    "model": "gemma4-e2b",
+    "category": "runtime-memory",
+    "finding": "Gemma allocator requested 9.48 GiB with only 9.27 GiB free while idle Nemotron ASR and other workers were resident.",
+    "fix": "Nemotron loads on demand; a large planner can evict idle ASR, and ASR can evict an idle planner under memory pressure.",
+    "promptChanged": false,
+    "modelWeightsChanged": false,
+    "originalFailedAttemptsPreserved": 3,
+    "coreSourceSha256": "ad8ec9e15b95963deb5feb8b00d7911f187c3faa17ccbd2b0177d91ca70fc66b"
+  },
+  {
+    "id": "independent-qwen-asr",
+    "at": "2026-10-22T11:16:14.298823+00:00",
+    "category": "worker-isolation",
+    "finding": "Qwen3-ASR shared the speech-model replacement lock and returned HTTP 429 during Omni inference.",
+    "fix": "Dedicated GPU2 ASR workers on loopback 9116/9117, independent queues; voice model remains loaded.",
+    "promptChanged": false,
+    "modelWeightsChanged": false,
+    "timingExclusion": {
+      "suite": "hard48",
+      "modelId": "qwen3-omni",
+      "caseId": "scope-04",
+      "reason": "client suspended during maintenance; quality result kept, latency excluded"
+    },
+    "latencyCaveat": "Remaining Omni rows share GPU2 with resident ASR workers; this is not an exclusive-GPU latency benchmark."
+  }
+]

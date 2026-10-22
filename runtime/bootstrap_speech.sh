@@ -5,16 +5,17 @@ sudo apt-get update -qq
 sudo apt-get install -y -qq python3-venv ffmpeg libsndfile1 sox git
 curl -LsSf https://astral.sh/uv/install.sh | sh
 export PATH="$HOME/.local/bin:$PATH"
-uv venv --system-site-packages --python /opt/pytorch/bin/python omni-env
+uv python install 3.12
+uv venv --python 3.12 omni-env
 uv pip install --python omni-env/bin/python 'transformers==4.57.6' 'bitsandbytes==0.49.2' accelerate fastapi uvicorn python-multipart soundfile librosa httpx 'xgrammar==0.2.8' qwen-omni-utils
 # Pin CUDA Torch explicitly; the DLAMI interpreter may not expose Torch.
 uv pip install --python omni-env/bin/python torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 # Custom-code audio models need their own pinned Transformers runtime.
-uv venv --system-site-packages --python /opt/pytorch/bin/python legacy-env
+uv venv --python 3.12 legacy-env
 uv pip install --python legacy-env/bin/python 'transformers==4.49.0' accelerate fastapi uvicorn python-multipart soundfile librosa httpx s3tokenizer onnxruntime hyperpyyaml diffusers zhon sentencepiece sphn safetensors xgrammar==0.2.8
 uv pip install --python legacy-env/bin/python torch==2.8.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 uv pip install --python legacy-env/bin/python "https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3%2Bcu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"
-uv venv --system-site-packages --python /opt/pytorch/bin/python moshi-env
+uv venv --python 3.12 moshi-env
 uv pip install --python moshi-env/bin/python --no-deps moshi==0.2.13
 uv pip install --python moshi-env/bin/python fastapi uvicorn python-multipart soundfile librosa httpx sentencepiece sphn safetensors einops huggingface_hub aiohttp
 uv pip install --python moshi-env/bin/python torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128

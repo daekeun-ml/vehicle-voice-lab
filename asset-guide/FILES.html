@@ -1,0 +1,125 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>어떤 파일이 무엇인가요?</title><style>body{font:16px/1.8 system-ui,sans-serif;color:#232f3e;background:#fff;max-width:1120px;margin:auto;padding:32px}a{color:#0972d3}h1,h2,h3{line-height:1.4}h2{margin-top:44px;border-top:1px solid #d5dbdb;padding-top:24px}pre{background:#f2f3f3;padding:18px;overflow:auto;border-radius:6px}code{font-size:.9em}table{display:block;overflow:auto;border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #d5dbdb;padding:10px}img{max-width:100%;height:auto}blockquote{border-left:4px solid #ec7211;padding-left:20px;margin-left:0}.nav{font-size:14px}</style></head><body><p class="nav"><a href="/">데모 앱</a> · <a href="hands-on.html">핸즈온</a> · <a href="README.html">가이드 시작</a></p><h1 id="어떤-파일이-무엇인가요">어떤 파일이 무엇인가요?</h1>
+<p><a href="README.html">처음 설명으로 돌아가기</a></p>
+<h2 id="화면음성-에셋">화면·음성 에셋</h2>
+<table>
+<thead>
+<tr>
+<th>위치</th>
+<th>무엇인가요?</th>
+<th>어떻게 보면 되나요?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../docs/screenshots/korean-ui.png">한국어 화면</a> / <a href="../docs/screenshots/english-ui.png">영어 화면</a></td>
+<td>데모 화면을 찍은 이미지</td>
+<td>앱의 전체 모습을 먼저 확인</td>
+</tr>
+<tr>
+<td><a href="../public/sample-command.wav">sample-command.wav</a></td>
+<td>한국어 차량 명령 입력 샘플</td>
+<td>“조수석 온도 25도” 테스트에 사용</td>
+</tr>
+<tr>
+<td><a href="../public/sample-english.wav">sample-english.wav</a></td>
+<td>영어 입력 샘플</td>
+<td>영어 음성 테스트에 사용</td>
+</tr>
+<tr>
+<td><a href="../public/sample-greeting.wav">sample-greeting.wav</a></td>
+<td>MiniCPM 경로에서 쓰는 별도 입력 샘플</td>
+<td>해당 모델의 샘플 음성 테스트에 사용</td>
+</tr>
+<tr>
+<td><a href="../public/reference-neutral.wav">reference-neutral.wav</a></td>
+<td>MiniCPM 음성 생성에 사용하는 참조 음성</td>
+<td>음성 생성 설정용 자료</td>
+</tr>
+<tr>
+<td><a href="../public/benchmark-audio/">benchmark-audio 폴더</a></td>
+<td>모델 비교 실험에서 저장한 응답 음성</td>
+<td>모델별 시험 응답을 직접 들어보기</td>
+</tr>
+<tr>
+<td><a href="../public/favicon.svg">favicon.svg</a></td>
+<td>브라우저 탭의 작은 아이콘</td>
+<td>앱 표시용 이미지</td>
+</tr>
+</tbody>
+</table>
+<p>비교 음성 파일명은 <strong><code>모델명-시험내용-reply.wav</code></strong> 형태입니다.</p>
+<ul>
+<li><code>passenger-25</code>: 조수석 온도 25도 요청.</li>
+<li><code>defrost-on</code>: 앞유리 김서림 제거 켜기 요청.</li>
+<li><code>reply</code>: 사용자의 입력이 아니라 시스템의 응답 음성.</li>
+</ul>
+<p>예를 들어 <code>qwen35-4b-nf4-passenger-25-reply.wav</code>는 Qwen3.5-4B NF4 설정으로 조수석 온도 요청을 시험했을 때의 응답입니다. <strong>파일의 모델명이 곧 목소리를 만든 모델이라는 뜻은 아닙니다.</strong> 명령 판단은 해당 모델이 하고, 음성은 Polly 같은 별도 서비스가 만들 수 있습니다.</p>
+<h2 id="프로젝트-구성">프로젝트 구성</h2>
+<table>
+<thead>
+<tr>
+<th>위치</th>
+<th>쉬운 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../public/">public/</a></td>
+<td>사용자가 보는 화면, 버튼 동작, 디자인, 샘플 음성</td>
+</tr>
+<tr>
+<td><a href="../server.mjs">server.mjs</a></td>
+<td>화면의 요청을 받아 모델·차량 상태·응답을 연결하는 중앙 서버</td>
+</tr>
+<tr>
+<td><a href="../vehicle.mjs">vehicle.mjs</a></td>
+<td>가상 차량의 상태와 명령 실행 규칙. 온도 범위 등도 검사</td>
+</tr>
+<tr>
+<td><a href="../planner-prompt-v2.mjs">planner-prompt-v2.mjs</a></td>
+<td>AI에게 차량 명령을 어떻게 판단할지 알려주는 지시문</td>
+</tr>
+<tr>
+<td><a href="../runtime/">runtime/</a></td>
+<td>서버에서 음성 인식·명령 판단·음성 생성 모델을 실행하는 코드</td>
+</tr>
+<tr>
+<td><a href="../model-catalog.json">model-catalog.json</a></td>
+<td>비교 대상 모델과 관련 정보 목록</td>
+</tr>
+<tr>
+<td><a href="../research/">research/</a></td>
+<td>비교 점수, 속도, 실패 사례 등 실험 기록</td>
+</tr>
+<tr>
+<td><a href="../scripts/">scripts/</a></td>
+<td>반복 시험, 결과 정리, 실행·배포 작업을 돕는 스크립트</td>
+</tr>
+<tr>
+<td><a href="../tests/">tests/</a></td>
+<td>프로그램이 예상대로 동작하는지 확인하는 자동 테스트</td>
+</tr>
+<tr>
+<td><a href="../infra/">infra/</a></td>
+<td>AWS 서버와 관련 서비스를 구성하는 코드</td>
+</tr>
+<tr>
+<td><a href="../docs/">docs/</a></td>
+<td>구조·배포·도우미 기능에 대한 상세 설명</td>
+</tr>
+</tbody>
+</table>
+<h2 id="목적에-따라-이-파일부터-보세요">목적에 따라 이 파일부터 보세요</h2>
+<ul>
+<li><strong>“무슨 앱인지 알고 싶다”</strong> → <a href="README.html">쉬운 설명</a>, <a href="../README.ko.md">한국어 원본 안내</a>.</li>
+<li><strong>“비교 결과가 궁금하다”</strong> → <a href="../research/vehicle-model-comparison.csv">비교 CSV</a>, <a href="../research/vehicle-benchmark-summary.json">평가 요약 JSON</a>. CSV는 표 형태, JSON은 프로그램이 읽기 좋은 데이터 형태입니다.</li>
+<li><strong>“어떤 문장으로 시험했나?”</strong> → <a href="../scripts/vehicle-benchmark-cases.mjs">평가 문장과 정답 정의</a>.</li>
+<li><strong>“더 어려운 문제는?”</strong> → <a href="HARD_BENCHMARK.html">별도 고난도 48문제와 해설</a>, <a href="../research/vehicle-hard-v1/cases.json">평가 입력·정답 JSON</a>. 신규 세트이며 모델 평가·음성 생성은 아직 미실행.</li>
+<li><strong>“정확히 어떤 모델을 쓰나?”</strong> → <a href="MODELS.html">서버별 모델 ID·크기·정밀도</a>.</li>
+<li><strong>“새 STT·TTS와 최신 모델 후보는?”</strong> → <a href="MODEL_CANDIDATES.html">Qwen3-ASR·Kokoro·MiniCPM 최신 계열 검토</a>, <a href="../research/model-candidate-review.json">후보 메타데이터</a>.</li>
+<li><strong>“잡음 제거와 Kokoro를 직접 시험한 결과는?”</strong> → <a href="AUDIO_FRONTEND.html">잡음 제거 설계·실험</a>, <a href="KOKORO_KOREAN_TEST.html">Kokoro 한국어 진단</a>, <a href="audio-lab.html">오디오 A/B 청취 페이지</a>.</li>
+<li><strong>“다른 한국어 TTS 3종 비교는?”</strong> → <a href="TTS_COMPARISON.html">Supertonic·Qwen 1.7B·CosyVoice 실행 결과</a>, <a href="tts-comparison.html">24개 생성 음성 듣기</a>.</li>
+<li><strong>“코드가 어떻게 연결되나?”</strong> → <a href="ARCHITECTURE.html">한국어 아키텍처 설명</a>, <a href="architecture.html">AWS 아키텍처 그림</a>, <a href="../docs/ARCHITECTURE.md">기존 영문 상세 구조</a>.</li>
+<li><strong>“직접 실행하고 싶다”</strong> → <a href="../docs/DEPLOYMENT.md">배포 안내</a>.</li>
+<li><strong>“가져다 써도 되나?”</strong> → <a href="../LICENSE">앱 라이선스</a>, <a href="../NOTICE">모델별 주의사항</a>.</li>
+</ul></body></html>

@@ -1,0 +1,59 @@
+{
+  "speechModelDuringTest": "qwen3-omni",
+  "speechBusyBefore": true,
+  "speechModelRetained": true,
+  "asrRequests": [
+    {
+      "text": "운전석 온도를 이십사도로 맞춰줘.",
+      "elapsedMs": 496,
+      "model": "Qwen/Qwen3-ASR-0.6B",
+      "revision": "5eb144179a02acc5e5ba31e748d22b0cf3e303b0",
+      "language": "Korean",
+      "precision": "bfloat16",
+      "loadMs": 0,
+      "queueMs": 0,
+      "independentAsr": true,
+      "asrId": "qwen3-asr-06b",
+      "requestMs": 549,
+      "vehicleStateChanged": false,
+      "wallMs": 1325
+    },
+    {
+      "text": "운전석 온도를 이십사도로 맞춰줘.",
+      "elapsedMs": 507,
+      "model": "Qwen/Qwen3-ASR-1.7B",
+      "revision": "7278e1e70fe206f11671096ffdd38061171dd6e5",
+      "language": "Korean",
+      "precision": "bfloat16",
+      "loadMs": 0,
+      "queueMs": 0,
+      "independentAsr": true,
+      "asrId": "qwen3-asr-17b",
+      "requestMs": 528,
+      "vehicleStateChanged": false,
+      "wallMs": 1228
+    }
+  ],
+  "webConversationChecks": [
+    {
+      "asrId": "qwen3-asr-06b",
+      "asrModel": "Qwen/Qwen3-ASR-0.6B",
+      "asrRevision": "5eb144179a02acc5e5ba31e748d22b0cf3e303b0",
+      "rawTranscript": "운전석 온도를 이십사도로 맞춰줘.",
+      "asrMs": 476,
+      "ttsModel": "akamotaco/ppaso-tts-v1",
+      "firstAudioMs": null
+    },
+    {
+      "asrId": "qwen3-asr-17b",
+      "asrModel": "Qwen/Qwen3-ASR-1.7B",
+      "asrRevision": "7278e1e70fe206f11671096ffdd38061171dd6e5",
+      "rawTranscript": "운전석 온도를 이십사도로 맞춰줘.",
+      "asrMs": 490,
+      "ttsModel": "akamotaco/ppaso-tts-v1",
+      "firstAudioMs": null
+    }
+  ],
+  "browserErrors": [],
+  "scope": "Synthetic WAV upload tests; two independent ASR workers concurrently with active Omni inference. No human microphone claim."
+}

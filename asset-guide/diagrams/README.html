@@ -1,0 +1,60 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>아키텍처 다이어그램</title><style>body{font:16px/1.8 system-ui,sans-serif;color:#232f3e;background:#fff;max-width:1120px;margin:auto;padding:32px}a{color:#0972d3}h1,h2,h3{line-height:1.4}h2{margin-top:44px;border-top:1px solid #d5dbdb;padding-top:24px}pre{background:#f2f3f3;padding:18px;overflow:auto;border-radius:6px}code{font-size:.9em}table{display:block;overflow:auto;border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #d5dbdb;padding:10px}img{max-width:100%;height:auto}blockquote{border-left:4px solid #ec7211;padding-left:20px;margin-left:0}.nav{font-size:14px}</style></head><body><p class="nav"><a href="/">데모 앱</a> · <a href="../hands-on.html">핸즈온</a> · <a href="../README.html">가이드 시작</a></p><h1 id="아키텍처-다이어그램">아키텍처 다이어그램</h1>
+<p><a href="../architecture.html">전체 그림 한 번에 보기</a></p>
+<table>
+<thead>
+<tr>
+<th>그림</th>
+<th>PNG</th>
+<th>형식</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="gpu-residency-ko.html">GPU 모델 상주</a></td>
+<td><a href="gpu-residency-ko.png">다운로드</a></td>
+<td>Architecture</td>
+<td>GPU 1의 독립 워커와 GPU 2의 단일 모델 교체</td>
+</tr>
+<tr>
+<td><a href="deployment-ko.html">AWS 배포 구성</a></td>
+<td><a href="deployment-ko.png">다운로드</a></td>
+<td>Architecture</td>
+<td>9개 구성 요소, GPU 워커·CPU Supertonic·AWS API 연결</td>
+</tr>
+<tr>
+<td><a href="command-sequence-ko.html">명령 처리 순서</a></td>
+<td><a href="command-sequence-ko.png">다운로드</a></td>
+<td>Sequence</td>
+<td>5개 참여자, 기본 Whisper → Qwen3.5-4B NF4 → Polly 경로</td>
+</tr>
+<tr>
+<td><a href="model-paths-ko.html">모델 경로 비교</a></td>
+<td><a href="model-paths-ko.png">다운로드</a></td>
+<td>Architecture</td>
+<td>6개 구성 요소, 3가지 이해 경로와 공통 실행기</td>
+</tr>
+</tbody>
+</table>
+<p><code>aws-diagram-design</code> 스킬의 Python 생성기로 작성했습니다. 모두 1280×720 가로형이며 AWS 공식 아이콘, Amazon Ember 글꼴, 직각 연결선을 사용합니다. HTML에 아이콘과 영문 글꼴을 포함하므로 스킬 설치 경로에 의존하지 않고 열 수 있습니다. 한글은 시스템 CJK 글꼴을 사용합니다.</p>
+<p>가이드에는 2배 해상도인 <strong>2560×1440 PNG</strong>를 삽입했습니다. PNG에는 렌더링된 한글이 포함되어 보는 환경의 글꼴에 영향을 받지 않습니다.</p>
+<h2 id="다시-생성하기">다시 생성하기</h2>
+<p>스킬이 설치된 환경에서:</p>
+<pre><code class="language-bash">python3 asset-guide/diagrams/build.py
+</code></pre>
+<p>다른 경로에 설치했다면:</p>
+<pre><code class="language-bash">python3 asset-guide/diagrams/build.py --skill /path/to/aws-diagram-design
+</code></pre>
+<p><a href="spec_vehicle.py">spec_vehicle.py</a>가 내용과 배치 원본이고, <a href="build.py">build.py</a>가 스킬 생성기를 실행한 뒤 글꼴을 내장하고 통합 HTML을 만듭니다. 생성기의 레이아웃·텍스트 경고가 있으면 빌드를 실패시킵니다.</p>
+<p>HTML을 수정·재생성한 뒤 PNG도 갱신하세요. Playwright·Chromium과 한글 글꼴이 설치된 환경에서:</p>
+<pre><code class="language-bash">python3 asset-guide/diagrams/export_png.py
+</code></pre>
+<p><a href="export_png.py">export_png.py</a>는 HTML의 SVG 영역만 투명 배경으로 내보냅니다. 페이지 제목과 설명은 포함하지 않습니다.</p>
+<h2 id="상세-수준">상세 수준</h2>
+<ul>
+<li>배포 구성: GPU 1의 독립 워커를 VRAM 공유 그룹으로 묶었습니다. Gateway 뒤의 Lambda·Web Search와 로컬 도구는 설명에 남겼습니다.</li>
+<li>GPU 상주: Core의 Nemotron+판단 모델, 별도 Whisper·Qwen TTS 2개·MiniCPM 워커와 GPU 2의 모델 교체 단위를 표시합니다. 메모리 공유는 GPU 경계로 표현하며 호출 순서를 나타내는 화살표는 사용하지 않습니다.</li>
+<li>명령 순서: 기본 모델 이름·정밀도를 명시한 정상 차량 변경 한 건을 보여줍니다. 실패·확인 질문 분기는 설명에 남겼습니다.</li>
+<li>모델 비교: README의 기존 Mermaid 6개 노드·5개 연결을 유지하여 다시 배치했습니다. 네이티브 음성 비교 모드는 실행기 밖의 별도 모드로 명시했습니다.</li>
+</ul>
+<p>배포 가동 상태를 조회한 그림이 아닙니다. 구현 근거는 <a href="../ARCHITECTURE.html">상세 아키텍처</a>에 있습니다.</p></body></html>

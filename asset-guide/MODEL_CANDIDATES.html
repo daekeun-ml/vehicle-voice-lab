@@ -1,0 +1,151 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>추가 모델 후보: Qwen3-ASR, Kokoro, MiniCPM 최신 계열</title><style>body{font:16px/1.8 system-ui,sans-serif;color:#232f3e;background:#fff;max-width:1120px;margin:auto;padding:32px}a{color:#0972d3}h1,h2,h3{line-height:1.4}h2{margin-top:44px;border-top:1px solid #d5dbdb;padding-top:24px}pre{background:#f2f3f3;padding:18px;overflow:auto;border-radius:6px}code{font-size:.9em}table{display:block;overflow:auto;border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #d5dbdb;padding:10px}img{max-width:100%;height:auto}blockquote{border-left:4px solid #ec7211;padding-left:20px;margin-left:0}.nav{font-size:14px}</style></head><body><p class="nav"><a href="/">데모 앱</a> · <a href="hands-on.html">핸즈온</a> · <a href="README.html">가이드 시작</a></p><h1 id="추가-모델-후보-qwen3-asr-kokoro-minicpm-최신-계열">추가 모델 후보: Qwen3-ASR, Kokoro, MiniCPM 최신 계열</h1>
+<p><a href="MODELS.html">현재 연결 모델</a> · <a href="README.html">에셋 안내</a> · <a href="../research/model-candidate-review.json">확인한 리비전·메타데이터</a></p>
+<p><strong>확인일: 2026-10-22. 공식 모델 카드와 Hugging Face 메타데이터를 확인한 후보 검토입니다.</strong> 이후 Kokoro는 가중치를 내려받아 <a href="KOKORO_KOREAN_TEST.html">한국어 음소 입력 실행·재인식 진단</a>을 수행했습니다. 추가로 Supertonic 3·Qwen3-TTS 1.7B·CosyVoice 3의 <a href="TTS_COMPARISON.html">한국어 8문장 비교</a>를 완료했습니다. Qwen 1.7B·Supertonic 3는 서울 공유 데모에 연동하고 모델별 요청을 검증했습니다. Qwen3-ASR 0.6B·1.7B도 GPU2에 연동했으며 <a href="STT_COMPARISON.html">STT 4종 비교</a>를 실행합니다. 나머지 후보 상태는 아래에 구분했습니다. 현재 기본 모델과 기존 평가 점수는 유지합니다.</p>
+<h2 id="우선-검토할-stt-qwen3-asr-두-크기">우선 검토할 STT: Qwen3-ASR 두 크기</h2>
+<table>
+<thead>
+<tr>
+<th>후보</th>
+<th>공식 한국어 지원</th>
+<th>라이선스</th>
+<th>이 앱에서 맡을 역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://huggingface.co/Qwen/Qwen3-ASR-0.6B">Qwen/Qwen3-ASR-0.6B</a></td>
+<td>명시됨</td>
+<td>Apache-2.0</td>
+<td>Whisper/Nemotron 대신 음성 → 텍스트</td>
+</tr>
+<tr>
+<td><a href="https://huggingface.co/Qwen/Qwen3-ASR-1.7B">Qwen/Qwen3-ASR-1.7B</a></td>
+<td>명시됨</td>
+<td>Apache-2.0</td>
+<td>같은 입력으로 0.6B와 정확도·시간·메모리 비교</td>
+</tr>
+</tbody>
+</table>
+<p>두 모델은 <strong>음성 인식 모델</strong>입니다. 차량 명령 JSON을 만드는 <code>Qwen/Qwen3.5-4B</code>와 역할이 다릅니다. 도입 시 비교 경로는 다음과 같습니다.</p>
+<blockquote>
+<p>음성 → 선택한 Qwen3-ASR → 인식 텍스트 → 기존 Qwen3.5-4B NF4 → 차량 실행기 → 기존 TTS</p>
+</blockquote>
+<p>공식 카드는 한국어를 포함한 30개 언어와 중국어 22개 방언을 명시합니다. <code>qwen-asr</code> 패키지가 Transformers·vLLM 실행을 지원하고, 카드의 스트리밍 경로는 vLLM을 사용합니다. 처음에는 기존 앱과 같은 <strong>발화 단위</strong>로 비교하고, 스트리밍 통합은 별도로 평가하는 편이 조건을 통제하기 쉽습니다. 제품의 스트리밍 지원이 곧 이 앱의 스트리밍 연동을 뜻하지는 않습니다.</p>
+<p><code>0.6B</code>·<code>1.7B</code>는 제품 크기 표기입니다. 확인한 Hub safetensors 메타데이터의 전체 텐서 파라미터 수는 각각 <strong>938,008,576</strong>과 <strong>2,349,217,408</strong>입니다. 메모리는 이름의 숫자만으로 산정하지 않고 인코더 등을 포함한 로딩·요청 peak를 직접 측정해야 합니다.</p>
+<p>비교 시 다음 조건을 고정합니다.</p>
+<ul>
+<li>동일 음성, 동일 한국어 전사 정답, 동일 텍스트 정규화 규칙.</li>
+<li>뒤쪽 판단 모델·프롬프트·차량 가드·TTS는 그대로 유지.</li>
+<li>한국어 CER, 숫자·좌석·부정·정정 인식 정확도와 최종 차량 제어 성공률을 분리.</li>
+<li>warm/cold 시간, 전사 완료 시간, GPU peak 메모리 측정. vLLM의 기본 메모리 예약량을 GPU 1의 다른 상주 워커와 함께 검토.</li>
+<li><a href="HARD_BENCHMARK.html">고난도 48문제</a>는 현재 텍스트 명세이므로 STT 시험 전에 사람 녹음이나 합성 음성을 별도로 준비.</li>
+</ul>
+<p>두 후보를 기존 워커에 무조건 추가 상주시키는 배치는 전제하지 않습니다. 같은 GPU의 메모리 예산을 확인하며 ASR 후보를 하나씩 로드해 비교할 수 있습니다. forced aligner는 선택적 타임스탬프 기능이며 이번 차량 명령 전사 비교에 필수로 추가하지 않습니다.</p>
+<h2 id="tts-후보-kokoro-82m">TTS 후보: Kokoro-82M</h2>
+<p><a href="https://huggingface.co/hexgrad/Kokoro-82M">hexgrad/Kokoro-82M</a>은 <strong>82M 파라미터의 공개 가중치 TTS 모델</strong>이며 Apache-2.0 라이선스로 안내됩니다. 공식 예제는 <code>kokoro.KPipeline</code>, <code>misaki</code> 계열 발음 처리와 <code>espeak-ng</code>를 사용하고 24kHz 오디오를 생성합니다.</p>
+<p><strong>공식 <a href="https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md">VOICES.md</a>에 한국어 voice/lang_code는 없습니다.</strong> 영어·일본어·중국어·스페인어·프랑스어·힌디어·이탈리아어·포르투갈어 등의 음성이 있으므로, 현재는 <strong>영어 TTS의 경량 실행 후보</strong>로 둡니다. 이 저장소의 Polly Seoyeon·Qwen 한국어 TTS를 바로 대체할 수 있다고 표시하지 않습니다.</p>
+<p>검토할 항목은 다음과 같습니다.</p>
+<ul>
+<li>같은 영어 안내 문장을 읽게 했을 때의 자연스러움, 숫자·지명 발음, 짧은 응답의 명료성.</li>
+<li>CPU와 GPU에서 각각 측정한 첫 오디오 시간·전체 생성 시간·메모리. 82M이라는 크기만으로 차량 CPU의 지연을 단정하지 않음.</li>
+<li>24kHz 출력과 현재 앱의 오디오 재생·WAV 처리 연결.</li>
+<li>공식 음성 문서가 지적하는 짧은 발화의 약점. 차량 안내는 짧으므로 긴 문단 합성 점수로 대신 평가하지 않음.</li>
+</ul>
+<p>한국어 확장·파인튜닝·커뮤니티 포크는 원본 <code>hexgrad/Kokoro-82M</code>의 공식 지원과 구분해야 합니다.</p>
+<p>추가 실행 결과: <code>ko</code>·<code>k</code> 모드는 거부됐지만 한국어 음소를 직접 넣는 방법으로 16개 오디오를 생성했습니다. 인사말 일부를 제외하면 차량 안내의 재인식 오류가 커서 한국어 기본 TTS에 연결하지 않았습니다. 이 결과는 사람이 청취해 판정한 품질 점수가 아닙니다. <a href="KOKORO_KOREAN_TEST.html">실행 방법·한계</a>와 <a href="audio-lab.html#kokoro">생성 음성</a>을 참고하세요.</p>
+<h2 id="kokoro-대안-tts-3종-실행-비교-완료">Kokoro 대안 TTS 3종: 실행 비교 완료</h2>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th>실행 구성</th>
+<th>재인식 완전 일치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Supertone/supertonic-3</code></td>
+<td>CPU · F1 · 한국어</td>
+<td>6/8</td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice</code></td>
+<td>GPU · Sohee · BF16</td>
+<td>7/8</td>
+</tr>
+<tr>
+<td><code>FunAudioLLM/Fun-CosyVoice3-0.5B-2512</code></td>
+<td>GPU · 합성 참조 음성 · fp16 옵션</td>
+<td>5/8</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tts-comparison.html">24개 음성 청취</a>와 <a href="TTS_COMPARISON.html">설정·실패 사례·측정 한계</a>를 확인하세요. 동일 8문장의 ASR 대리 지표이며 MOS가 아닙니다. CosyVoice는 0.08초로 끝난 짧은 인사말 실패를 포함합니다. 기존 0.6B·Polly를 이번에 재측정하지 않았으므로 기존 기본값 대비 우위를 주장하지 않습니다.</p>
+<h2 id="minicpm-o-45보다-최신-모델은">MiniCPM-o-4.5보다 최신 모델은?</h2>
+<p>확인한 공식 <a href="https://huggingface.co/openbmb/MiniCPM-o-4_5">MiniCPM-o-4.5 카드</a>는 <strong>4.5를 MiniCPM-o 계열의 최신 모델</strong>로 설명합니다. 확인한 OpenBMB 공식 공개 목록에서 더 새로운 o 계열 기본 모델은 찾지 못했습니다.</p>
+<p>새로운 버전 숫자가 붙은 다른 계열은 있지만, 입력·출력 기능이 다릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th>Hub 저장소 생성 시점¹</th>
+<th>역할</th>
+<th>이 앱에서의 판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://huggingface.co/openbmb/MiniCPM-o-4_5">MiniCPM-o-4.5</a></td>
+<td>2026-02-03</td>
+<td>영상·음성 이해, 음성 생성, 전이중 대화</td>
+<td>기존 음성 모델 비교 기준 유지</td>
+</tr>
+<tr>
+<td><a href="https://huggingface.co/openbmb/MiniCPM-V-4.7-1B">MiniCPM-V-4.7-1B</a></td>
+<td>2026-10-06</td>
+<td>이미지·영상 → 텍스트</td>
+<td>음성 모델의 직접 후속 교체 대상이 아님</td>
+</tr>
+<tr>
+<td><a href="https://huggingface.co/openbmb/MiniCPM5-2B">MiniCPM5-2B</a></td>
+<td>2026-09-06</td>
+<td>텍스트 생성</td>
+<td>STT 뒤의 <strong>판단 모델 후보</strong>로 별도 검토 가능</td>
+</tr>
+</tbody>
+</table>
+<p>¹ 저장소 생성일은 모델 발표일·학습 완료일과 다릅니다. 최근 파일 수정일이나 양자화 포맷 추가일도 새 세대 출시일로 취급하지 않습니다.</p>
+<p>MiniCPM-o-4.5의 공식 음성 대화 지원은 <strong>영어·중국어</strong>로 안내됩니다. 카드의 30개 이상 언어 지원 설명을 한국어 음성 입출력 보장으로 확장해서 읽으면 안 됩니다. 한국어 차량 명령 적합성은 기존 점수와 고난도 신규 평가로 확인해야 합니다.</p>
+<p>앱은 <code>503e754207c94da6bb26850b4469f367c9ea3582</code> 리비전을 고정하고 있습니다. 이번에 확인한 저장소 head는 <code>d59117d19ddb8a28a62f1b5f4e3b34ac48d510a4</code>로 다릅니다. <strong>head가 다르다는 사실만으로 가중치나 모델 세대가 바뀌었다고 단정할 수 없습니다.</strong> 업데이트하려면 변경 파일과 기존 음성 어댑터 호환성을 먼저 비교해야 합니다.</p>
+<h2 id="다른-음성-계열도-살펴본-결과">다른 음성 계열도 살펴본 결과</h2>
+<table>
+<thead>
+<tr>
+<th>후보</th>
+<th>확인한 역할</th>
+<th>검토 우선순위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://huggingface.co/stepfun-ai/Step-Audio-R1.1">Step-Audio-R1.1</a></td>
+<td>공식 카드의 실시간 음성 대화·추론 계열</td>
+<td>하드웨어·한국어·출력 어댑터부터 검토</td>
+</tr>
+<tr>
+<td><a href="https://huggingface.co/XiaomiMiMo/MiMo-V2.5-ASR">MiMo-V2.5-ASR</a></td>
+<td>중국어·영어 중심 음성 인식</td>
+<td>한국어 지원 근거를 추가 확인한 뒤 검토</td>
+</tr>
+</tbody>
+</table>
+<p>Step-Audio-R1.1은 기존 Step-Audio-2-mini보다 새로운 대안이지만 MiniCPM-o-4.5보다 저장소 생성일이 늦지는 않습니다. 공식 배포 안내는 4×L40S/H100/H800/H20에서 시험했다고 명시합니다. 확인된 약 33.49B BF16 파라미터는 가중치만 약 <strong>62.4GiB</strong>이므로 현재 단일 L40S 48GB에 같은 설정으로 바로 올릴 수 없습니다. 양자화·분산·offload 가능성을 실제로 확인하지 않고 “현재 GPU에서 실행 가능”으로 표시하지 않습니다.</p>
+<p>MiMo-V2.5-ASR은 2026-04에 생성된 더 최근 ASR 저장소지만, 공식 설명의 중국어·영어 성능을 한국어에도 적용할 근거는 확인하지 못했습니다. MiniCPM-o의 음성 대화 역할 전체를 대체하는 모델도 아닙니다.</p>
+<h2 id="이번-결정">이번 결정</h2>
+<ol>
+<li><strong>한국어 STT 비교 우선순위:</strong> Qwen3-ASR-0.6B와 1.7B를 모두 후보에 추가.</li>
+<li><strong>TTS:</strong> Kokoro-82M은 영어·경량 실행 후보. 한국어 기본 TTS는 기존 구성 유지.</li>
+<li><strong>음성 직접 이해:</strong> MiniCPM-o-4.5의 최신성만을 이유로 제외하지 않음. 공식 후속 모델 확인과 한국어 실측을 구분.</li>
+<li><strong>최신 텍스트 모델:</strong> MiniCPM5-2B는 STT 뒤의 판단 모델 후보로 검토 가능.</li>
+</ol>
+<p>후보와 근거는 <a href="../research/model-candidate-review.json">별도 검토 JSON</a>에 저장했습니다. 현재 실행 가능한 모델 카탈로그·선택기와 평가 결과에는 미연동 후보를 실행 완료 모델로 추가하지 않았습니다.</p></body></html>

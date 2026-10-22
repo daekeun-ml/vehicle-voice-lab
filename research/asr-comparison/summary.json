@@ -1,0 +1,649 @@
+{
+  "updatedAt": "2026-10-22T10:55:01.394Z",
+  "status": "complete",
+  "corpusHash": "6e420ce00aca5eb7fad515c7c6864b2454699417387740aec37825b8d1528241",
+  "planner": {
+    "plannerId": "qwen35-4b",
+    "promptVersion": "compact-v2",
+    "generationProfile": "deterministic",
+    "ttsProvider": "polly"
+  },
+  "metrics": "CER removes punctuation/whitespace, keeps numeric spelling. Entity metric compares explicit ordered mentions; control is action/state only, not reply semantics.",
+  "timing": "ASR worker elapsed time; model load excluded. Single requests, shared GPUs. Whisper/Nemotron GPU1; Qwen ASR GPU2. Same g6e.2xlarge L40S.",
+  "synthetic": true,
+  "realCarNoise": false,
+  "models": [
+    {
+      "id": "whisper",
+      "status": "complete",
+      "completed": 206,
+      "total": 206,
+      "groups": [
+        {
+          "condition": "original",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.025134649910233394,
+          "exact": 61,
+          "actionStateCorrect": 60,
+          "medianAsrMs": 107,
+          "medianRtf": 0.023240434577231933,
+          "entities": {
+            "numbers": {
+              "correct": 33,
+              "total": 37
+            },
+            "seats": {
+              "correct": 29,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 4,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "original-denoised",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.02333931777378815,
+          "exact": 62,
+          "actionStateCorrect": 60,
+          "medianAsrMs": 107,
+          "medianRtf": 0.024107142857142858,
+          "entities": {
+            "numbers": {
+              "correct": 33,
+              "total": 37
+            },
+            "seats": {
+              "correct": 29,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 4,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.0599250936329588,
+          "exact": 7,
+          "actionStateCorrect": 8,
+          "medianAsrMs": 123,
+          "medianRtf": 0.022524271844660194,
+          "entities": {
+            "numbers": {
+              "correct": 9,
+              "total": 11
+            },
+            "seats": {
+              "correct": 8,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.06367041198501873,
+          "exact": 8,
+          "actionStateCorrect": 8,
+          "medianAsrMs": 129,
+          "medianRtf": 0.023464032108675516,
+          "entities": {
+            "numbers": {
+              "correct": 9,
+              "total": 11
+            },
+            "seats": {
+              "correct": 8,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.2546816479400749,
+          "exact": 0,
+          "actionStateCorrect": 5,
+          "medianAsrMs": 122,
+          "medianRtf": 0.022524271844660194,
+          "entities": {
+            "numbers": {
+              "correct": 5,
+              "total": 11
+            },
+            "seats": {
+              "correct": 3,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.2546816479400749,
+          "exact": 0,
+          "actionStateCorrect": 5,
+          "medianAsrMs": 122,
+          "medianRtf": 0.026329113924050632,
+          "entities": {
+            "numbers": {
+              "correct": 5,
+              "total": 11
+            },
+            "seats": {
+              "correct": 3,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "nemotron",
+      "status": "complete",
+      "completed": 206,
+      "total": 206,
+      "groups": [
+        {
+          "condition": "original",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.11609814482345901,
+          "exact": 19,
+          "actionStateCorrect": 49,
+          "medianAsrMs": 112,
+          "medianRtf": 0.0223433242506812,
+          "entities": {
+            "numbers": {
+              "correct": 30,
+              "total": 37
+            },
+            "seats": {
+              "correct": 26,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 2,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "original-denoised",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.11011370436864153,
+          "exact": 20,
+          "actionStateCorrect": 50,
+          "medianAsrMs": 111,
+          "medianRtf": 0.0225,
+          "entities": {
+            "numbers": {
+              "correct": 30,
+              "total": 37
+            },
+            "seats": {
+              "correct": 27,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 2,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.2546816479400749,
+          "exact": 0,
+          "actionStateCorrect": 7,
+          "medianAsrMs": 127,
+          "medianRtf": 0.025588235294117648,
+          "entities": {
+            "numbers": {
+              "correct": 6,
+              "total": 11
+            },
+            "seats": {
+              "correct": 3,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.2846441947565543,
+          "exact": 0,
+          "actionStateCorrect": 8,
+          "medianAsrMs": 126,
+          "medianRtf": 0.025415162454873647,
+          "entities": {
+            "numbers": {
+              "correct": 6,
+              "total": 11
+            },
+            "seats": {
+              "correct": 3,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.704119850187266,
+          "exact": 0,
+          "actionStateCorrect": 2,
+          "medianAsrMs": 122,
+          "medianRtf": 0.02441176470588235,
+          "entities": {
+            "numbers": {
+              "correct": 0,
+              "total": 11
+            },
+            "seats": {
+              "correct": 0,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.704119850187266,
+          "exact": 0,
+          "actionStateCorrect": 2,
+          "medianAsrMs": 122,
+          "medianRtf": 0.02397003745318352,
+          "entities": {
+            "numbers": {
+              "correct": 0,
+              "total": 11
+            },
+            "seats": {
+              "correct": 0,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "qwen3-asr-06b",
+      "status": "complete",
+      "completed": 206,
+      "total": 206,
+      "groups": [
+        {
+          "condition": "original",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.08976660682226212,
+          "exact": 27,
+          "actionStateCorrect": 53,
+          "medianAsrMs": 642,
+          "medianRtf": 0.14418604651162792,
+          "entities": {
+            "numbers": {
+              "correct": 29,
+              "total": 37
+            },
+            "seats": {
+              "correct": 28,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 4,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "original-denoised",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.08976660682226212,
+          "exact": 27,
+          "actionStateCorrect": 53,
+          "medianAsrMs": 630,
+          "medianRtf": 0.14409005628517824,
+          "entities": {
+            "numbers": {
+              "correct": 29,
+              "total": 37
+            },
+            "seats": {
+              "correct": 28,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 4,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.14232209737827714,
+          "exact": 1,
+          "actionStateCorrect": 9,
+          "medianAsrMs": 760,
+          "medianRtf": 0.12793650793650793,
+          "entities": {
+            "numbers": {
+              "correct": 9,
+              "total": 11
+            },
+            "seats": {
+              "correct": 8,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.1348314606741573,
+          "exact": 1,
+          "actionStateCorrect": 9,
+          "medianAsrMs": 759,
+          "medianRtf": 0.12378976486860305,
+          "entities": {
+            "numbers": {
+              "correct": 9,
+              "total": 11
+            },
+            "seats": {
+              "correct": 8,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.45692883895131087,
+          "exact": 0,
+          "actionStateCorrect": 2,
+          "medianAsrMs": 667,
+          "medianRtf": 0.11650485436893204,
+          "entities": {
+            "numbers": {
+              "correct": 1,
+              "total": 11
+            },
+            "seats": {
+              "correct": 4,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.45318352059925093,
+          "exact": 0,
+          "actionStateCorrect": 2,
+          "medianAsrMs": 688,
+          "medianRtf": 0.12251585623678647,
+          "entities": {
+            "numbers": {
+              "correct": 2,
+              "total": 11
+            },
+            "seats": {
+              "correct": 4,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "qwen3-asr-17b",
+      "status": "complete",
+      "completed": 206,
+      "total": 206,
+      "groups": [
+        {
+          "condition": "original",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.06463195691202872,
+          "exact": 37,
+          "actionStateCorrect": 58,
+          "medianAsrMs": 669,
+          "medianRtf": 0.149636803874092,
+          "entities": {
+            "numbers": {
+              "correct": 31,
+              "total": 37
+            },
+            "seats": {
+              "correct": 27,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 4,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "original-denoised",
+          "completed": 79,
+          "total": 79,
+          "errors": 0,
+          "cer": 0.06702573309395571,
+          "exact": 38,
+          "actionStateCorrect": 59,
+          "medianAsrMs": 668,
+          "medianRtf": 0.149636803874092,
+          "entities": {
+            "numbers": {
+              "correct": 31,
+              "total": 37
+            },
+            "seats": {
+              "correct": 27,
+              "total": 29
+            },
+            "destinations": {
+              "correct": 4,
+              "total": 4
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.11610486891385768,
+          "exact": 1,
+          "actionStateCorrect": 10,
+          "medianAsrMs": 773,
+          "medianRtf": 0.13111111111111112,
+          "entities": {
+            "numbers": {
+              "correct": 9,
+              "total": 11
+            },
+            "seats": {
+              "correct": 8,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "colored-10dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.11235955056179775,
+          "exact": 2,
+          "actionStateCorrect": 10,
+          "medianAsrMs": 776,
+          "medianRtf": 0.12904564315352698,
+          "entities": {
+            "numbers": {
+              "correct": 10,
+              "total": 11
+            },
+            "seats": {
+              "correct": 8,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 1,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.2846441947565543,
+          "exact": 1,
+          "actionStateCorrect": 7,
+          "medianAsrMs": 747,
+          "medianRtf": 0.12423321359491572,
+          "entities": {
+            "numbers": {
+              "correct": 4,
+              "total": 11
+            },
+            "seats": {
+              "correct": 7,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        },
+        {
+          "condition": "white-0dB-denoised",
+          "completed": 12,
+          "total": 12,
+          "errors": 0,
+          "cer": 0.26591760299625467,
+          "exact": 1,
+          "actionStateCorrect": 7,
+          "medianAsrMs": 748,
+          "medianRtf": 0.12452431289640592,
+          "entities": {
+            "numbers": {
+              "correct": 5,
+              "total": 11
+            },
+            "seats": {
+              "correct": 7,
+              "total": 8
+            },
+            "destinations": {
+              "correct": 0,
+              "total": 1
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

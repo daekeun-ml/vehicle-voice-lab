@@ -1,0 +1,56 @@
+{
+  "text": "조수석 온도를 스물네 도로 맞췄어요.",
+  "sharedGpuBenchmarkRunning": true,
+  "rows": [
+    {
+      "provider": "qwen",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice",
+      "voice": "Sohee",
+      "inferenceMs": 8189,
+      "elapsedMs": 8195,
+      "mediaType": "audio/wav",
+      "audioSeconds": 5.28,
+      "requestWallMs": 9093
+    },
+    {
+      "provider": "qwen17",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "model": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+      "revision": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+      "voice": "Sohee",
+      "sampleRate": 24000,
+      "inferenceMs": 5004,
+      "elapsedMs": 5008,
+      "mediaType": "audio/wav",
+      "audioSeconds": 2.88,
+      "requestWallMs": 5725
+    },
+    {
+      "provider": "supertonic",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "model": "Supertone/supertonic-3",
+      "revision": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+      "voice": "F1",
+      "sampleRate": 44100,
+      "inferenceMs": 766,
+      "elapsedMs": 770,
+      "mediaType": "audio/wav",
+      "audioSeconds": 3.1346938775510202,
+      "requestWallMs": 1847
+    },
+    {
+      "provider": "polly",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "model": "Amazon Polly",
+      "voice": "Seoyeon",
+      "sampleRate": 16000,
+      "inferenceMs": 135,
+      "elapsedMs": 135,
+      "mediaType": "audio/wav",
+      "audioSeconds": 2.7375,
+      "requestWallMs": 321
+    }
+  ],
+  "note": "Single requests on deployed Seoul hosts, not a statistically powered latency benchmark. Polly time includes its API round trip."
+}

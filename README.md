@@ -1,10 +1,14 @@
+[벤치마크 결과 / Benchmark results](BENCHMARK_RESULTS.md)
+
 # On · Vehicle Voice Lab
 
 Compare how well speech models and small language models turn **vehicle requests into validated actions and spoken confirmations**. Try English speech with Nova 2.5 Sonic, explore the Korean self-hosted model comparison, and watch the cabin settings change. Compare model accuracy, first-audio latency, and memory use in a **Korean / English UI**.
 
 [한국어 안내](README.ko.md) · [Deployment](docs/DEPLOYMENT.md) · [Architecture & tools](docs/ARCHITECTURE.md) · [Model catalog](model-catalog.json) · [License notices](NOTICE)
 
-[Open the shared demo](https://dys3pnz3y08gk.cloudfront.net/?lang=en) · [Test scenarios](#try-these-test-scenarios) · [Benchmark at a glance](#benchmark-at-a-glance)
+[Open the shared demo](https://d2ub6bbyf1c3sv.cloudfront.net/?lang=en) · [Test scenarios](#try-these-test-scenarios) · [Benchmark at a glance](#benchmark-at-a-glance)
+
+The Seoul workshop deployment includes Qwen3-TTS 1.7B and CPU Supertonic 3 options. For the full benchmark run, GPUs now auto-stop eight hours after boot. See the [deployment, exercises, and cleanup guide](asset-guide/HANDS_ON.md).
 
 ## What you can do
 
@@ -30,7 +34,7 @@ See [tool examples, measured latency, playback checks and limitations](docs/ASSI
 
 ### Vehicle control scenarios
 
-For the **English voice demo**, open the [English UI](https://dys3pnz3y08gk.cloudfront.net/?lang=en), select **Nova 2.5 Sonic · Realtime S2S**, expand **Model and voice settings**, then set **Sonic speech language** to **English · Officially supported**. Click **English audio sample** for a microphone-free end-to-end check. The [included English recording](public/sample-english.wav) says **“Set the driver temperature to twenty-four degrees.”** You should see the driver temperature change to 24°C and hear an English confirmation.
+For the **English voice demo**, open the [English UI](https://d2ub6bbyf1c3sv.cloudfront.net/?lang=en), select **Nova 2.5 Sonic · Realtime S2S**, expand **Model and voice settings**, then set **Sonic speech language** to **English · Officially supported**. Click **English audio sample** for a microphone-free end-to-end check. The [included English recording](public/sample-english.wav) says **“Set the driver temperature to twenty-four degrees.”** You should see the driver temperature change to 24°C and hear an English confirmation.
 
 For your own tests, click **Start microphone** and say the English requests below, or type them into the command box. Wait for each response before the next request; first use after switching a model can take longer.
 

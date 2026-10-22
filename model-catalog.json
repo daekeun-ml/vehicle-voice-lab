@@ -710,5 +710,6 @@
       }
     }
   ],
-  "defaultPlannerId": "qwen35-4b-nf4"
+  "defaultPlannerId": "qwen35-4b-nf4",
+  "defaultAudioModelId": "step-audio2-mini"
 }

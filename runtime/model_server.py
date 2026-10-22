@@ -13,6 +13,7 @@ ROLE = os.environ.get('MODEL_ROLE', 'core')
 status = {'ready': False, 'role': ROLE, 'error': None, 'models': {}}
 lock = threading.Lock()
 model = processor = asr = asr_processor = tts = None
+ASR_MODEL = 'nvidia/nemotron-3.5-asr-streaming-0.6b'
 compiled_grammar = None
 tts_queue = asyncio.Lock()
 PLANNERS={
@@ -42,15 +43,36 @@ PLAN_SCHEMA = {
     }
 }
 
+def release_planner():
+    global model, processor, compiled_grammar
+    model = processor = compiled_grammar = None
+    status['models'].pop('llm', None)
+    status['models'].pop('quantization', None)
+    status.pop('plannerMemory', None)
+    gc.collect()
+    torch.cuda.empty_cache()
+
+
+def load_asr():
+    global asr, asr_processor
+    if asr is not None:
+        return
+    # A large planner and FP32 ASR need not coexist. The request lock serializes
+    # ASR and planning, so dropping an idle planner here cannot interrupt inference.
+    if torch.cuda.mem_get_info()[0] < 4 * 2**30 and model is not None:
+        release_planner()
+    from transformers import AutoModelForRNNT, AutoProcessor
+    asr_processor = AutoProcessor.from_pretrained(ASR_MODEL)
+    asr = AutoModelForRNNT.from_pretrained(ASR_MODEL, device_map='cuda', torch_dtype=torch.float32).eval()
+    status['models']['asr'] = ASR_MODEL
+    status['asrLoaded'] = True
+
+
 def load():
     global model, processor, asr, asr_processor, tts, compiled_grammar
     try:
         if ROLE == 'core':
-            from transformers import AutoModelForRNNT, AutoProcessor, AutoTokenizer, AutoModelForImageTextToText
-            aid = 'nvidia/nemotron-3.5-asr-streaming-0.6b'
-            asr_processor = AutoProcessor.from_pretrained(aid)
-            asr = AutoModelForRNNT.from_pretrained(aid, device_map='cuda', torch_dtype=torch.float32).eval()
-            status['models']['asr'] = aid
+            status.update(asrAvailable=True, asrLoaded=False, asrModel=ASR_MODEL)
             load_planner('Qwen/Qwen3.5-4B')
         else:
             from qwen_tts import Qwen3TTSModel
@@ -64,7 +86,7 @@ def load():
         status['error'] = str(e)
 
 def load_planner(lid, quantization='bf16'):
-    global model,processor,compiled_grammar
+    global model,processor,compiled_grammar,asr,asr_processor
     if lid not in PLANNERS:raise ValueError('Planner is not in the reviewed allowlist')
     if quantization not in ('bf16','nf4') or (quantization=='nf4' and lid!='Qwen/Qwen3.5-4B'):
         raise ValueError('Quantization is not enabled for this model')
@@ -72,7 +94,15 @@ def load_planner(lid, quantization='bf16'):
     from transformers import AutoTokenizer,AutoModelForImageTextToText,AutoModelForCausalLM,AutoModelForMultimodalLM
     import xgrammar as xgr
     started=time.perf_counter();status['loadingPlanner']=lid
-    model=processor=compiled_grammar=None;status['models'].pop('llm',None);status['models'].pop('quantization',None);status.pop('plannerMemory',None);gc.collect();torch.cuda.empty_cache()
+    release_planner()
+    # Gemma's full checkpoint plus inference needs more space than its E2B label
+    # suggests. Evict unused ASR, not a live TTS/MiniCPM service, when space is tight.
+    if lid.startswith('google/') and asr is not None and torch.cuda.mem_get_info()[0] < 12 * 2**30:
+        asr = asr_processor = None
+        status['models'].pop('asr', None)
+        status['asrLoaded'] = False
+        gc.collect()
+        torch.cuda.empty_cache()
     torch.cuda.synchronize();base_allocated=torch.cuda.memory_allocated()
     try:
         processor=AutoTokenizer.from_pretrained(lid,revision=PLANNERS[lid],local_files_only=True)
@@ -177,6 +207,7 @@ def transcribe(file: UploadFile):
         raise HTTPException(400, '16kHz mono WAV, max 30 seconds required')
     started = time.perf_counter()
     with lock, torch.inference_mode():
+        load_asr()
         inputs = asr_processor(samples, sampling_rate=rate, language='ko-KR', return_tensors='pt')
         inputs = inputs.to(asr.device)
         output = asr.generate(**inputs, return_dict_in_generate=True)

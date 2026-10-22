@@ -1,0 +1,12 @@
+{
+  "exclusions": [
+    {
+      "suite": "hard48",
+      "modelId": "qwen3-omni",
+      "caseId": "scope-04",
+      "reason": "Benchmark client suspended for ASR process separation; response completed while client was suspended. Keep quality result, exclude latency.",
+      "pauseStartedAt": "2026-10-22T11:09:18Z",
+      "recordedAt": "2026-10-22T11:12:55.782564+00:00"
+    }
+  ]
+}

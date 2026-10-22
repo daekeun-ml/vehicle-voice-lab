@@ -1,7 +1,7 @@
 """Install reference workers on instances already created by infra/provision*.py."""
 import argparse,json,pathlib,subprocess
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--worker',choices=['core','speech','all'],default='core');p.add_argument('--with-minicpm',action='store_true');args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--worker',choices=['core','speech','all'],default='core');p.add_argument('--with-minicpm',action='store_true');p.add_argument('--with-tts-candidates',action='store_true');args=p.parse_args()
 for name in (['core','speech'] if args.worker=='all' else [args.worker]):
  statepath=ROOT/('.runtime/aws.json' if name=='core' else '.runtime/speech-aws.json');state=json.loads(statepath.read_text())
  result=subprocess.run(['aws','--profile',state['profile'],'--region',state['region'],'ec2','describe-instances','--instance-ids',state['instanceId'],'--output','json'],check=True,capture_output=True,text=True)
@@ -19,6 +19,8 @@ for name in (['core','speech'] if args.worker=='all' else [args.worker]):
   ssh('bash '+directory+'/bootstrap.sh && bash '+directory+'/bootstrap_whisper.sh')
   state['whisperEnabled']=True
   if args.with_minicpm:ssh('bash '+directory+'/bootstrap_minicpm.sh')
+  if args.with_tts_candidates:
+   ssh('bash '+directory+'/bootstrap_tts_candidates.sh');state['ttsCandidatesEnabled']=True
  else:ssh('bash '+directory+'/bootstrap_speech.sh')
  statepath.write_text(json.dumps(state,indent=2));statepath.chmod(0o600)
  print(name+' worker setup complete; check service health after model loading.')

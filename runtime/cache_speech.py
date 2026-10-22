@@ -1,5 +1,6 @@
 from huggingface_hub import snapshot_download
 from concurrent.futures import ThreadPoolExecutor
+import argparse
 SPECS=[
  ('Qwen/Qwen3-Omni-30B-A3B-Instruct','26291f793822fb6be9555850f06dfe95f2d7e695',['*.json','*.safetensors','*.model','tokenizer*']),
  ('stepfun-ai/Step-Audio-2-mini','e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36',None),
@@ -9,4 +10,9 @@ SPECS=[
 ]
 def run(spec):
  repo,rev,patterns=spec;print('START',repo,flush=True);path=snapshot_download(repo,revision=rev,allow_patterns=patterns);print('CACHED',repo,path,flush=True)
-with ThreadPoolExecutor(max_workers=2) as pool:list(pool.map(run,SPECS))
+if __name__ == '__main__':
+ parser=argparse.ArgumentParser()
+ parser.add_argument('--model',choices=['all','qwen3-omni','step-audio2-mini','mimo-audio','moshi'],default='all')
+ selected=parser.parse_args().model
+ indexes={'all':range(len(SPECS)),'qwen3-omni':[0],'step-audio2-mini':[1],'mimo-audio':[2,3],'moshi':[4]}
+ with ThreadPoolExecutor(max_workers=2) as pool:list(pool.map(run,[SPECS[i] for i in indexes[selected]]))

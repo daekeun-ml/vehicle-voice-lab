@@ -1,0 +1,345 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>실제 연결된 AI 모델과 GPU 사양</title><style>body{font:16px/1.8 system-ui,sans-serif;color:#232f3e;background:#fff;max-width:1120px;margin:auto;padding:32px}a{color:#0972d3}h1,h2,h3{line-height:1.4}h2{margin-top:44px;border-top:1px solid #d5dbdb;padding-top:24px}pre{background:#f2f3f3;padding:18px;overflow:auto;border-radius:6px}code{font-size:.9em}table{display:block;overflow:auto;border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #d5dbdb;padding:10px}img{max-width:100%;height:auto}blockquote{border-left:4px solid #ec7211;padding-left:20px;margin-left:0}.nav{font-size:14px}</style></head><body><p class="nav"><a href="/">데모 앱</a> · <a href="hands-on.html">핸즈온</a> · <a href="README.html">가이드 시작</a></p><h1 id="실제-연결된-ai-모델과-gpu-사양">실제 연결된 AI 모델과 GPU 사양</h1>
+<p><a href="README.html">시작 안내</a> · <a href="ARCHITECTURE.html">아키텍처</a> · <a href="diagrams/deployment-ko.png">배포 그림</a></p>
+<p>새 후보는 <a href="MODEL_CANDIDATES.html">Qwen3-ASR 0.6B·1.7B, Kokoro-82M 및 최신 MiniCPM 계열 검토</a>에 정리했습니다. Qwen 1.7B·Supertonic 3는 공유 데모에 연동했고, Qwen3-ASR 0.6B·1.7B도 GPU2에 연동했습니다. Kokoro를 제거하고 Ppaso-TTS 한국어 ONNX CPU 경로로 교체했습니다. CosyVoice 3는 현재 앱 선택지에 추가하지 않았습니다. Kokoro는 별도 <a href="KOKORO_KOREAN_TEST.html">한국어 실행 진단</a>을 수행했으며, Qwen3-ASR의 동일 입력 비교는 <a href="STT_COMPARISON.html">STT 비교</a>에 정리합니다.</p>
+<p>Supertonic 3·Qwen3-TTS 1.7B·CosyVoice 3는 <a href="TTS_COMPARISON.html">별도 8문장 실행 비교</a>를 완료했습니다. 이후 Qwen 1.7B·Supertonic을 앱 선택지로 추가했습니다. Polly 기본값은 유지합니다.</p>
+<p><strong>기본 단계형 요청: Whisper large-v3-turbo → Qwen3.5-4B NF4 → 서버 검증·실행 → Polly Seoyeon.</strong></p>
+<p>이 문서의 “기본”은 카탈로그·UI·서버의 기본 선택 설정입니다. 현재 GPU에 무엇이 올라와 있는지 실시간 조회한 목록이 아닙니다. 아래 모델 크기는 저장소 카탈로그의 기록이며 제품명에 붙은 숫자와 전체 파라미터 수를 구분합니다.</p>
+<h2 id="하드웨어와-ai-모델을-구분하기">하드웨어와 AI 모델을 구분하기</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>GPU 1</th>
+<th>GPU 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EC2 인스턴스 유형</td>
+<td><code>g6e.2xlarge</code></td>
+<td><code>g6e.2xlarge</code></td>
+</tr>
+<tr>
+<td>GPU 제품명</td>
+<td>NVIDIA L40S × 1</td>
+<td>NVIDIA L40S × 1</td>
+</tr>
+<tr>
+<td>GPU 메모리</td>
+<td>48GB</td>
+<td>48GB</td>
+</tr>
+<tr>
+<td>CPU / 시스템 RAM</td>
+<td>8 vCPU / 64GiB</td>
+<td>8 vCPU / 64GiB</td>
+</tr>
+<tr>
+<td>프로비저닝 EBS</td>
+<td>gp3 150GiB</td>
+<td>gp3 250GiB</td>
+</tr>
+<tr>
+<td>역할</td>
+<td>Node·STT·판단 모델·TTS·MiniCPM</td>
+<td>추가 음성 모델 중 하나 선택</td>
+</tr>
+</tbody>
+</table>
+<p>서로 다른 서버의 GPU 메모리를 하나의 96GB 공간으로 묶는 구성은 아닙니다. 사양 근거: <a href="https://aws.amazon.com/ec2/instance-types/g6e/">AWS G6e</a>, <a href="../infra/provision.py">기본 서버 프로비저닝</a>, <a href="../infra/provision_speech.py">음성 서버 프로비저닝</a>.</p>
+<h2 id="어떤-모델이-함께-상주하나요">어떤 모델이 함께 상주하나요?</h2>
+<p>GPU 1의 Core 워커는 <strong>판단 모델 1개를 적재하고 Nemotron ASR은 필요할 때 적재</strong>합니다. Whisper·Qwen TTS 0.6B·Qwen TTS 1.7B·MiniCPM은 별도 GPU 워커이며, 활성화되어 로딩에 성공하면 같은 L40S의 VRAM을 함께 점유합니다. 판단 모델을 Qwen에서 Gemma로 바꿔도 큰 판단 모델의 공간이 부족하면 사용하지 않는 Nemotron을 해제합니다. 다른 TTS·MiniCPM 워커는 유지합니다.</p>
+<p>GPU 2는 추가 음성 모델 중 <strong>하나만</strong> 실행합니다. 모델을 바꾸면 이전 프로세스를 종료하고 새 프로세스를 실행합니다.</p>
+<p>기본 요청에서 사용하는 것은 Whisper와 선택한 판단 모델이며, 음성 응답은 기본적으로 외부 Polly입니다. 이때 사용하지 않는 활성 워커도 GPU 메모리에 남아 있을 수 있습니다. <strong>동시 상주와 한 요청의 호출 경로는 별개</strong>입니다. <a href="README.html#gpu에-올라간-모델과-요청에서-쓰는-모델은-다릅니다">워커별 표와 그림</a>을 참고하세요.</p>
+<p>Supertonic 3는 GPU 1 호스트의 CPU에서 별도 실행하며 GPU VRAM을 쓰지 않습니다. 모델 ID는 <code>Supertone/supertonic-3</code>, 목소리는 <code>F1</code>, 샘플레이트는 44.1kHz입니다.</p>
+<h2 id="gpu-1-음성-인식합성직접-음성-판단">GPU 1: 음성 인식·합성·직접 음성 판단</h2>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>정확한 모델 ID</th>
+<th>크기</th>
+<th>실행 정밀도</th>
+<th>기본/선택</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STT</td>
+<td><code>openai/whisper-large-v3-turbo</code></td>
+<td>카탈로그에 수치 없음</td>
+<td>FP16</td>
+<td>기본</td>
+</tr>
+<tr>
+<td>STT</td>
+<td><code>nvidia/nemotron-3.5-asr-streaming-0.6b</code></td>
+<td>제품명 0.6B</td>
+<td>FP32</td>
+<td>대체</td>
+</tr>
+<tr>
+<td>TTS</td>
+<td><code>Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice</code></td>
+<td>제품명 0.6B</td>
+<td>BF16</td>
+<td>Polly 대신 선택; <code>TTS_MODEL</code>로 변경 가능</td>
+</tr>
+<tr>
+<td>추가 TTS</td>
+<td><code>Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice</code></td>
+<td>제품명 1.7B / Hub 전체 약 1.92B</td>
+<td>BF16</td>
+<td>신규 앱 선택지</td>
+</tr>
+<tr>
+<td>직접 음성 판단</td>
+<td><code>openbmb/MiniCPM-o-4_5</code></td>
+<td>전체 약 9.37B</td>
+<td>BF16</td>
+<td>MiniCPM 제어/음성 비교 경로</td>
+</tr>
+</tbody>
+</table>
+<p>Whisper는 Transformers의 <code>AutoModelForSpeechSeq2Seq</code>로 직접 로드합니다. OpenAI 관리형 음성 API나 faster-whisper를 호출하는 구성이 아닙니다. Nemotron의 제품명에 streaming이 들어가지만 이 앱의 해당 경로는 발화 단위 업로드로 처리합니다.</p>
+<h2 id="gpu-1-선택-가능한-텍스트-판단-모델">GPU 1: 선택 가능한 텍스트 판단 모델</h2>
+<table>
+<thead>
+<tr>
+<th>앱 선택 ID</th>
+<th>정확한 모델 ID</th>
+<th>카탈로그 크기</th>
+<th>정밀도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qwen35-4b</code></td>
+<td><code>Qwen/Qwen3.5-4B</code></td>
+<td>4.66B total</td>
+<td>BF16</td>
+</tr>
+<tr>
+<td><code>qwen35-4b-nf4</code></td>
+<td><code>Qwen/Qwen3.5-4B</code></td>
+<td>4.66B total</td>
+<td><strong>4bit NF4 · BF16 연산 (앱 기본)</strong></td>
+</tr>
+<tr>
+<td><code>qwen35-2b</code></td>
+<td><code>Qwen/Qwen3.5-2B</code></td>
+<td>2.27B total</td>
+<td>BF16</td>
+</tr>
+<tr>
+<td><code>qwen35-08b</code></td>
+<td><code>Qwen/Qwen3.5-0.8B</code></td>
+<td>0.87B total</td>
+<td>BF16</td>
+</tr>
+<tr>
+<td><code>gemma4-e2b</code></td>
+<td><code>google/gemma-4-E2B-it</code></td>
+<td>2.3B effective / 5.12B total</td>
+<td>BF16</td>
+</tr>
+<tr>
+<td><code>phi4-mini</code></td>
+<td><code>microsoft/Phi-4-mini-instruct</code></td>
+<td>3.84B total</td>
+<td>BF16</td>
+</tr>
+<tr>
+<td><code>hyperclova-05b</code></td>
+<td><code>naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B</code></td>
+<td>0.57B total</td>
+<td>BF16</td>
+</tr>
+<tr>
+<td><code>exaone4-12b</code></td>
+<td><code>LGAI-EXAONE/EXAONE-4.0-1.2B</code></td>
+<td>1.28B total</td>
+<td>BF16</td>
+</tr>
+<tr>
+<td><code>smollm3</code></td>
+<td><code>HuggingFaceTB/SmolLM3-3B</code></td>
+<td>3.08B total</td>
+<td>BF16</td>
+</tr>
+</tbody>
+</table>
+<p><code>Qwen/Qwen3.5-4B</code>의 BF16와 NF4는 동일 체크포인트의 두 로딩 설정입니다. NF4는 선택한 선형 계층에 적용하며 double quantization과 BF16 연산을 사용합니다. STT·TTS까지 모두 4bit로 바뀌는 것은 아닙니다.</p>
+<p><strong>워커 시작 상태와 앱 기본 선택은 다릅니다.</strong> <code>runtime/model_server.py</code>는 시작할 때 Qwen3.5-4B BF16을 먼저 로드합니다. 카탈로그 기본값 <code>qwen35-4b-nf4</code>로 요청하면 NF4로 교체합니다. 따라서 재시작 직후 GPU 상태를 앱 기본 구성과 동일하다고 단정하면 안 됩니다.</p>
+<h2 id="gpu-2-추가-음성-모델">GPU 2: 추가 음성 모델</h2>
+<table>
+<thead>
+<tr>
+<th>앱 선택 ID</th>
+<th>정확한 모델 ID</th>
+<th>카탈로그 크기</th>
+<th>실행 설정</th>
+<th>차량 제어</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qwen3-omni</code></td>
+<td><code>Qwen/Qwen3-Omni-30B-A3B-Instruct</code></td>
+<td>35.26B total / A3B 표기</td>
+<td>Thinker 선형 계층 NF4 + 오디오 등 BF16</td>
+<td>직접 음성 → 명령 JSON → 공통 실행기</td>
+</tr>
+<tr>
+<td><code>step-audio2-mini</code></td>
+<td><code>stepfun-ai/Step-Audio-2-mini</code></td>
+<td>8.32B total</td>
+<td>BF16¹</td>
+<td>직접 음성 → 명령 JSON → 공통 실행기</td>
+</tr>
+<tr>
+<td><code>mimo-audio</code></td>
+<td><code>XiaomiMiMo/MiMo-Audio-7B-Instruct</code></td>
+<td>7B 표기 + 별도 오디오 토크나이저</td>
+<td>BF16¹</td>
+<td>직접 음성 → 명령 JSON → 공통 실행기</td>
+</tr>
+<tr>
+<td><code>moshi</code></td>
+<td><code>kyutai/moshiko-pytorch-bf16</code></td>
+<td>7.69B total</td>
+<td>BF16</td>
+<td>없음 · 네이티브 음성 비교만</td>
+</tr>
+</tbody>
+</table>
+<p>¹ Step-Audio·MiMo는 워커 상태에 BF16로 표시하며 외부 어댑터가 실제 모델을 로드합니다. 구성 요소 전체의 dtype를 이번에 실측한 것은 아닙니다. Qwen3-Omni는 <code>talker</code>, <code>code2wav</code>, <code>audio_tower</code>, <code>visual</code>을 NF4 대상에서 제외합니다.</p>
+<p>MiMo는 별도 <code>XiaomiMiMo/MiMo-Audio-Tokenizer</code>도 사용합니다. Moshi는 저장소에 함께 있는 Mimi 코덱 체크포인트를 로드합니다. <code>runtime/speech_manager.py</code>는 모델을 바꿀 때 기존 프로세스를 종료하고 새 프로세스를 실행하므로 이 네 모델이 동시에 상주하지 않습니다.</p>
+<h2 id="자체-gpu-밖에서-호출하는-서비스">자체 GPU 밖에서 호출하는 서비스</h2>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>정확한 식별자·설정</th>
+<th>기본 리전</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기본 한국어 TTS</td>
+<td>Amazon Polly · <code>VoiceId=Seoyeon</code>, <code>Engine=neural</code>, <code>LanguageCode=ko-KR</code>, PCM 16kHz</td>
+<td><code>ap-northeast-2</code></td>
+</tr>
+<tr>
+<td>실시간 음성</td>
+<td>Nova 2.5 Sonic · Bedrock 모델 ID <code>amazon.nova-2-5-sonic</code></td>
+<td><code>ap-northeast-1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Polly의 <code>Seoyeon</code>은 목소리 ID이며 다운로드 가능한 모델 저장소 ID가 아닙니다. Sonic의 파라미터 수·정밀도는 이 에셋에서 지정하지 않습니다. <code>SONIC_MODEL</code>, <code>SONIC_REGION</code> 환경 변수로 대상이 바뀔 수 있습니다. Sonic 응답은 자체 음성을 사용하며 Polly를 거치지 않습니다.</p>
+<h2 id="목록에는-있지만-현재-연결-대상이-아닌-후보">목록에는 있지만 현재 연결 대상이 아닌 후보</h2>
+<p>카탈로그의 전체 목록을 실제 실행 모델 목록으로 읽으면 안 됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>정확한 모델 ID</th>
+<th>카탈로그 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-1.5B</code></td>
+<td><code>access-needed</code></td>
+</tr>
+<tr>
+<td><code>nvidia/personaplex-7b-v1</code></td>
+<td><code>access-needed</code></td>
+</tr>
+<tr>
+<td><code>THUDM/glm-4-voice-9b</code></td>
+<td><code>license-review</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="체크포인트-리비전과-코드-근거">체크포인트 리비전과 코드 근거</h2>
+<p>다음은 저장소가 고정한 리비전입니다. 같은 Qwen3.5-4B의 정밀도 변형은 하나로 표시합니다. <code>ready</code>는 카탈로그의 연결 상태이며 현재 서버의 건강 상태를 뜻하지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>모델 ID</th>
+<th>고정 리비전</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openai/whisper-large-v3-turbo</code></td>
+<td><code>41f01f3fe87f28c78e2fbf8b568835947dd65ed9</code></td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3.5-4B</code></td>
+<td><code>851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a</code></td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3.5-2B</code></td>
+<td><code>15852e8c16360a2fea060d615a32b45270f8a8fc</code></td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3.5-0.8B</code></td>
+<td><code>2fc06364715b967f1860aea9cf38778875588b17</code></td>
+</tr>
+<tr>
+<td><code>google/gemma-4-E2B-it</code></td>
+<td><code>3e22461f65e89153144f8adb70e3b8c2cc9845a7</code></td>
+</tr>
+<tr>
+<td><code>microsoft/Phi-4-mini-instruct</code></td>
+<td><code>cfbefacb99257ffa30c83adab238a50856ac3083</code></td>
+</tr>
+<tr>
+<td><code>naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B</code></td>
+<td><code>3da5046fb0195d14f2497de198136987d35fd644</code></td>
+</tr>
+<tr>
+<td><code>LGAI-EXAONE/EXAONE-4.0-1.2B</code></td>
+<td><code>3abf2810673c7c0778df64a73c2d52eab32d91c4</code></td>
+</tr>
+<tr>
+<td><code>HuggingFaceTB/SmolLM3-3B</code></td>
+<td><code>a07cc9a04f16550a088caea529712d1d335b0ac1</code></td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3-Omni-30B-A3B-Instruct</code></td>
+<td><code>26291f793822fb6be9555850f06dfe95f2d7e695</code></td>
+</tr>
+<tr>
+<td><code>openbmb/MiniCPM-o-4_5</code></td>
+<td><code>503e754207c94da6bb26850b4469f367c9ea3582</code></td>
+</tr>
+<tr>
+<td><code>stepfun-ai/Step-Audio-2-mini</code></td>
+<td><code>e36fdd5d71e0ea22f09dd94bbab9bfc544ca1e36</code></td>
+</tr>
+<tr>
+<td><code>XiaomiMiMo/MiMo-Audio-7B-Instruct</code></td>
+<td><code>c359441c22c2a1c74be5f99a91e83392680e9cc8</code></td>
+</tr>
+<tr>
+<td><code>kyutai/moshiko-pytorch-bf16</code></td>
+<td><code>2bfc9ae6e89079a5cc7ed2a68436010d91a3d289</code></td>
+</tr>
+<tr>
+<td><code>XiaomiMiMo/MiMo-Audio-Tokenizer</code></td>
+<td><code>5df9914f72d3acda1320d7fecde7d91622edb0c1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Nemotron과 Qwen TTS의 로더에는 명시적인 <code>revision</code> 인자가 없습니다. 설치·캐시 시점에 따라 받아오는 버전이 달라질 수 있습니다.</p>
+<ul>
+<li>앱 기본값·모델 크기: <a href="../model-catalog.json">model-catalog.json</a>, <a href="../public/catalog.js">public/catalog.js</a>.</li>
+<li>STT: <a href="../runtime/whisper_server.py">runtime/whisper_server.py</a>, <a href="../runtime/model_server.py">runtime/model_server.py</a>.</li>
+<li>판단 모델·NF4·Qwen TTS: <a href="../runtime/model_server.py">runtime/model_server.py</a>.</li>
+<li>MiniCPM: <a href="../runtime/minicpm_server.py">runtime/minicpm_server.py</a>.</li>
+<li>추가 음성 모델·코덱: <a href="../runtime/speech_worker.py">runtime/speech_worker.py</a>, <a href="../runtime/speech_manager.py">runtime/speech_manager.py</a>.</li>
+<li>Polly·Sonic 실제 호출: <a href="../server.mjs">server.mjs</a>, <a href="../sonic.mjs">sonic.mjs</a>. 카탈로그 설명이 호출 코드와 다르면 실행 경로는 이 코드로 확인합니다.</li>
+</ul></body></html>

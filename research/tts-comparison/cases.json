@@ -1,0 +1,15 @@
+{
+  "suiteId": "korean-vehicle-tts-v1",
+  "scope": "Eight fixed Korean TTS utterances; pronunciation diagnostics, not a MOS or vehicle-control benchmark",
+  "referenceText": "안녕하세요. 차량의 설정과 안내를 도와드릴게요. 편하게 말씀해 주세요.",
+  "cases": [
+    {"id":"greeting","text":"안녕하세요.","focus":"short utterance"},
+    {"id":"temperature","text":"조수석 온도를 스물네 도로 맞췄어요.","focus":"seat and spoken number"},
+    {"id":"negation","text":"에어컨을 끄지 않았어요.","focus":"negation"},
+    {"id":"seat-scope","text":"운전석만 낮추고 조수석은 그대로 뒀어요.","focus":"seat scope and unchanged state"},
+    {"id":"decimal","text":"운전석은 22.5도, 조수석은 24도로 설정했어요.","focus":"written decimal and integers"},
+    {"id":"rejection","text":"풍량 9단은 지원하지 않아요. 설정을 변경하지 않았어요.","focus":"out-of-range refusal and negation"},
+    {"id":"destination","text":"목적지를 서울역에서 서울숲으로 바꿨어요.","focus":"similar place names"},
+    {"id":"compound","text":"운전석은 19도, 조수석은 27도, 바람 세기는 3단이에요.","focus":"multiple fields and written numbers"}
+  ]
+}

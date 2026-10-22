@@ -1,0 +1,273 @@
+{
+  "repo": "hexgrad/Kokoro-82M",
+  "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+  "python": "3.12.15",
+  "versions": {
+    "kokoro": "0.9.4",
+    "misaki": "0.9.4",
+    "torch": "2.14.1",
+    "transformers": "5.20.2",
+    "soundfile": "0.14.0"
+  },
+  "device": "cuda:0",
+  "hardware": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+  "officialKoreanMode": [
+    {
+      "lang_code": "ko",
+      "accepted": false,
+      "error": "AssertionError: ('ko', {'a': 'American English', 'b': 'British English', 'e': 'es', 'f': 'fr-fr', 'h': 'hi', 'i': 'it', 'p': 'pt-br', 'j': 'Japanese', 'z': 'Mandarin Chinese'})"
+    },
+    {
+      "lang_code": "k",
+      "accepted": false,
+      "error": "AssertionError: ('k', {'a': 'American English', 'b': 'British English', 'e': 'es', 'f': 'fr-fr', 'h': 'hi', 'i': 'it', 'p': 'pt-br', 'j': 'Japanese', 'z': 'Mandarin Chinese'})"
+    }
+  ],
+  "rows": [
+    {
+      "id": "greeting",
+      "text": "안녕하세요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "af_heart",
+      "phonemes": "ˈɐnnjʌŋhˌɐsejˌo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/greeting-espeak-ko-raw-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 1.725,
+      "inferenceSeconds": 0.6443108069997834,
+      "peak": 0.2995454967021942,
+      "sha256": "3baa9c371ef15e8b88cf1a1c2cb980c192a320a13e06a4f3d8050b780ad25e59"
+    },
+    {
+      "id": "greeting",
+      "text": "안녕하세요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "jf_alpha",
+      "phonemes": "ˈɐnnjʌŋhˌɐsejˌo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/greeting-espeak-ko-raw-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 1.9,
+      "inferenceSeconds": 0.05769417800001975,
+      "peak": 0.29732000827789307,
+      "sha256": "4b54eb6b9067ed53f622a33f15826829c813da459077920a1e9291b512a6d157"
+    },
+    {
+      "id": "greeting",
+      "text": "안녕하세요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "af_heart",
+      "phonemes": "ˈɐnnjʌŋhˌɐsejˌo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/greeting-espeak-ko-mapped-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 1.725,
+      "inferenceSeconds": 0.03919483999925433,
+      "peak": 0.3069337010383606,
+      "sha256": "e7c35e96e4886cdcc338ce208fe9a59c61facb231ca7c8b967150f16af0c88c7"
+    },
+    {
+      "id": "greeting",
+      "text": "안녕하세요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "jf_alpha",
+      "phonemes": "ˈɐnnjʌŋhˌɐsejˌo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/greeting-espeak-ko-mapped-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 1.9,
+      "inferenceSeconds": 0.03872903999945265,
+      "peak": 0.2978664040565491,
+      "sha256": "136386970623a41cce0258f4b044a9114090025414871510989d217eed59eafc"
+    },
+    {
+      "id": "temperature",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "af_heart",
+      "phonemes": "tɕˈosusˌʌq ˈondoɾˌɯɫ sˈɯmuɫnˌe dˈoɾomˈɐtʧhwʌsˌʌjo.",
+      "unsupportedPhonemeCharacters": [
+        "ɫ"
+      ],
+      "file": "research/kokoro-korean/temperature-espeak-ko-raw-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 3.25,
+      "inferenceSeconds": 0.06227514300007897,
+      "peak": 0.3560989499092102,
+      "sha256": "ca459566c7c276e0c230c9072d980d1eb60e2c5141a7c2f28610a612af32da92"
+    },
+    {
+      "id": "temperature",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "jf_alpha",
+      "phonemes": "tɕˈosusˌʌq ˈondoɾˌɯɫ sˈɯmuɫnˌe dˈoɾomˈɐtʧhwʌsˌʌjo.",
+      "unsupportedPhonemeCharacters": [
+        "ɫ"
+      ],
+      "file": "research/kokoro-korean/temperature-espeak-ko-raw-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 3.475,
+      "inferenceSeconds": 0.060413085999243776,
+      "peak": 0.39661702513694763,
+      "sha256": "b3b0619b5d0d9436b4c1a02d37c13d85218f9fb61ad173d0c302876b3659866c"
+    },
+    {
+      "id": "temperature",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "af_heart",
+      "phonemes": "ʨˈosusˌʌq ˈondoɾˌɯl sˈɯmulnˌe dˈoɾomˈɐtʧhwʌsˌʌjo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/temperature-espeak-ko-mapped-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 3.325,
+      "inferenceSeconds": 0.060733073999472253,
+      "peak": 0.37689605355262756,
+      "sha256": "f2fbcace1ca4a4e31b518639ef563b642945ac384ed0b5afb6da6f438c3c413e"
+    },
+    {
+      "id": "temperature",
+      "text": "조수석 온도를 스물네 도로 맞췄어요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "jf_alpha",
+      "phonemes": "ʨˈosusˌʌq ˈondoɾˌɯl sˈɯmulnˌe dˈoɾomˈɐtʧhwʌsˌʌjo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/temperature-espeak-ko-mapped-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 3.55,
+      "inferenceSeconds": 0.06040878600015276,
+      "peak": 0.41131067276000977,
+      "sha256": "ca66f686629a9b78c783f1a045d2e57a065b2f9217471c222cd7c1a69106506c"
+    },
+    {
+      "id": "negation",
+      "text": "에어컨을 끄지 않았어요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "af_heart",
+      "phonemes": "ˈeʌkhˌʌnɯɫ qˈɯdʑi ˈɐnɐsˌʌjo.",
+      "unsupportedPhonemeCharacters": [
+        "ɫ",
+        "ʑ"
+      ],
+      "file": "research/kokoro-korean/negation-espeak-ko-raw-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 2.075,
+      "inferenceSeconds": 0.05638773000009678,
+      "peak": 0.37896445393562317,
+      "sha256": "39fb205f14100359a114f2b75b9685a9bd559e3e8822e5fb1d70f6ba523cc822"
+    },
+    {
+      "id": "negation",
+      "text": "에어컨을 끄지 않았어요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "jf_alpha",
+      "phonemes": "ˈeʌkhˌʌnɯɫ qˈɯdʑi ˈɐnɐsˌʌjo.",
+      "unsupportedPhonemeCharacters": [
+        "ɫ",
+        "ʑ"
+      ],
+      "file": "research/kokoro-korean/negation-espeak-ko-raw-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 2.375,
+      "inferenceSeconds": 0.05692586100030894,
+      "peak": 0.36157748103141785,
+      "sha256": "fbb0280fc73f3cf6cbf363fa66bfc699be378554fe17f967d8000696f82e3d86"
+    },
+    {
+      "id": "negation",
+      "text": "에어컨을 끄지 않았어요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "af_heart",
+      "phonemes": "ˈeʌkhˌʌnɯl qˈɯʥi ˈɐnɐsˌʌjo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/negation-espeak-ko-mapped-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 2.175,
+      "inferenceSeconds": 0.05692106100013916,
+      "peak": 0.2859322428703308,
+      "sha256": "c8455508e81e015eb829e7ea8a54fba683ef5582a2446cc829a9e3ad1989f805"
+    },
+    {
+      "id": "negation",
+      "text": "에어컨을 끄지 않았어요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "jf_alpha",
+      "phonemes": "ˈeʌkhˌʌnɯl qˈɯʥi ˈɐnɐsˌʌjo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/negation-espeak-ko-mapped-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 2.475,
+      "inferenceSeconds": 0.056944776999444,
+      "peak": 0.35852673649787903,
+      "sha256": "c2b0af94c4aa5096c27b5215468c99d69d81c1d567da3237ca24309872741171"
+    },
+    {
+      "id": "seat-scope",
+      "text": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "af_heart",
+      "phonemes": "ˈundʑʌnsˌʌqmɐnnˈɐtʧhuqˌo tɕˈosusˌʌqɯn ɡˈɯdɛɾˌo dwˈʌsʌjˌo.",
+      "unsupportedPhonemeCharacters": [
+        "ʑ"
+      ],
+      "file": "research/kokoro-korean/seat-scope-espeak-ko-raw-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 3.75,
+      "inferenceSeconds": 0.06248329700065369,
+      "peak": 0.3375415503978729,
+      "sha256": "406260db5b8d1af804e63fa86a0642ac5b5f6098f407f8521f24dd4279446d09"
+    },
+    {
+      "id": "seat-scope",
+      "text": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "adapter": "espeak-ko-raw",
+      "voice": "jf_alpha",
+      "phonemes": "ˈundʑʌnsˌʌqmɐnnˈɐtʧhuqˌo tɕˈosusˌʌqɯn ɡˈɯdɛɾˌo dwˈʌsʌjˌo.",
+      "unsupportedPhonemeCharacters": [
+        "ʑ"
+      ],
+      "file": "research/kokoro-korean/seat-scope-espeak-ko-raw-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 4.075,
+      "inferenceSeconds": 0.062374957999963954,
+      "peak": 0.4011071026325226,
+      "sha256": "7a5cb3a370188342c61986980175c2548672ced1b42e46e2b956f9e29b0bafe3"
+    },
+    {
+      "id": "seat-scope",
+      "text": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "af_heart",
+      "phonemes": "ˈunʥʌnsˌʌqmɐnnˈɐtʧhuqˌo ʨˈosusˌʌqɯn ɡˈɯdɛɾˌo dwˈʌsʌjˌo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/seat-scope-espeak-ko-mapped-af_heart.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 3.8,
+      "inferenceSeconds": 0.06244488100037415,
+      "peak": 0.3604705333709717,
+      "sha256": "7a106e8c99496060978be0dde18affaf09601e3bd0feae42dbee2205c78efba9"
+    },
+    {
+      "id": "seat-scope",
+      "text": "운전석만 낮추고 조수석은 그대로 뒀어요.",
+      "adapter": "espeak-ko-mapped",
+      "voice": "jf_alpha",
+      "phonemes": "ˈunʥʌnsˌʌqmɐnnˈɐtʧhuqˌo ʨˈosusˌʌqɯn ɡˈɯdɛɾˌo dwˈʌsʌjˌo.",
+      "unsupportedPhonemeCharacters": [],
+      "file": "research/kokoro-korean/seat-scope-espeak-ko-mapped-jf_alpha.wav",
+      "sampleRate": 24000,
+      "durationSeconds": 4.0,
+      "inferenceSeconds": 0.06277223300003243,
+      "peak": 0.39459994435310364,
+      "sha256": "33cc169a9363f9cf3ded71c131af6ec5099ba38d35796cc2d66dca97647a8428"
+    }
+  ],
+  "humanListeningCompleted": false,
+  "loadSeconds": 0.8528533650005556,
+  "englishControl": {
+    "text": "The passenger temperature is now twenty four degrees.",
+    "file": "research/kokoro-korean/english-control-af_heart.wav",
+    "durationSeconds": 3.55
+  }
+}

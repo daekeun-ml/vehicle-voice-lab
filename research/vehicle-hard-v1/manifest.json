@@ -1,0 +1,35 @@
+{
+  "suiteId": "vehicle-hard-v1",
+  "version": 1,
+  "caseCount": 48,
+  "format": "UTF-8 JSON",
+  "sha256": "afb3add8b0e31a27898330db808dc6ff290d29e66d1e3f5ec1d5bf72e8360e50",
+  "measured": false,
+  "audioGenerated": false,
+  "categories": {
+    "repair": 6,
+    "scope": 6,
+    "arithmetic": 6,
+    "context": 6,
+    "atomic": 6,
+    "ambiguity": 6,
+    "noncommand": 6,
+    "contract": 6
+  },
+  "outcomes": {
+    "execute": 28,
+    "observe": 4,
+    "no-op": 2,
+    "clarify": 4,
+    "reject": 10
+  },
+  "validation": "48 authored reference plans, independent state patches, fixtures, alternatives, and answer facts checked offline",
+  "currentGuardBlocks": [
+    {
+      "id": "repair-03",
+      "referencePlanBlocked": true,
+      "reason": "온도는 16~30도 사이로 말씀해 주세요.",
+      "modelWasInvoked": false
+    }
+  ]
+}

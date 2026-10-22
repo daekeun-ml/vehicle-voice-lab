@@ -1,5 +1,5 @@
 import express from 'express';
-import {randomUUID} from 'node:crypto';
+import {randomUUID,createHash,timingSafeEqual} from 'node:crypto';
 import {mkdir,appendFile,readFile} from 'node:fs/promises';
 import {initialState,systemPrompt,parsePlan,executePlan} from './vehicle.mjs';
 import {PollyClient,SynthesizeSpeechCommand} from '@aws-sdk/client-polly';
@@ -10,6 +10,8 @@ import {SonicSession,SONIC_MODEL,SONIC_REGION} from './sonic.mjs';
 import {guardExplicitBounds} from './plan-guards.mjs';
 import {compactPlannerPrompt,compactKoreanPlannerPrompt} from './planner-prompt-v2.mjs';
 import {normalizeTranscript} from './transcript.mjs';
+import {ttsProviders,selectTtsProvider,publicTtsProviders} from './tts-providers.mjs';
+import {asrProviders} from './asr-providers.mjs';
 import {guardMiniPlan} from './minicpm-tools.mjs';
 import {inferAssistant,executeAssistant,toolCatalog,radioStations} from './assistant-service.mjs';
 
@@ -18,21 +20,38 @@ const core=process.env.CORE_URL||'http://127.0.0.1:19101', tts=process.env.TTS_U
 const whisper=process.env.WHISPER_URL||'http://127.0.0.1:19105';
 const mini=process.env.MINICPM_URL||'http://127.0.0.1:19103';
 const speechWorker=process.env.SPEECH_URL||'http://127.0.0.1:19104';
+async function transcribe(audio,id,signal){
+  if(!Object.hasOwn(asrProviders,id))throw new Error('지원하지 않는 음성 인식 모델입니다.');
+  const form=new FormData();form.append('file',new Blob([Buffer.from(audio,'base64')],{type:'audio/wav'}),'speech.wav');
+  const isQwen=id.startsWith('qwen3-asr-');
+  if(isQwen)form.append('model_id',id);
+  const data=await(await remote((isQwen?speechWorker:id==='whisper'?whisper:core)+'/asr',{method:'POST',body:form},signal,180000)).json();
+  const expected=asrProviders[id];
+  if(expected.revision&&(data.model!==expected.model||data.revision!==expected.revision))throw new Error('ASR 모델 응답이 선택한 버전과 다릅니다.');
+  return data;
+}
 const catalog=JSON.parse(await readFile(new URL('./model-catalog.json',import.meta.url),'utf8'));
 const plannerModels=catalog.models.filter(m=>m.role==='sllm'&&m.status==='ready');
 const sessions=new Map(), active=new Map(), sonicConnections=new Map();
+const previews=new Map();
 const polly=new PollyClient({region:process.env.AWS_REGION||'ap-northeast-2',...awsCredentials});
 function pcmWav(pcm){
   const h=Buffer.alloc(44);h.write('RIFF',0);h.writeUInt32LE(36+pcm.length,4);h.write('WAVEfmt ',8);h.writeUInt32LE(16,16);h.writeUInt16LE(1,20);h.writeUInt16LE(1,22);h.writeUInt32LE(16000,24);h.writeUInt32LE(32000,28);h.writeUInt16LE(2,32);h.writeUInt16LE(16,34);h.write('data',36);h.writeUInt32LE(pcm.length,40);return Buffer.concat([h,pcm]);
 }
 async function synthesize(text,provider,signal){
+  const selected=ttsProviders[selectTtsProvider(provider)];
   if(provider==='polly'){
     const start=performance.now();
     const result=await polly.send(new SynthesizeSpeechCommand({Engine:'neural',VoiceId:'Seoyeon',LanguageCode:'ko-KR',OutputFormat:'pcm',SampleRate:'16000',TextType:'text',Text:text}),{abortSignal:signal});
-    const pcm=Buffer.from(await result.AudioStream.transformToByteArray());return{bytes:pcmWav(pcm),elapsedMs:Math.round(performance.now()-start)};
+    const pcm=Buffer.from(await result.AudioStream.transformToByteArray());return{bytes:pcmWav(pcm),elapsedMs:Math.round(performance.now()-start),model:'Amazon Polly',voice:'Seoyeon',sampleRate:16000};
   }
-  const response=await remote(tts+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})},signal);
-  return{bytes:Buffer.from(await response.arrayBuffer()),elapsedMs:Number(response.headers.get('x-inference-ms'))};
+  const response=await remote(selected.url+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})},signal);
+  const model=response.headers.get('x-model')||selected.model;
+  const revision=response.headers.get('x-model-revision');
+  if(provider!=='qwen'&&(model!==selected.model||revision!==selected.revision))throw new Error('응답 음성 모델이 선택한 모델과 다릅니다.');
+  return{bytes:Buffer.from(await response.arrayBuffer()),elapsedMs:Number(response.headers.get('x-inference-ms')),
+    model,revision:response.headers.get('x-model-revision')||selected.revision,voice:response.headers.get('x-voice')||selected.voice,
+    sampleRate:Number(response.headers.get('x-sample-rate'))||undefined};
 }
 app.use((req,res,next)=>{
   const host=req.headers.host;
@@ -50,7 +69,116 @@ app.use('/api',(req,res,next)=>{res.setHeader('Cache-Control','no-store');if(clo
  if(!b||now-b.start>60000)budgets.set(ip,{start:now,count:1});else if(++b.count>90){res.setHeader('Retry-After','60');return res.status(429).json({error:'요청이 많아요. 잠시 후 다시 시도해 주세요.'});}
  }next();});setInterval(()=>{for(const[ip,b]of budgets)if(Date.now()-b.start>60000)budgets.delete(ip);},60000).unref();
 app.use(express.static('public'));
+// Only authored guides and synthetic experiment outputs are shared, never the whole repository.
+const guideHeaders=res=>res.setHeader('Content-Security-Policy',"default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src data:; media-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'");
+const guideFiles=(req,res,next)=>/\.(?:html|md|png|svg|wav|json)$/i.test(req.path)?next():res.sendStatus(404);
+app.use('/guide',guideFiles,express.static('asset-guide',{setHeaders:guideHeaders}));
+for(const folder of ['tts-comparison','kokoro-korean','audio-front-end','vehicle-hard-v1','asr-comparison','deployment-benchmarks']){
+  app.use('/research/'+folder,guideFiles,express.static('research/'+folder,{setHeaders:guideHeaders}));
+}
+app.get('/research/model-candidate-review.json',(req,res)=>res.sendFile('model-candidate-review.json',{root:'research'}));
 app.get('/api/catalog',async(req,res)=>res.json(JSON.parse(await readFile('model-catalog.json','utf8'))));
+app.get('/api/asr',async(req,res)=>res.json({providers:Object.entries(asrProviders).map(([id,p])=>({id,...p}))}));
+app.get('/api/asr/evaluation',async(req,res)=>{
+  try{res.json(JSON.parse(await readFile('research/asr-comparison/summary.json','utf8')));}
+  catch{res.json({status:'preparing',models:[]});}
+});
+app.get('/api/asr/evaluation/:modelId',async(req,res)=>{
+  if(!Object.hasOwn(asrProviders,req.params.modelId))return res.sendStatus(404);
+  try{res.json(JSON.parse(await readFile(`research/asr-comparison/${req.params.modelId}.json`,'utf8')));}
+  catch{res.status(404).json({error:'No STT results recorded yet'});}
+});
+app.post('/api/asr/transcribe',async(req,res)=>{
+  try{session(req);}catch(e){return res.status(400).json({error:e.message});}
+  if(typeof req.body.audio!=='string'||req.body.audio.length>2_700_000||!Object.hasOwn(asrProviders,req.body.asrId))return res.status(400).json({error:'음성 파일과 STT 모델을 확인해 주세요.'});
+  const controller=new AbortController();
+  res.on('close',()=>{if(!res.writableEnded)controller.abort();});
+  const start=performance.now();
+  try{const result=await transcribe(req.body.audio,req.body.asrId,controller.signal);res.json({...result,asrId:req.body.asrId,requestMs:Math.round(performance.now()-start),vehicleStateChanged:false});}
+  catch(e){if(!res.destroyed)res.status(502).json({error:e.message});}
+});
+app.get('/api/tts',async(req,res)=>{
+  const providers=await Promise.all(publicTtsProviders().map(async provider=>{
+    if(provider.managed)return {...provider,ready:null};
+    try{
+      const response=await fetch(ttsProviders[provider.id].url+'/health',{signal:AbortSignal.timeout(2000)});
+      const status=await response.json();
+      return {...provider,ready:response.ok&&status.ready===true,worker:status};
+    }catch{return {...provider,ready:false};}
+  }));
+  res.json({providers});
+});
+app.post('/api/tts/preview',async(req,res)=>{
+  let s,provider;
+  try{s=session(req);provider=selectTtsProvider(req.body.ttsProvider);}catch(e){return res.status(400).json({error:e.message});}
+  const text=typeof req.body.text==='string'?req.body.text.trim():'';
+  if(!text||text.length>350)return res.status(400).json({error:'읽을 문장을 1~350자로 입력해 주세요.'});
+  previews.get(s.id)?.abort();
+  const controller=new AbortController();previews.set(s.id,controller);s.updated=Date.now();
+  res.on('close',()=>{if(!res.writableEnded)controller.abort();});
+  const start=performance.now();
+  try{
+    const result=await synthesize(text,provider,controller.signal);
+    controller.signal.throwIfAborted();
+    if(previews.get(s.id)!==controller)return;
+    res.json({id:randomUUID(),provider,text,model:result.model,revision:result.revision,voice:result.voice,
+      sampleRate:result.sampleRate,inferenceMs:result.elapsedMs,elapsedMs:Math.round(performance.now()-start),
+      audio:result.bytes.toString('base64'),mediaType:'audio/wav',vehicleStateChanged:false});
+  }catch(e){if(!controller.signal.aborted&&!res.headersSent)res.status(502).json({error:e.message});}
+  finally{
+    if(previews.get(s.id)===controller)previews.delete(s.id);
+    if(!res.writableEnded&&!res.destroyed)res.status(controller.signal.aborted?499:500).end();
+  }
+});
+// Operator-only, normally disabled. Accepts a fixed case ID, never arbitrary state/history.
+// The benchmark service is bound to loopback and uses its own private key.
+app.post('/api/benchmark/fixture',async(req,res)=>{
+  const expected=Buffer.from(process.env.BENCHMARK_FIXTURE_KEY||''),actual=Buffer.from(String(req.headers['x-benchmark-key']||''));
+  if(!expected.length||expected.length!==actual.length||!timingSafeEqual(expected,actual))return res.sendStatus(403);
+  let s;try{s=session(req);}catch(e){return res.status(400).json({error:e.message});}
+  if(active.has(s.id)||sonicConnections.has(s.id))return res.status(409).json({error:'Session is active'});
+  const bytes=await readFile('research/vehicle-hard-v1/cases.json'),fixture=JSON.parse(bytes).cases.find(c=>c.id===req.body.caseId);
+  if(!fixture)return res.status(404).json({error:'Unknown fixed benchmark case'});
+  s.state=structuredClone(fixture.input.state);s.previous=structuredClone(fixture.input.previous);
+  s.history=structuredClone(fixture.input.history);s.turns=[];s.updated=Date.now();s.miniConversation=randomUUID();
+  res.json({caseId:fixture.id,state:s.state,historyMessages:s.history.length,fixtureSha256:createHash('sha256').update(bytes).digest('hex')});
+});
+app.get('/api/evaluations',async(req,res)=>{
+  try{
+    const summary=JSON.parse(await readFile('research/deployment-benchmarks/summary.json','utf8'));
+    try{summary.runtimeAdjustments=JSON.parse(await readFile('research/deployment-benchmarks/runtime-adjustments.json','utf8'));}catch{summary.runtimeAdjustments=[];}
+    try{
+      const {exclusions}=JSON.parse(await readFile('research/deployment-benchmarks/timing-exclusions.json','utf8'));
+      summary.timingExclusions=exclusions;
+      for(const model of summary.models)for(const [suite,stats]of Object.entries(model.suites)){
+        const excluded=exclusions.filter(x=>x.modelId===model.id&&x.suite===suite);
+        if(!excluded.length)continue;
+        const run=JSON.parse(await readFile(`research/deployment-benchmarks/${suite}/${model.id}.json`,'utf8'));
+        const values=run.rows.filter(r=>!r.modelLoadMs&&!excluded.some(x=>x.caseId===r.id)).map(r=>r.firstAudioMs).filter(Number.isFinite).sort((a,b)=>a-b);
+        const quantile=p=>values.length?values[Math.max(0,Math.ceil(values.length*p)-1)]:null;
+        stats.medianFirstAudioMs=quantile(.5);stats.p95FirstAudioMs=quantile(.95);
+        stats.timingExcluded=excluded.filter(x=>run.rows.some(r=>r.id===x.caseId)).length;
+      }
+    }catch{}
+    res.json(summary);
+  }
+  catch{res.json({status:'preparing',suites:[],models:[],message:'이번 배포의 평가를 준비하고 있습니다.'});}
+});
+app.get('/api/evaluations/:suite/:modelId',async(req,res)=>{
+  if(!['original31','hard48'].includes(req.params.suite)||!catalog.models.some(m=>m.id===req.params.modelId))return res.sendStatus(404);
+  try{
+    const run=JSON.parse(await readFile(`research/deployment-benchmarks/${req.params.suite}/${req.params.modelId}.json`,'utf8'));
+    try{
+      const {exclusions}=JSON.parse(await readFile('research/deployment-benchmarks/timing-exclusions.json','utf8'));
+      for(const row of run.rows){
+        const excluded=exclusions.find(x=>x.modelId===req.params.modelId&&x.suite===req.params.suite&&x.caseId===row.id);
+        if(excluded)row.timingExcludedReason=excluded.reason;
+      }
+    }catch{}
+    res.json(run);
+  }
+  catch{res.status(404).json({error:'No run recorded yet'});}
+});
 app.get('/api/benchmark-csv',(req,res)=>res.download('vehicle-model-comparison.csv','vehicle-model-comparison.csv',{root:'research'}));
 app.get('/api/benchmark',async(req,res)=>{
   try{res.json(JSON.parse(await readFile('research/vehicle-benchmark-summary.json','utf8')));}
@@ -73,12 +201,18 @@ async function remote(url,options={},signal,timeoutMs=120000){
 app.get('/api/health',async(req,res)=>{
   const result=await Promise.allSettled([fetch(core+'/health',{signal:AbortSignal.timeout(2000)}).then(r=>r.json()),fetch(tts+'/health',{signal:AbortSignal.timeout(2000)}).then(r=>r.json()),fetch(mini+'/health',{signal:AbortSignal.timeout(2000)}).then(r=>r.json()),fetch(speechWorker+'/health',{signal:AbortSignal.timeout(2000)}).then(r=>r.json()),fetch(whisper+'/health',{signal:AbortSignal.timeout(2000)}).then(r=>r.json())]);
   const states=result.map(r=>r.status==='fulfilled'?r.value:{ready:false,error:'GPU 연결 대기'}),workers=states.slice(0,2);
-  res.json({ready:workers.every(w=>w.ready),workers,researchWorkers:{minicpm:states[2],speech:states[3]},asrWorkers:{whisper:states[4]},minicpmControl:true,region:'ap-northeast-2',profile:process.env.AWS_PROFILE||'default',instanceType:'g6e.2xlarge',mode:'발화 단위 ASR · 문장 단위 음성 응답',simulated:true,deployment:{kind:cloudMode?'cloudfront':'local',gpuKeepRunning:true},sonic:{model:SONIC_MODEL,region:SONIC_REGION,koreanSupported:false}});
+  res.json({ready:workers.every(w=>w.ready),workers,researchWorkers:{minicpm:states[2],speech:states[3]},asrWorkers:{whisper:states[4]},minicpmControl:true,region:'ap-northeast-2',profile:process.env.AWS_PROFILE||'default',instanceType:'g6e.2xlarge',mode:'발화 단위 ASR · 문장 단위 음성 응답',simulated:true,deployment:{kind:cloudMode?'cloudfront':'local',autoStopHours:cloudMode?Number(process.env.GPU_AUTO_STOP_HOURS||0):null,gpuKeepRunning:cloudMode&&Number(process.env.GPU_AUTO_STOP_HOURS||0)===0},sonic:{model:SONIC_MODEL,region:SONIC_REGION,koreanSupported:false}});
 });
 app.post('/api/session',(req,res)=>{
   if(sessions.size>=1000)return res.status(503).json({error:'공유 데모 접속이 많습니다. 잠시 후 다시 시도해 주세요.'});
   const id=randomUUID();sessions.set(id,{id,miniConversation:randomUUID(),state:initialState(),previous:null,history:[],turns:[],updated:Date.now()});
   res.json({id,state:sessions.get(id).state});
+});
+app.delete('/api/session',(req,res)=>{
+  try{
+    const s=session(req);active.get(s.id)?.controller.abort();previews.get(s.id)?.abort();sonicConnections.get(s.id)?.stop();
+    sessions.delete(s.id);res.json({closed:true});
+  }catch(e){res.status(400).json({error:e.message});}
 });
 app.get('/api/tools',async(req,res)=>res.json(await toolCatalog()));
 app.post('/api/location',(req,res)=>{
@@ -104,6 +238,7 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
   // Voice-only comparison requires an explicit opt-out. Default routes execute
   // the selected model's own audio plan through the common vehicle executor.
   if(['/api/audio-native','/api/s2s'].includes(req.path)&&req.body.comparisonOnly===true)return next();
+  let ttsProvider;try{ttsProvider=selectTtsProvider(req.body.ttsProvider);}catch(e){return res.status(400).json({error:e.message});}
   const miniControl=['/api/minicpm-control','/api/s2s'].includes(req.path);
   const otherAudio=['/api/audio-control','/api/audio-native'].includes(req.path),audioControl=miniControl||otherAudio;
   const audioModel=otherAudio?catalog.models.find(m=>m.id===req.body.audioModelId&&m.status==='ready'&&m.audioPlanner):null;
@@ -123,12 +258,10 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
   res.on('close',()=>{if(!res.writableEnded)controller.abort();});
   let record,failureStage='recognition';
   try{
-    let text=req.body.text?.trim(),asrMs=0,rawTranscript=null,asrModel=null;const asrId=req.body.asrId||planner?.demoConfig?.asrId||'whisper';if(!['whisper','nemotron'].includes(asrId))throw new Error('지원하지 않는 음성 인식 모델입니다.');
-    send('stage',{stage:audioControl?'audioPlanning':'recognizing',model:audioModel?.name||'MiniCPM'});
+    let text=req.body.text?.trim(),asrMs=0,rawTranscript=null,asrModel=null,asrRevision=null;const asrId=req.body.asrId||planner?.demoConfig?.asrId||'whisper';if(!Object.hasOwn(asrProviders,asrId))throw new Error('지원하지 않는 음성 인식 모델입니다.');
+    send('stage',{stage:audioControl?'audioPlanning':'recognizing',model:audioControl?(audioModel?.name||'MiniCPM'):asrProviders[asrId].name});
     if(!text&&!audioControl){
-      const audio=Buffer.from(req.body.audio,'base64');
-      const form=new FormData();form.append('file',new Blob([audio],{type:'audio/wav'}),'speech.wav');
-      const data=await(await remote((asrId==='whisper'?whisper:core)+'/asr',{method:'POST',body:form},controller.signal)).json();rawTranscript=data.text;text=normalizeTranscript(data.text);asrMs=data.elapsedMs;asrModel=data.model;
+      const data=await transcribe(req.body.audio,asrId,controller.signal);rawTranscript=data.text;text=normalizeTranscript(data.text);asrMs=data.elapsedMs;asrModel=data.model;asrRevision=data.revision||null;
     }
     if(!text&&!audioControl)throw new Error('음성을 인식하지 못했어요. 다시 말씀해 주세요.');
     if(!audioControl){send('transcript',{text,rawText:rawTranscript,asrMs,asrModel});send('stage',{stage:'thinking'});}
@@ -147,7 +280,7 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
     failureStage='plan-format';let plan=parsePlan(data.text),miniGate;const modelProposedActions=structuredClone(plan.actions),modelReply=plan.reply;
     if(miniControl){miniGate=guardMiniPlan(plan,currentState);plan=miniGate.plan;}
     const boundsGate=guardExplicitBounds(audioControl?plan.heard:text,plan);plan=boundsGate.plan;
-    if(audioControl){text=typeof plan.heard==='string'?plan.heard.slice(0,500):'[음성 요청 · 모델의 원문 전사 없음]';send('understood',{text,model:audioModel?.name||'MiniCPM'});}
+    if(audioControl){text=typeof plan.heard==='string'?plan.heard.slice(0,500):'[음성 요청 · 모델의 원문 전사 없음]';send('understood',{text,model:audioControl?(audioModel?.name||'MiniCPM'):asrProviders[asrId].name});}
     let assistantResult;const assistantCall=requestedAssistant||(audioControl&&!plan.actions.length?inferAssistant(text):null);
     if(assistantCall){
       failureStage='assistant-tool';send('stage',{stage:'tool',tool:assistantCall.operation});
@@ -160,8 +293,7 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
     failureStage='vehicle-validation';let result,validationError=boundsGate.reason,proposedActions=boundsGate.proposedActions;try{result=executePlan(s.state,s.previous,plan);}catch(error){validationError=error.message;proposedActions=plan.actions;plan={...plan,intent:'clarify',actions:[],reply:'설정을 적용하지 않았어요. '+validationError};result=executePlan(s.state,s.previous,plan);}
     s.state=result.state;s.previous=result.previous;s.updated=Date.now();
     s.history.push({role:'user',content:text},{role:'assistant',content:result.reply});
-    const ttsProvider=req.body.ttsProvider==='qwen'?'qwen':'polly';
-    record={id:turnId,at:new Date().toISOString(),intent:plan.intent,modelProposedActions,modelReply,generationProfile:data.generationProfile,validationError,proposedActions,promptVersion,engine:otherAudio?'audio-control':miniControl?'minicpm-control':'cascade',audioModelId:audioModel?.id,quantization:data.quantization,plannerId:planner?.id,plannerMemory:data.memory,input:text,rawTranscript,asrModel,asrId:audioControl?null:asrId,inputMeaning:audioControl?'model-understanding-not-verbatim-transcript':'transcript',reply:result.reply,actions:plan.actions,results:result.results,state:structuredClone(s.state),asrMs:audioControl?null:asrMs,llmMs:data.elapsedMs,planner:data.model,plannerRevision:data.revision,modelLoadMs:data.loadMs||0,vehicleTools:true,plannerPasses:data.plannerPasses||1,ttsProvider,ttsMeasurement:ttsProvider==='polly'?'aws-api-round-trip':'gpu-inference',inputMode:req.body.text?'text':['microphone','file'].includes(req.body.inputMode)?req.body.inputMode:'audio',feedback:null};
+    record={id:turnId,at:new Date().toISOString(),intent:plan.intent,modelProposedActions,modelReply,generationProfile:data.generationProfile,validationError,proposedActions,promptVersion,engine:otherAudio?'audio-control':miniControl?'minicpm-control':'cascade',audioModelId:audioModel?.id,quantization:data.quantization,plannerId:planner?.id,plannerMemory:data.memory,input:text,rawTranscript,asrModel,asrRevision,asrId:audioControl?null:asrId,inputMeaning:audioControl?'model-understanding-not-verbatim-transcript':'transcript',reply:result.reply,actions:plan.actions,results:result.results,state:structuredClone(s.state),asrMs:audioControl?null:asrMs,llmMs:data.elapsedMs,planner:data.model,plannerRevision:data.revision,modelLoadMs:data.loadMs||0,vehicleTools:true,plannerPasses:data.plannerPasses||1,ttsProvider,ttsMeasurement:ttsProvider==='polly'?'aws-api-round-trip':['supertonic','ppaso'].includes(ttsProvider)?'cpu-inference':'gpu-inference',inputMode:req.body.text?'text':['microphone','file'].includes(req.body.inputMode)?req.body.inputMode:'audio',feedback:null};
     s.turns.push(record);
     if(assistantResult){record.assistant=assistantResult;record.toolMs=assistantResult.elapsedMs;record.planner='Application tool router';}
     if(miniGate?.reason){record.guardReason=miniGate.reason;record.proposedActions=miniGate.proposedActions;}
@@ -172,6 +304,7 @@ app.post(['/api/turn','/api/minicpm-control','/api/audio-control','/api/audio-na
     record.ttsMs=0;
     for(let index=0;index<sentences.length;index++){
       const audioResponse=await synthesize(sentences[index],ttsProvider,controller.signal);
+      record.ttsModel=audioResponse.model;record.ttsRevision=audioResponse.revision;record.ttsVoice=audioResponse.voice;record.ttsSampleRate=audioResponse.sampleRate;
       const bytes=audioResponse.bytes;
       record.ttsMs+=audioResponse.elapsedMs;
       if(index===0)record.serverAudioReadyMs=Math.round(performance.now()-start);
@@ -245,7 +378,7 @@ app.post('/api/metrics',(req,res)=>{
   }catch(e){res.status(400).json({error:e.message});}
 });
 app.get('/api/export',(req,res)=>{
-  try{const s=session(req);res.setHeader('Content-Disposition','attachment; filename="vehicle-voice-session.json"');res.json({exportedAt:new Date().toISOString(),simulation:true,models:{asr:{whisper:'openai/whisper-large-v3-turbo',nemotron:'nvidia/nemotron-3.5-asr-streaming-0.6b'},defaultPlanner:'Qwen/Qwen3.5-4B',defaultPlannerId:catalog.defaultPlannerId||'qwen35-4b',planners:plannerModels.map(m=>({id:m.id,model:m.repo,revision:m.revision,quantization:m.quantization||'bf16'})),minicpmControl:{model:'openbmb/MiniCPM-o-4_5',vehicleTools:true,output:'selected Korean TTS; hybrid'},minicpm:{model:'openbmb/MiniCPM-o-4_5',revision:catalog.models.find(m=>m.id==='minicpm-o45').revision,vehicleTools:false,koreanSupported:false},audioModels:catalog.models.filter(m=>m.role==='s2s'&&m.status==='ready'&&(m.nativeAudio||m.audioPlanner)).map(m=>({id:m.id,model:m.repo,revision:m.revision,nativeAudio:!!m.nativeAudio,defaultVehicleTools:!!m.audioPlanner,nativeComparisonVehicleTools:false,audioPlanner:!!m.audioPlanner,controlOutput:'selected Korean TTS; hybrid'})),tts:{polly:'Amazon Polly neural / Seoyeon',qwen:'Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice'},sonic:{id:SONIC_MODEL,region:SONIC_REGION,koreanSupported:false}},state:s.state,turns:s.turns});}catch(e){res.status(400).json({error:e.message});}
+  try{const s=session(req);res.setHeader('Content-Disposition','attachment; filename="vehicle-voice-session.json"');res.json({exportedAt:new Date().toISOString(),simulation:true,models:{asr:Object.fromEntries(Object.entries(asrProviders).map(([id,p])=>[id,{model:p.model,revision:p.revision}])),defaultPlanner:'Qwen/Qwen3.5-4B',defaultPlannerId:catalog.defaultPlannerId||'qwen35-4b',planners:plannerModels.map(m=>({id:m.id,model:m.repo,revision:m.revision,quantization:m.quantization||'bf16'})),minicpmControl:{model:'openbmb/MiniCPM-o-4_5',vehicleTools:true,output:'selected Korean TTS; hybrid'},minicpm:{model:'openbmb/MiniCPM-o-4_5',revision:catalog.models.find(m=>m.id==='minicpm-o45').revision,vehicleTools:false,koreanSupported:false},audioModels:catalog.models.filter(m=>m.role==='s2s'&&m.status==='ready'&&(m.nativeAudio||m.audioPlanner)).map(m=>({id:m.id,model:m.repo,revision:m.revision,nativeAudio:!!m.nativeAudio,defaultVehicleTools:!!m.audioPlanner,nativeComparisonVehicleTools:false,audioPlanner:!!m.audioPlanner,controlOutput:'selected Korean TTS; hybrid'})),tts:Object.fromEntries(publicTtsProviders().map(p=>[p.id,{model:p.model,revision:p.revision,voice:p.voice}])),sonic:{id:SONIC_MODEL,region:SONIC_REGION,koreanSupported:false}},state:s.state,turns:s.turns});}catch(e){res.status(400).json({error:e.message});}
 });
 setInterval(()=>{for(const[id,s]of sessions)if(Date.now()-s.updated>8*3600000&&!active.has(id)&&!sonicConnections.has(id))sessions.delete(id);},60000).unref();
 const server=app.listen(port,process.env.BIND_HOST||'127.0.0.1',()=>console.log(`Vehicle voice lab listening on ${port} (${cloudMode?'CloudFront':'local'})`));
@@ -265,11 +398,14 @@ wss.on('connection',(ws,req,url)=>{
     recordStart=performance.now();s.turns.push(record);send('turn',{turnId:record.id});return record;
   };
   const stop=()=>{if(stopped)return;stopped=true;clearTimeout(idleTimer);clearTimeout(lifetime);if(record&&!record.completed)record.interrupted=true;sonic.close();if(sonicConnections.get(s.id)?.stop===stop)sonicConnections.delete(s.id);if(ws.readyState===1)ws.close();};
-  const sonic=new SonicSession({state:s.state,language:url.searchParams.get('language')==='en'?'en':'ko',executeTool:args=>{
+  const sonic=new SonicSession({state:s.state,history:s.history.slice(-12),language:url.searchParams.get('language')==='en'?'en':'ko',executeTool:args=>{
     if(stopped||sonicConnections.get(s.id)?.stop!==stop)throw new Error('취소된 차량 명령입니다.');
+    if(!record||record.completed)newRecord();
+    if(Array.isArray(args.actions))record.modelProposedActions.push(...structuredClone(args.actions));
+    else record.modelPlanMalformed=true;
     const proposedPlan=parsePlan(JSON.stringify({intent:args.actions?.length?'control':'question',actions:args.actions,reply:''}));const gate=guardExplicitBounds(normalizeTranscript(record?.input||''),proposedPlan),plan=gate.plan;
     const result=executePlan(s.state,s.previous,plan);s.state=result.state;s.previous=result.previous;s.updated=Date.now();
-    if(!record||record.completed)newRecord();record.modelProposedActions.push(...proposedPlan.actions);if(gate.reason)record.validationError=gate.reason;record.actions.push(...plan.actions);record.results.push(...result.results);record.state=structuredClone(s.state);
+    if(gate.reason)record.validationError=gate.reason;record.actions.push(...plan.actions);record.results.push(...result.results);record.state=structuredClone(s.state);
     return{ok:true,state:s.state,reply:result.reply,results:result.results,actions:plan.actions};
   },executeAssistantTool:async(args,signal)=>{
     if(stopped||sonicConnections.get(s.id)?.stop!==stop)throw Error('Canceled assistant tool');

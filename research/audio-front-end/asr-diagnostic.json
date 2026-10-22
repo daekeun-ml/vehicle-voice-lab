@@ -1,0 +1,236 @@
+{
+  "model": "openai/whisper-large-v3-turbo",
+  "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+  "hardware": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+  "torch": "2.14.1",
+  "normalization": "NFKC, lowercase, alphanumeric only; explicit Korean number variants for 24 and 25",
+  "humanListeningCompleted": false,
+  "scope": "ASR diagnostic, not perceptual quality or end-to-end vehicle benchmark",
+  "referenceBasis": "ASR output on clean reference; not independently human-transcribed ground truth",
+  "rows": [
+    {
+      "id": "command-clean",
+      "condition": "clean",
+      "filterMode": "filtered",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "before": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.01826699948288
+      },
+      "after": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.00877600026433
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "command-stationary-colored-20dB",
+      "condition": "stationary-colored",
+      "filterMode": "filtered",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "before": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 63.946803999897384
+      },
+      "after": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 63.989868000135175
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "command-stationary-colored-10dB",
+      "condition": "stationary-colored",
+      "filterMode": "filtered",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "before": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.02056800015998
+      },
+      "after": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.1113720002977
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "command-stationary-colored-0dB",
+      "condition": "stationary-colored",
+      "filterMode": "bypass-no-reliable-quiet-frames",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "before": {
+        "text": "조수석 공도를 25도로 맞춰주세요.",
+        "ms": 64.06640299974242
+      },
+      "after": {
+        "text": "조수석 공도를 25도로 맞춰주세요.",
+        "ms": 64.08386600014637
+      },
+      "beforeAgreementErrorRate": 0.06666666666666667,
+      "afterAgreementErrorRate": 0.06666666666666667
+    },
+    {
+      "id": "command-colored-plus-bursts-20dB",
+      "condition": "colored-plus-bursts",
+      "filterMode": "filtered",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "before": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.1594549997535
+      },
+      "after": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.23582800016447
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "command-colored-plus-bursts-10dB",
+      "condition": "colored-plus-bursts",
+      "filterMode": "filtered",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "before": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 63.98794300002919
+      },
+      "after": {
+        "text": "조수석 온도를 25도로 맞춰주세요.",
+        "ms": 64.04010700043727
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "command-colored-plus-bursts-0dB",
+      "condition": "colored-plus-bursts",
+      "filterMode": "bypass-no-reliable-quiet-frames",
+      "referenceProxy": "조수석 온도를 25도로 맞춰주세요.",
+      "before": {
+        "text": "조수석 공도를 25도로 맞춰주세요.",
+        "ms": 64.04927699986729
+      },
+      "after": {
+        "text": "조수석 공도를 25도로 맞춰주세요.",
+        "ms": 64.060972000334
+      },
+      "beforeAgreementErrorRate": 0.06666666666666667,
+      "afterAgreementErrorRate": 0.06666666666666667
+    },
+    {
+      "id": "defrost-reply-clean",
+      "condition": "clean",
+      "filterMode": "filtered",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "before": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.28976000017428
+      },
+      "after": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.23958399966068
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-stationary-colored-20dB",
+      "condition": "stationary-colored",
+      "filterMode": "filtered",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "before": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.41161699978693
+      },
+      "after": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.33356799981993
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-stationary-colored-10dB",
+      "condition": "stationary-colored",
+      "filterMode": "filtered",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "before": {
+        "text": "앞머리 김사림 제거 기능을 켰어요.",
+        "ms": 72.06455399955303
+      },
+      "after": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.70031800028664
+      },
+      "beforeAgreementErrorRate": 0.07142857142857142,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-stationary-colored-0dB",
+      "condition": "stationary-colored",
+      "filterMode": "filtered",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "before": {
+        "text": "당일이 김사림 채워 김을 해켰어요.",
+        "ms": 69.52173899935588
+      },
+      "after": {
+        "text": "강물이 김살인 채워 김을 해 켰어요.",
+        "ms": 69.50994599992555
+      },
+      "beforeAgreementErrorRate": 0.5714285714285714,
+      "afterAgreementErrorRate": 0.7142857142857143
+    },
+    {
+      "id": "defrost-reply-colored-plus-bursts-20dB",
+      "condition": "colored-plus-bursts",
+      "filterMode": "filtered",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "before": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.31698100015637
+      },
+      "after": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.40029300039896
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-colored-plus-bursts-10dB",
+      "condition": "colored-plus-bursts",
+      "filterMode": "filtered",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "before": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.33835900053964
+      },
+      "after": {
+        "text": "앞유리 김사림 제거 기능을 켰어요.",
+        "ms": 69.26424999983283
+      },
+      "beforeAgreementErrorRate": 0.0,
+      "afterAgreementErrorRate": 0.0
+    },
+    {
+      "id": "defrost-reply-colored-plus-bursts-0dB",
+      "condition": "colored-plus-bursts",
+      "filterMode": "filtered",
+      "referenceProxy": "앞유리 김사림 제거 기능을 켰어요.",
+      "before": {
+        "text": "단밀이 김사림 제거 기능을 켰어요.",
+        "ms": 72.04911299959349
+      },
+      "after": {
+        "text": "당일이 김사림 제거 기능을 켰어요.",
+        "ms": 69.35437500033004
+      },
+      "beforeAgreementErrorRate": 0.21428571428571427,
+      "afterAgreementErrorRate": 0.21428571428571427
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "validatedAt": "2026-10-22T10:58:17.336818+00:00",
+  "url": "https://d2ub6bbyf1c3sv.cloudfront.net",
+  "computeRegion": "ap-northeast-2",
+  "instanceType": "g6e.2xlarge",
+  "gpuHosts": 2,
+  "defaultTts": "polly",
+  "enabledTts": [
+    "polly",
+    "qwen",
+    "qwen17",
+    "supertonic",
+    "ppaso"
+  ],
+  "verification": {
+    "unitPassed": 32,
+    "unitFailed": 0,
+    "coreAudioControl": true,
+    "sessionIsolation": true,
+    "ttsChecks": 12,
+    "ttsModelIdentityAndWav": true,
+    "directAudioModels": [
+      "minicpm-o45",
+      "step-audio2-mini"
+    ],
+    "sonicEnglish": true,
+    "sonicKoreanExperimental": true,
+    "syntheticBrowserMicrophone": true,
+    "browserPlayback": true,
+    "browserCancel": true,
+    "realHumanMicrophoneTested": false
+  },
+  "scopeNotes": [
+    "Qwen3-ASR 0.6B/1.7B and Ppaso are active. Kokoro was removed; CosyVoice remains an offline experiment.",
+    "Noise suppression prototypes are not applied to the live audio path.",
+    "AgentCore Gateway was not provisioned; local information providers remain available.",
+    "The 14 control configurations and four ASR providers have separate checkpointed benchmark reports. Moshi is not a vehicle-control benchmark configuration.",
+    "The 48-case hard suite is separate and not reported as passed deployment coverage."
+  ],
+  "configuredAutoStopHours": 16,
+  "autoStopAt": {
+    "core": "2026-10-22T21:08:30+00:00",
+    "speech": "2026-10-22T21:10:17+00:00"
+  },
+  "asrComparison": {
+    "status": "complete",
+    "completed": 824,
+    "total": 824,
+    "corpusHash": "6e420ce00aca5eb7fad515c7c6864b2454699417387740aec37825b8d1528241"
+  },
+  "ppasoVerification": {
+    "model": "akamotaco/ppaso-tts-v1",
+    "revision": "53d09664c4f636a5fb6f2ebe3ec22cd83ee249b9",
+    "synthesized": 8,
+    "normalizedRetranscriptionExact": 6,
+    "vehicleStateUnchanged": true,
+    "kokoroRejected": true,
+    "humanListeningCompleted": false
+  }
+}

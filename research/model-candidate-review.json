@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-22",
+  "scope": "Official publisher model cards and Hub metadata; not exhaustive market ranking. Repository creation/modification is not a model release date.",
+  "integrationChanged": true,
+  "weightsDownloaded": true,
+  "modelsInvoked": true,
+  "candidates": [
+    {
+      "repo": "Qwen/Qwen3-ASR-0.6B",
+      "role": "asr",
+      "status": "integrated-evaluated",
+      "priority": "evaluate-first",
+      "koreanOfficialEvidence": "supported",
+      "decision": "GPU2에서 교대 로드. Whisper/Nemotron과 동일 입력으로 CER·핵심 언급·지연·최종 제어 비교. GPU peak memory 별도 미측정.",
+      "evaluation": {
+        "type": "paired-asr-and-fixed-planner",
+        "inputsPerModel": 206,
+        "report": "research/asr-comparison/summary.json",
+        "humanListeningCompleted": false,
+        "appIntegration": true,
+        "smokePassed": true,
+        "completed": true
+      },
+      "source": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+      "cardAtRevision": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B/blob/5eb144179a02acc5e5ba31e748d22b0cf3e303b0/README.md",
+      "revisionReviewed": "5eb144179a02acc5e5ba31e748d22b0cf3e303b0",
+      "repositoryCreatedAt": "2026-01-28T03:15:39+00:00",
+      "repositoryLastModifiedAt": "2026-01-30T03:00:21+00:00",
+      "license": "apache-2.0",
+      "gated": false,
+      "hubSafetensorsMetadata": {
+        "parameters": {
+          "BF16": 938008576
+        },
+        "total": 938008576
+      }
+    },
+    {
+      "repo": "Qwen/Qwen3-ASR-1.7B",
+      "role": "asr",
+      "status": "integrated-evaluated",
+      "priority": "evaluate-first",
+      "koreanOfficialEvidence": "supported",
+      "decision": "GPU2에서 교대 로드. Whisper/Nemotron과 동일 입력으로 CER·핵심 언급·지연·최종 제어 비교. GPU peak memory 별도 미측정.",
+      "evaluation": {
+        "type": "paired-asr-and-fixed-planner",
+        "inputsPerModel": 206,
+        "report": "research/asr-comparison/summary.json",
+        "humanListeningCompleted": false,
+        "appIntegration": true,
+        "smokePassed": true,
+        "completed": true
+      },
+      "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B",
+      "cardAtRevision": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B/blob/7278e1e70fe206f11671096ffdd38061171dd6e5/README.md",
+      "revisionReviewed": "7278e1e70fe206f11671096ffdd38061171dd6e5",
+      "repositoryCreatedAt": "2026-01-28T03:22:40+00:00",
+      "repositoryLastModifiedAt": "2026-01-30T03:00:12+00:00",
+      "license": "apache-2.0",
+      "gated": false,
+      "hubSafetensorsMetadata": {
+        "parameters": {
+          "BF16": 2349217408
+        },
+        "total": 2349217408
+      }
+    },
+    {
+      "repo": "hexgrad/Kokoro-82M",
+      "role": "tts",
+      "status": "removed-from-app",
+      "priority": "english-experiment",
+      "koreanOfficialEvidence": "not-listed",
+      "decision": "공식 한국어 voice/lang_code 없음. 영어 TTS의 품질·CPU/GPU 지연 비교 후보",
+      "evaluation": {
+        "type": "isolated-synthesis-and-asr-diagnostic",
+        "koreanOutputs": 16,
+        "englishControlOutputs": 1,
+        "report": "research/kokoro-korean/probe.json",
+        "asrReport": "research/kokoro-korean/asr-diagnostic.json",
+        "humanListeningCompleted": false,
+        "appIntegration": false,
+        "conclusion": "Phoneme-input generation succeeds; ko/k mode rejected; vehicle utterance re-transcription errors do not support adoption."
+      },
+      "source": "https://huggingface.co/hexgrad/Kokoro-82M",
+      "cardAtRevision": "https://huggingface.co/hexgrad/Kokoro-82M/blob/f3ff3571791e39611d31c381e3a41a3af07b4987/README.md",
+      "revisionReviewed": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "repositoryCreatedAt": "2024-12-26T00:20:08+00:00",
+      "repositoryLastModifiedAt": "2025-04-10T18:12:48+00:00",
+      "license": "apache-2.0",
+      "gated": false,
+      "hubSafetensorsMetadata": null,
+      "parameterLabel": "82M",
+      "voicesSource": "https://huggingface.co/hexgrad/Kokoro-82M/blob/f3ff3571791e39611d31c381e3a41a3af07b4987/VOICES.md",
+      "liveDeployment": {
+        "removed": true,
+        "replacedBy": "akamotaco/ppaso-tts-v1"
+      }
+    },
+    {
+      "repo": "openbmb/MiniCPM5-2B",
+      "role": "sllm",
+      "status": "candidate-not-integrated",
+      "priority": "secondary-candidate",
+      "koreanOfficialEvidence": "unverified",
+      "decision": "새 텍스트 판단 모델 후보. MiniCPM-o의 음성 기능 대체가 아님",
+      "evaluation": null,
+      "source": "https://huggingface.co/openbmb/MiniCPM5-2B",
+      "cardAtRevision": "https://huggingface.co/openbmb/MiniCPM5-2B/blob/f97400052a43d642bbc6e9975e2397e3ae6a6b52/README.md",
+      "revisionReviewed": "f97400052a43d642bbc6e9975e2397e3ae6a6b52",
+      "repositoryCreatedAt": "2026-09-06T11:12:19+00:00",
+      "repositoryLastModifiedAt": "2026-09-29T06:12:33+00:00",
+      "license": "apache-2.0",
+      "gated": false,
+      "hubSafetensorsMetadata": {
+        "parameters": {
+          "BF16": 2516756480
+        },
+        "total": 2516756480
+      }
+    },
+    {
+      "repo": "openbmb/MiniCPM-V-4.7-1B",
+      "role": "vision-language",
+      "status": "candidate-not-integrated",
+      "priority": "not-a-speech-replacement",
+      "koreanOfficialEvidence": "unverified",
+      "decision": "이미지·영상 모델. 음성 모델 교체 대상에서 제외",
+      "evaluation": null,
+      "source": "https://huggingface.co/openbmb/MiniCPM-V-4.7-1B",
+      "cardAtRevision": "https://huggingface.co/openbmb/MiniCPM-V-4.7-1B/blob/379f120c2ff3588e6e06559ec6b9ec15cc05114e/README.md",
+      "revisionReviewed": "379f120c2ff3588e6e06559ec6b9ec15cc05114e",
+      "repositoryCreatedAt": "2026-10-06T17:40:13+00:00",
+      "repositoryLastModifiedAt": "2026-10-19T12:53:37+00:00",
+      "license": "apache-2.0",
+      "gated": false,
+      "hubSafetensorsMetadata": {
+        "parameters": {
+          "BF16": 1554476272
+        },
+        "total": 1554476272
+      }
+    },
+    {
+      "repo": "stepfun-ai/Step-Audio-R1.1",
+      "role": "audio-reasoning",
+      "status": "candidate-not-integrated",
+      "priority": "hardware-review",
+      "koreanOfficialEvidence": "unverified",
+      "decision": "공식 배포 예제 4×L40S 등, BF16 가중치만 약 62.4GiB. 현재 단일 L40S에 그대로 교체 불가",
+      "evaluation": null,
+      "source": "https://huggingface.co/stepfun-ai/Step-Audio-R1.1",
+      "cardAtRevision": "https://huggingface.co/stepfun-ai/Step-Audio-R1.1/blob/8abb296c09123345b09de57dbc2830b6a12134b1/README.md",
+      "revisionReviewed": "8abb296c09123345b09de57dbc2830b6a12134b1",
+      "repositoryCreatedAt": "2026-01-14T06:37:24+00:00",
+      "repositoryLastModifiedAt": "2026-02-14T09:35:25+00:00",
+      "license": "apache-2.0",
+      "gated": false,
+      "hubSafetensorsMetadata": {
+        "parameters": {
+          "BF16": 33487033600
+        },
+        "total": 33487033600
+      }
+    },
+    {
+      "repo": "XiaomiMiMo/MiMo-V2.5-ASR",
+      "role": "asr",
+      "status": "candidate-not-integrated",
+      "priority": "secondary-review",
+      "koreanOfficialEvidence": "not-listed",
+      "decision": "중국어·영어 중심의 ASR 후보. 한국어 우선 비교에서는 Qwen3-ASR 뒤로 둠",
+      "evaluation": null,
+      "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-ASR",
+      "cardAtRevision": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-ASR/blob/98641d537df521ac6df05f74090475694d9510b7/README.md",
+      "revisionReviewed": "98641d537df521ac6df05f74090475694d9510b7",
+      "repositoryCreatedAt": "2026-04-23T06:30:09+00:00",
+      "repositoryLastModifiedAt": "2026-04-24T03:45:28+00:00",
+      "license": "mit",
+      "gated": false,
+      "hubSafetensorsMetadata": {
+        "parameters": {
+          "F32": 8018587648
+        },
+        "total": 7622619136
+      }
+    },
+    {
+      "repo": "Supertone/supertonic-3",
+      "role": "tts",
+      "status": "integrated-verified-seoul",
+      "priority": "korean-tts-comparison",
+      "koreanOfficialEvidence": "supported",
+      "source": "https://huggingface.co/Supertone/supertonic-3",
+      "cardAtRevision": "https://huggingface.co/Supertone/supertonic-3/blob/3cadd1ee6394adea1bd021217a0e650ede09a323/README.md",
+      "revisionReviewed": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+      "repositoryCreatedAt": "2026-05-06T20:46:20+00:00",
+      "license": "openrail",
+      "evaluation": {
+        "type": "isolated-8-utterance-tts-and-asr-diagnostic",
+        "report": "research/tts-comparison/supertonic3.json",
+        "summary": "research/tts-comparison/summary.json",
+        "normalizedAsrExact": 6,
+        "total": 8,
+        "humanListeningCompleted": false,
+        "appIntegration": false
+      },
+      "currentIntegration": {
+        "region": "ap-northeast-2",
+        "url": "https://d2ub6bbyf1c3sv.cloudfront.net",
+        "verification": "asset-guide/deployment-status.json",
+        "defaultTtsChanged": false
+      }
+    },
+    {
+      "repo": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+      "role": "tts",
+      "status": "integrated-verified-seoul",
+      "priority": "korean-tts-comparison",
+      "koreanOfficialEvidence": "supported",
+      "source": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+      "cardAtRevision": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/blob/0c0e3051f131929182e2c023b9537f8b1c68adfe/README.md",
+      "revisionReviewed": "0c0e3051f131929182e2c023b9537f8b1c68adfe",
+      "repositoryCreatedAt": "2026-01-21T08:56:49+00:00",
+      "license": "apache-2.0",
+      "evaluation": {
+        "type": "isolated-8-utterance-tts-and-asr-diagnostic",
+        "report": "research/tts-comparison/qwen17.json",
+        "summary": "research/tts-comparison/summary.json",
+        "normalizedAsrExact": 7,
+        "total": 8,
+        "humanListeningCompleted": false,
+        "appIntegration": false
+      },
+      "currentIntegration": {
+        "region": "ap-northeast-2",
+        "url": "https://d2ub6bbyf1c3sv.cloudfront.net",
+        "verification": "asset-guide/deployment-status.json",
+        "defaultTtsChanged": false
+      }
+    },
+    {
+      "repo": "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+      "role": "tts",
+      "status": "experiment-complete-not-integrated",
+      "priority": "korean-tts-comparison",
+      "koreanOfficialEvidence": "supported",
+      "source": "https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+      "cardAtRevision": "https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512/blob/29e01c4e8d000f4bcd70751be16fa94bf3d85a18/README.md",
+      "revisionReviewed": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+      "repositoryCreatedAt": "2025-12-11T04:00:59+00:00",
+      "license": "apache-2.0",
+      "evaluation": {
+        "type": "isolated-8-utterance-tts-and-asr-diagnostic",
+        "report": "research/tts-comparison/cosyvoice3.json",
+        "summary": "research/tts-comparison/summary.json",
+        "normalizedAsrExact": 5,
+        "total": 8,
+        "humanListeningCompleted": false,
+        "appIntegration": false
+      }
+    },
+    {
+      "repo": "akamotaco/ppaso-tts-v1",
+      "revision": "53d09664c4f636a5fb6f2ebe3ec22cd83ee249b9",
+      "role": "tts",
+      "status": "integrated",
+      "backend": "ONNX CPU",
+      "language": "ko",
+      "evaluation": "research/tts-comparison/ppaso.json",
+      "humanListeningCompleted": false
+    }
+  ],
+  "minicpmReview": {
+    "repo": "openbmb/MiniCPM-o-4_5",
+    "currentAppRevision": "503e754207c94da6bb26850b4469f367c9ea3582",
+    "reviewedHeadRevision": "d59117d19ddb8a28a62f1b5f4e3b34ac48d510a4",
+    "repositoryCreatedAt": "2026-02-03T14:10:39+00:00",
+    "source": "https://huggingface.co/openbmb/MiniCPM-o-4_5/blob/d59117d19ddb8a28a62f1b5f4e3b34ac48d510a4/README.md",
+    "finding": "Official card describes 4.5 as latest in MiniCPM-o series. Newer MiniCPM-V and MiniCPM5 have different modalities; no newer base o-series successor identified in checked official listings.",
+    "speechLanguages": [
+      "English",
+      "Chinese"
+    ],
+    "headDifferenceMeaning": "A different repository revision does not by itself establish a new model generation or changed weights.",
+    "officialListingScope": {
+      "author": "openbmb",
+      "search": "MiniCPM",
+      "sort": "created_at",
+      "limit": 60,
+      "returned": 60,
+      "matchingOSeries": [
+        {
+          "id": "openbmb/MiniCPM-o-2_6-GPTQ",
+          "created_at": "2026-06-03T08:20:53+00:00",
+          "last_modified": "2026-06-03T10:40:41+00:00",
+          "pipeline_tag": "any-to-any",
+          "sha": "ba795d708ba49abccab280c398adb9b81384608c"
+        },
+        {
+          "id": "openbmb/MiniCPM-o-4_5-GPTQ",
+          "created_at": "2026-06-02T06:51:46+00:00",
+          "last_modified": "2026-08-03T10:15:28+00:00",
+          "pipeline_tag": "any-to-any",
+          "sha": "02b54c54c36f8b48e97501bb0fde5d178c62df38"
+        },
+        {
+          "id": "openbmb/MiniCPM-o-4_5",
+          "created_at": "2026-02-03T14:10:39+00:00",
+          "last_modified": "2026-10-16T10:30:03+00:00",
+          "pipeline_tag": "any-to-any",
+          "sha": "d59117d19ddb8a28a62f1b5f4e3b34ac48d510a4"
+        },
+        {
+          "id": "openbmb/MiniCPM-o-4_5-awq",
+          "created_at": "2026-02-02T04:42:28+00:00",
+          "last_modified": "2026-08-18T03:58:06+00:00",
+          "pipeline_tag": "any-to-any",
+          "sha": "02b87bcf31b1e3bc66094a8f8eba2034605e5073"
+        },
+        {
+          "id": "openbmb/MiniCPM-o-4_5-gguf",
+          "created_at": "2026-02-02T04:42:00+00:00",
+          "last_modified": "2026-08-18T03:58:01+00:00",
+          "pipeline_tag": "any-to-any",
+          "sha": "db25077c33951fe163b42986fba0132e279872a2"
+        }
+      ]
+    }
+  },
+  "executionScope": "Kokoro and three TTS isolated experiments completed. Qwen3-TTS 1.7B and Supertonic 3 integrated and verified in the Seoul app. Qwen3-ASR not executed."
+}

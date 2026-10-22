@@ -1,0 +1,18 @@
+{
+  "scope": "2 synthetic source clips × 2 artificial noise types × 3 levels; clean ASR proxy reference",
+  "noiseCaseCount": 12,
+  "cleanControlCount": 2,
+  "methods": {
+    "conservative-dd-wiener-v1": {
+      "improved": 1,
+      "same": 10,
+      "worse": 1
+    },
+    "RNNoise": {
+      "improved": 1,
+      "same": 8,
+      "worse": 3
+    }
+  },
+  "decision": "Do not enable either algorithm globally. Validate real recorded speech, critical token errors, and downstream vehicle plans first."
+}
